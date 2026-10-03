@@ -1,1 +1,809 @@
-{"sections": {"hero": {"type": "dg-hero-float", "settings": {"product": "glow-cap", "image": "shopify://shop_images/Sffc109b3a186413289912dbdc9fae749A.webp", "blend": true, "left_text": "Thicker‑looking hair,", "right_text": "<em>30 minutes</em> a day.", "card_eyebrow": "291 red + near-infrared LEDs", "card_title": "THE HAIR RENEW CAP", "card_text": "<p>Cordless, hands-free light therapy for your scalp. No pills, no creams, no appointments.</p>", "button_label": "Shop the Hair Renew Cap", "show_price": true, "meta_text": "30-day money-back guarantee", "float_distance": 16, "float_speed": 4, "bg_1": "#F4F8F6", "bg_2": "#FDEBDD", "glow_color": "#FF6B4A", "text_color": "#17393D", "accent_color": "#E0701C", "card_color": "#17393D", "padding_top": 36, "padding_bottom": 56, "card_offset": 24}}, "ticker": {"type": "dg-ticker", "settings": {"style": "light", "speed": 40}, "blocks": {"item_1": {"type": "item", "settings": {"icon": "leaf", "text": "No pills. No creams."}}, "item_2": {"type": "item", "settings": {"icon": "power", "text": "Cordless & rechargeable"}}, "item_3": {"type": "item", "settings": {"icon": "light", "text": "291 red + near-infrared LEDs"}}, "item_4": {"type": "item", "settings": {"icon": "clock", "text": "30 minutes a day"}}, "item_5": {"type": "item", "settings": {"icon": "shield", "text": "30-day money-back guarantee"}}, "item_6": {"type": "item", "settings": {"icon": "truck", "text": "Tracked shipping"}}, "item_7": {"type": "item", "settings": {"icon": "heart", "text": "Made for men & women"}}}, "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6", "item_7"]}, "benefits": {"type": "dg-benefits", "settings": {"style": "light", "anchor": "benefits", "eyebrow": "Why the Hair Renew Cap", "heading": "Light therapy that fits <em>your</em> routine", "text": "<p>Everything you need for red light therapy at home, in one comfortable, cordless cap.</p>", "columns": "3", "button_label": "", "button_link": "", "padding_top": 88, "padding_bottom": 88}, "blocks": {"benefit_1": {"type": "benefit", "settings": {"icon": "light", "title": "291 red + near-infrared LEDs", "text": "<p>97 red (660nm) and 194 near-infrared (850nm) LEDs spread across the inside of the cap.</p>"}}, "benefit_2": {"type": "benefit", "settings": {"icon": "power", "title": "Cordless & rechargeable", "text": "<p>Built-in 2000mAh battery. No cable while you wear it: move around, read, work or unwind.</p>"}}, "benefit_3": {"type": "benefit", "settings": {"icon": "clock", "title": "30 minutes, then it beeps", "text": "<p>One session a day. The cap beeps when your 30 minutes are up, so there's nothing to time.</p>"}}, "benefit_4": {"type": "benefit", "settings": {"icon": "spark", "title": "4 modes, 3 brightness levels", "text": "<p>Choose Normal, Breathing, 10Hz or 40Hz pulse, and set the brightness that feels right.</p>"}}, "benefit_5": {"type": "benefit", "settings": {"icon": "cap", "title": "Looks like a regular cap", "text": "<p>Baseball-cap style in Black or Grey. Once it's on, the lights aren't visible from outside.</p>"}}, "benefit_6": {"type": "benefit", "settings": {"icon": "leaf", "title": "Drug-free & mess-free", "text": "<p>Nothing to swallow, nothing to rub in, and no residue left in your hair.</p>"}}}, "block_order": ["benefit_1", "benefit_2", "benefit_3", "benefit_4", "benefit_5", "benefit_6"]}, "buy": {"type": "featured-product", "settings": {"product": "glow-cap", "color_scheme": "scheme-3", "padding_top": 72, "padding_bottom": 72}, "blocks": {"text_1": {"type": "text", "settings": {"text": "Red + near-infrared light therapy", "text_style": "uppercase"}}, "title_2": {"type": "title", "settings": {"heading_size": "h1"}}, "price_3": {"type": "price", "settings": {}}, "text_4": {"type": "text", "settings": {"text": "Cordless red + near-infrared light therapy you can wear around the house. 30 minutes a day, hands-free, drug-free and mess-free.", "text_style": "body"}}, "variant_picker_5": {"type": "variant_picker", "settings": {"picker_type": "button", "swatch_shape": "circle"}}, "quantity_selector_6": {"type": "quantity_selector", "settings": {}}, "buy_buttons_7": {"type": "buy_buttons", "settings": {"show_dynamic_checkout": true, "show_gift_card_recipient": false}}, "text_8": {"type": "text", "settings": {"text": "<strong>✓</strong> 30-day money-back guarantee &nbsp; <strong>✓</strong> Tracked shipping &nbsp; <strong>✓</strong> Secure checkout", "text_style": "body"}}, "delivery_14": {"type": "custom_liquid", "settings": {"custom_liquid": "{% render 'dg-delivery', min: 6, max: 11 %}"}}}, "block_order": ["text_1", "title_2", "price_3", "text_4", "variant_picker_5", "quantity_selector_6", "buy_buttons_7", "delivery_14", "text_8"]}, "how": {"type": "dg-steps", "settings": {"style": "light", "anchor": "how-it-works", "eyebrow": "How it works", "heading": "Three steps. <em>30 minutes</em> a day.", "text": "", "button_label": "Shop the Hair Renew Cap", "button_link": "shopify://products/glow-cap", "padding_top": 88, "padding_bottom": 88}, "blocks": {"step_1": {"type": "step", "settings": {"badge": "", "icon": "power", "title": "Charge it", "text": "<p>A full charge takes about 2 hours with the included cable and wall adapter, and lasts about an hour of use.</p>"}}, "step_2": {"type": "step", "settings": {"badge": "", "icon": "cap", "title": "Put it on & press start", "text": "<p>Wear it on a clean, dry scalp. Pick a mode and brightness with the button on the side.</p>"}}, "step_3": {"type": "step", "settings": {"badge": "", "icon": "clock", "title": "30 minutes, once a day", "text": "<p>Relax while it works. The cap beeps at 30 minutes. Repeat daily. Consistency matters most.</p>"}}}, "block_order": ["step_1", "step_2", "step_3"]}, "compare": {"type": "dg-compare", "settings": {"style": "mist", "anchor": "", "eyebrow": "Compare", "heading": "Why an at-home <em>light cap</em>?", "text": "", "col_us": "Hair Renew Cap", "col_a": "In-clinic light sessions", "col_b": "Pills & supplements", "note": "General comparison for illustration. Individual clinics and products vary.", "button_label": "", "button_link": "", "padding_top": 88, "padding_bottom": 88}, "blocks": {"row_1": {"type": "row", "settings": {"label": "Use at home, on your schedule", "us": true, "a": false, "b": true}}, "row_2": {"type": "row", "settings": {"label": "Nothing to swallow", "us": true, "a": true, "b": false}}, "row_3": {"type": "row", "settings": {"label": "Red + near-infrared light", "us": true, "a": true, "b": false}}, "row_4": {"type": "row", "settings": {"label": "No recurring appointments", "us": true, "a": false, "b": true}}, "row_5": {"type": "row", "settings": {"label": "One-time purchase", "us": true, "a": false, "b": false}}, "row_6": {"type": "row", "settings": {"label": "Private: no travel or waiting rooms", "us": true, "a": false, "b": true}}}, "block_order": ["row_1", "row_2", "row_3", "row_4", "row_5", "row_6"]}, "expect": {"type": "dg-steps", "settings": {"style": "teal", "anchor": "what-to-expect", "eyebrow": "Honest expectations", "heading": "A routine, <em>not a miracle</em>", "text": "<p>Here's what a realistic journey looks like. Everyone is different, and results vary from person to person.</p>", "button_label": "", "button_link": "", "padding_top": 88, "padding_bottom": 88}, "blocks": {"step_1": {"type": "step", "settings": {"badge": "Weeks 1–4", "icon": "repeat", "title": "Build the habit", "text": "<p>Pick a time for your daily 30 minutes (morning coffee, evening TV) and stick to it.</p>"}}, "step_2": {"type": "step", "settings": {"badge": "Months 2–3", "icon": "clock", "title": "Stay consistent", "text": "<p>Keep up your routine. This is where most people give up too early.</p>"}}, "step_3": {"type": "step", "settings": {"badge": "Month 4+", "icon": "spark", "title": "Check your progress", "text": "<p>Compare with photos from day one to see how your hair is looking.</p>"}}}, "block_order": ["step_1", "step_2", "step_3"]}, "guarantee": {"type": "dg-guarantee", "settings": {"style": "light", "anchor": "guarantee", "days": "30", "eyebrow": "Risk-free", "heading": "Try it for 30 days. Love it or get your money back.", "text": "<p>Light therapy takes consistency, so give it a real try. If you're not happy within 30 days of delivery, email us and we'll refund you.</p>", "button_label": "Get the Hair Renew Cap", "button_link": "shopify://products/glow-cap", "padding_top": 72, "padding_bottom": 72}, "blocks": {"badge_1": {"type": "badge", "settings": {"icon": "shield", "text": "30-day money-back guarantee"}}, "badge_2": {"type": "badge", "settings": {"icon": "truck", "text": "Tracked shipping on every order"}}, "badge_3": {"type": "badge", "settings": {"icon": "lock", "text": "Secure checkout"}}, "badge_4": {"type": "badge", "settings": {"icon": "mail", "text": "Real support from real people"}}}, "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"]}, "faq": {"type": "dg-faq", "settings": {"style": "mist", "anchor": "faq", "eyebrow": "FAQ", "heading": "Questions, answered", "text": "", "open_first": true, "button_label": "See all FAQs", "button_link": "shopify://pages/faqs", "padding_top": 88, "padding_bottom": 88}, "blocks": {"question_1": {"type": "question", "settings": {"question": "How often should I use the Hair Renew Cap?", "answer": "<p>Once a day for 30 minutes. The cap beeps when your session is done. Consistency matters most, so pick a time that fits your day.</p>"}}, "question_2": {"type": "question", "settings": {"question": "When will I see results?", "answer": "<p>Red light therapy is a long-term routine, not an overnight fix. Most people use it consistently for several months before judging results, and results vary from person to person. That's why you get 30 days to try it risk-free.</p>"}}, "question_3": {"type": "question", "settings": {"question": "How long does the battery last?", "answer": "<p>About 1 hour per full charge (two sessions), and about 2 hours to charge. A USB cable and a wall adapter are included. A green light means it's on; the red light flashes 3 times when the battery is low.</p>"}}, "question_4": {"type": "question", "settings": {"question": "Does it hurt or get hot?", "answer": "<p>No. Most people feel a gentle warmth at most. Stop and contact us if anything feels uncomfortable.</p>"}}, "question_5": {"type": "question", "settings": {"question": "Is it for men or women?", "answer": "<p>Both. The Hair Renew Cap is a one-size baseball-style cap for anyone who wants to add red light therapy to their routine.</p>"}}, "question_6": {"type": "question", "settings": {"question": "Is it OK if I'm sensitive to flashing light?", "answer": "<p>The 10Hz and 40Hz modes pulse. If you have epilepsy or are sensitive to flashing light, don't use the pulse modes, and check with your doctor first. The same goes if you're pregnant or have a medical condition.</p>"}}, "question_7": {"type": "question", "settings": {"question": "How long does shipping take?", "answer": "<p>Most orders arrive in about 6–11 days, and every order is tracked. Your estimated delivery dates are shown next to the Add to cart button.</p>"}}, "question_8": {"type": "question", "settings": {"question": "What if it's not for me?", "answer": "<p>You have 30 days from delivery to try it. If you're not happy, email support@thedailyglowco.com for a full refund. See our <a href=\"/pages/return-policy\">Returns & Refunds</a> page for details.</p>"}}}, "block_order": ["question_1", "question_2", "question_3", "question_4", "question_5", "question_6", "question_7", "question_8"]}, "reviews": {"type": "dg-reviews", "blocks": {"review_1": {"type": "review", "settings": {"rating": 5, "text": "It is a very comfortable cap and once worn, the lights are not visible so it can be used even on the street. Once the cap has passed the recommended usage time (30 min), it emits a small beep to inform you about it. I still don't know if it works but I am happy with its operation.", "name": "V***a", "country": "Spain", "date": "14 Dec 2025", "variant": "Black", "verified": true}}, "review_2": {"type": "review", "settings": {"rating": 5, "text": "It's great that it's cordless and has a large battery capacity.", "name": "さ***か", "country": "Japan", "date": "13 May 2026", "variant": "Black", "verified": true}}, "review_3": {"type": "review", "settings": {"rating": 5, "text": "Rechargeable battery is very convenient. It's nice to have multiple functions, intensity or frequency.", "name": "AliExpress Shopper", "country": "United States", "date": "15 Dec 2025", "variant": "Grey", "verified": true}}, "review_4": {"type": "review", "settings": {"rating": 5, "text": "Everything okay, good quality product", "name": "AliExpress Shopper", "country": "Chile", "date": "15 Nov 2025", "variant": "Black", "verified": true, "photo": "shopify://shop_images/review-cl-1.webp", "photo_alt": "Photo from this buyer"}}, "review_5": {"type": "review", "settings": {"rating": 5, "text": "Cool product. Packed very well in sturdy cardboard box.", "name": "AliExpress Shopper", "country": "Poland", "date": "05 Oct 2025", "variant": "Black", "verified": true, "photo": "shopify://shop_images/review-pl-1.webp", "photo_alt": "Photo from this buyer"}}, "review_6": {"type": "review", "settings": {"rating": 4, "text": "Very good. It's just that the shape doesn't fit well on the head. Can't be worn on the street.", "name": "AliExpress Shopper", "country": "Brazil", "date": "14 Jun 2026", "variant": "Grey", "verified": true}}, "review_7": {"type": "review", "settings": {"rating": 5, "text": "Excellent purchase! The LED cap works perfectly, great product!", "name": "E***r", "country": "Brazil", "date": "19 Aug 2026", "variant": "Grey", "verified": true}}, "review_8": {"type": "review", "settings": {"rating": 5, "text": "Pretty cool! I'm using it.", "name": "D***s", "country": "Brazil", "date": "01 Aug 2026", "variant": "Black", "verified": true, "photo": "shopify://shop_images/review-br-2.webp", "photo_alt": "Photo from this buyer"}}, "review_9": {"type": "review", "settings": {"rating": 4, "text": "The quality is good, the only problem is aesthetics, it does not look pretty but does what it says, use it 40 mins every other day", "name": "AliExpress Shopper", "country": "Costa Rica", "date": "23 Aug 2026", "variant": "Black", "verified": true}}, "review_10": {"type": "review", "settings": {"rating": 5, "text": "It's a great item, not yet tested for its effectiveness but it's comfortable to wear and all the lights are on.", "name": "u***a", "country": "France", "date": "29 Nov 2025", "variant": "Black", "verified": true}}, "review_11": {"type": "review", "settings": {"rating": 4, "text": "It seems good but needs time to see if it's effective", "name": "h***e", "country": "France", "date": "28 Nov 2025", "variant": "Black", "verified": true, "photo": "shopify://shop_images/review-fr-1.webp", "photo_alt": "Photo from this buyer"}}, "review_12": {"type": "review", "settings": {"rating": 5, "text": "Feels good but only used it for a week", "name": "AliExpress Shopper", "country": "Sweden", "date": "19 Jun 2026", "variant": "Black", "verified": true}}, "review_13": {"type": "review", "settings": {"rating": 5, "text": "Looks good. I tried it just once so I don't know if it really works", "name": "a***r", "country": "Australia", "date": "05 Oct 2025", "variant": "Grey", "verified": true}}, "review_14": {"type": "review", "settings": {"rating": 3, "text": "The LED control board emits a very high pitched tone, very close to my right ear. Have used for two days. All the lights work, and it gets warm, but I'm unsure if I can endure the sound.", "name": "f***f", "country": "United States", "date": "21 Aug 2026", "variant": "Black", "verified": true}}, "review_15": {"type": "review", "settings": {"rating": 5, "text": "I ordered a US plug, but it was an EU plug. The main unit is usable and it's rechargeable, so that's good.", "name": "AliExpress Shopper", "country": "Japan", "date": "27 Sep 2026", "variant": "Black", "verified": true}}, "review_16": {"type": "review", "settings": {"rating": 5, "text": "Item as described", "name": "AliExpress Shopper", "country": "Spain", "date": "16 Jun 2026", "variant": "Black", "verified": true}}, "review_17": {"type": "review", "settings": {"rating": 5, "text": "Under testing, and hopefully it will be as described.", "name": "AliExpress Shopper", "country": "Saudi Arabia", "date": "25 Jan 2026", "variant": "Black", "verified": true}}, "review_18": {"type": "review", "settings": {"rating": 2, "text": "I didn't get to try it because when I opened the box I found a lot of mold on the cap.", "name": "AliExpress Shopper", "country": "Spain", "date": "26 Aug 2026", "variant": "Black", "verified": true}}}, "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5", "review_6", "review_7", "review_8", "review_9", "review_10", "review_11", "review_12", "review_13", "review_14", "review_15", "review_16", "review_17", "review_18"], "settings": {"style": "mist", "anchor": "reviews", "eyebrow": "Reviews", "heading": "What buyers of this cap are <em>saying</em>", "show_summary": true, "average": "4.7", "summary_text": "Based on 35 ratings on AliExpress · 94% positive", "disclosure": "<p>These are real reviews from verified buyers of this exact cap on our supplier's AliExpress listing, shown with their original star ratings, including the critical ones. Reviews not written in English were translated, a few were shortened, and we left out reviews that make medical or hair-growth claims.</p>", "badge_text": "Verified purchase", "initial_count": 6, "more_label": "Show more reviews", "padding_top": 88, "padding_bottom": 88}}, "videos": {"type": "dg-videos", "blocks": {"video_1": {"type": "video", "settings": {"video_url": "https://cdn.shopify.com/videos/c/vp/f7f069797c7346e9bb6eaf302781b489/f7f069797c7346e9bb6eaf302781b489.HD-720p-1.6Mbps-95725127.mp4", "poster_url": "https://cdn.shopify.com/s/files/1/0774/1374/4794/files/preview_images/f7f069797c7346e9bb6eaf302781b489.thumbnail.0000000000.jpg?v=1790555111", "title": "", "caption": ""}}}, "block_order": ["video_1"], "settings": {"style": "teal", "anchor": "see-it", "eyebrow": "See it in action", "heading": "Unbox it, switch it on, <em>wear it</em>", "text": "<p>Here's the Hair Renew Cap straight out of the box: a regular-looking cap with 291 red and near-infrared LEDs inside and a simple control button on the side.</p><ul><li>Cordless: charge it, then wear it anywhere at home</li><li>One button for 4 modes and 3 brightness levels</li><li>Beeps when your 30 minutes are up</li></ul>", "button_label": "Shop the Hair Renew Cap", "button_link": "shopify://products/glow-cap", "ratio": "9 / 16", "padding_top": 88, "padding_bottom": 88}}}, "order": ["hero", "ticker", "benefits", "videos", "buy", "reviews", "how", "compare", "expect", "guarantee", "faq"]}
+{
+  "sections": {
+    "hero": {
+      "type": "dg-hero-float",
+      "settings": {
+        "product": "glow-cap",
+        "image": "",
+        "blend": false,
+        "left_text": "Healthier-looking hair,",
+        "right_text": "<em>30 minutes</em> a day.",
+        "card_eyebrow": "291 red + near-infrared LEDs",
+        "card_title": "THE HAIR RENEW CAP",
+        "card_text": "<p>Cordless, hands-free light therapy for your hair and scalp routine. No pills, no creams, no appointments.</p>",
+        "button_label": "Shop the Hair Renew Cap",
+        "show_price": true,
+        "meta_text": "Free shipping · 30-day money-back guarantee",
+        "float_distance": 16,
+        "float_speed": 4,
+        "bg_1": "#F4F8F6",
+        "bg_2": "#FDEBDD",
+        "glow_color": "#FF6B4A",
+        "text_color": "#17393D",
+        "accent_color": "#E0701C",
+        "card_color": "#17393D",
+        "padding_top": 36,
+        "padding_bottom": 56,
+        "card_offset": 24,
+        "image_asset": "dg-product-black-cutout.png",
+        "holiday_pill_1": "The holiday edit",
+        "holiday_pill_2": "Buy 2, save 15%"
+      }
+    },
+    "ticker": {
+      "type": "dg-ticker",
+      "settings": {
+        "style": "light",
+        "speed": 40
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "No pills. No creams."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "power",
+            "text": "Cordless & rechargeable"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "light",
+            "text": "291 red + near-infrared LEDs"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "30 minutes a day"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free tracked shipping"
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "text": "Made for men & women"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7"
+      ]
+    },
+    "benefits": {
+      "type": "dg-benefits",
+      "settings": {
+        "style": "mist",
+        "anchor": "benefits",
+        "eyebrow": "Why the Hair Renew Cap",
+        "heading": "Light therapy that fits <em>your routine</em>",
+        "text": "<p>Everything you need for red light therapy at home, in one comfortable, cordless cap.</p>",
+        "columns": "3",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "light",
+            "title": "291 red + near-infrared LEDs",
+            "text": "<p>97 red (660nm) and 194 near-infrared (850nm) LEDs spread across the inside of the cap.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "power",
+            "title": "Cordless & rechargeable",
+            "text": "<p>Built-in 2000mAh battery. No cable while you wear it: move around, read, work or unwind.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clock",
+            "title": "30 minutes, then it beeps",
+            "text": "<p>One session a day. The cap beeps when your 30 minutes are up, so there's nothing to time.</p>"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "spark",
+            "title": "4 modes, 3 brightness levels",
+            "text": "<p>Choose Normal, Breathing, 10Hz or 40Hz pulse, and set the brightness that feels right.</p>"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "cap",
+            "title": "Looks like a regular cap",
+            "text": "<p>Baseball-cap style in Black or Grey. Once it's on, the lights aren't visible from outside.</p>"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Drug-free & mess-free",
+            "text": "<p>Nothing to swallow, nothing to rub in, and no residue left in your hair.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ]
+    },
+    "how": {
+      "type": "dg-steps",
+      "settings": {
+        "style": "mist",
+        "anchor": "how-it-works",
+        "eyebrow": "How it works",
+        "heading": "Three steps. <em>30 minutes</em> a day.",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "badge": "",
+            "icon": "power",
+            "title": "Charge it",
+            "text": "<p>A full charge takes about 2 hours with the included cable and wall adapter, and lasts about an hour of use.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "badge": "",
+            "icon": "cap",
+            "title": "Put it on & press start",
+            "text": "<p>Wear it on a clean, dry scalp. Pick a mode and brightness with the button on the side.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "badge": "",
+            "icon": "clock",
+            "title": "30 minutes, once a day",
+            "text": "<p>Relax while it works. The cap beeps at 30 minutes. Repeat daily. Consistency matters most.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "expect": {
+      "type": "dg-steps",
+      "settings": {
+        "style": "teal",
+        "anchor": "what-to-expect",
+        "eyebrow": "Honest expectations",
+        "heading": "A routine, <em>not a miracle</em>",
+        "text": "<p>Here's what a realistic journey looks like. Everyone is different, and results vary from person to person.</p>",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "badge": "Weeks 1–4",
+            "icon": "repeat",
+            "title": "Build the habit",
+            "text": "<p>Pick a time for your daily 30 minutes (morning coffee, evening TV) and stick to it.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "badge": "Months 2–3",
+            "icon": "clock",
+            "title": "Stay consistent",
+            "text": "<p>Keep up your routine. This is where most people give up too early.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "badge": "Month 4+",
+            "icon": "spark",
+            "title": "Check your progress",
+            "text": "<p>Compare with photos from day one to see how your hair is looking.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "guarantee": {
+      "type": "dg-guarantee",
+      "settings": {
+        "style": "light",
+        "anchor": "guarantee",
+        "days": "30",
+        "eyebrow": "Risk-free",
+        "heading": "Try it for 30 days. Love it or get your money back.",
+        "text": "<p>Light therapy takes consistency, so give it a real try. If you're not happy within 30 days of delivery, email us and we'll refund you.</p>",
+        "button_label": "Get the Hair Renew Cap",
+        "button_link": "shopify://products/glow-cap",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Tracked shipping on every order"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure checkout"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support from real people"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "faq": {
+      "type": "dg-faq",
+      "settings": {
+        "style": "mist",
+        "anchor": "faq",
+        "eyebrow": "FAQ",
+        "heading": "Questions, <em>answered</em>",
+        "text": "",
+        "open_first": true,
+        "button_label": "See all FAQs",
+        "button_link": "shopify://pages/faqs",
+        "padding_top": 88,
+        "padding_bottom": 88
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "How often should I use the Hair Renew Cap?",
+            "answer": "<p>Once a day for 30 minutes. The cap beeps when your session is done. Consistency matters most, so pick a time that fits your day.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "<p>Red light therapy is a long-term routine, not an overnight fix. Most people use it consistently for several months before judging results, and results vary from person to person. That's why you get 30 days to try it risk-free.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Is it for men or women?",
+            "answer": "<p>Both. The Hair Renew Cap is a one-size baseball-style cap for anyone who wants to add red light therapy to their routine.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Most orders arrive in about 6–11 days, and every order is tracked. Your estimated delivery dates are shown next to the Add to cart button.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "What if it's not for me?",
+            "answer": "<p>You have 30 days from delivery to try it. If you're not happy, email support@thedailyglowco.com for a full refund. See our <a href=\"/pages/return-policy\">Returns & Refunds</a> page for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_5",
+        "question_7",
+        "question_8"
+      ]
+    },
+    "reviews": {
+      "type": "dg-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "It is a very comfortable cap and once worn, the lights are not visible so it can be used even on the street. Once the cap has passed the recommended usage time (30 min), it emits a small beep to inform you about it. I still don't know if it works but I am happy with its operation.",
+            "name": "V***a",
+            "country": "Spain",
+            "date": "14 Dec 2025",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "It's great that it's cordless and has a large battery capacity.",
+            "name": "さ***か",
+            "country": "Japan",
+            "date": "13 May 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Rechargeable battery is very convenient. It's nice to have multiple functions, intensity or frequency.",
+            "name": "AliExpress Shopper",
+            "country": "United States",
+            "date": "15 Dec 2025",
+            "variant": "Grey",
+            "verified": true
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Everything okay, good quality product",
+            "name": "AliExpress Shopper",
+            "country": "Chile",
+            "date": "15 Nov 2025",
+            "variant": "Black",
+            "verified": true,
+            "photo": "shopify://shop_images/review-cl-1.webp",
+            "photo_alt": "Photo from this buyer"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Cool product. Packed very well in sturdy cardboard box.",
+            "name": "AliExpress Shopper",
+            "country": "Poland",
+            "date": "05 Oct 2025",
+            "variant": "Black",
+            "verified": true,
+            "photo": "shopify://shop_images/review-pl-1.webp",
+            "photo_alt": "Photo from this buyer"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "text": "Very good. It's just that the shape doesn't fit well on the head. Can't be worn on the street.",
+            "name": "AliExpress Shopper",
+            "country": "Brazil",
+            "date": "14 Jun 2026",
+            "variant": "Grey",
+            "verified": true
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Excellent purchase! The LED cap works perfectly, great product!",
+            "name": "E***r",
+            "country": "Brazil",
+            "date": "19 Aug 2026",
+            "variant": "Grey",
+            "verified": true
+          }
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Pretty cool! I'm using it.",
+            "name": "D***s",
+            "country": "Brazil",
+            "date": "01 Aug 2026",
+            "variant": "Black",
+            "verified": true,
+            "photo": "shopify://shop_images/review-br-2.webp",
+            "photo_alt": "Photo from this buyer"
+          }
+        },
+        "review_9": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "text": "The quality is good, the only problem is aesthetics, it does not look pretty but does what it says, use it 40 mins every other day",
+            "name": "AliExpress Shopper",
+            "country": "Costa Rica",
+            "date": "23 Aug 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_10": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "It's a great item, not yet tested for its effectiveness but it's comfortable to wear and all the lights are on.",
+            "name": "u***a",
+            "country": "France",
+            "date": "29 Nov 2025",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_11": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "text": "It seems good but needs time to see if it's effective",
+            "name": "h***e",
+            "country": "France",
+            "date": "28 Nov 2025",
+            "variant": "Black",
+            "verified": true,
+            "photo": "shopify://shop_images/review-fr-1.webp",
+            "photo_alt": "Photo from this buyer"
+          }
+        },
+        "review_12": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Feels good but only used it for a week",
+            "name": "AliExpress Shopper",
+            "country": "Sweden",
+            "date": "19 Jun 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_13": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Looks good. I tried it just once so I don't know if it really works",
+            "name": "a***r",
+            "country": "Australia",
+            "date": "05 Oct 2025",
+            "variant": "Grey",
+            "verified": true
+          }
+        },
+        "review_14": {
+          "type": "review",
+          "settings": {
+            "rating": 3,
+            "text": "The LED control board emits a very high pitched tone, very close to my right ear. Have used for two days. All the lights work, and it gets warm, but I'm unsure if I can endure the sound.",
+            "name": "f***f",
+            "country": "United States",
+            "date": "21 Aug 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_15": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "I ordered a US plug, but it was an EU plug. The main unit is usable and it's rechargeable, so that's good.",
+            "name": "AliExpress Shopper",
+            "country": "Japan",
+            "date": "27 Sep 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_16": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Item as described",
+            "name": "AliExpress Shopper",
+            "country": "Spain",
+            "date": "16 Jun 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_17": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Under testing, and hopefully it will be as described.",
+            "name": "AliExpress Shopper",
+            "country": "Saudi Arabia",
+            "date": "25 Jan 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        },
+        "review_18": {
+          "type": "review",
+          "settings": {
+            "rating": 2,
+            "text": "I didn't get to try it because when I opened the box I found a lot of mold on the cap.",
+            "name": "AliExpress Shopper",
+            "country": "Spain",
+            "date": "26 Aug 2026",
+            "variant": "Black",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8",
+        "review_9",
+        "review_10",
+        "review_11",
+        "review_12",
+        "review_13",
+        "review_14",
+        "review_15",
+        "review_16",
+        "review_17",
+        "review_18"
+      ],
+      "settings": {
+        "style": "mist",
+        "anchor": "reviews",
+        "eyebrow": "Reviews",
+        "heading": "What buyers of this cap are <em>saying</em>",
+        "show_summary": true,
+        "average": "4.7",
+        "summary_text": "Based on 35 ratings on AliExpress · 94% positive",
+        "disclosure": "<p>These are real reviews from verified buyers of this exact cap on our supplier's AliExpress listing, shown with their original star ratings, including the critical ones. Reviews not written in English were translated, a few were shortened, and we left out reviews that make medical or hair-growth claims.</p>",
+        "badge_text": "Verified purchase",
+        "initial_count": 6,
+        "more_label": "Show more reviews",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "spotlight": {
+      "type": "dg-product",
+      "blocks": {
+        "img_1": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-product-black.jpg",
+            "color": "Black",
+            "alt": "The Hair Renew Cap in Black"
+          }
+        },
+        "img_2": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-product-grey.jpg",
+            "color": "Grey",
+            "alt": "The Hair Renew Cap in Grey"
+          }
+        },
+        "img_3": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-studio-leds-inside.jpg",
+            "color": "",
+            "alt": "LEDs glowing inside the cap"
+          }
+        },
+        "img_4": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-lifestyle-woman.jpg",
+            "color": "Black",
+            "alt": "The cap worn at home"
+          }
+        },
+        "img_5": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-lifestyle-man.jpg",
+            "color": "Grey",
+            "alt": "The cap worn at home"
+          }
+        },
+        "img_6": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-in-the-box.jpg",
+            "color": "",
+            "alt": "What's in the box"
+          }
+        },
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping, 6–11 days"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure checkout"
+          }
+        }
+      },
+      "block_order": [
+        "img_1",
+        "img_2",
+        "img_3",
+        "img_4",
+        "img_5",
+        "img_6",
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ],
+      "settings": {
+        "layout": "spotlight",
+        "product": "glow-cap",
+        "eyebrow": "Red + near-infrared light therapy",
+        "rating": "4.7",
+        "rating_text": "35 AliExpress ratings",
+        "rating_link": "#reviews",
+        "text": "<p>Cordless, hands-free and drug-free. Wear it for 30 minutes a day while you read, work or unwind. It beeps when you're done.</p>",
+        "image_badge": "Free shipping",
+        "duo_sub": "one for you, one for someone else",
+        "link_label": "See full details, specs and what's in the box",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "gift": {
+      "type": "dg-holiday-banner",
+      "settings": {
+        "eyebrow": "The holiday edit",
+        "heading": "Give someone a daily routine. <strong>Buy 2, save 15%.</strong>",
+        "text": "<p>One for you, one for them. Free tracked shipping on every order. Order by December 12 for holiday delivery.</p>",
+        "button_label": "Shop the gift bundle",
+        "button_link": "shopify://products/glow-cap",
+        "padding_top": 72
+      }
+    },
+    "lifestyle": {
+      "type": "dg-lifestyle",
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "asset": "dg-lifestyle-woman.jpg",
+            "alt": "Woman wearing the Hair Renew Cap at home",
+            "caption": "Evening reading, 30 min"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "asset": "dg-lifestyle-man.jpg",
+            "alt": "Man wearing the Hair Renew Cap at home",
+            "caption": "Working from home, 30 min"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "asset": "dg-product-grey.jpg",
+            "alt": "The Hair Renew Cap in Grey",
+            "caption": "Black or Grey, one size"
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3"
+      ],
+      "settings": {
+        "style": "light",
+        "eyebrow": "Made for men & women",
+        "heading": "Wear it on the sofa, at your desk, <em>anywhere at home</em>",
+        "text": "<p>Charge it, put it on, press start. No cable, no clinic, no waiting room.</p>",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "gift",
+    "spotlight",
+    "benefits",
+    "lifestyle",
+    "how",
+    "expect",
+    "reviews",
+    "guarantee",
+    "faq"
+  ]
+}

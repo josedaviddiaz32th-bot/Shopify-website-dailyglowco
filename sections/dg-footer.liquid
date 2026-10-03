@@ -1,0 +1,72 @@
+{%- comment -%} Daily Glow site footer: newsletter, two link columns, bottom bar. {%- endcomment -%}
+<footer class="dgf">
+  <div class="dgf__wrap">
+    <div class="dgf__grid">
+      <div class="dgf__intro">
+        <img src="{{ 'dg-logo-horizontal-white.svg' | asset_url }}" alt="{{ shop.name | escape }}" height="56" style="height: 56px; width: auto;" loading="lazy">
+        {%- if section.settings.signup_heading != blank %}<p class="dgf__pitch">{{ section.settings.signup_heading | escape }}</p>{% endif -%}
+        {%- form 'customer', id: 'DgFooterNewsletter', class: 'dgf__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="dgf__ok" role="status">{{ section.settings.success_text | escape }}</p>
+          {%- else -%}
+            <label class="visually-hidden" for="DgFooterEmail">{{ 'newsletter.label' | t }}</label>
+            <input id="DgFooterEmail" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ section.settings.placeholder | escape }}" value="{{ form.email }}">
+            <button type="submit">{{ section.settings.button_label | escape }}</button>
+            {%- if form.errors -%}<p class="dgf__err" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="dgf__col" {{ block.shopify_attributes }}>
+          <span class="dgf__heading">{{ block.settings.heading | escape }}</span>
+          {%- for link in block.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endfor -%}
+          {%- if block.settings.show_email and shop.email != blank -%}
+            <a href="mailto:{{ shop.email }}">{{ shop.email }}</a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="dgf__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright | escape }}</span>
+      <div class="dgf__legal">
+        {%- for link in section.settings.legal_menu.links -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+        {%- if settings.social_instagram_link != blank %}<a href="{{ settings.social_instagram_link }}" rel="noopener" target="_blank">Instagram</a>{% endif -%}
+        {%- if settings.social_tiktok_link != blank %}<a href="{{ settings.social_tiktok_link }}" rel="noopener" target="_blank">TikTok</a>{% endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Daily Glow footer",
+  "tag": "div",
+  "class": "section-dg-footer",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "signup_heading", "label": "Newsletter text", "default": "Tips for your routine, early access to offers, nothing else." },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "Your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "Thanks, you're subscribed." },
+    { "type": "text", "id": "copyright", "label": "Copyright text", "default": "The Daily Glow Co. · Tools for a healthier life" },
+    { "type": "link_list", "id": "legal_menu", "label": "Bottom links menu", "info": "Privacy, Terms, etc. Instagram and TikTok come from Theme settings > Social media." }
+  ],
+  "blocks": [
+    {
+      "type": "links",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "checkbox", "id": "show_email", "label": "Show store email under the links", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Daily Glow footer" }]
+}
+{% endschema %}

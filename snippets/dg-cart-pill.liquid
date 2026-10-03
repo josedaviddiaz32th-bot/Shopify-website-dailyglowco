@@ -1,0 +1,4 @@
+{%- comment -%} Cart pill used inside #cart-icon-bubble (header + cart drawer refresh). {%- endcomment -%}
+<span class="dgh-cart__label">{{ 'templates.cart.cart' | t }}</span>
+<span class="dgh-cart__count" aria-hidden="true">{{ cart.item_count }}</span>
+<span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>

@@ -1,0 +1,53 @@
+{%- comment -%} "What's in the box": image + heading + numbered item tiles. {%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap dgx-media-split">
+    <div class="dgx-media-split__img">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 900, 1200', sizes: '(min-width: 990px) 560px, 92vw', alt: section.settings.image.alt }}
+      {%- elsif section.settings.asset != blank -%}
+        <img src="{{ section.settings.asset | asset_url }}" alt="{{ section.settings.heading | strip_html | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      <h2 class="dg__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank %}<div class="dg__lede dgx-mb">{{ section.settings.text }}</div>{% endif -%}
+      <div class="dgx-box-items">
+        {%- for block in section.blocks -%}
+          <div class="dgx-box-item" {{ block.shopify_attributes }}>
+            <span class="dgx-box-item__n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="dgx-box-item__name">{{ block.settings.name | escape }}</span>
+            {%- if block.settings.note != blank %}<span class="dgx-box-item__note">{{ block.settings.note | escape }}</span>{% endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "What's in the box",
+  "tag": "div",
+  "class": "section-dg-box",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "light", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "box" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "...or theme asset file name", "default": "dg-in-the-box.jpg" },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "What's in the box" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Everything you need, <em>ready to go</em>" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Charge it once and you're set for two sessions.</p>" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Item" },
+      { "type": "text", "id": "note", "label": "Note" }
+    ] }
+  ],
+  "presets": [{ "name": "What's in the box" }]
+}
+{% endschema %}

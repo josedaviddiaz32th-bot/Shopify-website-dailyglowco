@@ -1,1 +1,34 @@
-{"name": "t:sections.footer.name", "type": "footer", "sections": {"newsletter": {"type": "newsletter", "blocks": {"heading": {"type": "heading", "settings": {"heading": "Get hair-care tips & offers", "heading_size": "h1"}}, "paragraph": {"type": "paragraph", "settings": {"text": "<p>Routine tips, product news and subscriber-only offers. No spam, unsubscribe anytime.</p>"}}, "email-form": {"type": "email_form", "settings": {}}}, "block_order": ["heading", "paragraph", "email-form"], "settings": {"color_scheme": "scheme-3", "full_width": true, "padding_top": 56, "padding_bottom": 56}}, "footer": {"type": "footer", "blocks": {"brand": {"type": "brand_information", "settings": {"show_social": true}}, "links": {"type": "link_list", "settings": {"heading": "Help & info", "menu": "footer"}}, "contact": {"type": "text", "settings": {"heading": "Talk to us", "subtext": "<p>support@thedailyglowco.com<br/>We reply within 1–2 business days.</p>"}}}, "block_order": ["brand", "links", "contact"], "settings": {"color_scheme": "scheme-2", "newsletter_enable": false, "newsletter_heading": "Subscribe to our emails", "enable_follow_on_shop": true, "show_social": true, "enable_country_selector": false, "enable_language_selector": false, "payment_enable": true, "show_policy": true, "margin_top": 0, "padding_top": 48, "padding_bottom": 48}}}, "order": ["newsletter", "footer"]}
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "dg-footer",
+      "blocks": {
+        "col_shop": {
+          "type": "links",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "col_help": {
+          "type": "links",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer",
+            "show_email": true
+          }
+        }
+      },
+      "block_order": [
+        "col_shop",
+        "col_help"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

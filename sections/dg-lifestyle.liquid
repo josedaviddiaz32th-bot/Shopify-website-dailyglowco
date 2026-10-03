@@ -1,0 +1,53 @@
+{%- comment -%} Lifestyle row: header + lede, then portrait tiles with pill captions. {%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+<section class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dgx-split-head">
+      <div>
+        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+        <h2 class="dg__title">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+    </div>
+    <div class="dgx-tiles">
+      {%- for block in section.blocks -%}
+        <figure class="dgx-tile" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 380px, 92vw', alt: block.settings.alt }}
+          {%- elsif block.settings.asset != blank -%}
+            <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.alt | escape }}" loading="lazy">
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'dgx-tile__ph' }}
+          {%- endif -%}
+          {%- if block.settings.caption != blank %}<figcaption>{{ block.settings.caption | escape }}</figcaption>{% endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle tiles",
+  "tag": "div",
+  "class": "section-dg-lifestyle",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "light", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Made for men & women" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Italic words get the sunrise gradient.", "default": "Wear it on the sofa, at your desk, <em>anywhere at home</em>" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Charge it, put it on, press start. No cable, no clinic, no waiting room.</p>" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "tile", "name": "Tile", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image (4:5)" },
+      { "type": "text", "id": "asset", "label": "...or theme asset file name", "info": "e.g. dg-lifestyle-woman.jpg" },
+      { "type": "text", "id": "alt", "label": "Image description" },
+      { "type": "text", "id": "caption", "label": "Caption", "default": "Evening reading, 30 min" }
+    ] }
+  ],
+  "presets": [{ "name": "Lifestyle tiles", "blocks": [{ "type": "tile" }, { "type": "tile" }, { "type": "tile" }] }]
+}
+{% endschema %}

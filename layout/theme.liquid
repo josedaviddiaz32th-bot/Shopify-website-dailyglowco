@@ -63,6 +63,8 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    <script src="{{ 'dg-theme.js' | asset_url }}" defer="defer"></script>
+
     {{ content_for_header }}
 
     {%- liquid
@@ -77,6 +79,10 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {%- assign dg_font_500 = settings.type_body_font | font_modify: 'weight', '500' -%}
+      {%- assign dg_font_800 = settings.type_body_font | font_modify: 'weight', '800' -%}
+      {{ dg_font_500 | font_face: font_display: 'swap' }}
+      {{ dg_font_800 | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -279,6 +285,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'dg-theme.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

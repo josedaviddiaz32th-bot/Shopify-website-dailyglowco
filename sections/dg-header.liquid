@@ -1,0 +1,111 @@
+{%- comment -%}
+  Daily Glow site header: announcement bar (standard + holiday), logo, centred nav, account + cart pill.
+  Keeps #cart-icon-bubble so Dawn's cart drawer can open and refresh it.
+{%- endcomment -%}
+{%- liquid
+  assign holiday = settings.holiday_mode
+  assign menu = section.settings.menu
+-%}
+<header class="dgh-site{% if section.settings.sticky %} dgh-site--sticky{% endif %}" data-dg-header>
+  {%- if holiday -%}
+    <div class="dgh-announce">
+      <span class="dgh-announce__tag">{{ section.settings.holiday_tag | escape }}</span>
+      <span>{{ section.settings.holiday_text | escape }}</span>
+      {%- if section.settings.holiday_link_label != blank -%}
+        <a href="{{ section.settings.holiday_link | default: routes.all_products_collection_url }}">{{ section.settings.holiday_link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  {%- elsif section.settings.announcement != blank -%}
+    {%- assign parts = section.settings.announcement | split: '|' -%}
+    <div class="dgh-announce">
+      {%- for part in parts -%}
+        {%- unless forloop.first %}<span class="dgh-announce__sep" aria-hidden="true">·</span>{% endunless -%}
+        <span>{{ part | strip | escape }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="dgh-bar">
+    <div class="dgh-row">
+      <details class="dgh-burger" data-dg-burger>
+        <summary aria-label="{{ 'sections.header.menu' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </summary>
+        <nav class="dgh-drawer" aria-label="{{ 'sections.header.menu' | t }}">
+          {%- for link in menu.links -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {%- endfor -%}
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{{ routes.account_url }}">{{ section.settings.account_label | escape }}</a>
+          {%- endif -%}
+        </nav>
+      </details>
+
+      <a href="{{ routes.root_url }}" class="dgh-logo" aria-label="{{ shop.name | escape }} home">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 600 | image_tag: height: section.settings.logo_height, widths: '200, 400, 600', alt: shop.name, loading: 'eager' }}
+        {%- else -%}
+          <img src="{{ 'dg-logo-header.svg' | asset_url }}" alt="{{ shop.name | escape }}" height="{{ section.settings.logo_height }}" style="height: {{ section.settings.logo_height }}px; width: auto;">
+        {%- endif -%}
+        {%- if holiday and section.settings.santa_hat -%}
+          <svg class="dgh-hat" viewBox="0 0 40 34" aria-hidden="true">
+            <path d="M4 26 C8 12 16 4 27 4 C31 4 34 8 35 14 L37 22 C31 18 27 18 24 20 L4 26 Z" fill="#d8352a"/>
+            <path d="M27 4 C22 6 18 12 16 22" fill="none" stroke="#b5261d" stroke-width="1.2" opacity=".6"/>
+            <rect x="1" y="23" width="28" height="8" rx="4" transform="rotate(-12 15 27)" fill="#fff" stroke="rgba(23,57,61,0.12)" stroke-width=".8"/>
+            <circle cx="36.5" cy="23.5" r="4" fill="#fff" stroke="rgba(23,57,61,0.12)" stroke-width=".8"/>
+          </svg>
+        {%- endif -%}
+      </a>
+
+      <nav class="dgh-nav" aria-label="Main">
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}"{% if link.current or link.child_current %} class="is-active" aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="dgh-actions">
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="dgh-account" href="{{ routes.account_url }}">{{ section.settings.account_label | escape }}</a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="dgh-cart" id="cart-icon-bubble">
+          {%- render 'dg-cart-pill' -%}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    var h = document.querySelector('[data-dg-header]');
+    if (!h) return;
+    var set = function () { document.documentElement.style.setProperty('--dg-header-h', h.offsetHeight + 'px'); };
+    set();
+    window.addEventListener('resize', set);
+    var b = h.querySelector('[data-dg-burger]');
+    document.addEventListener('click', function (e) { if (b && b.open && !b.contains(e.target)) b.open = false; });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Daily Glow header",
+  "tag": "div",
+  "class": "section-dg-header",
+  "settings": [
+    { "type": "header", "content": "Announcement" },
+    { "type": "text", "id": "announcement", "label": "Announcement", "info": "Separate messages with |", "default": "Free tracked shipping | 30-day money-back guarantee | Buy 2, save 15%" },
+    { "type": "text", "id": "holiday_tag", "label": "Holiday label", "default": "Holiday gifting" },
+    { "type": "text", "id": "holiday_text", "label": "Holiday announcement", "default": "Buy 2 caps, save 15% · Order by Dec 12 for holiday delivery" },
+    { "type": "text", "id": "holiday_link_label", "label": "Holiday link label", "default": "Shop gifts" },
+    { "type": "url", "id": "holiday_link", "label": "Holiday link" },
+    { "type": "header", "content": "Main row" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (optional)", "info": "Leave empty to use the built-in Daily Glow header logo." },
+    { "type": "range", "id": "logo_height", "label": "Logo height", "min": 24, "max": 64, "step": 2, "unit": "px", "default": 38 },
+    { "type": "checkbox", "id": "santa_hat", "label": "Santa hat on the logo in holiday mode", "default": true },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "account_label", "label": "Account label", "default": "Account" },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true }
+  ]
+}
+{% endschema %}

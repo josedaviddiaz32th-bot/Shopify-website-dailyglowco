@@ -1,0 +1,46 @@
+{%- comment -%} Holiday gift banner. Renders only while Theme settings > Holiday mode is on. {%- endcomment -%}
+{%- if settings.holiday_mode -%}
+  {{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+  <section class="dg dgx-gift" style="--dg-pt: {{ section.settings.padding_top }}px;">
+    <div class="dgx-gift__wrap">
+      <div class="dgx-gift__card">
+        <div class="dgx-gift__copy">
+          {%- if section.settings.eyebrow != blank %}<span class="dgx-gift__eyebrow">{{ section.settings.eyebrow | escape }}</span>{% endif -%}
+          <h2 class="dgx-gift__title">{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank %}<div class="dgx-gift__text">{{ section.settings.text }}</div>{% endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <div><a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a></div>
+          {%- endif -%}
+        </div>
+        <div class="dgx-gift__media">
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 900, 1200', sizes: '(min-width: 990px) 600px, 100vw', alt: section.settings.image.alt }}
+          {%- else -%}
+            <img src="{{ 'dg-product-black.jpg' | asset_url }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <div style="padding:16px 24px;text-align:center;font-size:13px;opacity:.7">Holiday gift banner: hidden until Holiday mode is on (Theme settings › Daily Glow holiday).</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Holiday gift banner",
+  "tag": "div",
+  "class": "section-dg-holiday-banner",
+  "settings": [
+    { "type": "paragraph", "content": "Only shows while Holiday mode is on in Theme settings." },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "The holiday edit" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Bold words turn golden.", "default": "Give someone a daily routine. <strong>Buy 2, save 15%.</strong>" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>One for you, one for them. Free tracked shipping on every order. Order by December 12 for holiday delivery.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the gift bundle" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Gift image", "info": "Shot list: Black + Grey caps wrapped in kraft paper with a teal ribbon. 4:3." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [{ "name": "Holiday gift banner" }]
+}
+{% endschema %}

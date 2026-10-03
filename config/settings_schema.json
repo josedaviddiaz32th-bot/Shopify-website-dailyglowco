@@ -8,6 +8,72 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Daily Glow offers",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Holiday mode"
+      },
+      {
+        "type": "checkbox",
+        "id": "holiday_mode",
+        "label": "Holiday mode",
+        "default": false,
+        "info": "Turns on the Christmas campaign everywhere: announcement, Santa hat, hero snow and lights, gift banner, product page offer strip and countdown."
+      },
+      {
+        "type": "text",
+        "id": "holiday_end_date",
+        "label": "Offer ends (YYYY-MM-DD)",
+        "default": "2026-12-24",
+        "info": "The countdown runs to 23:59:59 on this date, in the shopper's time zone."
+      },
+      {
+        "type": "image_picker",
+        "id": "holiday_hero_image",
+        "label": "Holiday hero background (optional)"
+      },
+      {
+        "type": "checkbox",
+        "id": "holiday_show_compare",
+        "label": "Show compare-at price in holiday mode",
+        "default": false,
+        "info": "Only turn this on if the product genuinely sold at the compare-at price (FTC reference-pricing rules). Keep it out of ads."
+      },
+      {
+        "type": "header",
+        "content": "Buy 2, save"
+      },
+      {
+        "type": "range",
+        "id": "bundle_discount_percent",
+        "label": "Buy 2 discount",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "%",
+        "default": 15,
+        "info": "Shows the 2-cap set and cart upsell. Must match an automatic discount in Shopify admin (Discounts > Amount off products, minimum quantity 2). Set to 0 to hide."
+      },
+      {
+        "type": "header",
+        "content": "Cart drawer"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "dg_cart_banner",
+        "label": "Banner above cart items",
+        "default": "You've unlocked <strong>free tracked shipping</strong>"
+      },
+      {
+        "type": "text",
+        "id": "dg_cart_smallprint",
+        "label": "Small print under checkout",
+        "default": "30-day money-back guarantee · Secure checkout"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

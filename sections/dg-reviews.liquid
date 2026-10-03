@@ -99,6 +99,9 @@
         </button>
       </div>
     {%- endif -%}
+    {%- if section.settings.link_label != blank -%}
+      <p class="dg__textlink"><a href="{{ section.settings.link_url | default: '#' }}">{{ section.settings.link_label | escape }}</a></p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -115,6 +118,8 @@
 {"type":"text","id":"badge_text","label":"Badge text","default":"Verified buyer"},
 {"type":"range","id":"initial_count","label":"Reviews shown before 'Show more'","min":3,"max":24,"step":3,"default":6},
 {"type":"text","id":"more_label","label":"'Show more' label","default":"Show more reviews"},
+{"type":"text","id":"link_label","label":"Text link label (below the reviews)"},
+{"type":"url","id":"link_url","label":"Text link"},
 {"type":"header","content":"Spacing"},
 {"type":"range","id":"padding_top","label":"Top padding","min":0,"max":160,"step":4,"unit":"px","default":88},
 {"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":160,"step":4,"unit":"px","default":88}

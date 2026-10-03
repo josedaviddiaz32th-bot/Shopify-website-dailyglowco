@@ -1,0 +1,49 @@
+{%- comment -%} Specs: heading + photo on the left, key/value table on the right. {%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap dgx-specs">
+    <div>
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      <h2 class="dg__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank %}<div class="dg__lede dgx-mb">{{ section.settings.text }}</div>{% endif -%}
+      <div class="dgx-specs__img">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 700, 1000', sizes: '(min-width: 990px) 520px, 92vw', alt: section.settings.image.alt }}
+        {%- elsif section.settings.asset != blank -%}
+          <img src="{{ section.settings.asset | asset_url }}" alt="" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+    <dl class="dgx-specs__table">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}><dt>{{ block.settings.label | escape }}</dt><dd>{{ block.settings.value | escape }}</dd></div>
+      {%- endfor -%}
+    </dl>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Specs table",
+  "tag": "div",
+  "class": "section-dg-specs",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "mist", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "specs" },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Specs" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The details, <em>in full</em>" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>One size, baseball-cap style, with a single control button on the side.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "...or theme asset file name", "default": "dg-detail-button.jpg" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Label" },
+      { "type": "text", "id": "value", "label": "Value", "default": "Value" }
+    ] }
+  ],
+  "presets": [{ "name": "Specs table" }]
+}
+{% endschema %}

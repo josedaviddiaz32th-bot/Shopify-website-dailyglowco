@@ -1,0 +1,426 @@
+{%- comment -%}
+  Daily Glow buy box. Two layouts:
+  - "pdp": product page (holiday offer strip, breadcrumb, main image + 2×2 grid, sticky buy box, sticky bar)
+  - "spotlight": homepage product spotlight (vertical thumbnails, swatches)
+  Colour / adapter / set pickers drive Dawn's <product-form>, so the cart drawer and
+  dynamic checkout (Shop Pay) work as usual. Supports products with either two options
+  (Color, Adapter) or one combined option like "Black – US plug".
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign p = section.settings.product
+  if p == blank
+    assign p = product
+  endif
+  assign layout = section.settings.layout
+  assign holiday = settings.holiday_mode
+  assign pct = settings.bundle_discount_percent | default: 0
+  assign show_compare = false
+  if holiday and settings.holiday_show_compare
+    assign show_compare = true
+  endif
+  assign product_form_id = 'dg-product-form-' | append: sid
+  assign sticky_form_id = 'dg-sticky-form-' | append: sid
+-%}
+
+{%- if p != blank -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign current = p.selected_or_first_available_variant
+  assign colors = ''
+  assign plugs = ''
+  for v in p.variants
+    if v.options.size > 1
+      assign c = v.option1
+      assign pl = v.option2 | split: ' ' | first
+    else
+      assign parts = v.title | split: ' – '
+      assign c = parts[0] | strip
+      assign pl = parts[1] | split: ' ' | first
+    endif
+    assign colors = colors | append: c | append: '|'
+    if pl != blank
+      assign plugs = plugs | append: pl | append: '|'
+    endif
+    if v.id == current.id
+      assign cur_color = c
+      assign cur_plug = pl
+    endif
+  endfor
+  assign colors = colors | split: '|' | uniq
+  assign plugs = plugs | split: '|' | uniq
+
+  assign single = current.price
+  assign keep = 100 | minus: pct
+  assign duo = current.price | times: 2 | times: keep | divided_by: 100
+  assign duo_each = duo | divided_by: 2
+  assign duo_save = current.price | times: 2 | minus: duo
+-%}
+
+<dg-product
+  class="dgp dgp--{{ layout }}"
+  id="dgp-{{ sid }}"
+  data-section="{{ sid }}"
+  data-layout="{{ layout }}"
+  data-pct="{{ pct }}"
+  data-compare="{{ show_compare }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  data-holiday="{{ holiday }}"
+  style="--dgp-pt: {{ section.settings.padding_top }}px; --dgp-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <script type="application/json" data-variants>
+    [
+      {%- for v in p.variants -%}
+        {%- liquid
+          if v.options.size > 1
+            assign c = v.option1
+            assign pl = v.option2 | split: ' ' | first
+          else
+            assign parts = v.title | split: ' – '
+            assign c = parts[0] | strip
+            assign pl = parts[1] | split: ' ' | first
+          endif
+        -%}
+        {"id":{{ v.id }},"available":{{ v.available }},"price":{{ v.price }},"compare":{{ v.compare_at_price | default: 0 }},"color":{{ c | json }},"plug":{{ pl | default: '' | json }}}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  </script>
+
+  {%- if layout == 'pdp' and holiday -%}
+    <div class="dgp-offer">
+      <div class="dgp-offer__inner">
+        <div class="dg-festive dg-festive--mini" data-dg-festive data-flakes="40" data-bulbs="22" aria-hidden="true"></div>
+        <div class="dgp-offer__copy">
+          <span class="dgp-offer__tag">{{ section.settings.offer_tag | escape }}</span>
+          <span class="dgp-offer__price">Now <span data-price-single>{{ single | money }}</span>
+            {%- if show_compare and current.compare_at_price > current.price %} <s data-compare-single>{{ current.compare_at_price | money }}</s>{% endif -%}
+          </span>
+        </div>
+        <div class="dgp-offer__count" data-dg-countdown="{{ settings.holiday_end_date | default: '2026-12-24' }}">
+          <span class="dgp-offer__ends">Ends in</span>
+          <span class="dgp-chip"><b data-d>0</b>d</span><span class="dgp-chip"><b data-h>00</b>h</span><span class="dgp-chip"><b data-m>00</b>m</span><span class="dgp-chip"><b data-s>00</b>s</span>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="dgp__wrap">
+    {%- if layout == 'pdp' and section.settings.show_breadcrumb -%}
+      <nav class="dgp-crumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span>
+        <a href="{{ routes.all_products_collection_url }}">Shop</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{{ p.title | escape }}</span>
+      </nav>
+    {%- endif -%}
+
+    <div class="dgp__grid">
+      {%- comment -%} Gallery: one group per colour; blocks with no colour show in every group. {%- endcomment -%}
+      <div class="dgp-media">
+        {%- for color in colors -%}
+          {%- assign cdown = color | downcase -%}
+          <div class="dgp-gallery" data-color="{{ color | escape }}"{% if color != cur_color %} hidden{% endif %}>
+            {%- assign n = 0 -%}
+            {%- capture thumbs -%}{%- endcapture -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type != 'image' -%}{%- continue -%}{%- endif -%}
+              {%- assign bcol = block.settings.color | downcase | strip -%}
+              {%- if bcol != blank and bcol != cdown -%}{%- continue -%}{%- endif -%}
+              {%- assign n = n | plus: 1 -%}
+              {%- liquid
+                assign alt = block.settings.alt | default: p.title | escape
+                if n == 1
+                  assign eager = 'eager'
+                else
+                  assign eager = 'lazy'
+                endif
+              -%}
+              {%- capture img -%}
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1400 | image_tag: loading: eager, widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 600px, 92vw', alt: alt }}
+                {%- elsif block.settings.asset != blank -%}
+                  <img src="{{ block.settings.asset | asset_url }}" alt="{{ alt }}" loading="{{ eager }}" width="1200" height="1200">
+                {%- endif -%}
+              {%- endcapture -%}
+              {%- if layout == 'spotlight' -%}
+                <figure class="dgp-slide{% if n == 1 %} is-active{% endif %}" data-slide="{{ n }}" {{ block.shopify_attributes }}>{{ img }}</figure>
+                {%- capture thumbs -%}{{ thumbs }}<button type="button" class="dgp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{{ img | replace: 'loading="eager"', 'loading="lazy"' }}</button>{%- endcapture -%}
+              {%- else -%}
+                <figure class="dgp-tile{% if n == 1 %} dgp-tile--main{% endif %}" {{ block.shopify_attributes }}>
+                  {{ img }}
+                  {%- if n == 1 -%}
+                    {%- if holiday and section.settings.holiday_badge != blank -%}
+                      <span class="dgp-badge dgp-badge--holiday">{{ section.settings.holiday_badge | escape }}</span>
+                    {%- elsif section.settings.image_badge != blank -%}
+                      <span class="dgp-badge">{{ section.settings.image_badge | escape }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                </figure>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if n == 0 -%}
+              <figure class="dgp-tile dgp-tile--main dgp-slide is-active">
+                {{ p.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 600px, 92vw' }}
+              </figure>
+            {%- endif -%}
+            {%- if layout == 'spotlight' -%}
+              {%- if section.settings.image_badge != blank %}<span class="dgp-badge">{{ section.settings.image_badge | escape }}</span>{% endif -%}
+              {%- if n > 1 %}<div class="dgp-thumbs">{{ thumbs }}</div>{% endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="dgp-box">
+        <div class="dgp-head">
+          {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+          {%- if layout == 'pdp' -%}
+            <h1 class="dgp-title">{{ p.title | escape }}</h1>
+          {%- else -%}
+            <h2 class="dgp-title">{{ p.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.rating != blank -%}
+            {%- assign r_round = section.settings.rating | plus: 0 | plus: 0.5 | floor -%}
+            <a class="dgp-rating" href="{{ section.settings.rating_link | default: '#reviews' }}">
+              <span class="dg-stars" role="img" aria-label="{{ section.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}<svg viewBox="0 0 24 24"{% if i > r_round %} class="off"{% endif %} aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>{%- endfor -%}
+              </span>
+              <span><strong>{{ section.settings.rating | escape }}</strong> · {{ section.settings.rating_text | escape }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if layout == 'pdp' -%}
+          <div class="dgp-price">
+            <span class="dgp-price__now" data-price>{{ single | money }}</span>
+            {%- if show_compare -%}
+              <s class="dgp-price__was" data-compare{% unless current.compare_at_price > current.price %} hidden{% endunless %}>{{ current.compare_at_price | money }}</s>
+              <span class="dgp-pill" data-save{% unless current.compare_at_price > current.price %} hidden{% endunless %}>Save {{ current.compare_at_price | minus: current.price | money }}</span>
+            {%- endif -%}
+            <span class="dgp-price__note" data-price-note>{% if holiday %}{{ section.settings.holiday_note | escape }}{% else %}{{ section.settings.price_note | escape }}{% endif %}</span>
+          </div>
+        {%- elsif section.settings.text != blank -%}
+          <div class="dgp-text">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        <div class="dgp-options">
+          {%- if colors.size > 1 -%}
+            <fieldset class="dgp-opt">
+              <legend>Color: <span data-color-name>{{ cur_color | escape }}</span></legend>
+              <div class="dgp-opt__row">
+                {%- for color in colors -%}
+                  {%- liquid
+                    assign cd = color | downcase
+                    case cd
+                      when 'black'
+                        assign sw = '#1d1f21'
+                      when 'grey', 'gray'
+                        assign sw = '#9aa1a3'
+                      when 'white'
+                        assign sw = '#f4f4f2'
+                      else
+                        assign sw = '#c9cfcf'
+                    endcase
+                  -%}
+                  <button type="button" class="dgp-color" data-pick-color="{{ color | escape }}" aria-pressed="{% if color == cur_color %}true{% else %}false{% endif %}" aria-label="{{ color | escape }}">
+                    <span class="dgp-color__sw" style="background: {{ sw }};"></span>{% if layout == 'pdp' %}<span>{{ color | escape }}</span>{% endif %}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endif -%}
+          {%- if plugs.size > 1 and layout == 'pdp' -%}
+            <fieldset class="dgp-opt">
+              <legend>{{ section.settings.plug_label | escape }}</legend>
+              <div class="dgp-opt__row dgp-opt__row--tight">
+                {%- for plug in plugs -%}
+                  <button type="button" class="dgp-plug" data-pick-plug="{{ plug | escape }}" aria-pressed="{% if plug == cur_plug %}true{% else %}false{% endif %}">{{ plug | escape }}</button>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endif -%}
+        </div>
+        {%- if plugs.size > 1 and layout == 'spotlight' -%}
+          <p class="dgp-plugnote">{{ section.settings.plug_label | escape }}: <span data-plug-name>{{ cur_plug }}</span> · <a href="{{ p.url }}">change on the product page</a></p>
+        {%- endif -%}
+
+        {%- if pct > 0 -%}
+          <fieldset class="dgp-sets">
+            <legend>{{ section.settings.set_label | escape }}</legend>
+            <label class="dgp-set">
+              <input type="radio" name="dgp-set-{{ sid }}" value="1" checked>
+              <span class="dgp-set__dot" aria-hidden="true"></span>
+              <span class="dgp-set__body">
+                <span class="dgp-set__title">1 {{ p.title | escape }}</span>
+                <span class="dgp-set__sub">{{ section.settings.single_sub | escape }}</span>
+              </span>
+              <span class="dgp-set__price" data-price-single>{{ single | money }}</span>
+            </label>
+            <label class="dgp-set">
+              <input type="radio" name="dgp-set-{{ sid }}" value="2">
+              <span class="dgp-set__dot" aria-hidden="true"></span>
+              <span class="dgp-set__body">
+                <span class="dgp-set__title">2 {{ section.settings.plural_title | default: p.title | escape }} <span class="dgp-pill">Save {{ pct }}%</span></span>
+                <span class="dgp-set__sub"><span data-price-each>{{ duo_each | money }}</span> each · {{ section.settings.duo_sub | escape }}</span>
+              </span>
+              <span class="dgp-set__price" data-price-duo>{{ duo | money }}</span>
+            </label>
+          </fieldset>
+        {%- endif -%}
+
+        <div class="dgp-buy" data-buy>
+          <product-form class="product-form" data-section-id="{{ sid }}">
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+            {%- form 'product', p, id: product_form_id, class: 'form dgp-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ current.id }}" class="product-variant-id"{% unless current.available %} disabled{% endunless %}>
+              <input type="hidden" name="quantity" value="1" data-qty>
+              {%- comment -%} Add to cart comes first in the DOM (product-form.js picks the first submit button); CSS order shows Shop Pay above it. {%- endcomment -%}
+              <button type="submit" name="add" class="dg-btn dg-btn--primary dgp-atc"{% unless current.available %} disabled{% endunless %}>
+                <span data-atc-label>{% if current.available %}{{ 'products.product.add_to_cart' | t }} · {{ single | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+              <div class="dgp-shoppay">{{ form | payment_button }}</div>
+            {%- endform -%}
+          </product-form>
+        </div>
+
+        {%- if layout == 'pdp' and section.settings.text != blank -%}
+          <div class="dgp-text">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if layout == 'pdp' and section.settings.show_delivery -%}
+          <div class="dgp-eta" data-eta data-min="{{ section.settings.eta_min }}" data-max="{{ section.settings.eta_max }}">
+            {%- render 'dg-icon', name: 'truck' -%}
+            <span>{{ section.settings.eta_text | escape }} <strong data-eta-dates>{{ section.settings.eta_min }}–{{ section.settings.eta_max }} days</strong>.</span>
+          </div>
+        {%- endif -%}
+
+        {%- assign badges = section.blocks | where: 'type', 'badge' -%}
+        {%- if badges.size > 0 -%}
+          <ul class="dg-badges dgp-badges">
+            {%- for block in badges -%}
+              <li {{ block.shopify_attributes }}>{% render 'dg-icon', name: block.settings.icon %}{{ block.settings.text | escape }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
+        {%- if tabs.size > 0 -%}
+          <div class="dgp-tabs">
+            {%- for block in tabs -%}
+              <details {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.heading | escape }}<span aria-hidden="true">+</span></summary>
+                <div class="dgp-tabs__body">
+                  {{ block.settings.content }}
+                  {%- if block.settings.page != blank %}{{ block.settings.page.content }}{% endif -%}
+                </div>
+              </details>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if layout == 'spotlight' and section.settings.link_label != blank -%}
+          <a class="dgp-more" href="{{ p.url }}">{{ section.settings.link_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if layout == 'pdp' and section.settings.sticky_bar -%}
+    <div class="dgp-sticky" data-sticky hidden>
+      <div class="dgp-sticky__inner">
+        {%- if p.featured_image -%}
+          {{ p.featured_image | image_url: width: 120 | image_tag: class: 'dgp-sticky__img', loading: 'lazy', alt: '' }}
+        {%- endif -%}
+        <div class="dgp-sticky__meta">
+          <span class="dgp-sticky__name">{{ p.title | escape }}</span>
+          <span class="dgp-sticky__sub" data-sticky-meta></span>
+        </div>
+        <div class="dgp-sticky__btns">
+          {%- form 'product', p, id: sticky_form_id, class: 'dgp-sticky__form', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ current.id }}">
+            <input type="hidden" name="quantity" value="1" data-qty>
+            <div class="dgp-shoppay">{{ form | payment_button }}</div>
+          {%- endform -%}
+          <button type="button" class="dg-btn dg-btn--primary dgp-sticky__atc" data-sticky-atc>{{ 'products.product.add_to_cart' | t }}</button>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if layout == 'pdp' -%}
+    <script type="application/ld+json">
+      {{ p | structured_data }}
+    </script>
+  {%- endif -%}
+</dg-product>
+{%- else -%}
+  <div class="dgp"><div class="dgp__wrap"><p>Choose a product for this section.</p></div></div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Daily Glow buy box",
+  "tag": "section",
+  "class": "section-dg-product",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "default": "pdp", "options": [
+      { "value": "pdp", "label": "Product page" },
+      { "value": "spotlight", "label": "Homepage spotlight" }
+    ] },
+    { "type": "product", "id": "product", "label": "Product", "info": "On product pages, leave empty to use the current product." },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Red + near-infrared light therapy" },
+    { "type": "text", "id": "rating", "label": "Rating", "default": "4.7", "info": "Use the real average from the source. Leave empty to hide." },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "35 AliExpress ratings" },
+    { "type": "text", "id": "rating_link", "label": "Rating link", "default": "#reviews" },
+    { "type": "richtext", "id": "text", "label": "Short description", "default": "<p>Cordless red + near-infrared light therapy for healthier-looking hair, at home. 30 minutes a day.</p>" },
+    { "type": "text", "id": "image_badge", "label": "Badge on main image", "default": "291 LEDs inside" },
+    { "type": "header", "content": "Price and options" },
+    { "type": "text", "id": "price_note", "label": "Note next to price", "default": "Free tracked shipping" },
+    { "type": "text", "id": "plug_label", "label": "Adapter label", "default": "Wall adapter" },
+    { "type": "text", "id": "set_label", "label": "Set selector label", "default": "Choose your set", "info": "The 2-cap option shows when Theme settings > Daily Glow offers > Buy 2 discount is above 0." },
+    { "type": "text", "id": "plural_title", "label": "Product name, plural", "default": "Hair Renew Caps" },
+    { "type": "text", "id": "single_sub", "label": "1-item subtext", "default": "Free tracked shipping" },
+    { "type": "text", "id": "duo_sub", "label": "2-item subtext", "default": "one for you, one for someone else" },
+    { "type": "header", "content": "Product page extras" },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true },
+    { "type": "checkbox", "id": "show_delivery", "label": "Show delivery estimate", "default": true },
+    { "type": "text", "id": "eta_text", "label": "Delivery text", "default": "Free tracked shipping. Order today, arrives" },
+    { "type": "range", "id": "eta_min", "label": "Delivery from (days)", "min": 1, "max": 30, "step": 1, "default": 6 },
+    { "type": "range", "id": "eta_max", "label": "Delivery to (days)", "min": 1, "max": 30, "step": 1, "default": 11 },
+    { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar", "default": true },
+    { "type": "header", "content": "Holiday mode" },
+    { "type": "text", "id": "offer_tag", "label": "Offer strip label", "default": "Exclusive Christmas offer · Limited time" },
+    { "type": "text", "id": "holiday_badge", "label": "Holiday badge on main image", "default": "Christmas offer" },
+    { "type": "text", "id": "holiday_note", "label": "Holiday note next to price", "default": "Limited-time Christmas price" },
+    { "type": "header", "content": "Spotlight" },
+    { "type": "text", "id": "link_label", "label": "Link to product page", "default": "See full details, specs and what's in the box" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Gallery image", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "...or theme asset file name", "info": "Used when no image is picked, e.g. dg-product-black.jpg" },
+      { "type": "text", "id": "color", "label": "Show for colour", "info": "e.g. Black. Leave empty to show for every colour." },
+      { "type": "text", "id": "alt", "label": "Image description" }
+    ] },
+    { "type": "badge", "name": "Trust badge", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "shield", "options": [
+        { "value": "shield", "label": "Shield" }, { "value": "truck", "label": "Truck" }, { "value": "lock", "label": "Lock" },
+        { "value": "mail", "label": "Mail" }, { "value": "check", "label": "Check" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }
+      ] },
+      { "type": "text", "id": "text", "label": "Text", "default": "30-day money-back" }
+    ] },
+    { "type": "tab", "name": "Accordion", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping" },
+      { "type": "richtext", "id": "content", "label": "Content" },
+      { "type": "page", "id": "page", "label": "Page content (optional)" }
+    ] }
+  ],
+  "presets": [{ "name": "Daily Glow buy box", "settings": { "layout": "spotlight" } }]
+}
+{% endschema %}

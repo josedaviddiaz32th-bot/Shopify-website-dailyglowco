@@ -2,9 +2,11 @@
   assign sid = section.id
   assign p = section.settings.product
   assign img = section.settings.image
-  if img == blank and p != blank
+  assign img_asset = section.settings.image_asset
+  if img == blank and img_asset == blank and p != blank
     assign img = p.featured_image
   endif
+  assign holiday = settings.holiday_mode
   if section.settings.button_link != blank
     assign cta_url = section.settings.button_link
   elsif p != blank
@@ -27,6 +29,21 @@
       radial-gradient(60% 55% at 50% 42%, {{ section.settings.glow_color | color_modify: 'alpha', 0.30 }} 0%, transparent 70%),
       linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 100%);
   }
+  #dgh-{{ sid }}.is-holiday {
+    background:
+      radial-gradient(60% 55% at 50% 42%, rgba(255,194,74,.28), transparent 70%),
+      radial-gradient(40% 40% at 12% 18%, rgba(255,107,74,.14), transparent 70%),
+      radial-gradient(40% 40% at 88% 22%, rgba(255,194,74,.18), transparent 70%),
+      linear-gradient(180deg, rgba(234,242,240,.82) 0%, rgba(244,248,246,.78) 55%, rgba(253,235,221,.86) 100%){% if settings.holiday_hero_image != blank %},
+      url('{{ settings.holiday_hero_image | image_url: width: 2000 }}') center / cover no-repeat{% endif %};
+  }
+  #dgh-{{ sid }} .dgh__pill {
+    position: absolute; top: 48px; left: 50%; transform: translateX(-50%); z-index: 3; display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 18px; border-radius: 999px; background: #17393D; color: #fff; font-size: 12px; font-weight: 600; line-height: 1;
+    letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
+  }
+  #dgh-{{ sid }} .dgh__pill span:first-child { color: #FFC24A; }
+  #dgh-{{ sid }}.is-holiday .dgh__wrap { padding-top: {{ section.settings.padding_top | plus: 48 }}px; }
   #dgh-{{ sid }} *, #dgh-{{ sid }} *::before, #dgh-{{ sid }} *::after { box-sizing: border-box; }
   #dgh-{{ sid }} .dgh__wrap { max-width: 1240px; margin: 0 auto; padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px; }
   #dgh-{{ sid }} .dgh__grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(300px, 520px) minmax(0,1fr); align-items: center; gap: 24px; }
@@ -99,10 +116,18 @@
     #dgh-{{ sid }} .dgh__card { margin-top: 18px; padding: 22px 18px; }
     #dgh-{{ sid }} .dgh__btn { width: 100%; justify-content: center; }
     #dgh-{{ sid }} .dgh__meta { text-align: center; }
+    #dgh-{{ sid }} .dgh__pill { top: 18px; font-size: 10.5px; letter-spacing: .14em; padding: 8px 14px; }
+    #dgh-{{ sid }}.is-holiday .dgh__wrap { padding-top: {{ section.settings.padding_top | times: 0.45 | round | plus: 40 }}px; }
   }
 </style>
 
-<section id="dgh-{{ sid }}" class="dgh" aria-label="{{ img_alt }}">
+<section id="dgh-{{ sid }}" class="dgh{% if holiday %} is-holiday{% endif %}" aria-label="{{ img_alt }}">
+  {%- if holiday -%}
+    <div class="dg-festive" data-dg-festive data-flakes="70" data-bulbs="28" aria-hidden="true"></div>
+    {%- if section.settings.holiday_pill_1 != blank or section.settings.holiday_pill_2 != blank -%}
+      <div class="dgh__pill"><span>{{ section.settings.holiday_pill_1 | escape }}</span><span>{{ section.settings.holiday_pill_2 | escape }}</span></div>
+    {%- endif -%}
+  {%- endif -%}
   <div class="dgh__wrap">
     <div class="dgh__grid">
       <p class="dgh__side dgh__side--l">{{ section.settings.left_text }}</p>
@@ -110,7 +135,9 @@
         <div class="dgh__halo" aria-hidden="true"></div>
         <div class="dgh__enter">
           <div class="dgh__float">
-            {%- if img != blank -%}
+            {%- if section.settings.image == blank and img_asset != blank -%}
+              <img src="{{ img_asset | asset_url }}" alt="{{ img_alt }}" loading="eager" fetchpriority="high" width="1200" height="900">
+            {%- elsif img != blank -%}
               {{ img | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 750px) 560px, 90vw', widths: '400, 600, 800, 1000, 1400', alt: img_alt }}
             {%- else -%}
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -146,6 +173,7 @@
 {"type":"header","content":"Product"},
 {"type":"product","id":"product","label":"Product"},
 {"type":"image_picker","id":"image","label":"Image (optional)","info":"Leave empty to use the product's main photo. A transparent PNG looks best."},
+{"type":"text","id":"image_asset","label":"...or theme asset file name","info":"Used when no image is picked, e.g. dg-product-black-cutout.png"},
 {"type":"checkbox","id":"blend","label":"Blend white photo background into the page","default":true,"info":"Turn off if you upload a transparent PNG or use a dark background."},
 {"type":"header","content":"Side text"},
 {"type":"inline_richtext","id":"left_text","label":"Left text","default":"Thicker‑looking hair,"},
@@ -159,6 +187,9 @@
 {"type":"checkbox","id":"show_price","label":"Show price","default":true},
 {"type":"text","id":"meta_text","label":"Text under price","default":"30-day money-back guarantee"},
 {"type":"range","id":"card_offset","label":"Card position (negative = overlap the product)","min":-100,"max":80,"step":4,"unit":"px","default":24},
+{"type":"header","content":"Holiday mode"},
+{"type":"text","id":"holiday_pill_1","label":"Holiday pill (golden part)","default":"The holiday edit"},
+{"type":"text","id":"holiday_pill_2","label":"Holiday pill (white part)","default":"Buy 2, save 15%"},
 {"type":"header","content":"Motion"},
 {"type":"range","id":"float_distance","label":"Float height","min":4,"max":40,"step":2,"unit":"px","default":16},
 {"type":"range","id":"float_speed","label":"Float speed (seconds per bob)","min":2,"max":10,"step":1,"unit":"s","default":4},

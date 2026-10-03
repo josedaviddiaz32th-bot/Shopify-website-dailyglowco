@@ -74,6 +74,9 @@
           </span>
         </button>
       </div>
+      {%- if cart != empty and settings.dg_cart_banner != blank -%}
+        <div class="dg-cart-banner">{% render 'dg-icon', name: 'check' %}<span>{{ settings.dg_cart_banner }}</span></div>
+      {%- endif -%}
       <cart-drawer-items
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
@@ -477,6 +480,19 @@
                     {%- endfor -%}
                   </tbody>
                 </table>
+                {%- liquid
+                  assign dg_pct = settings.bundle_discount_percent | default: 0
+                  assign dg_line = cart.items | first
+                -%}
+                {%- if dg_pct > 0 and cart.items.size == 1 and cart.item_count == 1 -%}
+                  {%- assign dg_keep = 100 | minus: dg_pct -%}
+                  {%- assign dg_duo = dg_line.original_price | times: 2 | times: dg_keep | divided_by: 100 -%}
+                  <div class="dg-upsell">
+                    <span class="dg-upsell__title">Add a second cap and save {{ dg_pct }}% on both</span>
+                    <span class="dg-upsell__text">One for you, one for someone you share your routine with. {{ dg_duo | money }} for two.</span>
+                    <button type="button" class="dg-upsell__btn" data-dg-upsell data-line="1" data-variant="{{ dg_line.variant_id }}">Upgrade to 2 caps</button>
+                  </div>
+                {%- endif -%}
               </div>
             {%- endif -%}
             <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
@@ -587,6 +603,12 @@
           >
             {{ 'sections.cart.checkout' | t }}
           </button>
+          {%- if additional_checkout_buttons and cart != empty -%}
+            <div class="dg-cart-dyn">{{ content_for_additional_checkout_buttons }}</div>
+          {%- endif -%}
+          {%- if settings.dg_cart_smallprint != blank -%}
+            <p class="dg-cart-small">{{ settings.dg_cart_smallprint | escape }}</p>
+          {%- endif -%}
         </div>
       </div>
     </div>
