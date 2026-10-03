@@ -1,0 +1,134 @@
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign sid = section.id
+  assign shown = section.settings.initial_count
+  assign avg = section.settings.average | default: '5.0'
+  assign avg_num = avg | plus: 0
+  assign avg_round = avg_num | plus: 0.5 | floor
+-%}
+<style>
+  #dgr-{{ sid }} .dgr__summary { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: -18px 0 18px; }
+  #dgr-{{ sid }} .dgr__avg { font-family: var(--font-heading-family); font-size: 46px; font-weight: 700; line-height: 1; color: var(--dg-fg); }
+  #dgr-{{ sid }} .dgr__meta { text-align: left; font-size: 14px; color: var(--dg-muted); }
+  #dgr-{{ sid }} .dgr__stars { display: inline-flex; gap: 2px; color: #F5A623; }
+  #dgr-{{ sid }} .dgr__stars svg { width: 18px; height: 18px; }
+  #dgr-{{ sid }} .dgr__stars .off { color: rgba(23,57,61,.18); }
+  #dgr-{{ sid }} .dgr__note {
+    max-width: 720px; margin: 0 auto 36px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--dg-muted);
+  }
+  #dgr-{{ sid }} .dgr__grid { columns: 3 300px; column-gap: 20px; }
+  #dgr-{{ sid }} .dgr__card {
+    break-inside: avoid; margin: 0 0 20px; background: var(--dg-card); border: 1px solid var(--dg-line);
+    border-radius: 20px; padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 10px;
+  }
+  #dgr-{{ sid }} .dgr__card[hidden] { display: none; }
+  #dgr-{{ sid }} .dgr__title { font-family: var(--font-heading-family); font-weight: 600; font-size: 16.5px; margin: 0; color: var(--dg-fg); }
+  #dgr-{{ sid }} .dgr__text { margin: 0; font-size: 15px; line-height: 1.6; color: var(--dg-fg); opacity: .88; }
+  #dgr-{{ sid }} .dgr__photo { width: 100%; height: auto; border-radius: 12px; display: block; aspect-ratio: 1 / 1; object-fit: cover; }
+  #dgr-{{ sid }} .dgr__who { display: flex; align-items: center; gap: 10px; margin-top: 4px; font-size: 13px; color: var(--dg-muted); }
+  #dgr-{{ sid }} .dgr__avatar {
+    width: 34px; height: 34px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 700; font-size: 14px;
+    color: #17393D; background: linear-gradient(135deg, #F08A2C, #FFC24A);
+  }
+  #dgr-{{ sid }} .dgr__name { font-weight: 600; color: var(--dg-fg); }
+  #dgr-{{ sid }} .dgr__badge {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+    color: #2E7D5B; background: rgba(46,125,91,.1); border-radius: 999px; padding: 3px 8px; width: fit-content;
+  }
+  #dgr-{{ sid }} .dgr__badge svg { width: 12px; height: 12px; }
+  #dgr-{{ sid }} .dgr__more { display: flex; justify-content: center; margin-top: 10px; }
+  #dgr-{{ sid }} .dgr__more button { cursor: pointer; background: transparent; font: inherit; }
+  @media screen and (max-width: 749px) {
+    #dgr-{{ sid }} .dgr__grid { columns: 1; }
+    #dgr-{{ sid }} .dgr__summary { margin-top: -8px; }
+  }
+</style>
+
+{%- capture star -%}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>{%- endcapture -%}
+
+<section id="dgr-{{ sid }}"{% if section.settings.anchor != blank %} data-anchor="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  {%- if section.settings.anchor != blank %}<span id="{{ section.settings.anchor | handle }}" style="position:relative;top:-90px;display:block"></span>{% endif -%}
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      <h2 class="dg__title">{{ section.settings.heading }}</h2>
+    </div>
+
+    {%- if section.settings.show_summary -%}
+      <div class="dgr__summary">
+        <div class="dgr__avg">{{ avg }}</div>
+        <div class="dgr__meta">
+          <div class="dgr__stars" role="img" aria-label="{{ avg }} out of 5 stars">
+            {%- for i in (1..5) -%}<span{% if i > avg_round %} class="off"{% endif %}>{{ star }}</span>{%- endfor -%}
+          </div>
+          <div>{{ section.settings.summary_text | escape }}</div>
+        </div>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.disclosure != blank -%}<p class="dgr__note">{{ section.settings.disclosure }}</p>{%- endif -%}
+
+    <div class="dgr__grid">
+      {%- for block in section.blocks -%}
+        {%- assign r = block.settings -%}
+        <article class="dgr__card" {{ block.shopify_attributes }}{% if forloop.index > shown %} hidden data-more{% endif %}>
+          <div class="dgr__stars" role="img" aria-label="{{ r.rating }} out of 5 stars">
+            {%- for i in (1..5) -%}<span{% if i > r.rating %} class="off"{% endif %}>{{ star }}</span>{%- endfor -%}
+          </div>
+          {%- if r.title != blank %}<h3 class="dgr__title">{{ r.title | escape }}</h3>{% endif -%}
+          <p class="dgr__text">{{ r.text | escape | newline_to_br }}</p>
+          {%- if r.photo != blank -%}
+            {{ r.photo | image_url: width: 600 | image_tag: class: 'dgr__photo', loading: 'lazy', alt: r.photo_alt }}
+          {%- elsif r.photo_url != blank -%}
+            <img class="dgr__photo" src="{{ r.photo_url }}" loading="lazy" alt="{{ r.photo_alt | escape }}">
+          {%- endif -%}
+          {%- if r.verified %}<span class="dgr__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>{{ section.settings.badge_text | escape }}</span>{% endif -%}
+          <div class="dgr__who">
+            <span class="dgr__avatar" aria-hidden="true">{{ r.name | slice: 0 | upcase }}</span>
+            <span><span class="dgr__name">{{ r.name | escape }}</span>{% if r.country != blank %} · {{ r.country | escape }}{% endif %}<br>
+              {%- if r.date != blank %}{{ r.date | escape }}{% endif %}{% if r.variant != blank %}{% if r.date != blank %} · {% endif %}{{ r.variant | escape }}{% endif -%}
+            </span>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > shown -%}
+      <div class="dgr__more">
+        <button type="button" class="dg-btn dg-btn--ghost" onclick="this.closest('section').querySelectorAll('[data-more]').forEach(function(c){c.hidden=false});this.parentNode.remove();">
+          {{ section.settings.more_label | escape }} ({{ section.blocks.size | minus: shown }})
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{"name":"Customer reviews","tag":"div","class":"section-dg-reviews","max_blocks":50,"settings":[
+{"type":"select","id":"style","label":"Color style","default":"light","options":[{"value":"light","label":"White"},{"value":"mist","label":"Mist"},{"value":"teal","label":"Deep teal"}]},
+{"type":"text","id":"anchor","label":"Anchor ID","default":"reviews","info":"Lets menus link here, e.g. /#reviews"},
+{"type":"text","id":"eyebrow","label":"Small label","default":"Reviews"},
+{"type":"inline_richtext","id":"heading","label":"Heading","default":"What buyers are <em>saying</em>"},
+{"type":"checkbox","id":"show_summary","label":"Show rating summary","default":true},
+{"type":"text","id":"average","label":"Average rating","default":"4.8","info":"Use the real average from the source."},
+{"type":"text","id":"summary_text","label":"Summary text","default":"Based on verified buyer reviews"},
+{"type":"richtext","id":"disclosure","label":"Where these reviews come from","default":"<p>These reviews come from verified buyers of this same cap on our supplier's marketplace. They're shown as written (sometimes shortened) and ratings are never changed.</p>"},
+{"type":"text","id":"badge_text","label":"Badge text","default":"Verified buyer"},
+{"type":"range","id":"initial_count","label":"Reviews shown before 'Show more'","min":3,"max":24,"step":3,"default":6},
+{"type":"text","id":"more_label","label":"'Show more' label","default":"Show more reviews"},
+{"type":"header","content":"Spacing"},
+{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":160,"step":4,"unit":"px","default":88},
+{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":160,"step":4,"unit":"px","default":88}
+],"blocks":[{"type":"review","name":"Review","settings":[
+{"type":"range","id":"rating","label":"Stars","min":1,"max":5,"step":1,"default":5},
+{"type":"text","id":"title","label":"Title (optional)"},
+{"type":"textarea","id":"text","label":"Review text","default":"Review text"},
+{"type":"text","id":"name","label":"Name (as shown on the source)","default":"Customer"},
+{"type":"text","id":"country","label":"Country"},
+{"type":"text","id":"date","label":"Date"},
+{"type":"text","id":"variant","label":"Color / plug purchased"},
+{"type":"checkbox","id":"verified","label":"Verified purchase on the source","default":true},
+{"type":"image_picker","id":"photo","label":"Customer photo"},
+{"type":"text","id":"photo_url","label":"Customer photo URL (if not uploaded)"},
+{"type":"text","id":"photo_alt","label":"Photo description"}
+]}],"presets":[{"name":"Customer reviews"}]}
+{% endschema %}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  Estimated delivery window, calculated in the shopper's browser from today's date.
+  Usage: {% render 'dg-delivery', min: 6, max: 11 %}
+{%- endcomment -%}
+{%- liquid
+  assign dmin = min | default: 6
+  assign dmax = max | default: 11
+  assign uid = 'dgd-' | append: section.id | append: '-' | append: dmin | append: dmax
+-%}
+<div class="dg-delivery" id="{{ uid }}" data-min="{{ dmin }}" data-max="{{ dmax }}" style="display:flex;align-items:flex-start;gap:10px;margin:14px 0 4px;padding:12px 14px;border-radius:14px;background:rgba(240,138,44,.09);border:1px solid rgba(240,138,44,.28);font-size:14.5px;line-height:1.45;color:inherit;">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F08A2C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:1px"><path d="M2 6h11v10H2z"/><path d="M13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+  <span><strong>Estimated delivery: <span class="dg-delivery__dates">{{ dmin }}–{{ dmax }} days</span></strong><br><span style="opacity:.8">Order today · tracked shipping · 30-day money-back guarantee</span></span>
+</div>
+<script>
+  (function () {
+    var el = document.getElementById('{{ uid }}');
+    if (!el) return;
+    var add = function (n) { var d = new Date(); d.setDate(d.getDate() + n); return d; };
+    var fmt = function (d) { return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }); };
+    var a = add(parseInt(el.dataset.min, 10)), b = add(parseInt(el.dataset.max, 10));
+    el.querySelector('.dg-delivery__dates').textContent = fmt(a) + ' – ' + fmt(b);
+  })();
+</script>

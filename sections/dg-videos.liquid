@@ -1,0 +1,83 @@
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{%- assign sid = section.id -%}
+<style>
+  #dgv-{{ sid }} .dgv__grid { display: grid; gap: 20px; grid-template-columns: repeat({{ section.blocks.size | at_most: 3 | at_least: 1 }}, minmax(0, 1fr)); }
+  #dgv-{{ sid }} .dgv__item { margin: 0; }
+  #dgv-{{ sid }} .dgv__frame { position: relative; border-radius: 22px; overflow: hidden; background: #0f2426; aspect-ratio: {{ section.settings.ratio }}; box-shadow: 0 24px 50px -30px rgba(23,57,61,.6); }
+  #dgv-{{ sid }} .dgv__frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #dgv-{{ sid }} .dgv__sound {
+    position: absolute; right: 12px; bottom: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255,255,255,.9); color: #17393D; display: grid; place-items: center;
+  }
+  #dgv-{{ sid }} .dgv__sound svg { width: 20px; height: 20px; }
+  #dgv-{{ sid }} .dgv__cap { margin: 12px 4px 0; font-size: 15px; line-height: 1.5; color: var(--dg-muted); text-align: center; }
+  #dgv-{{ sid }} .dgv__cap strong { display: block; color: var(--dg-fg); font-family: var(--font-heading-family); font-size: 16.5px; margin-bottom: 2px; }
+  #dgv-{{ sid }} .dgv__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 56px; align-items: center; max-width: 980px; margin: 0 auto; }
+  #dgv-{{ sid }} .dgv__split .dg__head { margin: 0; text-align: left; max-width: none; }
+  #dgv-{{ sid }} .dgv__split .dgv__grid { grid-template-columns: 1fr; }
+  #dgv-{{ sid }} .dg__lede ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  #dgv-{{ sid }} .dg__lede li { position: relative; padding-left: 28px; color: var(--dg-fg); }
+  #dgv-{{ sid }} .dg__lede li::before { content: ""; position: absolute; left: 0; top: .45em; width: 16px; height: 16px; border-radius: 50%; background: #F08A2C; box-shadow: 0 0 0 4px rgba(240,138,44,.18); }
+  #dgv-{{ sid }} .dg__lede p + p, #dgv-{{ sid }} .dg__lede p + ul { margin-top: 14px; }
+  #dgv-{{ sid }} .dgv__cta { margin-top: 26px; }
+  @media screen and (max-width: 749px) {
+    #dgv-{{ sid }} .dgv__grid { grid-template-columns: 1fr; }
+    #dgv-{{ sid }} .dgv__split { grid-template-columns: 1fr; gap: 32px; }
+    #dgv-{{ sid }} .dgv__split .dgv__grid { max-width: 340px; width: 100%; margin: 0 auto; }
+  }
+</style>
+<section id="dgv-{{ sid }}" class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  {%- if section.settings.anchor != blank %}<span id="{{ section.settings.anchor | handle }}" style="position:relative;top:-90px;display:block"></span>{% endif -%}
+  <div class="dg__wrap">
+    {%- assign split = false -%}{%- if section.blocks.size == 1 %}{% assign split = true %}{% endif -%}
+    {%- if split %}<div class="dgv__split">{% endif -%}
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="dg__head">
+        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+        {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+        {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+        {%- if section.settings.button_label != blank %}<div class="dgv__cta"><a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label | escape }}</a></div>{% endif -%}
+      </div>
+    {%- endif -%}
+    <div class="dgv__grid">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <figure class="dgv__item" {{ block.shopify_attributes }}>
+          <div class="dgv__frame">
+            {%- if b.video != blank -%}
+              {{ b.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '900x' }}
+            {%- elsif b.video_url != blank -%}
+              <video src="{{ b.video_url }}" {% if b.poster_url != blank %}poster="{{ b.poster_url }}"{% endif %} autoplay muted loop playsinline preload="metadata"></video>
+            {%- endif -%}
+            <button type="button" class="dgv__sound" aria-label="Turn sound on" onclick="var v=this.parentNode.querySelector('video');if(!v)return;v.muted=!v.muted;if(!v.muted){v.play()};this.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');this.innerHTML=v.muted?this.dataset.off:this.dataset.on;" data-off='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>' data-on='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg></button>
+          </div>
+          {%- if b.title != blank or b.caption != blank -%}
+            <figcaption class="dgv__cap">{% if b.title != blank %}<strong>{{ b.title | escape }}</strong>{% endif %}{{ b.caption | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+    {%- if split %}</div>{% endif -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Product videos","tag":"div","class":"section-dg-videos","max_blocks":6,"settings":[
+{"type":"select","id":"style","label":"Color style","default":"light","options":[{"value":"light","label":"White"},{"value":"mist","label":"Mist"},{"value":"teal","label":"Deep teal"}]},
+{"type":"text","id":"anchor","label":"Anchor ID (optional)"},
+{"type":"text","id":"eyebrow","label":"Small label","default":"See it in action"},
+{"type":"inline_richtext","id":"heading","label":"Heading","default":"The Hair Renew Cap, <em>up close</em>"},
+{"type":"richtext","id":"text","label":"Intro text"},
+{"type":"text","id":"button_label","label":"Button label"},
+{"type":"url","id":"button_link","label":"Button link"},
+{"type":"select","id":"ratio","label":"Video shape","default":"1 / 1","options":[{"value":"16 / 9","label":"Landscape"},{"value":"1 / 1","label":"Square"},{"value":"4 / 5","label":"Portrait"},{"value":"9 / 16","label":"Tall (Reels/TikTok)"}]},
+{"type":"header","content":"Spacing"},
+{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":160,"step":4,"unit":"px","default":88},
+{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":160,"step":4,"unit":"px","default":88}
+],"blocks":[{"type":"video","name":"Video","settings":[
+{"type":"video","id":"video","label":"Video (uploaded to Shopify)"},
+{"type":"text","id":"video_url","label":"...or video URL (.mp4)"},
+{"type":"text","id":"poster_url","label":"Cover image URL (optional)"},
+{"type":"text","id":"title","label":"Title"},
+{"type":"text","id":"caption","label":"Caption"}
+]}],"presets":[{"name":"Product videos"}]}
+{% endschema %}

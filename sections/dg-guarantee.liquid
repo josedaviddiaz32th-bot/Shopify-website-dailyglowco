@@ -1,0 +1,27 @@
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg-guarantee">
+      <div class="dg-guarantee__seal" aria-hidden="true"><div><strong>{{ section.settings.days }}</strong><span>Day<br>Guarantee</span></div></div>
+      <div>
+        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+        <h2 class="dg__title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+        <ul class="dg-badges">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{% render 'dg-icon', name: block.settings.icon %}{{ block.settings.text | escape }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- if section.settings.button_label != blank -%}
+        <div class="dg-guarantee__cta">
+          <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name":"Daily Glow guarantee","tag":"div","class":"section-dg-guarantee","settings":[{"type":"select","id":"style","label":"Color style","default":"teal","options":[{"value":"light","label":"White"},{"value":"mist","label":"Mist"},{"value":"teal","label":"Deep teal"}]},{"type":"text","id":"anchor","label":"Anchor ID (optional)"},{"type":"text","id":"days","label":"Number of days","default":"30"},{"type":"text","id":"eyebrow","label":"Small label","default":"Risk-free"},{"type":"inline_richtext","id":"heading","label":"Heading","default":"Try it for 30 days. Love it or get your money back."},{"type":"richtext","id":"text","label":"Text","default":"<p>Red light therapy takes consistency, so give it a real try. If you're not happy within 30 days of delivery, email us and we'll refund you.</p>"},{"type":"text","id":"button_label","label":"Button label","default":"Get the Glow Cap"},{"type":"url","id":"button_link","label":"Button link"},{"type":"header","content":"Spacing"},{"type":"range","id":"padding_top","label":"Top padding","min":0,"max":160,"step":4,"unit":"px","default":72},{"type":"range","id":"padding_bottom","label":"Bottom padding","min":0,"max":160,"step":4,"unit":"px","default":72}],"blocks":[{"type":"badge","name":"Badge","settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"light","label":"Light"},{"value":"hands","label":"Hands"},{"value":"leaf","label":"Leaf"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"home","label":"Home"},{"value":"spark","label":"Spark"},{"value":"truck","label":"Truck"},{"value":"cap","label":"Cap"},{"value":"power","label":"Power"},{"value":"repeat","label":"Repeat"},{"value":"heart","label":"Heart"},{"value":"lock","label":"Lock"},{"value":"mail","label":"Mail"},{"value":"check","label":"Check"}],"default":"check"},{"type":"text","id":"text","label":"Text","default":"Secure checkout"}]}],"presets":[{"name":"Daily Glow guarantee"}]}
+{% endschema %}
