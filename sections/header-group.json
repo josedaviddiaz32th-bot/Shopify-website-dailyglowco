@@ -9,7 +9,11 @@
         "menu": "main-menu",
         "logo_height": 38,
         "sticky": true,
-        "santa_hat": true
+        "santa_hat": true,
+        "holiday_tag": "Christmas sale",
+        "holiday_text": "The Hair Renew Cap is now $84.99 (was $99.99) · Free tracked shipping",
+        "holiday_link_label": "Shop now",
+        "holiday_link": "shopify://products/glow-cap"
       }
     }
   },

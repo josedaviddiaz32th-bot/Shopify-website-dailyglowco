@@ -10,6 +10,7 @@
 {
   "current": {
     "holiday_mode": true,
+    "holiday_show_compare": true,
     "logo_width": 160,
     "type_header_font": "poppins_n6",
     "heading_scale": 110,
