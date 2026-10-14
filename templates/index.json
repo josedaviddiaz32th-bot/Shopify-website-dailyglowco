@@ -120,54 +120,6 @@
     "spotlight": {
       "type": "dg-product",
       "blocks": {
-        "img_1": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-product-black.jpg",
-            "color": "Black",
-            "alt": "The Hair Renew Cap in Black"
-          }
-        },
-        "img_2": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-product-grey.jpg",
-            "color": "Grey",
-            "alt": "The Hair Renew Cap in Grey"
-          }
-        },
-        "img_3": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-studio-leds-inside.jpg",
-            "color": "",
-            "alt": "LEDs glowing inside the cap"
-          }
-        },
-        "img_4": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-lifestyle-woman.jpg",
-            "color": "Black",
-            "alt": "The cap worn at home"
-          }
-        },
-        "img_5": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-lifestyle-man.jpg",
-            "color": "Grey",
-            "alt": "The cap worn at home"
-          }
-        },
-        "img_6": {
-          "type": "image",
-          "settings": {
-            "asset": "dg-in-the-box.jpg",
-            "color": "",
-            "alt": "What's in the box"
-          }
-        },
         "badge_1": {
           "type": "badge",
           "settings": {
@@ -188,15 +140,65 @@
             "icon": "lock",
             "text": "Secure checkout"
           }
+        },
+        "img_1": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-cap-studio.jpg",
+            "alt": "The Hair Renew Cap in Black"
+          }
+        },
+        "vid_1": {
+          "type": "video",
+          "settings": {
+            "index": 1,
+            "alt": "The Hair Renew Cap with its red LEDs glowing"
+          }
+        },
+        "img_2": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-cap-inside-glow.jpg",
+            "alt": "291 LEDs glowing inside the cap"
+          }
+        },
+        "img_3": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-cap-lifestyle-table.jpg",
+            "alt": "The cap at home, next to a coffee and a book"
+          }
+        },
+        "img_4": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-cap-exploded.jpg",
+            "alt": "What's inside: LED liner, battery, control panel and USB cable"
+          }
+        },
+        "vid_2": {
+          "type": "video",
+          "settings": {
+            "index": 2,
+            "alt": "What's inside the Hair Renew Cap"
+          }
+        },
+        "img_5": {
+          "type": "image",
+          "settings": {
+            "asset": "dg-product-grey.jpg",
+            "alt": "The Hair Renew Cap in Grey"
+          }
         }
       },
       "block_order": [
         "img_1",
+        "vid_1",
         "img_2",
         "img_3",
         "img_4",
+        "vid_2",
         "img_5",
-        "img_6",
         "badge_1",
         "badge_2",
         "badge_3"
