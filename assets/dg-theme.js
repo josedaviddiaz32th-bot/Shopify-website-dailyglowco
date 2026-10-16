@@ -131,7 +131,7 @@
         if (!bar || !buy) return;
         var check = function () {
           var r = buy.getBoundingClientRect();
-          bar.hidden = !(r.bottom < 0 || r.top > window.innerHeight);
+          bar.hidden = !(r.bottom < 0); // only after scrolling past the buy box
           document.body.style.paddingBottom = bar.hidden ? '' : bar.offsetHeight + 'px';
         };
         window.addEventListener('scroll', check, { passive: true });
