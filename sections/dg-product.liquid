@@ -151,30 +151,30 @@
                   <img src="{{ block.settings.asset | asset_url }}" alt="{{ alt }}" loading="{{ eager }}" width="1200" height="1200">
                 {%- endif -%}
               {%- endcapture -%}
-              {%- if layout == 'spotlight' -%}
-                <figure class="dgp-slide{% if n == 1 %} is-active{% endif %}" data-slide="{{ n }}" {{ block.shopify_attributes }}>{{ img }}</figure>
-                {%- capture thumbs -%}{{ thumbs }}<button type="button" class="dgp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{%- if vm != blank -%}{{ vm.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: alt }}{%- else -%}{{ img | replace: 'loading="eager"', 'loading="lazy"' }}{%- endif -%}</button>{%- endcapture -%}
-              {%- else -%}
-                <figure class="dgp-tile{% if n == 1 %} dgp-tile--main{% endif %}" {{ block.shopify_attributes }}>
-                  {{ img }}
-                  {%- if n == 1 -%}
-                    {%- if holiday and section.settings.holiday_badge != blank -%}
-                      <span class="dgp-badge dgp-badge--holiday">{{ section.settings.holiday_badge | escape }}</span>
-                    {%- elsif section.settings.image_badge != blank -%}
-                      <span class="dgp-badge">{{ section.settings.image_badge | escape }}</span>
-                    {%- endif -%}
-                  {%- endif -%}
-                </figure>
-              {%- endif -%}
+              <figure class="dgp-slide{% if n == 1 %} is-active{% endif %}" data-slide="{{ n }}" {{ block.shopify_attributes }}>{{ img }}</figure>
+              {%- capture thumbs -%}{{ thumbs }}<button type="button" class="dgp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{%- if vm != blank -%}{{ vm.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: alt }}{%- else -%}{{ img | replace: 'loading="eager"', 'loading="lazy"' }}{%- endif -%}</button>{%- endcapture -%}
             {%- endfor -%}
             {%- if n == 0 -%}
-              <figure class="dgp-tile dgp-tile--main dgp-slide is-active">
+              <figure class="dgp-slide is-active">
                 {{ p.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 600px, 92vw' }}
               </figure>
             {%- endif -%}
-            {%- if layout == 'spotlight' -%}
-              {%- if section.settings.image_badge != blank %}<span class="dgp-badge">{{ section.settings.image_badge | escape }}</span>{% endif -%}
-              {%- if n > 1 %}<div class="dgp-thumbs">{{ thumbs }}</div>{% endif -%}
+            {%- if layout == 'pdp' and holiday and section.settings.holiday_badge != blank -%}
+              <span class="dgp-badge dgp-badge--holiday">{{ section.settings.holiday_badge | escape }}</span>
+            {%- elsif section.settings.image_badge != blank -%}
+              <span class="dgp-badge">{{ section.settings.image_badge | escape }}</span>
+            {%- endif -%}
+            {%- if n > 1 -%}
+              {%- if layout == 'pdp' -%}
+                {%- comment -%} Carousel: arrows step through slides; the strip scrolls to keep the active thumb in view. {%- endcomment -%}
+                <div class="dgp-strip">
+                  <button type="button" class="dgp-arrow" data-gallery-step="-1" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                  <div class="dgp-thumbs">{{ thumbs }}</div>
+                  <button type="button" class="dgp-arrow" data-gallery-step="1" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+                </div>
+              {%- else -%}
+                <div class="dgp-thumbs">{{ thumbs }}</div>
+              {%- endif -%}
             {%- endif -%}
           </div>
         {%- endfor -%}
@@ -197,7 +197,19 @@
               <span><strong>{{ section.settings.rating | escape }}</strong> · {{ section.settings.rating_text | escape }}</span>
             </a>
           {%- endif -%}
+          {%- if layout == 'pdp' and section.settings.text != blank -%}
+            <div class="dgp-text dgp-lede">{{ section.settings.text }}</div>
+          {%- endif -%}
         </div>
+
+        {%- assign highlights = section.blocks | where: 'type', 'highlight' -%}
+        {%- if layout == 'pdp' and highlights.size > 0 -%}
+          <ul class="dgp-highlights" style="--dgp-hl: {{ highlights.size }};">
+            {%- for block in highlights -%}
+              <li {{ block.shopify_attributes }}>{% render 'dg-icon', name: block.settings.icon %}<span>{{ block.settings.text | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
 
         {%- if layout == 'pdp' -%}
           <div class="dgp-price">
@@ -294,10 +306,6 @@
             {%- endform -%}
           </product-form>
         </div>
-
-        {%- if layout == 'pdp' and section.settings.text != blank -%}
-          <div class="dgp-text">{{ section.settings.text }}</div>
-        {%- endif -%}
 
         {%- if layout == 'pdp' and section.settings.show_delivery -%}
           <div class="dgp-eta" data-eta data-min="{{ section.settings.eta_min }}" data-max="{{ section.settings.eta_max }}">
@@ -428,6 +436,15 @@
         { "value": "mail", "label": "Mail" }, { "value": "check", "label": "Check" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }
       ] },
       { "type": "text", "id": "text", "label": "Text", "default": "30-day money-back" }
+    ] },
+    { "type": "highlight", "name": "Highlight", "limit": 4, "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "light", "options": [
+        { "value": "light", "label": "Light" }, { "value": "hands", "label": "Hands" }, { "value": "clock", "label": "Clock" },
+        { "value": "spark", "label": "Spark" }, { "value": "cap", "label": "Cap" }, { "value": "power", "label": "Power" },
+        { "value": "repeat", "label": "Repeat" }, { "value": "home", "label": "Home" }, { "value": "leaf", "label": "Leaf" },
+        { "value": "shield", "label": "Shield" }, { "value": "heart", "label": "Heart" }, { "value": "check", "label": "Check" }
+      ] },
+      { "type": "text", "id": "text", "label": "Text", "default": "Red + near-infrared light", "info": "Keep it to 2–4 words. Shown in a row under the product name." }
     ] },
     { "type": "tab", "name": "Accordion", "settings": [
       { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping" },

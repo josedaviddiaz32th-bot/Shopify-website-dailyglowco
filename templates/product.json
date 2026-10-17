@@ -3,6 +3,34 @@
     "main": {
       "type": "dg-product",
       "blocks": {
+        "highlight_1": {
+          "type": "highlight",
+          "settings": {
+            "icon": "light",
+            "text": "Red + near-infrared light"
+          }
+        },
+        "highlight_2": {
+          "type": "highlight",
+          "settings": {
+            "icon": "hands",
+            "text": "Cordless & hands-free"
+          }
+        },
+        "highlight_3": {
+          "type": "highlight",
+          "settings": {
+            "icon": "clock",
+            "text": "30-min auto timer"
+          }
+        },
+        "highlight_4": {
+          "type": "highlight",
+          "settings": {
+            "icon": "spark",
+            "text": "4 light modes"
+          }
+        },
         "badge_1": {
           "type": "badge",
           "settings": {
@@ -96,6 +124,10 @@
         }
       },
       "block_order": [
+        "highlight_1",
+        "highlight_2",
+        "highlight_3",
+        "highlight_4",
         "img_1",
         "vid_1",
         "img_2",

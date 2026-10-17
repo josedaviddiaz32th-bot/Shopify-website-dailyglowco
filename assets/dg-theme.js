@@ -42,6 +42,7 @@
         }.bind(this));
 
         this.setupSticky();
+        this.setupSwipe();
         this.update(true);
       }
 
@@ -51,16 +52,47 @@
         var p = e.target.closest('[data-pick-plug]');
         if (p) { this.plug = p.dataset.pickPlug; this.update(); return; }
         var t = e.target.closest('[data-thumb]');
-        if (t) {
-          var g = t.closest('.dgp-gallery');
-          g.querySelectorAll('[data-thumb]').forEach(function (b) { b.classList.toggle('is-active', b === t); });
-          g.querySelectorAll('[data-slide]').forEach(function (s) { s.classList.toggle('is-active', s.dataset.slide === t.dataset.thumb); });
-          return;
-        }
+        if (t) { this.showSlide(t.closest('.dgp-gallery'), parseInt(t.dataset.thumb, 10)); return; }
+        var step = e.target.closest('[data-gallery-step]');
+        if (step) { this.stepSlide(step.closest('.dgp-gallery'), parseInt(step.dataset.galleryStep, 10)); return; }
         if (e.target.closest('[data-sticky-atc]')) {
           var btn = this.querySelector('.dgp-atc');
           if (btn && !btn.disabled) btn.click();
         }
+      }
+
+      showSlide(g, n) {
+        var slides = g.querySelectorAll('[data-slide]');
+        if (!slides.length) return;
+        n = ((n - 1 + slides.length) % slides.length) + 1;
+        slides.forEach(function (s) { s.classList.toggle('is-active', s.dataset.slide === String(n)); });
+        g.querySelectorAll('[data-thumb]').forEach(function (b) {
+          var on = b.dataset.thumb === String(n);
+          b.classList.toggle('is-active', on);
+          if (on && b.parentElement.scrollWidth > b.parentElement.clientWidth) {
+            var strip = b.parentElement;
+            strip.scrollTo({ left: b.offsetLeft - strip.offsetLeft - (strip.clientWidth - b.offsetWidth) / 2 });
+          }
+        });
+      }
+
+      stepSlide(g, dir) {
+        var cur = g.querySelector('[data-slide].is-active');
+        this.showSlide(g, (cur ? parseInt(cur.dataset.slide, 10) : 1) + dir);
+      }
+
+      setupSwipe() {
+        var self = this, x0 = null, y0 = 0;
+        this.querySelectorAll('.dgp-gallery').forEach(function (g) {
+          if (!g.querySelector('[data-gallery-step]')) return;
+          g.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+          g.addEventListener('touchend', function (e) {
+            if (x0 === null || !e.target.closest('[data-slide]')) { x0 = null; return; }
+            var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+            x0 = null;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) self.stepSlide(g, dx < 0 ? 1 : -1);
+          });
+        });
       }
 
       variant() {
