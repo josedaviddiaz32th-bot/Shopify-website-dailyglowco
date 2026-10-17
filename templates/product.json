@@ -13,7 +13,7 @@
         "highlight_2": {
           "type": "highlight",
           "settings": {
-            "icon": "hands",
+            "icon": "battery",
             "text": "Cordless & hands-free"
           }
         },

@@ -182,7 +182,12 @@
 .dgp-highlights { list-style: none; margin: 0; padding: 16px 0; display: grid; grid-template-columns: repeat(var(--dgp-hl, 4), minmax(0, 1fr)); border-top: 1px solid var(--dg-line-c); border-bottom: 1px solid var(--dg-line-c); }
 .dgp-highlights li { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 8px; text-align: center; font-size: 13.5px; font-weight: 500; line-height: 1.35; color: var(--dg-ink); }
 .dgp-highlights li + li { border-left: 1px solid var(--dg-line-c); }
-.dgp-highlights .dg-icon { width: 26px; height: 26px; color: var(--dg-orange-deep); }
+.dgp-highlights .dg-icon { width: 26px; height: 26px; flex: none; color: var(--dg-orange-deep); }
+@media screen and (max-width: 560px) {
+  .dgp-highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 14px; }
+  .dgp-highlights li { flex-direction: row; gap: 10px; padding: 0 12px; text-align: left; }
+  .dgp-highlights li:nth-child(odd) { border-left: 0; padding-left: 0; }
+}
 
 /* Options */
 .dgp fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
