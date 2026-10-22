@@ -93,25 +93,27 @@
         view-event-trigger="manual"
       >
         {%- if cart != empty -%}
-          {%- comment -%} Rewards bar {%- endcomment -%}
+          {%- comment -%} Rewards bar. The caps multi-buy nudge only shows when a cap
+              is actually in the cart; other products get the plain shipping line. {%- endcomment -%}
+          {%- liquid
+            assign dg_cap_count = 0
+            for item in cart.items
+              if item.product.handle == 'glow-cap'
+                assign dg_cap_count = dg_cap_count | plus: item.quantity
+              endif
+            endfor
+          -%}
           <div class="dgc-rewards">
-            {%- if dg_pct > 0 and cart.item_count < 2 -%}
+            {%- if dg_pct > 0 and dg_cap_count == 1 -%}
               <p class="dgc-rewards__msg">Add <strong>1 more cap</strong> to save <strong>{{ dg_pct }}%</strong> on both</p>
               <div class="dgc-rewards__track"><span style="width: 50%"></span></div>
-            {%- elsif dg_pct > 0 -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>{{ dg_pct }}% off</strong> and <strong>free tracked shipping</strong></p>
+            {%- elsif dg_pct > 0 and dg_cap_count > 1 -%}
+              <p class="dgc-rewards__msg">You've unlocked <strong>{{ dg_pct }}% off your caps</strong> and <strong>free tracked shipping</strong></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- else -%}
               <p class="dgc-rewards__msg">You've unlocked <strong>free tracked shipping</strong></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- endif -%}
-            <ul class="dgc-rewards__steps" role="list">
-              <li class="is-on">{% render 'dg-icon', name: 'truck' %}<span>Free shipping</span></li>
-              {%- if dg_pct > 0 -%}
-                <li{% if cart.item_count >= 2 %} class="is-on"{% endif %}>{% render 'dg-icon', name: 'heart' %}<span>{{ dg_pct }}% off 2 caps</span></li>
-              {%- endif -%}
-              <li class="is-on">{% render 'dg-icon', name: 'shield' %}<span>30-day guarantee</span></li>
-            </ul>
           </div>
         {%- endif -%}
 
@@ -291,9 +293,6 @@
               <li>{{ type | payment_type_svg_tag: class: 'dgc-pay__icon' }}</li>
             {%- endfor -%}
           </ul>
-          {%- if settings.dg_cart_smallprint != blank -%}
-            <p class="dgc-foot__small">{{ settings.dg_cart_smallprint | escape }}</p>
-          {%- endif -%}
         </div>
       </div>
     </div>

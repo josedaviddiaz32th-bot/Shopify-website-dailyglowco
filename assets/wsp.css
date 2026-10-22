@@ -140,4 +140,11 @@
 @media screen and (max-width: 749px) {
   .wsp-offer { grid-template-columns: auto 1fr auto; }
   .wsp-offer__img { display: none; }
+  /* Tighter fold: shorter gallery so rating + full name sit in the first screen */
+  .wsp-grid { gap: 12px; }
+  .wsp-slide img, .wsp-slide video, .wsp-slide .wsp-ph { aspect-ratio: 4 / 3; }
+  .wsp-thumb { flex-basis: 48px; width: 48px; height: 48px; }
+  .wsp-head .dg__eyebrow { display: none; }
+  .wsp-title { font-size: clamp(26px, 7vw, 34px); }
+  .wsp-sub { font-size: 15px; margin-bottom: 8px; }
 }
