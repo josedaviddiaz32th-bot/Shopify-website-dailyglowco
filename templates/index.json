@@ -273,7 +273,7 @@
       ],
       "settings": {
         "style": "teal",
-        "days": 30,
+        "days": "30",
         "eyebrow": "Zero-risk mornings",
         "heading": "We stand behind every patch",
         "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back.</p>",

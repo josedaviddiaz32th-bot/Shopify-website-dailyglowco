@@ -68,7 +68,7 @@
       ],
       "settings": {
         "style": "mist",
-        "days": 30,
+        "days": "30",
         "eyebrow": "Zero-risk",
         "heading": "Every product, guaranteed",
         "text": "<p>30 days from delivery to change your mind, on everything we sell. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
