@@ -64,7 +64,8 @@
           "settings": {
             "match": "Forehead",
             "title": "Wrinkle Smooth Forehead Patch",
-            "subtitle": "Forehead lines + frown lines between the brows"
+            "subtitle": "Forehead lines + frown lines between the brows",
+            "featured": true
           }
         },
         "offer-eye": {
