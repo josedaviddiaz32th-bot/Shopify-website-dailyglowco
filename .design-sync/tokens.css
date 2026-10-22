@@ -1,0 +1,18 @@
+/* The Daily Glow Co. — brand tokens for Claude Design.
+   Colors/gradient/shadows copied from assets/dg-theme.css :root.
+   Font variables stand in for the ones Shopify injects in layout/theme.liquid
+   (settings: type_header_font poppins_n6, type_body_font poppins_n4). */
+:root {
+  --dg-teal: #17393d; --dg-teal-900: #0f2426; --dg-orange: #f08a2c; --dg-orange-deep: #e0701c; --dg-gold: #ffc24a;
+  --dg-mist: #eef3f1; --dg-white: #fff; --dg-glow-red: #ff6b4a;
+  --dg-ink: #17393d; --dg-ink-muted: rgba(23,57,61,.72); --dg-line-c: rgba(23,57,61,.12);
+  --dg-star: #f5a623; --dg-star-off: rgba(23,57,61,.18);
+  --dg-grad: linear-gradient(90deg, #f08a2c, #ffc24a);
+  --dg-shadow-cta: 0 10px 28px -12px rgba(240,138,44,.75);
+  --dg-shadow-media: 0 12px 30px rgba(23,57,61,.08);
+  --dg-shoppay: #5a31f4;
+
+  --font-body-family: "Poppins", sans-serif;
+  --font-heading-family: "Poppins", sans-serif;
+}
+body { font-family: var(--font-body-family); color: var(--dg-ink); }

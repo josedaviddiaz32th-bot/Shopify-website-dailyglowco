@@ -1,0 +1,8 @@
+{
+  "projectId": "4507d73e-bea0-4e86-a980-9c979c3f0d32",
+  "shape": "package",
+  "pkg": "dailyglow-theme",
+  "globalName": "DailyGlow",
+  "buildCmd": "sh .design-sync/build-brand.sh",
+  "readmeHeader": ".design-sync/conventions.md"
+}
