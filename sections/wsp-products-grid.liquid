@@ -1,0 +1,70 @@
+{%- comment -%}
+  Products overview grid: one card per product (used on the Products page and
+  as the homepage "shop all" strip). Cards link to each product's page.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+      {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+    </div>
+    <div class="wsp-products">
+      {%- for block in section.blocks -%}
+        {%- assign bp = block.settings.product -%}
+        {%- if bp == blank -%}{%- continue -%}{%- endif -%}
+        <a class="wsp-product-card" href="{{ bp.url }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 45vw, 92vw', alt: bp.title | escape }}
+          {%- elsif bp.featured_image -%}
+            {{ bp.featured_image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 45vw, 92vw', alt: bp.title | escape }}
+          {%- else -%}
+            <div class="wsp-product-card__img wsp-ph"><span>{{ bp.title | escape }}</span></div>
+          {%- endif -%}
+          <div class="wsp-product-card__body">
+            {%- if block.settings.tag != blank %}<span class="wsp-product-card__tag">{{ block.settings.tag | escape }}</span>{% endif -%}
+            <h3 class="wsp-product-card__title">{{ block.settings.title | default: bp.title | escape }}</h3>
+            {%- if block.settings.text != blank %}<p class="wsp-product-card__text">{{ block.settings.text | escape }}</p>{% endif -%}
+            <div class="wsp-product-card__row">
+              <span class="wsp-product-card__price">{% if bp.price_varies %}From {% endif %}{{ bp.price_min | money }}</span>
+              <span class="wsp-product-card__link">{{ block.settings.link_label | default: 'Shop now' | escape }} →</span>
+            </div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP products grid",
+  "tag": "section",
+  "class": "section-wsp-products",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Background", "default": "white", "options": [
+      { "value": "white", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Daily Glow Co." },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Our products" },
+    { "type": "richtext", "id": "text", "label": "Intro text" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product card", "limit": 6, "settings": [
+      { "type": "product", "id": "product", "label": "Product" },
+      { "type": "text", "id": "tag", "label": "Small tag", "info": "e.g. 'New' or 'Best seller'" },
+      { "type": "text", "id": "title", "label": "Title override" },
+      { "type": "text", "id": "text", "label": "One-line description" },
+      { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop now" },
+      { "type": "image_picker", "id": "image", "label": "Image override" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP products grid" }]
+}
+{% endschema %}

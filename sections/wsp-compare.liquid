@@ -1,0 +1,89 @@
+{%- comment -%}
+  Four-column comparison: the patches vs three alternatives. Cell values:
+  "true" renders a check, "false" renders an x, anything else renders as text
+  (so cost rows can say "$435–$586 per visit"). "Botox" may appear only as a
+  factual cost label, never as "alternative to Botox".
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+      {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+    </div>
+    <div class="wsp-compare">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">Feature</span></th>
+            <th scope="col" class="is-us">{{ section.settings.col_us | escape }}</th>
+            <th scope="col">{{ section.settings.col_a | escape }}</th>
+            <th scope="col">{{ section.settings.col_b | escape }}</th>
+            <th scope="col">{{ section.settings.col_c | escape }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.label | escape }}</th>
+              {%- assign cells = 'us,a,b,c' | split: ',' -%}
+              {%- for key in cells -%}
+                {%- assign val = block.settings[key] | strip -%}
+                <td{% if key == 'us' %} class="is-us"{% endif %}>
+                  {%- if val == 'true' -%}<span class="dg-yes" role="img" aria-label="Yes">{% render 'dg-icon', name: 'check' %}</span>
+                  {%- elsif val == 'false' -%}<span class="dg-no" role="img" aria-label="No">{% render 'dg-icon', name: 'x' %}</span>
+                  {%- else -%}{{ val | escape }}{%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if section.settings.note != blank %}<p class="dg__note">{{ section.settings.note | escape }}</p>{% endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <div class="dg__cta">
+        <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '#offer' }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP comparison",
+  "tag": "section",
+  "class": "section-wsp-compare",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Background", "default": "white", "options": [
+      { "value": "white", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Smarter money" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Compare your options" },
+    { "type": "richtext", "id": "text", "label": "Intro text" },
+    { "type": "text", "id": "col_us", "label": "Our column", "default": "Wrinkle Smooth Patches" },
+    { "type": "text", "id": "col_a", "label": "Column 2", "default": "Injectables" },
+    { "type": "text", "id": "col_b", "label": "Column 3", "default": "Paper tape" },
+    { "type": "text", "id": "col_c", "label": "Column 4", "default": "Single-use patches" },
+    { "type": "text", "id": "note", "label": "Note under the table" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the buy box (#offer)." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [
+      { "type": "text", "id": "label", "label": "Feature", "default": "Needle-free" },
+      { "type": "text", "id": "us", "label": "Us", "default": "true", "info": "true = check, false = x, anything else shows as text" },
+      { "type": "text", "id": "a", "label": "Column 2", "default": "false" },
+      { "type": "text", "id": "b", "label": "Column 3", "default": "true" },
+      { "type": "text", "id": "c", "label": "Column 4", "default": "true" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP comparison" }]
+}
+{% endschema %}

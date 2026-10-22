@@ -1,0 +1,593 @@
+{
+  "sections": {
+    "hero": {
+      "type": "wsp-hero",
+      "blocks": {
+        "img1": {
+          "type": "image",
+          "settings": {
+            "alt": "Hero shot — the patches on clean background (placeholder: upload Higgsfield render)"
+          }
+        },
+        "img2": {
+          "type": "image",
+          "settings": {
+            "alt": "The forehead patch on skin, covering most of the forehead (placeholder: Celina render)"
+          }
+        },
+        "img3": {
+          "type": "image",
+          "settings": {
+            "alt": "Application tips for a secure, comfortable fit (placeholder)"
+          }
+        },
+        "img4": {
+          "type": "image",
+          "settings": {
+            "alt": "Forehead and under-eye shapes, made for each area (placeholder)"
+          }
+        },
+        "proof1": {
+          "type": "proof",
+          "settings": {
+            "icon": "check",
+            "text": "Forehead & under-eye"
+          }
+        },
+        "proof2": {
+          "type": "proof",
+          "settings": {
+            "icon": "leaf",
+            "text": "No needles, no tape, no refills"
+          }
+        },
+        "proof3": {
+          "type": "proof",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable — just clean and reuse"
+          }
+        },
+        "offer-set": {
+          "type": "offer",
+          "settings": {
+            "match": "Set",
+            "subtitle": "Forehead + eye pair — cover both areas tonight",
+            "badge": "Most popular",
+            "save_label": "Save $15",
+            "compare": 65,
+            "featured": true
+          }
+        },
+        "offer-forehead": {
+          "type": "offer",
+          "settings": {
+            "match": "Forehead",
+            "title": "Wrinkle Smooth Forehead Patch",
+            "subtitle": "Forehead lines + frown lines between the brows"
+          }
+        },
+        "offer-eye": {
+          "type": "offer",
+          "settings": {
+            "match": "Eye",
+            "title": "Wrinkle Smooth Eye Patches (1 pair)",
+            "subtitle": "Crescent shape for the delicate under-eye area"
+          }
+        }
+      },
+      "block_order": [
+        "img1",
+        "img2",
+        "img3",
+        "img4",
+        "proof1",
+        "proof2",
+        "proof3",
+        "offer-set",
+        "offer-forehead",
+        "offer-eye"
+      ],
+      "settings": {
+        "eyebrow": "Reusable overnight silicone patches",
+        "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
+        "subheadline": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin.",
+        "offer_label": "Choose your patches",
+        "guarantee_line": "Try them for 30 days. If you don't love your mornings, get your money back.",
+        "sticky_bar": true
+      }
+    },
+    "ticker": {
+      "type": "dg-ticker",
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable night after night"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "No actives — nothing absorbed"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free tracked shipping"
+          }
+        },
+        "t5": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "30 seconds before bed"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "style": "white"
+      }
+    },
+    "problem": {
+      "type": "wsp-story",
+      "settings": {
+        "style": "mist",
+        "eyebrow": "You know the moment",
+        "heading": "Every morning, the mirror says the same thing",
+        "body": "<p>The lines on your forehead and between your brows read as tired or upset — even on your best days. The creams promised to help and didn't touch them. And needles? Between the price, the upkeep and the thought of a frozen look, that was never really on the table.</p><p>So the lines stay. And every photo, every mirror, every \"you look tired\" lands a little harder.</p>",
+        "kicker": "There's a simpler way to wake up to smoother-looking skin.",
+        "button_label": "Show me how it works",
+        "button_link": "#how-it-works",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "how": {
+      "type": "dg-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 1",
+            "title": "Apply before bed",
+            "text": "Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 2",
+            "title": "Sleep",
+            "text": "The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 3",
+            "title": "Peel and glow",
+            "text": "Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "style": "white",
+        "anchor": "how-it-works",
+        "eyebrow": "How it works",
+        "heading": "Hold + hydrate, <em>while you sleep</em>",
+        "text": "<p>While you sleep, your skin folds and loses moisture. The patch does two simple things all night: it holds the skin surface smooth, and it seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
+        "button_label": "Try them tonight",
+        "button_link": "#offer"
+      }
+    },
+    "expect": {
+      "type": "wsp-story",
+      "settings": {
+        "style": "white",
+        "eyebrow": "What to expect",
+        "heading": "Honest expectations",
+        "body": "<p><strong>Night one:</strong> peel the patch off to smoother-looking skin. The effect is strongest in the first hours of the morning.</p><p><strong>Every night after:</strong> make it your 30-second ritual. Results are visible in the morning and are strongest when you use the patches regularly. Deep-set lines soften less than fine ones — and results vary from person to person.</p><p>No needles. Nothing absorbed into your skin. Just a smoother-looking morning, on repeat.</p>",
+        "kicker": "Look rested. Still look like you.",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "areas": {
+      "type": "wsp-areas",
+      "blocks": {
+        "forehead": {
+          "type": "area",
+          "settings": {
+            "title": "Wrinkle Smooth Forehead Patch",
+            "text": "One wide patch (approx. 14.3 × 6 cm) with a center tab that covers forehead lines and the frown lines between your brows.",
+            "match": "Forehead"
+          }
+        },
+        "eyes": {
+          "type": "area",
+          "settings": {
+            "title": "Wrinkle Smooth Eye Patches",
+            "text": "A mirrored pair of soft crescents shaped for the delicate skin under your eyes.",
+            "match": "Eye"
+          }
+        }
+      },
+      "block_order": [
+        "forehead",
+        "eyes"
+      ],
+      "settings": {
+        "style": "mist",
+        "eyebrow": "Made for two areas",
+        "heading": "Your forehead, and under your eyes",
+        "text": "<p>Each area gets its own shape, so the patch sits flat and stays comfortable while you sleep.</p>",
+        "nudge": "Want both? <strong>Cover both areas tonight</strong> — pick the forehead + eye option above and save.",
+        "nudge_link_label": "Choose your patches ↑"
+      }
+    },
+    "compare": {
+      "type": "wsp-compare",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Needle-free",
+            "us": "true",
+            "a": "false",
+            "b": "true",
+            "c": "true"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Cost",
+            "us": "From $30, reusable",
+            "a": "$435–$586 per visit (Botox), every 3–4 months",
+            "b": "Refills every month",
+            "c": "Pay per use"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Use at home, overnight",
+            "us": "true",
+            "a": "false",
+            "b": "true",
+            "c": "true"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Reusable",
+            "us": "true",
+            "a": "false",
+            "b": "false",
+            "c": "false"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "No glue on your skin",
+            "us": "true",
+            "a": "true",
+            "b": "false",
+            "c": "false"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "You still look like you",
+            "us": "true",
+            "a": "Depends on the dose",
+            "b": "true",
+            "c": "true"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "style": "white",
+        "eyebrow": "Smarter money",
+        "heading": "Think in cost per night",
+        "text": "<p>One reusable patch, many mornings. Here's how the options actually stack up.</p>",
+        "col_us": "Wrinkle Smooth Patches",
+        "col_a": "Injectables",
+        "col_b": "Paper tape",
+        "col_c": "Single-use patches",
+        "note": "Injectable costs shown are typical published US prices per visit. We're not comparing results — just what it takes to keep going.",
+        "button_label": "Choose your patches",
+        "button_link": "#offer"
+      }
+    },
+    "guide": {
+      "type": "dg-steps",
+      "blocks": {
+        "g1": {
+          "type": "step",
+          "settings": {
+            "badge": "Prep",
+            "title": "Start clean and dry",
+            "text": "No serum, oil or moisturizer underneath — the patch grips best on fully dry skin. Oily skin? Pat dry first."
+          }
+        },
+        "g2": {
+          "type": "step",
+          "settings": {
+            "badge": "Apply",
+            "title": "Smooth from the center out",
+            "text": "Place the patch, then smooth it outward so it sits flat with no air pockets. Don't stretch the skin under your eyes."
+          }
+        },
+        "g3": {
+          "type": "step",
+          "settings": {
+            "badge": "Sleep",
+            "title": "Wear it overnight",
+            "text": "6–8 hours is the sweet spot. Side sleeper? Press the edges once more before lights out."
+          }
+        },
+        "g4": {
+          "type": "step",
+          "settings": {
+            "badge": "Morning",
+            "title": "Peel, clean, reuse",
+            "text": "Peel off gently, clean the patch after each use and store it on its backing so it's ready for tonight."
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
+      "settings": {
+        "style": "mist",
+        "anchor": "application",
+        "eyebrow": "Getting it right",
+        "heading": "Two minutes to the perfect fit",
+        "text": "<p>Most \"it fell off\" stories come down to skincare under the patch. Two minutes of prep fixes that. New to silicone patches? Do a quick patch test first, and stop if your skin feels irritated.</p>"
+      }
+    },
+    "box": {
+      "type": "dg-box",
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "name": "Your Wrinkle Smooth patches",
+            "note": "Forehead patch (approx. 14.3 × 6 cm) and/or eye patch pair, depending on your choice"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "name": "Protective backing",
+            "note": "Store the patches on it between uses"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "style": "white",
+        "eyebrow": "What's in the box",
+        "heading": "Simple, on purpose",
+        "text": "<p>Soft, clear 1.5mm silicone. Non-electric, no refills to buy, no actives — nothing absorbed into your skin.</p>"
+      }
+    },
+    "guarantee": {
+      "type": "dg-guarantee",
+      "blocks": {
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Tracked shipping"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
+      },
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
+      "settings": {
+        "style": "teal",
+        "days": 30,
+        "eyebrow": "Zero-risk mornings",
+        "heading": "We stand behind every patch",
+        "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "button_label": "Choose your patches",
+        "button_link": "#offer"
+      }
+    },
+    "faq": {
+      "type": "dg-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will it stay on all night?",
+            "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat, and press the edges once more if you sleep on your side.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How many times can I reuse it?",
+            "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing. How long it lasts depends on your skin prep and care routine.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I clean it?",
+            "answer": "<p>Just clean it after each application and place it back on its protective backing until tonight.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe under my eyes?",
+            "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation. New to silicone patches? Do a quick patch test first.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Will it irritate my skin or cause breakouts?",
+            "answer": "<p>The patches are soft silicone with no actives — nothing is absorbed into your skin. Keep the patch clean between uses. If you're breakout-prone, start with a few nights a week and see how your skin responds.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with retinol or tretinoin?",
+            "answer": "<p>Use the patches on your non-retinoid nights, or check with your dermatologist. Never apply a patch over freshly applied actives.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "How long do results last?",
+            "answer": "<p>The smoother look is strongest in the morning and fades through the day — that's normal for every patch of this kind. Used regularly, mornings keep starting smoother.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Does it work on deep lines?",
+            "answer": "<p>You'll see smoother-looking softening. Fine lines respond most; deep-set lines soften less. We'd rather tell you that now than surprise you later.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "Can I wear it during the day?",
+            "answer": "<p>You can — some people wear them while working from home or relaxing. Overnight (6–8 hours) is simply the easiest habit to keep.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a subscription?",
+            "answer": "<p>No. You buy the patches once and reuse them. No refills, no memberships, nothing recurring.</p>"
+          }
+        },
+        "q11": {
+          "type": "question",
+          "settings": {
+            "question": "How do returns work?",
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "q11"
+      ],
+      "settings": {
+        "style": "white",
+        "anchor": "faq",
+        "eyebrow": "Questions, answered",
+        "heading": "Everything you're wondering",
+        "open_first": true,
+        "button_label": "Choose your patches",
+        "button_link": "#offer"
+      }
+    },
+    "cta": {
+      "type": "wsp-cta",
+      "settings": {
+        "style": "teal",
+        "eyebrow": "Tonight's the night",
+        "heading": "Wake up to <em>visibly smoother skin</em>",
+        "text": "<p>Thirty seconds before bed. Smoother-looking skin in the mirror tomorrow. And thirty days to decide if your mornings are better.</p>",
+        "button_label": "Choose your patches",
+        "button_link": "#offer",
+        "guarantee_line": "30-day money-back guarantee · Free tracked shipping · Reusable"
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "problem",
+    "how",
+    "expect",
+    "areas",
+    "compare",
+    "guide",
+    "box",
+    "guarantee",
+    "faq",
+    "cta",
+    "disclosures"
+  ]
+}

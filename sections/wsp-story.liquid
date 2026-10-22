@@ -1,0 +1,51 @@
+{%- comment -%}
+  Narrative section (the "every morning you notice them" problem block, the
+  honest-expectations block). Short centered paragraphs in her words, optional
+  kicker line at the end. No shame, no personal call-outs: talk about the
+  lines, not the person.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+    </div>
+    <div class="wsp-story__inner">
+      {{ section.settings.body }}
+      {%- if section.settings.kicker != blank -%}
+        <p class="wsp-story__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div class="dg__cta">
+        <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '#offer' }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP story",
+  "tag": "section",
+  "class": "section-wsp-story",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Background", "default": "white", "options": [
+      { "value": "white", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "inline_richtext", "id": "kicker", "label": "Closing line (bigger)" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the buy box (#offer)." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [{ "name": "WSP story" }]
+}
+{% endschema %}
