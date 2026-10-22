@@ -65,10 +65,9 @@
           <div class="dgc-empty__body">
             <span class="dgc-empty__icon">{% render 'dg-icon', name: 'cap' %}</span>
             <h2 class="dgc-empty__title">Your cart is empty</h2>
-            <p class="dgc-empty__text">Red light therapy for your hair, a few minutes a day.</p>
-            {%- assign dg_first = collections.all.products | first -%}
-            <a href="{% if dg_first %}{{ dg_first.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}" class="dgc-btn">
-              Shop the Hair Renew Cap
+            <p class="dgc-empty__text">Simple tools for your daily glow.</p>
+            <a href="/pages/products" class="dgc-btn">
+              Start shopping
             </a>
           </div>
         </div>

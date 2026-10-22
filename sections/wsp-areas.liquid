@@ -1,0 +1,128 @@
+{%- comment -%}
+  "Made for two areas" — one card per patch area with its own add-to-cart,
+  plus a bundle nudge pointing back to the buy box. Each card's Add button is a
+  real product form on the matched variant, so the cart drawer keeps working.
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product
+  if p == blank
+    assign p = product
+  endif
+-%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<section{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handle }}"{% endif %} class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+      {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+    </div>
+
+    <div class="wsp-areas">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign v = nil
+          if p != blank and block.settings.match != blank
+            assign m = block.settings.match | downcase
+            for pv in p.variants
+              assign vt = pv.title | downcase
+              if vt contains m and v == nil
+                assign v = pv
+              endif
+            endfor
+          endif
+        -%}
+        <article class="wsp-area" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'wsp-area__img', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 45vw, 92vw', alt: block.settings.title | escape }}
+          {%- elsif block.settings.asset != blank -%}
+            <img class="wsp-area__img" src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="900" height="675">
+          {%- elsif v and v.image -%}
+            {{ v.image | image_url: width: 900 | image_tag: class: 'wsp-area__img', loading: 'lazy', alt: block.settings.title | escape }}
+          {%- else -%}
+            <div class="wsp-area__img wsp-ph"><span>{{ block.settings.title | escape }} — photo placeholder</span></div>
+          {%- endif -%}
+          <div class="wsp-area__body">
+            <h3 class="wsp-area__title">{{ block.settings.title | escape }}</h3>
+            <p class="wsp-area__text">{{ block.settings.text | escape }}</p>
+            <div class="wsp-area__row">
+              {%- if v -%}
+                <span class="wsp-area__price">{{ v.price | money }}</span>
+                {%- assign area_form_id = 'wsp-area-form-' | append: block.id -%}
+                <product-form class="product-form" data-section-id="{{ section.id }}-{{ block.id }}">
+                  <div class="product-form__error-message-wrapper" role="alert" hidden>
+                    <span class="product-form__error-message"></span>
+                  </div>
+                  {%- form 'product', p, id: area_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    <input type="hidden" name="id" value="{{ v.id }}" class="product-variant-id"{% unless v.available %} disabled{% endunless %}>
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc" style="width:auto"{% unless v.available %} disabled{% endunless %}>
+                      <span>{% if v.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+                      {%- render 'loading-spinner' -%}
+                    </button>
+                  {%- endform -%}
+                </product-form>
+              {%- else -%}
+                <a class="dg-btn dg-btn--ghost" href="#offer">Choose above</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- liquid
+      # The bundle nudge only renders once a variant matching nudge_match exists,
+      # so the page never references a set that can't be bought yet.
+      assign nudge_ok = false
+      if section.settings.nudge != blank and p != blank
+        assign nm = section.settings.nudge_match | default: 'Set' | downcase
+        for pv in p.variants
+          assign pvt = pv.title | downcase
+          if pvt contains nm
+            assign nudge_ok = true
+          endif
+        endfor
+      endif
+    -%}
+    {%- if nudge_ok -%}
+      <p class="wsp-nudge">{{ section.settings.nudge }} <a href="#offer">{{ section.settings.nudge_link_label | escape }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP two areas",
+  "tag": "section",
+  "class": "section-wsp-areas",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Background", "default": "mist", "options": [
+      { "value": "white", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "anchor", "label": "Anchor id" },
+    { "type": "product", "id": "product", "label": "Product", "info": "On product pages, leave empty to use the current product." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made for two areas" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Your forehead and under your eyes" },
+    { "type": "richtext", "id": "text", "label": "Intro text" },
+    { "type": "inline_richtext", "id": "nudge", "label": "Bundle nudge", "info": "Shown under the cards. Keep it honest: only reference the set once the bundle variant exists." },
+    { "type": "text", "id": "nudge_link_label", "label": "Nudge link label", "default": "Choose your patches ↑" },
+    { "type": "text", "id": "nudge_match", "label": "Show nudge only when a variant title contains", "default": "Set", "info": "Keeps the set nudge hidden until the bundle variant exists in Shopify." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    { "type": "area", "name": "Area card", "limit": 4, "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Wrinkle Smooth Forehead Patch" },
+      { "type": "text", "id": "text", "label": "Text", "default": "One wide patch that covers forehead lines and the frown lines between your brows." },
+      { "type": "text", "id": "match", "label": "Matches variant title containing", "default": "Forehead" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "...or theme asset file name" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP two areas" }]
+}
+{% endschema %}

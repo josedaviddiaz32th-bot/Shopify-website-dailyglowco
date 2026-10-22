@@ -1,0 +1,268 @@
+{%- comment -%}
+  Wrinkle Smooth Patches — hero / buy box (above the fold).
+  Structure follows the landing-page template: gallery carousel, outcome-first
+  headline, proof bullets, offer selector (one radio card per variant, decorated
+  by "Offer card" blocks matched on variant title), add to cart, guarantee line,
+  mobile sticky bar. Reuses the theme's <product-form> so cart drawer, Shop Pay
+  and analytics keep working. A bundle card appears automatically once the
+  bundle variant exists in Shopify and an Offer card block matches it.
+{%- endcomment -%}
+{%- liquid
+  assign sid = section.id
+  assign p = section.settings.product
+  if p == blank
+    assign p = product
+  endif
+-%}
+
+{%- if p != blank -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'wsp.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  # Which variant starts selected: the first available variant decorated by a
+  # blocks marked "featured", tried in BLOCK order (bundle card outranks the
+  # forehead card the moment the bundle variant exists), else first available.
+  assign featured_id = 0
+  assign fallback_id = 0
+  for v in p.variants
+    if v.available and fallback_id == 0
+      assign fallback_id = v.id
+    endif
+  endfor
+  for block in section.blocks
+    if block.type == 'offer' and block.settings.match != blank and block.settings.featured and featured_id == 0
+      assign m = block.settings.match | downcase
+      for v in p.variants
+        assign vt = v.title | downcase
+        if vt contains m and v.available and featured_id == 0
+          assign featured_id = v.id
+        endif
+      endfor
+    endif
+  endfor
+  if featured_id == 0
+    assign featured_id = fallback_id
+  endif
+  if featured_id == 0
+    assign featured_id = p.variants.first.id
+  endif
+  assign current = p.variants | where: 'id', featured_id | first
+  assign product_form_id = 'wsp-product-form-' | append: sid
+  assign media_blocks = section.blocks | where: 'type', 'image'
+  assign video_blocks = section.blocks | where: 'type', 'video'
+-%}
+
+<wsp-hero class="dg wsp-hero" id="offer" data-section="{{ sid }}" data-money-format="{{ shop.money_format | escape }}">
+  <div class="dg__wrap" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+    <div class="wsp-grid">
+
+      {%- comment -%} Gallery. Cadence: hero shot → texture/fit → objection → proof. {%- endcomment -%}
+      <div class="wsp-media">
+        {%- assign n = 0 -%}
+        {%- capture thumbs -%}{%- endcapture -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'image' and block.type != 'video' -%}{%- continue -%}{%- endif -%}
+          {%- assign n = n | plus: 1 -%}
+          {%- liquid
+            assign alt = block.settings.alt | default: p.title | escape
+            if n == 1
+              assign eager = 'eager'
+            else
+              assign eager = 'lazy'
+            endif
+          -%}
+          {%- assign vm = nil -%}
+          {%- if block.type == 'video' -%}
+            {%- assign vids = p.media | where: 'media_type', 'video' -%}
+            {%- assign vidx = block.settings.index | default: 1 | minus: 1 -%}
+            {%- assign vm = vids[vidx] -%}
+            {%- if vm == blank -%}{%- assign n = n | minus: 1 -%}{%- continue -%}{%- endif -%}
+          {%- endif -%}
+          {%- capture img -%}
+            {%- if vm != blank -%}
+              {{ vm | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1200x' }}
+            {%- elsif block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1400 | image_tag: loading: eager, widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, 92vw', alt: alt }}
+            {%- elsif block.settings.asset != blank -%}
+              <img src="{{ block.settings.asset | asset_url }}" alt="{{ alt }}" loading="{{ eager }}" width="1200" height="1200">
+            {%- else -%}
+              <div class="wsp-ph"><span>{{ block.settings.alt | default: 'Image placeholder — pick an image in the theme editor' | escape }}</span></div>
+            {%- endif -%}
+          {%- endcapture -%}
+          <figure class="wsp-slide{% if n == 1 %} is-active{% endif %}" data-slide="{{ n }}" {{ block.shopify_attributes }}>{{ img }}</figure>
+          {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{%- if vm != blank -%}{{ vm.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: alt }}{%- elsif block.settings.image != blank -%}{{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: alt }}{%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="" loading="lazy" width="120" height="120">{%- else -%}<span class="wsp-ph" style="aspect-ratio:auto;height:100%"><span style="font-size:10px">{{ n }}</span></span>{%- endif -%}</button>{%- endcapture -%}
+        {%- endfor -%}
+        {%- if n == 0 -%}
+          {%- comment -%} No media blocks yet: label the placeholders with the intended shot list. {%- endcomment -%}
+          {%- assign ph = 'Hero shot: patch pack, clean background|The patch on skin: forehead, most of the forehead covered|Fit & feel: eye crescents + center-tab forehead shape|Morning peel-off: real customer photo (coming)' | split: '|' -%}
+          {%- for label in ph -%}
+            {%- assign n = n | plus: 1 -%}
+            <figure class="wsp-slide{% if forloop.first %} is-active{% endif %}" data-slide="{{ n }}"><div class="wsp-ph"><span>{{ label }}</span></div></figure>
+            {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ label | escape }}"><span class="wsp-ph" style="aspect-ratio:auto;height:100%"><span style="font-size:10px">{{ n }}</span></span></button>{%- endcapture -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if n > 1 -%}
+          <div class="wsp-strip">
+            <button type="button" class="wsp-arrow" data-gallery-step="-1" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div class="wsp-thumbs">{{ thumbs }}</div>
+            <button type="button" class="wsp-arrow" data-gallery-step="1" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="wsp-box">
+        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
+        {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
+
+        {%- assign proofs = section.blocks | where: 'type', 'proof' -%}
+        {%- if proofs.size > 0 -%}
+          <ul class="wsp-proof">
+            {%- for block in proofs -%}
+              <li {{ block.shopify_attributes }}>{% render 'dg-icon', name: block.settings.icon %}<span>{{ block.settings.text | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%} Offer selector: one card per variant, blocks decorate. {%- endcomment -%}
+        <fieldset class="wsp-offers">
+          <legend>{{ section.settings.offer_label | escape }}</legend>
+          {%- for v in p.variants -%}
+            {%- liquid
+              assign deco = nil
+              assign vt = v.title | downcase
+              for block in section.blocks
+                if block.type == 'offer' and block.settings.match != blank
+                  assign m = block.settings.match | downcase
+                  if vt contains m and deco == nil
+                    assign deco = block
+                  endif
+                endif
+              endfor
+              assign card_title = v.title
+              if deco and deco.settings.title != blank
+                assign card_title = deco.settings.title
+              endif
+            -%}
+            <label class="wsp-offer" {% if deco %}{{ deco.shopify_attributes }}{% endif %}>
+              <input type="radio" name="wsp-offer-{{ sid }}" value="{{ v.id }}"
+                data-price="{{ v.price }}" data-available="{{ v.available }}" data-title="{{ card_title | escape }}"
+                {% if v.id == featured_id %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
+              {%- if deco and deco.settings.badge != blank -%}<span class="wsp-offer__flag">{{ deco.settings.badge | escape }}</span>{%- endif -%}
+              <span class="wsp-offer__dot" aria-hidden="true"></span>
+              {%- assign vimg = v.image | default: p.featured_image -%}
+              {%- if vimg -%}{{ vimg | image_url: width: 120 | image_tag: class: 'wsp-offer__img', loading: 'lazy', alt: '' }}{%- endif -%}
+              <span class="wsp-offer__body">
+                <span class="wsp-offer__title">{{ card_title | escape }}
+                  {%- if deco and deco.settings.save_label != blank %} <span class="wsp-offer__save">{{ deco.settings.save_label | escape }}</span>{% endif -%}
+                </span>
+                {%- if deco and deco.settings.subtitle != blank -%}<span class="wsp-offer__sub">{{ deco.settings.subtitle | escape }}</span>{%- endif -%}
+              </span>
+              <span class="wsp-offer__price">
+                <span class="wsp-offer__now">{{ v.price | money }}</span>
+                {%- if deco and deco.settings.compare > 0 -%}
+                  {%- assign cmp = deco.settings.compare | times: 100.0 -%}
+                  {%- if cmp > v.price -%}<span class="wsp-offer__was">{{ cmp | money }}</span>{%- endif -%}
+                {%- endif -%}
+              </span>
+            </label>
+          {%- endfor -%}
+        </fieldset>
+
+        <div class="wsp-buy" data-buy>
+          <product-form class="product-form" data-section-id="{{ sid }}">
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+            {%- form 'product', p, id: product_form_id, class: 'form wsp-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ current.id }}" class="product-variant-id"{% unless current.available %} disabled{% endunless %}>
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc"{% unless current.available %} disabled{% endunless %}>
+                <span data-atc-label data-add="{{ 'products.product.add_to_cart' | t | escape }}" data-soldout="{{ 'products.product.sold_out' | t | escape }}">
+                  {%- if current.available %}{{ 'products.product.add_to_cart' | t }} · {{ current.price | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
+                </span>
+                {%- render 'loading-spinner' -%}
+              </button>
+              <div class="dgp-shoppay">{{ form | payment_button }}</div>
+            {%- endform -%}
+          </product-form>
+          {%- if section.settings.guarantee_line != blank -%}
+            <p class="wsp-guarantee-line">{% render 'dg-icon', name: 'shield' %}<span>{{ section.settings.guarantee_line | escape }}</span></p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.sticky_bar -%}
+    <div class="wsp-sticky" data-sticky hidden>
+      <div class="wsp-sticky__inner">
+        <div class="wsp-sticky__meta">
+          <span class="wsp-sticky__name" data-sticky-name>{{ current.title | escape }}</span>
+          <span class="wsp-sticky__price" data-sticky-price>{{ current.price | money }}</span>
+        </div>
+        <button type="button" class="dg-btn dg-btn--primary" data-sticky-atc>{{ 'products.product.add_to_cart' | t }}</button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if template.name == 'product' -%}
+    <script type="application/ld+json">
+      {{ p | structured_data }}
+    </script>
+  {%- endif -%}
+</wsp-hero>
+{%- else -%}
+  <div class="dg"><div class="dg__wrap"><p>Choose a product for this section.</p></div></div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WSP hero / buy box",
+  "tag": "section",
+  "class": "section-wsp-hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "On product pages, leave empty to use the current product." },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Reusable overnight silicone patches" },
+    { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Smooth Your Wrinkles <em>While You Sleep</em>" },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin." },
+    { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
+    { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
+    { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Gallery image", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "...or theme asset file name" },
+      { "type": "text", "id": "alt", "label": "Image description", "info": "Also shown inside the placeholder while no image is picked." }
+    ] },
+    { "type": "video", "name": "Gallery video", "settings": [
+      { "type": "number", "id": "index", "label": "Product video number", "default": 1, "info": "1 = the first video in the product's media." },
+      { "type": "text", "id": "alt", "label": "Video description" }
+    ] },
+    { "type": "proof", "name": "Proof bullet", "limit": 4, "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
+        { "value": "check", "label": "Check" }, { "value": "repeat", "label": "Repeat" }, { "value": "leaf", "label": "Leaf" },
+        { "value": "shield", "label": "Shield" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }
+      ] },
+      { "type": "text", "id": "text", "label": "Text", "default": "No needles, no tape, no refills" }
+    ] },
+    { "type": "offer", "name": "Offer card", "settings": [
+      { "type": "text", "id": "match", "label": "Matches variant title containing", "info": "e.g. Forehead, Eye, Set. The card styles the first variant whose title contains this text; if no variant matches, it does nothing (safe to set up the bundle card before the bundle variant exists)." },
+      { "type": "text", "id": "title", "label": "Card title override" },
+      { "type": "text", "id": "subtitle", "label": "Subtitle", "info": "e.g. 'Covers forehead lines and frown lines'" },
+      { "type": "text", "id": "badge", "label": "Badge", "info": "e.g. 'Most popular'" },
+      { "type": "text", "id": "save_label", "label": "Save label", "info": "e.g. 'Save $15'" },
+      { "type": "number", "id": "compare", "label": "Compare-at price (dollars)", "info": "Shown struck through when above the variant price. Use the real sum of the separate prices." },
+      { "type": "checkbox", "id": "featured", "label": "Pre-selected", "default": false }
+    ] }
+  ],
+  "presets": [{ "name": "WSP hero / buy box" }]
+}
+{% endschema %}

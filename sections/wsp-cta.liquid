@@ -1,0 +1,44 @@
+{%- comment -%}
+  Final CTA block: repeat the outcome, one button back to the buy box,
+  guarantee line. No fake urgency.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+
+<section class="dg dg--{{ section.settings.style }}" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="wsp-cta">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+      {%- if section.settings.text != blank %}<div class="dg__lede">{{ section.settings.text }}</div>{% endif -%}
+      <div class="dg__cta">
+        <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '#offer' }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a>
+      </div>
+      {%- if section.settings.guarantee_line != blank -%}
+        <p class="wsp-guarantee-line" style="justify-content:center">{% render 'dg-icon', name: 'shield' %}<span>{{ section.settings.guarantee_line | escape }}</span></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP final CTA",
+  "tag": "section",
+  "class": "section-wsp-cta",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Background", "default": "teal", "options": [
+      { "value": "white", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Tonight's the night" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Wake up to <em>visibly smoother skin</em>" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Choose your patches" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#offer", "info": "A URL or an on-page #anchor. Defaults to the buy box (#offer)." },
+    { "type": "text", "id": "guarantee_line", "label": "Guarantee line", "default": "30-day money-back guarantee. Free tracked shipping." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "presets": [{ "name": "WSP final CTA" }]
+}
+{% endschema %}
