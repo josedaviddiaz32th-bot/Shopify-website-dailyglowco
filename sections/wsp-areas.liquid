@@ -51,11 +51,12 @@
             <div class="wsp-area__row">
               {%- if v -%}
                 <span class="wsp-area__price">{{ v.price | money }}</span>
+                {%- assign area_form_id = 'wsp-area-form-' | append: block.id -%}
                 <product-form class="product-form" data-section-id="{{ section.id }}-{{ block.id }}">
                   <div class="product-form__error-message-wrapper" role="alert" hidden>
                     <span class="product-form__error-message"></span>
                   </div>
-                  {%- form 'product', p, id: 'wsp-area-form-' | append: block.id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  {%- form 'product', p, id: area_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                     <input type="hidden" name="id" value="{{ v.id }}" class="product-variant-id"{% unless v.available %} disabled{% endunless %}>
                     <input type="hidden" name="quantity" value="1">
                     <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc" style="width:auto"{% unless v.available %} disabled{% endunless %}>
