@@ -23,22 +23,25 @@
 
 {%- liquid
   # Which variant starts selected: the first available variant decorated by a
-  # block marked "featured", else the first available, else the first.
+  # blocks marked "featured", tried in BLOCK order (bundle card outranks the
+  # forehead card the moment the bundle variant exists), else first available.
   assign featured_id = 0
   assign fallback_id = 0
   for v in p.variants
     if v.available and fallback_id == 0
       assign fallback_id = v.id
     endif
-    for block in section.blocks
-      if block.type == 'offer' and block.settings.match != blank and block.settings.featured and v.available and featured_id == 0
-        assign m = block.settings.match | downcase
+  endfor
+  for block in section.blocks
+    if block.type == 'offer' and block.settings.match != blank and block.settings.featured and featured_id == 0
+      assign m = block.settings.match | downcase
+      for v in p.variants
         assign vt = v.title | downcase
-        if vt contains m
+        if vt contains m and v.available and featured_id == 0
           assign featured_id = v.id
         endif
-      endif
-    endfor
+      endfor
+    endif
   endfor
   if featured_id == 0
     assign featured_id = fallback_id
