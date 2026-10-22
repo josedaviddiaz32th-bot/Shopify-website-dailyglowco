@@ -202,7 +202,7 @@
         "heading": "Hold + hydrate, <em>while you sleep</em>",
         "text": "<p>While you sleep, your skin folds and loses moisture. The patch does two simple things all night: it holds the skin surface smooth, and it seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
         "button_label": "Try them tonight",
-        "button_link": "#offer"
+        "button_link": "/products/wrinkle-smooth-patches#offer"
       }
     },
     "expect": {
@@ -452,7 +452,7 @@
         "heading": "We stand behind every patch",
         "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
         "button_label": "Choose your patches",
-        "button_link": "#offer"
+        "button_link": "/products/wrinkle-smooth-patches#offer"
       }
     },
     "faq": {
@@ -556,7 +556,7 @@
         "heading": "Everything you're wondering",
         "open_first": true,
         "button_label": "Choose your patches",
-        "button_link": "#offer"
+        "button_link": "/products/wrinkle-smooth-patches#offer"
       }
     },
     "cta": {

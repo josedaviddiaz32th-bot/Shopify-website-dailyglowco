@@ -204,7 +204,7 @@
         "heading": "Hold + hydrate, <em>while you sleep</em>",
         "text": "<p>While you sleep, your skin folds and loses moisture. The patch holds the skin surface smooth and seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
         "button_label": "Try them tonight",
-        "button_link": "#offer"
+        "button_link": "/#offer"
       }
     },
     "areas": {
@@ -278,7 +278,7 @@
         "heading": "We stand behind every patch",
         "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back.</p>",
         "button_label": "Choose your patches",
-        "button_link": "#offer"
+        "button_link": "/#offer"
       }
     },
     "products": {
@@ -368,7 +368,7 @@
         "heading": "Before you ask",
         "open_first": true,
         "button_label": "Choose your patches",
-        "button_link": "#offer"
+        "button_link": "/#offer"
       }
     },
     "cta": {
