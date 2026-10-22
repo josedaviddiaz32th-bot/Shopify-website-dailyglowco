@@ -5,15 +5,15 @@
     "header": {
       "type": "dg-header",
       "settings": {
-        "announcement": "Free tracked shipping | 30-day money-back guarantee | Buy 2, save 15%",
+        "announcement": "Free tracked shipping | 30-day money-back guarantee",
         "menu": "main-menu",
         "logo_height": 38,
         "sticky": true,
         "santa_hat": true,
-        "holiday_tag": "Christmas sale",
-        "holiday_text": "The Hair Renew Cap is now $84.99 (was $99.99) · Free tracked shipping",
+        "holiday_tag": "New",
+        "holiday_text": "The Wrinkle Smooth Patches are here · Smooth your wrinkles while you sleep",
         "holiday_link_label": "Shop now",
-        "holiday_link": "shopify://products/glow-cap"
+        "holiday_link": "shopify://products/wrinkle-smooth-patches"
       }
     }
   },

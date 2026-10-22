@@ -1,38 +1,16 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero": {
-      "type": "wsp-hero",
-      "blocks": {
-        "img1": { "type": "image", "settings": { "alt": "Hero shot — the patches on clean background (placeholder: upload Higgsfield render)" } },
-        "img2": { "type": "image", "settings": { "alt": "The forehead patch on skin, covering most of the forehead (placeholder: Celina render)" } },
-        "img3": { "type": "image", "settings": { "alt": "Application tips for a secure, comfortable fit (placeholder)" } },
-        "img4": { "type": "image", "settings": { "alt": "Forehead and under-eye shapes, made for each area (placeholder)" } },
-        "proof1": { "type": "proof", "settings": { "icon": "check", "text": "Forehead & under-eye" } },
-        "proof2": { "type": "proof", "settings": { "icon": "leaf", "text": "No needles, no tape, no refills" } },
-        "proof3": { "type": "proof", "settings": { "icon": "repeat", "text": "Reusable — just clean and reuse" } },
-        "offer-set": { "type": "offer", "settings": { "match": "Set", "subtitle": "Forehead + eye pair — cover both areas tonight", "badge": "Most popular", "save_label": "Save $15", "compare": 65, "featured": true } },
-        "offer-forehead": { "type": "offer", "settings": { "match": "Forehead", "title": "Wrinkle Smooth Forehead Patch", "subtitle": "Forehead lines + frown lines between the brows", "featured": true } },
-        "offer-eye": { "type": "offer", "settings": { "match": "Eye", "title": "Wrinkle Smooth Eye Patches (1 pair)", "subtitle": "Crescent shape for the delicate under-eye area" } }
-      },
-      "block_order": ["img1", "img2", "img3", "img4", "proof1", "proof2", "proof3", "offer-set", "offer-forehead", "offer-eye"],
+      "type": "wsp-story",
       "settings": {
-        "product": "wrinkle-smooth-patches",
-        "eyebrow": "Reusable overnight silicone patches",
-        "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
-        "subheadline": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin.",
-        "offer_label": "Choose your patches",
-        "guarantee_line": "Try them for 30 days. If you don't love your mornings, get your money back.",
-        "sticky_bar": true,
-        "padding_top": 32
+        "style": "mist",
+        "eyebrow": "The Daily Glow Co.",
+        "heading": "Smooth Your Wrinkles <em>While You Sleep</em>",
+        "body": "<p>Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin.</p>",
+        "button_label": "Shop the Wrinkle Smooth Patches",
+        "button_link": "/products/wrinkle-smooth-patches",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "ticker": {
@@ -46,20 +24,6 @@
       },
       "block_order": ["t1", "t2", "t3", "t4", "t5"],
       "settings": { "style": "light" }
-    },
-    "problem": {
-      "type": "wsp-story",
-      "settings": {
-        "style": "mist",
-        "eyebrow": "You know the moment",
-        "heading": "Every morning, the mirror says the same thing",
-        "body": "<p>The lines on your forehead and between your brows read as tired or upset — even on your best days. The creams promised to help and didn't touch them. And needles? Between the price, the upkeep and the thought of a frozen look, that was never really on the table.</p>",
-        "kicker": "There's a simpler way to wake up to smoother-looking skin.",
-        "button_label": "Show me how it works",
-        "button_link": "#home-how",
-        "padding_top": 88,
-        "padding_bottom": 88
-      }
     },
     "how": {
       "type": "dg-steps",
@@ -75,25 +39,23 @@
         "eyebrow": "How it works",
         "heading": "Hold + hydrate, <em>while you sleep</em>",
         "text": "<p>While you sleep, your skin folds and loses moisture. The patch holds the skin surface smooth and seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
-        "button_label": "Try them tonight",
-        "button_link": "/#offer"
+        "button_label": "See the full story",
+        "button_link": "/products/wrinkle-smooth-patches"
       }
     },
-    "areas": {
-      "type": "wsp-areas",
+    "products": {
+      "type": "wsp-products-grid",
       "blocks": {
-        "forehead": { "type": "area", "settings": { "title": "Wrinkle Smooth Forehead Patch", "text": "One wide patch (approx. 14.3 × 6 cm) with a center tab that covers forehead lines and the frown lines between your brows.", "match": "Forehead" } },
-        "eyes": { "type": "area", "settings": { "title": "Wrinkle Smooth Eye Patches", "text": "A mirrored pair of soft crescents shaped for the delicate skin under your eyes.", "match": "Eye" } }
+        "patches": { "type": "product", "settings": { "product": "wrinkle-smooth-patches", "tag": "New", "title": "The Wrinkle Smooth Patches", "text": "Reusable silicone patches for your forehead and under-eyes. Smoother-looking skin by morning.", "link_label": "Shop the patches" } },
+        "cap": { "type": "product", "settings": { "product": "glow-cap", "tag": "Customer favorite", "title": "The Hair Renew Cap", "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home.", "link_label": "Shop the cap" } }
       },
-      "block_order": ["forehead", "eyes"],
+      "block_order": ["patches", "cap"],
       "settings": {
-        "style": "mist",
-        "product": "wrinkle-smooth-patches",
-        "eyebrow": "Made for two areas",
-        "heading": "Your forehead, and under your eyes",
-        "text": "<p>Each area gets its own shape, so the patch sits flat and stays comfortable while you sleep.</p>",
-        "nudge": "Want both? <strong>Cover both areas tonight</strong> — pick the forehead + eye option above and save.",
-        "nudge_link_label": "Choose your patches ↑"
+        "style": "white",
+        "anchor": "products",
+        "eyebrow": "The Daily Glow Co.",
+        "heading": "Everything we make",
+        "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.</p>"
       }
     },
     "guarantee": {
@@ -107,44 +69,31 @@
       "settings": {
         "style": "teal",
         "days": "30",
-        "eyebrow": "Zero-risk mornings",
-        "heading": "We stand behind every patch",
-        "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back.</p>",
-        "button_label": "Choose your patches",
-        "button_link": "/#offer"
-      }
-    },
-    "products": {
-      "type": "wsp-products-grid",
-      "blocks": {
-        "patches": { "type": "product", "settings": { "product": "wrinkle-smooth-patches", "tag": "New", "title": "The Wrinkle Smooth Patches", "text": "Reusable silicone patches for your forehead and under-eyes. Smoother-looking skin by morning.", "link_label": "Shop the patches" } },
-        "cap": { "type": "product", "settings": { "product": "glow-cap", "tag": "Customer favorite", "title": "The Hair Renew Cap", "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home.", "link_label": "Shop the cap" } }
-      },
-      "block_order": ["patches", "cap"],
-      "settings": {
-        "style": "white",
-        "eyebrow": "The Daily Glow Co.",
-        "heading": "Everything we make",
-        "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.</p>"
+        "eyebrow": "Zero-risk",
+        "heading": "Every product, guaranteed",
+        "text": "<p>Try anything we make for 30 days from delivery. If you don't love it, write to us and get your money back.</p>",
+        "button_label": "Shop the patches",
+        "button_link": "/products/wrinkle-smooth-patches"
       }
     },
     "faq": {
       "type": "dg-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Will it stay on all night?", "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "How many times can I reuse it?", "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "Is it safe under my eyes?", "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Is there a subscription?", "answer": "<p>No. You buy the patches once and reuse them. No refills, no memberships, nothing recurring.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "How do returns work?", "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>" } }
+        "q1": { "type": "question", "settings": { "question": "Will the patches stay on all night?", "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "How many times can I reuse them?", "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Are they safe under my eyes?", "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Is there a subscription?", "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring — for the patches or the cap.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "How do returns work?", "answer": "<p>You have 30 days from delivery on everything we sell. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5"],
       "settings": {
         "style": "mist",
+        "anchor": "faq",
         "eyebrow": "Questions, answered",
         "heading": "Before you ask",
         "open_first": true,
-        "button_label": "Choose your patches",
-        "button_link": "/#offer"
+        "button_label": "Shop the patches",
+        "button_link": "/products/wrinkle-smooth-patches"
       }
     },
     "cta": {
@@ -154,11 +103,11 @@
         "eyebrow": "Tonight's the night",
         "heading": "Wake up to <em>visibly smoother skin</em>",
         "text": "<p>Thirty seconds before bed. Smoother-looking skin in the mirror tomorrow. And thirty days to decide if your mornings are better.</p>",
-        "button_label": "Choose your patches",
-        "button_link": "#offer",
+        "button_label": "Shop the Wrinkle Smooth Patches",
+        "button_link": "/products/wrinkle-smooth-patches",
         "guarantee_line": "30-day money-back guarantee · Free tracked shipping · Reusable"
       }
     }
   },
-  "order": ["hero", "ticker", "problem", "how", "areas", "guarantee", "products", "faq", "cta"]
+  "order": ["hero", "ticker", "how", "products", "guarantee", "faq", "cta"]
 }
