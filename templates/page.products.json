@@ -24,31 +24,59 @@
           }
         }
       },
-      "block_order": ["patches", "cap"],
+      "block_order": [
+        "patches",
+        "cap"
+      ],
       "settings": {
         "style": "white",
         "eyebrow": "The Daily Glow Co.",
         "heading": "Our products",
-        "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.<\/p>",
+        "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.</p>",
         "padding_top": 56
       }
     },
     "guarantee": {
       "type": "dg-guarantee",
       "blocks": {
-        "gb1": { "type": "badge", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "gb2": { "type": "badge", "settings": { "icon": "truck", "text": "Tracked shipping" } },
-        "gb3": { "type": "badge", "settings": { "icon": "mail", "text": "Real support: support@thedailyglowco.com" } }
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Tracked shipping"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
       },
-      "block_order": ["gb1", "gb2", "gb3"],
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
       "settings": {
         "style": "mist",
         "days": 30,
         "eyebrow": "Zero-risk",
         "heading": "Every product, guaranteed",
-        "text": "<p>30 days from delivery to change your mind, on everything we sell. Damaged or wrong item? Send a photo within 7 days and we'll replace it.<\/p>"
+        "text": "<p>30 days from delivery to change your mind, on everything we sell. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
       }
     }
   },
-  "order": ["grid", "guarantee"]
+  "order": [
+    "grid",
+    "guarantee"
+  ]
 }

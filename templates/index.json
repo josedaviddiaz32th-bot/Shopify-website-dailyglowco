@@ -147,7 +147,7 @@
         "t5"
       ],
       "settings": {
-        "style": "white"
+        "style": "light"
       }
     },
     "problem": {
@@ -198,7 +198,7 @@
         "s3"
       ],
       "settings": {
-        "style": "white",
+        "style": "light",
         "anchor": "home-how",
         "eyebrow": "How it works",
         "heading": "Hold + hydrate, <em>while you sleep</em>",

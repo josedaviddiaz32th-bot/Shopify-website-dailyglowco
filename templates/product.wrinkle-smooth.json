@@ -145,7 +145,7 @@
         "t5"
       ],
       "settings": {
-        "style": "white"
+        "style": "light"
       }
     },
     "problem": {
@@ -196,7 +196,7 @@
         "s3"
       ],
       "settings": {
-        "style": "white",
+        "style": "light",
         "anchor": "how-it-works",
         "eyebrow": "How it works",
         "heading": "Hold + hydrate, <em>while you sleep</em>",
@@ -409,7 +409,7 @@
         "b2"
       ],
       "settings": {
-        "style": "white",
+        "style": "light",
         "eyebrow": "What's in the box",
         "heading": "Simple, on purpose",
         "text": "<p>Soft, clear 1.5mm silicone. Non-electric, no refills to buy, no actives — nothing absorbed into your skin.</p>"
@@ -550,7 +550,7 @@
         "q11"
       ],
       "settings": {
-        "style": "white",
+        "style": "light",
         "anchor": "faq",
         "eyebrow": "Questions, answered",
         "heading": "Everything you're wondering",
