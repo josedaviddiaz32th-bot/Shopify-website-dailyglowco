@@ -4,11 +4,17 @@
 
 /* ---------- Hero / buy box ---------- */
 .wsp-hero .dg__wrap { padding-top: var(--dg-pt, 20px); }
-.wsp-grid { display: grid; gap: 26px; }
+.wsp-grid { display: grid; gap: 18px; grid-template-areas: "head" "media" "box"; }
+.wsp-head { grid-area: head; }
+.wsp-media { grid-area: media; }
+.wsp-box { grid-area: box; }
 @media screen and (min-width: 990px) {
-  .wsp-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .wsp-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "media head" "media box"; gap: 10px 48px; align-items: start; }
   .wsp-media { position: sticky; top: 90px; }
 }
+.wsp-rating { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 14px; color: var(--dg-ink-muted); }
+.wsp-rating .dg-stars svg { width: 16px; height: 16px; }
+.wsp-rating strong { color: var(--dg-ink); }
 
 .wsp-media { min-width: 0; }
 .wsp-slide { display: none; margin: 0; position: relative; border-radius: 22px; overflow: hidden; background: var(--dg-mist); }

@@ -59,6 +59,22 @@
   <div class="dg__wrap" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
     <div class="wsp-grid">
 
+      {%- comment -%} Name + rating + short description: first thing on a phone. {%- endcomment -%}
+      <div class="wsp-head">
+        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
+        {%- if section.settings.rating != blank -%}
+          {%- assign r_round = section.settings.rating | plus: 0 | plus: 0.5 | floor -%}
+          <p class="wsp-rating">
+            <span class="dg-stars" role="img" aria-label="{{ section.settings.rating }} out of 5 stars">
+              {%- for i in (1..5) -%}<svg viewBox="0 0 24 24"{% if i > r_round %} class="off"{% endif %} aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>{%- endfor -%}
+            </span>
+            <span><strong>{{ section.settings.rating | escape }}</strong>/5 · {{ section.settings.rating_text | escape }}</span>
+          </p>
+        {%- endif -%}
+        {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
+      </div>
+
       {%- comment -%} Gallery. Cadence: hero shot → texture/fit → objection → proof. {%- endcomment -%}
       <div class="wsp-media">
         {%- assign n = 0 -%}
@@ -114,10 +130,6 @@
       </div>
 
       <div class="wsp-box">
-        {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
-        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
-        {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
-
         {%- assign proofs = section.blocks | where: 'type', 'proof' -%}
         {%- if proofs.size > 0 -%}
           <ul class="wsp-proof">
@@ -228,6 +240,8 @@
     { "type": "product", "id": "product", "label": "Product", "info": "On product pages, leave empty to use the current product." },
     { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Reusable overnight silicone patches" },
     { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Smooth Your Wrinkles <em>While You Sleep</em>" },
+    { "type": "text", "id": "rating", "label": "Rating", "info": "Real average from the source only. Leave empty to hide." },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "info": "e.g. '671 ratings · 5,000+ sold'. Say where they're from if they aren't this store's own reviews." },
     { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin." },
     { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
