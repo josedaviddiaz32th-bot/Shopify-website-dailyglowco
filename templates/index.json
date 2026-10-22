@@ -172,7 +172,7 @@
           "settings": {
             "badge": "Step 1",
             "title": "Apply before bed",
-            "text": "Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds."
+            "text": "<p>Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds.</p>"
           }
         },
         "s2": {
@@ -180,7 +180,7 @@
           "settings": {
             "badge": "Step 2",
             "title": "Sleep",
-            "text": "The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed."
+            "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed.</p>"
           }
         },
         "s3": {
@@ -188,7 +188,7 @@
           "settings": {
             "badge": "Step 3",
             "title": "Peel and glow",
-            "text": "Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night."
+            "text": "<p>Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night.</p>"
           }
         }
       },

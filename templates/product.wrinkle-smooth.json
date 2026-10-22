@@ -170,7 +170,7 @@
           "settings": {
             "badge": "Step 1",
             "title": "Apply before bed",
-            "text": "Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds."
+            "text": "<p>Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds.</p>"
           }
         },
         "s2": {
@@ -178,7 +178,7 @@
           "settings": {
             "badge": "Step 2",
             "title": "Sleep",
-            "text": "The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed."
+            "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed.</p>"
           }
         },
         "s3": {
@@ -186,7 +186,7 @@
           "settings": {
             "badge": "Step 3",
             "title": "Peel and glow",
-            "text": "Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night."
+            "text": "<p>Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night.</p>"
           }
         }
       },
@@ -344,7 +344,7 @@
           "settings": {
             "badge": "Prep",
             "title": "Start clean and dry",
-            "text": "No serum, oil or moisturizer underneath — the patch grips best on fully dry skin. Oily skin? Pat dry first."
+            "text": "<p>No serum, oil or moisturizer underneath — the patch grips best on fully dry skin. Oily skin? Pat dry first.</p>"
           }
         },
         "g2": {
@@ -352,7 +352,7 @@
           "settings": {
             "badge": "Apply",
             "title": "Smooth from the center out",
-            "text": "Place the patch, then smooth it outward so it sits flat with no air pockets. Don't stretch the skin under your eyes."
+            "text": "<p>Place the patch, then smooth it outward so it sits flat with no air pockets. Don't stretch the skin under your eyes.</p>"
           }
         },
         "g3": {
@@ -360,7 +360,7 @@
           "settings": {
             "badge": "Sleep",
             "title": "Wear it overnight",
-            "text": "6–8 hours is the sweet spot. Side sleeper? Press the edges once more before lights out."
+            "text": "<p>6–8 hours is the sweet spot. Side sleeper? Press the edges once more before lights out.</p>"
           }
         },
         "g4": {
@@ -368,7 +368,7 @@
           "settings": {
             "badge": "Morning",
             "title": "Peel, clean, reuse",
-            "text": "Peel off gently, clean the patch after each use and store it on its backing so it's ready for tonight."
+            "text": "<p>Peel off gently, clean the patch after each use and store it on its backing so it's ready for tonight.</p>"
           }
         }
       },
