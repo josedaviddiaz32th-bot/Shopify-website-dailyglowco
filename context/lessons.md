@@ -7,3 +7,5 @@
 - Navigation menus and pages are STORE-level, not theme files: menu/page changes go live immediately, on every theme, regardless of branch.
 - Shopify commits API/theme-editor changes back to the connected branch ("Update from Shopify" commits) — always pull/rebase before pushing.
 - wsp-hero's bundle offer card + areas nudge are dormant until a variant whose title contains "Set" exists; featured offer resolves in block order so the bundle auto-wins once created.
+- 2026-10-22: AutoDS sync overwrote the patch product title back to the AliExpress title hours after it was fixed (same thing hit the cap on 2026-09-28). Title restored; owner renamed to "The Wrinkle Smooth Patches". TURN OFF AutoDS sync for this product.
+- 2026-10-22: Bundle decided — Shopify variant "Forehead + Eye Set (1 of each)" at $49.99 (compare-at $65, real sum). AutoDS can't auto-map it (supplier sells the two pieces as separate variations); Set orders are fulfilled by ordering both items from the supplier manually. Stock for the Set is tracked at the merchant location, not the AutoDS location.
