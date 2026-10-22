@@ -4,7 +4,7 @@
 
 /* ---------- Hero / buy box ---------- */
 .wsp-hero .dg__wrap { padding-top: var(--dg-pt, 20px); }
-.wsp-grid { display: grid; gap: 18px; grid-template-areas: "head" "media" "box"; }
+.wsp-grid { display: grid; gap: 18px; grid-template-areas: "media" "head" "box"; }
 .wsp-head { grid-area: head; }
 .wsp-media { grid-area: media; }
 .wsp-box { grid-area: box; }
