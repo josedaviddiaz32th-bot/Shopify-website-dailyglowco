@@ -62,7 +62,6 @@
       {%- comment -%} Name + rating + short description: first thing on a phone. {%- endcomment -%}
       <div class="wsp-head">
         {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
-        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
         {%- if section.settings.rating != blank -%}
           {%- assign r_round = section.settings.rating | plus: 0 | plus: 0.5 | floor -%}
           <p class="wsp-rating">
@@ -72,6 +71,7 @@
             <span><strong>{{ section.settings.rating | escape }}</strong>/5 · {{ section.settings.rating_text | escape }}</span>
           </p>
         {%- endif -%}
+        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
         {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
       </div>
 
