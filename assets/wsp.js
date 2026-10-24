@@ -134,4 +134,82 @@
   }
 
   /* Area cards: plain product forms; <product-form> does the cart work. */
+
+  /* Shop grid: grid size, filter & sort, Quick Shop panels. */
+  if (!customElements.get('wsp-shop')) {
+    customElements.define('wsp-shop', class extends HTMLElement {
+      connectedCallback() {
+        if (this._ready) return;
+        this._ready = true;
+        this.format = this.dataset.moneyFormat || '${{amount}}';
+        this.grid = this.querySelector('[data-grid]');
+        this.filter = this.querySelector('[data-filter]');
+
+        this.addEventListener('click', this.onClick.bind(this));
+        this.addEventListener('change', this.onChange.bind(this));
+        // Close a Quick Shop panel when its add-to-cart is submitted, so the cart drawer shows.
+        this.addEventListener('submit', function (e) {
+          var d = e.target.closest('dialog');
+          if (d) setTimeout(function () { d.close(); }, 150);
+        });
+        // Click on the dimmed backdrop closes the panel.
+        this.querySelectorAll('dialog').forEach(function (d) {
+          d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+        });
+      }
+
+      onClick(e) {
+        var q = e.target.closest('[data-open-quick]');
+        if (q) { var d = document.getElementById(q.dataset.openQuick); if (d) d.showModal(); return; }
+        if (e.target.closest('[data-open-filter]')) { if (this.filter) this.filter.showModal(); return; }
+        var c = e.target.closest('[data-close]');
+        if (c) { c.closest('dialog').close(); return; }
+        var m = e.target.closest('[data-cols]');
+        if (m) { this.style.setProperty('--wsp-cols-m', m.dataset.cols); this.press(m, '[data-cols]'); return; }
+        var dk = e.target.closest('[data-cols-d]');
+        if (dk) { this.style.setProperty('--wsp-cols-d', dk.dataset.colsD); this.press(dk, '[data-cols-d]'); }
+      }
+
+      press(btn, sel) {
+        this.querySelectorAll(sel).forEach(function (b) { b.setAttribute('aria-pressed', b === btn); });
+      }
+
+      onChange(e) {
+        var t = e.target;
+        if (t.name && t.name.indexOf('wsp-quick-opt-') === 0) {
+          var d = t.closest('dialog');
+          var input = d.querySelector('form [name="id"]');
+          var btn = d.querySelector('form [type="submit"]');
+          var ok = t.dataset.available === 'true';
+          input.value = t.value;
+          input.disabled = !ok;
+          btn.disabled = !ok;
+          var price = d.querySelector('[data-quick-price]');
+          if (price) price.textContent = formatMoney(parseInt(t.dataset.price, 10), this.format);
+          return;
+        }
+        if (t.name && (t.name.indexOf('wsp-cat-') === 0 || t.name.indexOf('wsp-sort-') === 0)) this.apply();
+      }
+
+      apply() {
+        var cat = (this.querySelector('[name^="wsp-cat-"]:checked') || {}).value || '';
+        var sort = (this.querySelector('[name^="wsp-sort-"]:checked') || {}).value || 'featured';
+        var cards = Array.prototype.slice.call(this.grid.children);
+        var shown = 0;
+        cards.forEach(function (c) {
+          var on = !cat || c.dataset.cat === cat;
+          c.hidden = !on;
+          if (on) shown++;
+        });
+        cards.sort(function (a, b) {
+          if (sort === 'price-asc') return a.dataset.price - b.dataset.price;
+          if (sort === 'price-desc') return b.dataset.price - a.dataset.price;
+          return a.dataset.index - b.dataset.index;
+        }).forEach(function (c) { this.grid.appendChild(c); }.bind(this));
+        this.querySelectorAll('[data-count]').forEach(function (el) { el.textContent = shown; });
+        var empty = this.querySelector('[data-empty]');
+        if (empty) empty.hidden = shown > 0;
+      }
+    });
+  }
 })();

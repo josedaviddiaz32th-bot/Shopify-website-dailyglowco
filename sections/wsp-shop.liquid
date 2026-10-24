@@ -1,0 +1,190 @@
+{%- comment -%}
+  Shop-all grid: banner, toolbar (count, grid size, filter & sort), product cards
+  with a Quick Shop panel. One "Product" block per card, in display order. The
+  Quick Shop panel is a real product form, so the cart drawer keeps working.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'wsp.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign sid = section.id
+  assign cats = ''
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.product != blank
+      assign shown = shown | plus: 1
+      if block.settings.category != blank
+        assign cats = cats | append: block.settings.category | append: '|'
+      endif
+    endif
+  endfor
+  assign cats = cats | split: '|' | uniq
+-%}
+
+<wsp-shop class="dg wsp-shop" id="wsp-shop-{{ sid }}" data-money-format="{{ shop.money_format | escape }}" style="--wsp-cols-m: 2; --wsp-cols-d: {{ section.settings.columns_desktop }};">
+  <div class="wsp-shop__banner{% if section.settings.image != blank %} has-image{% endif %}">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'wsp-shop__banner-img', loading: 'eager', widths: '600, 900, 1200, 1600, 2000', sizes: '100vw', alt: '' }}
+    {%- endif -%}
+    <div class="wsp-shop__banner-copy">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      <h1 class="wsp-shop__title">{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank %}<div class="wsp-shop__lede">{{ section.settings.text }}</div>{% endif -%}
+    </div>
+  </div>
+
+  <div class="wsp-shop__wrap">
+    <div class="wsp-shop__bar">
+      <div class="wsp-shop__view" role="group" aria-label="Grid size">
+        <button type="button" class="wsp-shop__viewbtn wsp-shop__viewbtn--m" data-cols="1" aria-label="1 per row" aria-pressed="false"><span class="wsp-bars"><i></i></span></button>
+        <button type="button" class="wsp-shop__viewbtn wsp-shop__viewbtn--m" data-cols="2" aria-label="2 per row" aria-pressed="true"><span class="wsp-bars"><i></i><i></i></span></button>
+        <button type="button" class="wsp-shop__viewbtn wsp-shop__viewbtn--d" data-cols-d="3" aria-label="3 per row" aria-pressed="{% if section.settings.columns_desktop == "3" %}true{% else %}false{% endif %}"><span class="wsp-bars"><i></i><i></i><i></i></span></button>
+        <button type="button" class="wsp-shop__viewbtn wsp-shop__viewbtn--d" data-cols-d="4" aria-label="4 per row" aria-pressed="{% if section.settings.columns_desktop == "4" %}true{% else %}false{% endif %}"><span class="wsp-bars"><i></i><i></i><i></i><i></i></span></button>
+      </div>
+      <p class="wsp-shop__count"><span data-count>{{ shown }}</span> products</p>
+      <button type="button" class="wsp-shop__filterbtn" data-open-filter aria-haspopup="dialog">Filter &amp; sort</button>
+    </div>
+
+    <ul class="wsp-shop__grid" data-grid role="list">
+      {%- for block in section.blocks -%}
+        {%- assign bp = block.settings.product -%}
+        {%- if bp == blank -%}{%- continue -%}{%- endif -%}
+        {%- liquid
+          assign img = block.settings.image | default: bp.featured_image
+          assign r_round = block.settings.rating | plus: 0 | plus: 0.5 | floor
+        -%}
+        <li class="wsp-card" data-index="{{ forloop.index }}" data-price="{{ bp.price_min }}" data-cat="{{ block.settings.category | escape }}" {{ block.shopify_attributes }}>
+          <a class="wsp-card__media" href="{{ bp.url }}" tabindex="-1" aria-hidden="true">
+            {%- if img -%}
+              {{ img | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', alt: bp.title | escape }}
+            {%- else -%}
+              <span class="wsp-ph"><span>{{ bp.title | escape }}</span></span>
+            {%- endif -%}
+            {%- if block.settings.badge != blank -%}<span class="wsp-card__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+          </a>
+          <div class="wsp-card__body">
+            {%- if block.settings.label != blank -%}<p class="wsp-card__label">{{ block.settings.label | escape }}</p>{%- endif -%}
+            <h2 class="wsp-card__title"><a href="{{ bp.url }}">{{ block.settings.title | default: bp.title | escape }}</a></h2>
+            {%- if block.settings.rating != blank -%}
+              <p class="wsp-card__rating">
+                <span class="dg-stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+                  {%- for i in (1..5) -%}<svg viewBox="0 0 24 24"{% if i > r_round %} class="off"{% endif %} aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>{%- endfor -%}
+                </span>
+                <span>{{ block.settings.rating_text | escape }}</span>
+              </p>
+            {%- endif -%}
+            <p class="wsp-card__price">{% if bp.price_varies %}<span>From</span> {% endif %}{{ bp.price_min | money }}</p>
+            <button type="button" class="wsp-card__quick" data-open-quick="wsp-quick-{{ block.id }}" aria-haspopup="dialog">Quick shop</button>
+          </div>
+
+          {%- comment -%} Quick Shop panel {%- endcomment -%}
+          {%- assign cur = bp.selected_or_first_available_variant -%}
+          <dialog class="wsp-quick" id="wsp-quick-{{ block.id }}" aria-label="Quick shop: {{ bp.title | escape }}">
+            <div class="wsp-quick__head">
+              <span class="wsp-quick__heading">Quick shop</span>
+              <button type="button" class="wsp-quick__close" data-close aria-label="Close">{% render 'dg-icon', name: 'x' %}</button>
+            </div>
+            <div class="wsp-quick__media">
+              {%- for pimg in bp.images limit: 4 -%}
+                {{ pimg | image_url: width: 500 | image_tag: loading: 'lazy', alt: pimg.alt | default: bp.title | escape }}
+              {%- endfor -%}
+            </div>
+            <div class="wsp-quick__body">
+              <h3 class="wsp-quick__title">{{ bp.title | escape }}</h3>
+              <p class="wsp-quick__price" data-quick-price>{{ cur.price | money }}</p>
+              {%- unless bp.has_only_default_variant -%}
+                <fieldset class="wsp-quick__opts">
+                  <legend>{{ bp.options.first | escape }}:</legend>
+                  {%- for v in bp.variants -%}
+                    <label class="wsp-quick__opt">
+                      <input type="radio" name="wsp-quick-opt-{{ block.id }}" value="{{ v.id }}" data-price="{{ v.price }}" data-available="{{ v.available }}"{% if v.id == cur.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+                      <span>{{ v.title | escape }}</span>
+                    </label>
+                  {%- endfor -%}
+                </fieldset>
+              {%- endunless -%}
+              <a class="wsp-quick__more" href="{{ bp.url }}">View full details</a>
+            </div>
+            <div class="wsp-quick__foot">
+              <product-form class="product-form" data-section-id="{{ sid }}">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <span class="product-form__error-message"></span>
+                </div>
+                {%- assign qf_id = 'wsp-quick-form-' | append: block.id -%}
+                {%- form 'product', bp, id: qf_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input type="hidden" name="id" value="{{ cur.id }}" class="product-variant-id"{% unless cur.available %} disabled{% endunless %}>
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc"{% unless cur.available %} disabled{% endunless %}>
+                    <span>{% if cur.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                {%- endform -%}
+              </product-form>
+            </div>
+          </dialog>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <p class="wsp-shop__empty" data-empty hidden>No products match this filter.</p>
+  </div>
+
+  {%- comment -%} Filter & sort panel {%- endcomment -%}
+  <dialog class="wsp-quick wsp-filter" data-filter aria-label="Filter and sort">
+    <div class="wsp-quick__head">
+      <span class="wsp-quick__heading">Filter &amp; sort</span>
+      <button type="button" class="wsp-quick__close" data-close aria-label="Close">{% render 'dg-icon', name: 'x' %}</button>
+    </div>
+    <div class="wsp-quick__body">
+      {%- if cats.size > 0 -%}
+        <fieldset class="wsp-quick__opts">
+          <legend>Show</legend>
+          <label class="wsp-quick__opt"><input type="radio" name="wsp-cat-{{ sid }}" value="" checked><span>All</span></label>
+          {%- for c in cats -%}
+            <label class="wsp-quick__opt"><input type="radio" name="wsp-cat-{{ sid }}" value="{{ c | escape }}"><span>{{ c | escape }}</span></label>
+          {%- endfor -%}
+        </fieldset>
+      {%- endif -%}
+      <fieldset class="wsp-quick__opts">
+        <legend>Sort by</legend>
+        <label class="wsp-quick__opt"><input type="radio" name="wsp-sort-{{ sid }}" value="featured" checked><span>Featured</span></label>
+        <label class="wsp-quick__opt"><input type="radio" name="wsp-sort-{{ sid }}" value="price-asc"><span>Price, low to high</span></label>
+        <label class="wsp-quick__opt"><input type="radio" name="wsp-sort-{{ sid }}" value="price-desc"><span>Price, high to low</span></label>
+      </fieldset>
+    </div>
+    <div class="wsp-quick__foot">
+      <button type="button" class="dg-btn dg-btn--primary wsp-atc" data-close>Show <span data-count>{{ shown }}</span> products</button>
+    </div>
+  </dialog>
+</wsp-shop>
+
+{% schema %}
+{
+  "name": "WSP shop grid",
+  "tag": "section",
+  "class": "section-wsp-shop",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner image", "info": "Optional. Without one, the banner is a soft mint band." },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "The Daily Glow Co." },
+    { "type": "inline_richtext", "id": "heading", "label": "Title", "default": "The full <em>range</em>" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "select", "id": "columns_desktop", "label": "Products per row on desktop", "default": "4", "options": [
+      { "value": "3", "label": "3" }, { "value": "4", "label": "4" }
+    ] }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product", "settings": [
+      { "type": "product", "id": "product", "label": "Product" },
+      { "type": "text", "id": "title", "label": "Title override" },
+      { "type": "text", "id": "label", "label": "Small label above the title", "info": "e.g. 'Silicone patches · Forehead'" },
+      { "type": "text", "id": "category", "label": "Filter group", "info": "e.g. Sets, Face, Body. Products with the same group filter together." },
+      { "type": "text", "id": "badge", "label": "Badge on the photo", "info": "e.g. 'Most popular'" },
+      { "type": "text", "id": "rating", "label": "Rating", "info": "Real average only, e.g. 4.6. Leave empty to hide the stars." },
+      { "type": "text", "id": "rating_text", "label": "Rating text", "info": "e.g. '34 ratings'" },
+      { "type": "image_picker", "id": "image", "label": "Card image override" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP shop grid" }]
+}
+{% endschema %}
