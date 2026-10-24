@@ -3,16 +3,34 @@
     "hero": {
       "type": "wsp-hero",
       "blocks": {
-        "img1": { "type": "image", "settings": { "product_image": 1, "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches" } },
-        "img2": { "type": "image", "settings": { "product_image": 2, "alt": "The face set worn on the forehead, under the eyes and along the smile lines" } },
-        "img3": { "type": "image", "settings": { "product_image": 4, "alt": "Where each patch goes: forehead lines, crow's feet and smile lines" } },
-        "img4": { "type": "image", "settings": { "product_image": 6, "alt": "Patch sizes: forehead patch 14.3 × 6 cm, crescents 7.8 × 2.2 cm" } },
-        "img5": { "type": "image", "settings": { "product_image": 5, "alt": "Soft, flexible silicone that peels off and reuses" } },
-        "img6": { "type": "image", "settings": { "product_image": 7, "alt": "Two sets: 10 reusable patches" } },
-        "proof1": { "type": "proof", "settings": { "icon": "check", "text": "Forehead, under-eyes & smile lines" } },
-        "proof2": { "type": "proof", "settings": { "icon": "leaf", "text": "No needles, no tape, no refills" } },
-        "proof3": { "type": "proof", "settings": { "icon": "repeat", "text": "Reusable: just clean and reuse" } },
-        "proof4": { "type": "proof", "settings": { "icon": "truck", "text": "Ships free: every set clears $40" } },
+        "proof1": {
+          "type": "proof",
+          "settings": {
+            "icon": "check",
+            "text": "Forehead, under-eyes & smile lines"
+          }
+        },
+        "proof2": {
+          "type": "proof",
+          "settings": {
+            "icon": "leaf",
+            "text": "No needles, no tape, no refills"
+          }
+        },
+        "proof3": {
+          "type": "proof",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable: just clean and reuse"
+          }
+        },
+        "proof4": {
+          "type": "proof",
+          "settings": {
+            "icon": "truck",
+            "text": "Ships free: every set clears $40"
+          }
+        },
         "offer-2": {
           "type": "offer",
           "settings": {
@@ -32,9 +50,72 @@
             "title": "1 Set (5 pieces)",
             "subtitle": "Everything you need to start tonight"
           }
+        },
+        "img0": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "wrinkle-smooth-face-set-in-use",
+            "alt": "The Wrinkle Smooth Face Set worn on the forehead, under the eyes and along the smile lines"
+          }
+        },
+        "img1": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "e61d3668494ec41da7f0e0715bc86a4d",
+            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
+          }
+        },
+        "img2": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "b89acd1c2c9992a17c7ec5ba87468242",
+            "alt": "The face set worn on the forehead, under the eyes and along the smile lines"
+          }
+        },
+        "img3": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "01ef9eec0e6f95b812276a47f05fb98c",
+            "alt": "Where each patch goes: forehead lines, crow's feet and smile lines"
+          }
+        },
+        "img4": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "e1faeb6f0a0c3ee7954cfe4498075012",
+            "alt": "Patch sizes: forehead patch 14.3 × 6 cm, crescents 7.8 × 2.2 cm"
+          }
+        },
+        "img5": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "6405da5b6b325bb22ad364c49d5d70ca",
+            "alt": "Soft, flexible silicone that peels off and reuses"
+          }
+        },
+        "img6": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "f37fc42126aec00c90524487d6019bf8",
+            "alt": "Two sets: 10 reusable patches"
+          }
         }
       },
-      "block_order": ["img1", "img2", "img3", "img4", "img5", "img6", "proof1", "proof2", "proof3", "proof4", "offer-2", "offer-1"],
+      "block_order": [
+        "img0",
+        "img1",
+        "img2",
+        "img3",
+        "img4",
+        "img5",
+        "img6",
+        "proof1",
+        "proof2",
+        "proof3",
+        "proof4",
+        "offer-2",
+        "offer-1"
+      ],
       "settings": {
         "eyebrow": "The 5-piece face set",
         "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
@@ -49,14 +130,52 @@
     "ticker": {
       "type": "dg-ticker",
       "blocks": {
-        "t1": { "type": "item", "settings": { "icon": "truck", "text": "Free shipping on orders $40+" } },
-        "t2": { "type": "item", "settings": { "icon": "repeat", "text": "Reusable night after night" } },
-        "t3": { "type": "item", "settings": { "icon": "leaf", "text": "No actives, nothing absorbed" } },
-        "t4": { "type": "item", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "t5": { "type": "item", "settings": { "icon": "clock", "text": "Five patches, one minute before bed" } }
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable night after night"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "No actives, nothing absorbed"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "t5": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "Five patches, one minute before bed"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4", "t5"],
-      "settings": { "style": "light" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "style": "light"
+      }
     },
     "problem": {
       "type": "wsp-story",
@@ -75,11 +194,36 @@
     "how": {
       "type": "dg-steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "badge": "Step 1", "title": "Apply before bed", "text": "<p>Press each patch onto clean, dry skin, from the center outward. All five take about a minute.</p>" } },
-        "s2": { "type": "step", "settings": { "badge": "Step 2", "title": "Sleep", "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives, nothing absorbed.</p>" } },
-        "s3": { "type": "step", "settings": { "badge": "Step 3", "title": "Peel and glow", "text": "<p>Peel them off in the morning to visibly smoother-looking skin. Then just clean and reuse, night after night.</p>" } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 1",
+            "title": "Apply before bed",
+            "text": "<p>Press each patch onto clean, dry skin, from the center outward. All five take about a minute.</p>"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 2",
+            "title": "Sleep",
+            "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives, nothing absorbed.</p>"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 3",
+            "title": "Peel and glow",
+            "text": "<p>Peel them off in the morning to visibly smoother-looking skin. Then just clean and reuse, night after night.</p>"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "style": "light",
         "anchor": "how-it-works",
@@ -93,11 +237,36 @@
     "areas": {
       "type": "dg-benefits",
       "blocks": {
-        "a1": { "type": "benefit", "settings": { "icon": "check", "title": "Forehead & frown lines", "text": "<p>One wide forehead patch (about 14.3 × 6 cm) with a center piece that sits over the frown lines between your brows.</p>" } },
-        "a2": { "type": "benefit", "settings": { "icon": "heart", "title": "Under-eyes & crow's feet", "text": "<p>Soft crescents (about 7.8 × 2.2 cm) for under your eyes or the outer corners where crow's feet show.</p>" } },
-        "a3": { "type": "benefit", "settings": { "icon": "spark", "title": "Smile lines", "text": "<p>Use the same crescents along your smile lines. Put the four wherever you notice lines most.</p>" } }
+        "a1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "title": "Forehead & frown lines",
+            "text": "<p>One wide forehead patch (about 14.3 × 6 cm) with a center piece that sits over the frown lines between your brows.</p>"
+          }
+        },
+        "a2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Under-eyes & crow's feet",
+            "text": "<p>Soft crescents (about 7.8 × 2.2 cm) for under your eyes or the outer corners where crow's feet show.</p>"
+          }
+        },
+        "a3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "spark",
+            "title": "Smile lines",
+            "text": "<p>Use the same crescents along your smile lines. Put the four wherever you notice lines most.</p>"
+          }
+        }
       },
-      "block_order": ["a1", "a2", "a3"],
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
       "settings": {
         "style": "mist",
         "eyebrow": "What's in the set",
@@ -123,14 +292,75 @@
     "compare": {
       "type": "wsp-compare",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Needle-free", "us": "true", "a": "false", "b": "true", "c": "true" } },
-        "r2": { "type": "row", "settings": { "label": "Cost", "us": "$45 for 5 reusable patches", "a": "$435–$586 per visit (Botox), every 3–4 months", "b": "Refills every month", "c": "Pay per use" } },
-        "r3": { "type": "row", "settings": { "label": "Forehead, eyes & smile lines", "us": "true", "a": "Per area treated", "b": "false", "c": "false" } },
-        "r4": { "type": "row", "settings": { "label": "Use at home, overnight", "us": "true", "a": "false", "b": "true", "c": "true" } },
-        "r5": { "type": "row", "settings": { "label": "Reusable", "us": "true", "a": "false", "b": "false", "c": "false" } },
-        "r6": { "type": "row", "settings": { "label": "No glue on your skin", "us": "true", "a": "true", "b": "false", "c": "false" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Needle-free",
+            "us": "true",
+            "a": "false",
+            "b": "true",
+            "c": "true"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Cost",
+            "us": "$45 for 5 reusable patches",
+            "a": "$435–$586 per visit (Botox), every 3–4 months",
+            "b": "Refills every month",
+            "c": "Pay per use"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Forehead, eyes & smile lines",
+            "us": "true",
+            "a": "Per area treated",
+            "b": "false",
+            "c": "false"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Use at home, overnight",
+            "us": "true",
+            "a": "false",
+            "b": "true",
+            "c": "true"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Reusable",
+            "us": "true",
+            "a": "false",
+            "b": "false",
+            "c": "false"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "No glue on your skin",
+            "us": "true",
+            "a": "true",
+            "b": "false",
+            "c": "false"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
       "settings": {
         "style": "white",
         "eyebrow": "Smarter money",
@@ -148,12 +378,45 @@
     "guide": {
       "type": "dg-steps",
       "blocks": {
-        "g1": { "type": "step", "settings": { "badge": "Prep", "title": "Start clean and dry", "text": "<p>No serum, lotion or oil underneath. The patches grip best on fully dry skin. Oily skin? Pat dry first.</p>" } },
-        "g2": { "type": "step", "settings": { "badge": "Apply", "title": "Smooth from the center out", "text": "<p>Press each patch on so it lies flat with no air pockets. Around the eyes, don't stretch the skin.</p>" } },
-        "g3": { "type": "step", "settings": { "badge": "Sleep", "title": "Wear them overnight", "text": "<p>6–8 hours is the sweet spot. Side sleeper? Press the edges once more before lights out.</p>" } },
-        "g4": { "type": "step", "settings": { "badge": "Morning", "title": "Peel, clean, reuse", "text": "<p>Peel off gently, clean each patch after use and store it on its backing film so it's ready for tonight.</p>" } }
+        "g1": {
+          "type": "step",
+          "settings": {
+            "badge": "Prep",
+            "title": "Start clean and dry",
+            "text": "<p>No serum, lotion or oil underneath. The patches grip best on fully dry skin. Oily skin? Pat dry first.</p>"
+          }
+        },
+        "g2": {
+          "type": "step",
+          "settings": {
+            "badge": "Apply",
+            "title": "Smooth from the center out",
+            "text": "<p>Press each patch on so it lies flat with no air pockets. Around the eyes, don't stretch the skin.</p>"
+          }
+        },
+        "g3": {
+          "type": "step",
+          "settings": {
+            "badge": "Sleep",
+            "title": "Wear them overnight",
+            "text": "<p>6–8 hours is the sweet spot. Side sleeper? Press the edges once more before lights out.</p>"
+          }
+        },
+        "g4": {
+          "type": "step",
+          "settings": {
+            "badge": "Morning",
+            "title": "Peel, clean, reuse",
+            "text": "<p>Peel off gently, clean each patch after use and store it on its backing film so it's ready for tonight.</p>"
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3", "g4"],
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
       "settings": {
         "style": "mist",
         "anchor": "application",
@@ -165,11 +428,33 @@
     "box": {
       "type": "dg-box",
       "blocks": {
-        "b1": { "type": "item", "settings": { "name": "1 forehead patch", "note": "About 14.3 × 6 cm, with a center piece for frown lines" } },
-        "b2": { "type": "item", "settings": { "name": "4 crescent patches", "note": "About 7.8 × 2.2 cm, for under-eyes, crow's feet or smile lines" } },
-        "b3": { "type": "item", "settings": { "name": "Backing film", "note": "Store each patch on it between uses" } }
+        "b1": {
+          "type": "item",
+          "settings": {
+            "name": "1 forehead patch",
+            "note": "About 14.3 × 6 cm, with a center piece for frown lines"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "name": "4 crescent patches",
+            "note": "About 7.8 × 2.2 cm, for under-eyes, crow's feet or smile lines"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "name": "Backing film",
+            "note": "Store each patch on it between uses"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
         "style": "light",
         "eyebrow": "What's in the box",
@@ -180,11 +465,33 @@
     "guarantee": {
       "type": "dg-guarantee",
       "blocks": {
-        "gb1": { "type": "badge", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "gb2": { "type": "badge", "settings": { "icon": "truck", "text": "Free shipping on orders $40+" } },
-        "gb3": { "type": "badge", "settings": { "icon": "mail", "text": "Real support: support@thedailyglowco.com" } }
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
       },
-      "block_order": ["gb1", "gb2", "gb3"],
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
       "settings": {
         "style": "teal",
         "days": "30",
@@ -198,19 +505,97 @@
     "faq": {
       "type": "dg-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Will the patches stay on all night?", "answer": "<p>Applied to clean, fully dry skin (no serum or oil underneath), the patches are made to stay in place overnight. Smooth each one from the center outward so it sits flat, and press the edges once more if you sleep on your side.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Where do the four crescents go?", "answer": "<p>Wherever you notice lines most: under your eyes, at the outer corners for crow's feet, or along your smile lines. Mix and match from night to night.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "How many times can I reuse them?", "answer": "<p>Many nights with proper care. Clean each patch after use and store it on its backing film. How long they last depends on your skin prep and care routine.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Are they safe under my eyes?", "answer": "<p>The crescents are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation. Don't use on broken or irritated skin.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "Will they irritate my skin or cause breakouts?", "answer": "<p>The patches are soft silicone with no actives; nothing is absorbed into your skin. Keep them clean between uses. If your skin is sensitive, try one for an hour first.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "Can I use them with retinol or tretinoin?", "answer": "<p>Use the patches on your non-retinoid nights, or check with your dermatologist. Never apply a patch over freshly applied actives.</p>" } },
-        "q7": { "type": "question", "settings": { "question": "How long do results last?", "answer": "<p>The smoother look is strongest in the morning and fades through the day, which is normal for every patch of this kind. Used regularly, mornings keep starting smoother.</p>" } },
-        "q8": { "type": "question", "settings": { "question": "Does it work on deep lines?", "answer": "<p>You'll see smoother-looking softening. Fine lines respond most; deep-set lines soften less. We'd rather tell you that now than surprise you later.</p>" } },
-        "q9": { "type": "question", "settings": { "question": "How much is shipping?", "answer": "<p>Free on orders of $40 or more, and every Face Set option qualifies. Orders under $40 ship for a flat $4.99.</p>" } },
-        "q10": { "type": "question", "settings": { "question": "Is there a subscription?", "answer": "<p>No. You buy the set once and reuse it. No refills, no memberships, nothing recurring.</p>" } },
-        "q11": { "type": "question", "settings": { "question": "How do returns work?", "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will the patches stay on all night?",
+            "answer": "<p>Applied to clean, fully dry skin (no serum or oil underneath), the patches are made to stay in place overnight. Smooth each one from the center outward so it sits flat, and press the edges once more if you sleep on your side.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Where do the four crescents go?",
+            "answer": "<p>Wherever you notice lines most: under your eyes, at the outer corners for crow's feet, or along your smile lines. Mix and match from night to night.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How many times can I reuse them?",
+            "answer": "<p>Many nights with proper care. Clean each patch after use and store it on its backing film. How long they last depends on your skin prep and care routine.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Are they safe under my eyes?",
+            "answer": "<p>The crescents are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation. Don't use on broken or irritated skin.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Will they irritate my skin or cause breakouts?",
+            "answer": "<p>The patches are soft silicone with no actives; nothing is absorbed into your skin. Keep them clean between uses. If your skin is sensitive, try one for an hour first.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use them with retinol or tretinoin?",
+            "answer": "<p>Use the patches on your non-retinoid nights, or check with your dermatologist. Never apply a patch over freshly applied actives.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "How long do results last?",
+            "answer": "<p>The smoother look is strongest in the morning and fades through the day, which is normal for every patch of this kind. Used regularly, mornings keep starting smoother.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Does it work on deep lines?",
+            "answer": "<p>You'll see smoother-looking softening. Fine lines respond most; deep-set lines soften less. We'd rather tell you that now than surprise you later.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "How much is shipping?",
+            "answer": "<p>Free on orders of $40 or more, and every Face Set option qualifies. Orders under $40 ship for a flat $4.99.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a subscription?",
+            "answer": "<p>No. You buy the set once and reuse it. No refills, no memberships, nothing recurring.</p>"
+          }
+        },
+        "q11": {
+          "type": "question",
+          "settings": {
+            "question": "How do returns work?",
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "q11"
+      ],
       "settings": {
         "style": "light",
         "anchor": "faq",
@@ -233,7 +618,24 @@
         "guarantee_line": "Free shipping on orders $40+ · 30-day money-back guarantee · Reusable"
       }
     },
-    "disclosures": { "type": "disclosures", "settings": {} }
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {}
+    }
   },
-  "order": ["hero", "ticker", "problem", "how", "areas", "expect", "compare", "guide", "box", "guarantee", "faq", "cta", "disclosures"]
+  "order": [
+    "hero",
+    "ticker",
+    "problem",
+    "how",
+    "areas",
+    "expect",
+    "compare",
+    "guide",
+    "box",
+    "guarantee",
+    "faq",
+    "cta",
+    "disclosures"
+  ]
 }

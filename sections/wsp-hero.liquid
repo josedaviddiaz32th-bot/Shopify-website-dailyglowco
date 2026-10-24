@@ -98,8 +98,17 @@
             {%- if vm == blank -%}{%- assign n = n | minus: 1 -%}{%- continue -%}{%- endif -%}
           {%- endif -%}
           {%- liquid
-            # Image source: picked image, else the product's own photo number N.
+            # Image source: picked image, else the product photo whose file name contains
+            # product_image_file (stable when photos are reordered), else product photo number N.
             assign gimg = block.settings.image
+            if gimg == blank and block.settings.product_image_file != blank
+              for pi in p.images
+                if pi.src contains block.settings.product_image_file
+                  assign gimg = pi
+                  break
+                endif
+              endfor
+            endif
             if gimg == blank and block.settings.product_image > 0
               assign pidx = block.settings.product_image | minus: 1
               assign gimg = p.images[pidx]
@@ -272,6 +281,7 @@
     { "type": "image", "name": "Gallery image", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "asset", "label": "...or theme asset file name" },
+      { "type": "text", "id": "product_image_file", "label": "...or the product photo whose file name contains", "info": "e.g. face-set-in-use. Keeps pointing at the same photo even if you reorder the product's photos." },
       { "type": "number", "id": "product_image", "label": "...or the product's photo number", "info": "1 = the product's first photo, 2 = the second, and so on. Used when no image is picked." },
       { "type": "text", "id": "alt", "label": "Image description", "info": "Also shown inside the placeholder while no image is picked." }
     ] },
