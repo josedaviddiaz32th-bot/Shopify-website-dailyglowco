@@ -110,7 +110,7 @@
           if (window.innerWidth >= 750) { self.style.removeProperty('--wsp-slide-h'); return; }
           var cur = slide.getBoundingClientRect().height;
           var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
-          var spare = window.innerHeight - titleBottom - 12;
+          var spare = window.innerHeight - titleBottom - 16;
           var h = Math.max(260, Math.min(cur + spare, window.innerWidth * 1.25));
           self.style.setProperty('--wsp-slide-h', Math.round(h) + 'px');
         };

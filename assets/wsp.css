@@ -150,6 +150,6 @@
   }
   .wsp-thumb { flex-basis: 48px; width: 48px; height: 48px; }
   .wsp-head .dg__eyebrow { display: none; }
-  .wsp-title { font-size: clamp(26px, 7vw, 34px); }
+  .wsp-title { font-size: clamp(26px, 7vw, 34px); margin-bottom: 32px; }
   .wsp-sub { font-size: 15px; margin-bottom: 8px; }
 }
