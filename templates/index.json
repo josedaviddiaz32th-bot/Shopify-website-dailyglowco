@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -16,23 +25,86 @@
     "ticker": {
       "type": "dg-ticker",
       "blocks": {
-        "t1": { "type": "item", "settings": { "icon": "repeat", "text": "Reusable night after night" } },
-        "t2": { "type": "item", "settings": { "icon": "leaf", "text": "No actives — nothing absorbed" } },
-        "t3": { "type": "item", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "t4": { "type": "item", "settings": { "icon": "truck", "text": "Free tracked shipping" } },
-        "t5": { "type": "item", "settings": { "icon": "clock", "text": "30 seconds before bed" } }
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable night after night"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "No actives — nothing absorbed"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free tracked shipping"
+          }
+        },
+        "t5": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "30 seconds before bed"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4", "t5"],
-      "settings": { "style": "light" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "style": "light"
+      }
     },
     "how": {
       "type": "dg-steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "badge": "Step 1", "title": "Apply before bed", "text": "<p>Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds.</p>" } },
-        "s2": { "type": "step", "settings": { "badge": "Step 2", "title": "Sleep", "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed.</p>" } },
-        "s3": { "type": "step", "settings": { "badge": "Step 3", "title": "Peel and glow", "text": "<p>Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night.</p>" } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 1",
+            "title": "Apply before bed",
+            "text": "<p>Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds.</p>"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 2",
+            "title": "Sleep",
+            "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed.</p>"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "badge": "Step 3",
+            "title": "Peel and glow",
+            "text": "<p>Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night.</p>"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "style": "light",
         "anchor": "home-how",
@@ -46,10 +118,31 @@
     "products": {
       "type": "wsp-products-grid",
       "blocks": {
-        "patches": { "type": "product", "settings": { "product": "wrinkle-smooth-patches", "tag": "New", "title": "The Wrinkle Smooth Patches", "text": "Reusable silicone patches for your forehead and under-eyes. Smoother-looking skin by morning.", "link_label": "Shop the patches" } },
-        "cap": { "type": "product", "settings": { "product": "glow-cap", "tag": "Customer favorite", "title": "The Hair Renew Cap", "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home.", "link_label": "Shop the cap" } }
+        "patches": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-under-eye-patches",
+            "tag": "New",
+            "title": "The Wrinkle Smooth Patches",
+            "text": "Reusable silicone patches for your forehead and under-eyes. Smoother-looking skin by morning.",
+            "link_label": "Shop the patches"
+          }
+        },
+        "cap": {
+          "type": "product",
+          "settings": {
+            "product": "glow-cap",
+            "tag": "Customer favorite",
+            "title": "The Hair Renew Cap",
+            "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home.",
+            "link_label": "Shop the cap"
+          }
+        }
       },
-      "block_order": ["patches", "cap"],
+      "block_order": [
+        "patches",
+        "cap"
+      ],
       "settings": {
         "style": "white",
         "anchor": "products",
@@ -61,11 +154,33 @@
     "guarantee": {
       "type": "dg-guarantee",
       "blocks": {
-        "gb1": { "type": "badge", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "gb2": { "type": "badge", "settings": { "icon": "truck", "text": "Tracked shipping" } },
-        "gb3": { "type": "badge", "settings": { "icon": "mail", "text": "Real support: support@thedailyglowco.com" } }
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Tracked shipping"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
       },
-      "block_order": ["gb1", "gb2", "gb3"],
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
       "settings": {
         "style": "teal",
         "days": "30",
@@ -79,13 +194,49 @@
     "faq": {
       "type": "dg-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Will the patches stay on all night?", "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "How many times can I reuse them?", "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "Are they safe under my eyes?", "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Is there a subscription?", "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring — for the patches or the cap.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "How do returns work?", "answer": "<p>You have 30 days from delivery on everything we sell. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will the patches stay on all night?",
+            "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How many times can I reuse them?",
+            "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Are they safe under my eyes?",
+            "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a subscription?",
+            "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring — for the patches or the cap.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "How do returns work?",
+            "answer": "<p>You have 30 days from delivery on everything we sell. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
         "style": "mist",
         "anchor": "faq",
@@ -109,5 +260,13 @@
       }
     }
   },
-  "order": ["hero", "ticker", "how", "products", "guarantee", "faq", "cta"]
+  "order": [
+    "hero",
+    "ticker",
+    "how",
+    "products",
+    "guarantee",
+    "faq",
+    "cta"
+  ]
 }
