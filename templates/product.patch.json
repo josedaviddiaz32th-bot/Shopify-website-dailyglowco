@@ -3,11 +3,18 @@
     "hero": {
       "type": "wsp-hero",
       "blocks": {
+        "photo1": { "type": "image", "settings": { "product_image": 1 } },
+        "photo2": { "type": "image", "settings": { "product_image": 2 } },
+        "photo3": { "type": "image", "settings": { "product_image": 3 } },
+        "slot4": { "type": "image", "settings": { "alt": "Photo 4: empty slot, pick an image" } },
+        "slot5": { "type": "image", "settings": { "alt": "Photo 5: empty slot, pick an image" } },
+        "slot6": { "type": "image", "settings": { "alt": "Photo 6: empty slot, pick an image" } },
+        "slot7": { "type": "image", "settings": { "alt": "Photo 7: empty slot, pick an image" } },
         "proof1": { "type": "proof", "settings": { "icon": "leaf", "text": "No needles, no tape, no refills" } },
         "proof2": { "type": "proof", "settings": { "icon": "repeat", "text": "Reusable: just clean and reuse" } },
         "proof3": { "type": "proof", "settings": { "icon": "truck", "text": "Free shipping on orders $40+" } }
       },
-      "block_order": ["proof1", "proof2", "proof3"],
+      "block_order": ["photo1", "photo2", "photo3", "slot4", "slot5", "slot6", "slot7", "proof1", "proof2", "proof3"],
       "settings": {
         "eyebrow": "Reusable overnight silicone patches",
         "headline": "Smooth your lines <em>while you sleep</em>",

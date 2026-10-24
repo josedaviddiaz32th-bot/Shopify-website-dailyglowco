@@ -61,43 +61,37 @@
         "img1": {
           "type": "image",
           "settings": {
-            "product_image_file": "e61d3668494ec41da7f0e0715bc86a4d",
-            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
+            "alt": "Photo 4: empty slot, pick an image"
           }
         },
         "img2": {
           "type": "image",
           "settings": {
-            "product_image_file": "b89acd1c2c9992a17c7ec5ba87468242",
-            "alt": "The face set worn on the forehead, under the eyes and along the smile lines"
+            "alt": "Photo 5: empty slot, pick an image"
           }
         },
         "img3": {
           "type": "image",
           "settings": {
-            "product_image_file": "01ef9eec0e6f95b812276a47f05fb98c",
-            "alt": "Where each patch goes: forehead lines, crow's feet and smile lines"
+            "alt": "Photo 6: empty slot, pick an image"
           }
         },
         "img4": {
           "type": "image",
           "settings": {
-            "product_image_file": "e1faeb6f0a0c3ee7954cfe4498075012",
-            "alt": "Patch sizes: forehead patch 14.3 × 6 cm, crescents 7.8 × 2.2 cm"
+            "alt": "Photo 7: empty slot, pick an image"
           }
         },
         "img5": {
           "type": "image",
           "settings": {
-            "product_image_file": "6405da5b6b325bb22ad364c49d5d70ca",
-            "alt": "Soft, flexible silicone that peels off and reuses"
+            "alt": "Photo 8: empty slot, pick an image"
           }
         },
         "img6": {
           "type": "image",
           "settings": {
-            "product_image_file": "f37fc42126aec00c90524487d6019bf8",
-            "alt": "Two sets: 10 reusable patches"
+            "alt": "Photo 9: empty slot, pick an image"
           }
         },
         "imghero": {

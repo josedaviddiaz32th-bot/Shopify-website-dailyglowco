@@ -114,6 +114,9 @@
               assign gimg = p.images[pidx]
             endif
           -%}
+          {%- comment -%} Empty slots are kept as placeholders for the theme editor; shoppers never see them. {%- endcomment -%}
+          {%- if vm == blank and gimg == blank and block.settings.asset == blank and request.design_mode == false -%}{%- assign n = n | minus: 1 -%}{%- continue -%}{%- endif -%}
+          {%- if block.settings.alt == blank and gimg.alt != blank -%}{%- assign alt = gimg.alt | escape -%}{%- endif -%}
           {%- capture img -%}
             {%- if vm != blank -%}
               {{ vm | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1200x' }}
@@ -283,7 +286,7 @@
       { "type": "text", "id": "asset", "label": "...or theme asset file name" },
       { "type": "text", "id": "product_image_file", "label": "...or the product photo whose file name contains", "info": "e.g. face-set-in-use. Keeps pointing at the same photo even if you reorder the product's photos." },
       { "type": "number", "id": "product_image", "label": "...or the product's photo number", "info": "1 = the product's first photo, 2 = the second, and so on. Used when no image is picked." },
-      { "type": "text", "id": "alt", "label": "Image description", "info": "Also shown inside the placeholder while no image is picked." }
+      { "type": "text", "id": "alt", "label": "Image description", "info": "Also shown inside the placeholder while no image is picked. Empty slots only show here in the theme editor, never to shoppers." }
     ] },
     { "type": "video", "name": "Gallery video", "settings": [
       { "type": "number", "id": "index", "label": "Product video number", "default": 1, "info": "1 = the first video in the product's media." },
