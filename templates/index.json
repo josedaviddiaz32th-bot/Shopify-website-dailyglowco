@@ -1,16 +1,124 @@
 {
   "sections": {
     "hero": {
-      "type": "wsp-story",
+      "type": "wsp-hero",
+      "blocks": {
+        "img1": {
+          "type": "image",
+          "settings": {
+            "product_image": 1,
+            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
+          }
+        },
+        "img2": {
+          "type": "image",
+          "settings": {
+            "product_image": 2,
+            "alt": "The face set worn on the forehead, under the eyes and along the smile lines"
+          }
+        },
+        "img3": {
+          "type": "image",
+          "settings": {
+            "product_image": 4,
+            "alt": "Where each patch goes: forehead lines, crow's feet and smile lines"
+          }
+        },
+        "img4": {
+          "type": "image",
+          "settings": {
+            "product_image": 6,
+            "alt": "Patch sizes: forehead patch 14.3 × 6 cm, crescents 7.8 × 2.2 cm"
+          }
+        },
+        "img5": {
+          "type": "image",
+          "settings": {
+            "product_image": 5,
+            "alt": "Soft, flexible silicone that peels off and reuses"
+          }
+        },
+        "img6": {
+          "type": "image",
+          "settings": {
+            "product_image": 7,
+            "alt": "Two sets: 10 reusable patches"
+          }
+        },
+        "proof1": {
+          "type": "proof",
+          "settings": {
+            "icon": "check",
+            "text": "Forehead, under-eyes & smile lines"
+          }
+        },
+        "proof2": {
+          "type": "proof",
+          "settings": {
+            "icon": "leaf",
+            "text": "No needles, no tape, no refills"
+          }
+        },
+        "proof3": {
+          "type": "proof",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable: just clean and reuse"
+          }
+        },
+        "proof4": {
+          "type": "proof",
+          "settings": {
+            "icon": "truck",
+            "text": "Ships free: every set clears $40"
+          }
+        },
+        "offer-2": {
+          "type": "offer",
+          "settings": {
+            "match": "2 Sets",
+            "title": "2 Sets (10 pieces)",
+            "subtitle": "$30 a set, with a spare ready or one to share",
+            "badge": "Most popular",
+            "save_label": "Save $30",
+            "compare": 90,
+            "featured": true
+          }
+        },
+        "offer-1": {
+          "type": "offer",
+          "settings": {
+            "match": "1 Set",
+            "title": "1 Set (5 pieces)",
+            "subtitle": "Everything you need to start tonight"
+          }
+        }
+      },
+      "block_order": [
+        "img1",
+        "img2",
+        "img3",
+        "img4",
+        "img5",
+        "img6",
+        "proof1",
+        "proof2",
+        "proof3",
+        "proof4",
+        "offer-2",
+        "offer-1"
+      ],
       "settings": {
-        "style": "mist",
-        "eyebrow": "The Daily Glow Co.",
-        "heading": "Smooth Your Wrinkles <em>While You Sleep</em>",
-        "body": "<p>Five soft silicone patches for your forehead, under your eyes and your smile lines. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.</p>",
-        "button_label": "Shop the Face Set",
-        "button_link": "/products/wrinkle-smooth-face-set",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "eyebrow": "The 5-piece face set",
+        "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
+        "rating": "4.6",
+        "rating_text": "34 ratings · 300+ sold",
+        "subheadline": "Five soft silicone patches for your forehead, under your eyes and your smile lines. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.",
+        "offer_label": "Choose your set",
+        "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
+        "sticky_bar": true,
+        "product": "wrinkle-smooth-face-set",
+        "padding_top": 20
       }
     },
     "ticker": {
@@ -19,36 +127,36 @@
         "t1": {
           "type": "item",
           "settings": {
-            "icon": "repeat",
-            "text": "Reusable night after night"
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
           }
         },
         "t2": {
           "type": "item",
           "settings": {
-            "icon": "leaf",
-            "text": "No actives — nothing absorbed"
+            "icon": "repeat",
+            "text": "Reusable night after night"
           }
         },
         "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "No actives, nothing absorbed"
+          }
+        },
+        "t4": {
           "type": "item",
           "settings": {
             "icon": "shield",
             "text": "30-day money-back guarantee"
           }
         },
-        "t4": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "text": "Free shipping on orders $40+"
-          }
-        },
         "t5": {
           "type": "item",
           "settings": {
             "icon": "clock",
-            "text": "30 seconds before bed"
+            "text": "Five patches, one minute before bed"
           }
         }
       },
@@ -103,7 +211,7 @@
         "heading": "Hold + hydrate, <em>while you sleep</em>",
         "text": "<p>While you sleep, your skin folds and loses moisture. The patch holds the skin surface smooth and seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
         "button_label": "See the full story",
-        "button_link": "/products/wrinkle-smooth-face-set"
+        "button_link": "/#offer"
       }
     },
     "products": {
@@ -190,7 +298,7 @@
         "heading": "Every product, guaranteed",
         "text": "<p>Try anything we make for 30 days from delivery. If you don't love it, write to us and get your money back.</p>",
         "button_label": "Shop the patches",
-        "button_link": "/products/wrinkle-smooth-face-set"
+        "button_link": "/#offer"
       }
     },
     "faq": {
@@ -254,7 +362,7 @@
         "heading": "Before you ask",
         "open_first": true,
         "button_label": "Shop the patches",
-        "button_link": "/products/wrinkle-smooth-face-set"
+        "button_link": "/#offer"
       }
     },
     "cta": {
@@ -264,8 +372,8 @@
         "eyebrow": "Tonight's the night",
         "heading": "Wake up to <em>visibly smoother skin</em>",
         "text": "<p>Thirty seconds before bed. Smoother-looking skin in the mirror tomorrow. And thirty days to decide if your mornings are better.</p>",
-        "button_label": "Shop the Face Set",
-        "button_link": "/products/wrinkle-smooth-face-set",
+        "button_label": "Choose your set",
+        "button_link": "#offer",
         "guarantee_line": "Free shipping on orders $40+ · 30-day money-back guarantee · Reusable"
       }
     }
