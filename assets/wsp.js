@@ -25,6 +25,7 @@
 
         this.setupSticky();
         this.setupSwipe();
+        this.setupFold();
         this.update();
       }
 
@@ -94,6 +95,30 @@
           var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
           x0 = null;
           if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) self.stepSlide(dx < 0 ? 1 : -1);
+        });
+      }
+
+      // Phones: size the slide so the product name ends right at the bottom of the
+      // first screen and the description starts just below it.
+      setupFold() {
+        var self = this;
+        var media = this.querySelector('.wsp-media');
+        var slide = this.querySelector('.wsp-slide.is-active');
+        var title = this.querySelector('.wsp-title');
+        if (!media || !slide || !title) return;
+        var fit = function () {
+          if (window.innerWidth >= 750) { self.style.removeProperty('--wsp-slide-h'); return; }
+          var cur = slide.getBoundingClientRect().height;
+          var titleBottom = title.getBoundingClientRect().bottom + window.scrollY;
+          var spare = window.innerHeight - titleBottom - 16;
+          var h = Math.max(260, Math.min(cur + spare, window.innerWidth * 1.25));
+          self.style.setProperty('--wsp-slide-h', Math.round(h) + 'px');
+        };
+        fit();
+        var lastW = window.innerWidth;
+        window.addEventListener('resize', function () {
+          // Ignore height-only resizes (mobile toolbars showing/hiding) to avoid jumps.
+          if (window.innerWidth !== lastW) { lastW = window.innerWidth; self.style.removeProperty('--wsp-slide-h'); fit(); }
         });
       }
 
