@@ -58,7 +58,8 @@
         <li class="wsp-card" data-index="{{ forloop.index }}" data-price="{{ bp.price_min }}" data-cat="{{ block.settings.category | escape }}" {{ block.shopify_attributes }}>
           <a class="wsp-card__media" href="{{ bp.url }}" tabindex="-1" aria-hidden="true">
             {%- if img -%}
-              {{ img | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', alt: bp.title | escape }}
+              {%- if forloop.index <= 4 %}{% assign card_load = 'eager' %}{% else %}{% assign card_load = 'lazy' %}{% endif -%}
+              {{ img | image_url: width: 800 | image_tag: loading: card_load, widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', alt: bp.title | escape }}
             {%- else -%}
               <span class="wsp-ph"><span>{{ bp.title | escape }}</span></span>
             {%- endif -%}
