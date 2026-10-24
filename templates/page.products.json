@@ -1,50 +1,101 @@
 {
   "sections": {
-    "grid": {
-      "type": "wsp-products-grid",
+    "shop": {
+      "type": "wsp-shop",
       "blocks": {
-        "faceset": {
+        "face": {
           "type": "product",
           "settings": {
             "product": "wrinkle-smooth-face-set",
-            "tag": "Most popular",
             "title": "The Wrinkle Smooth Face Set (5 pieces)",
-            "text": "Forehead, under-eyes and smile lines in one reusable set. Ships free.",
-            "link_label": "Shop the set"
+            "label": "Set · Forehead, eyes & smile lines",
+            "category": "Sets",
+            "rating": "4.6",
+            "rating_text": "34 ratings",
+            "badge": "Most popular"
           }
         },
-        "undereye": {
+        "fnc": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-face-neck-chest-set",
+            "title": "The Wrinkle Smooth Face, Neck & Chest Set (11 pieces)",
+            "label": "Set · Face, neck & chest",
+            "category": "Sets",
+            "rating": "4.4",
+            "rating_text": "68 ratings"
+          }
+        },
+        "eye": {
           "type": "product",
           "settings": {
             "product": "wrinkle-smooth-under-eye-patches",
-            "tag": "New",
             "title": "The Wrinkle Smooth Under-Eye Patches",
-            "text": "A reusable pair of soft crescents for the delicate skin under your eyes.",
-            "link_label": "Shop the patches"
+            "label": "Silicone patches · Eyes",
+            "category": "Face",
+            "rating": "4.7",
+            "rating_text": "671 ratings"
           }
         },
-        "cap": {
+        "fore": {
           "type": "product",
           "settings": {
-            "product": "glow-cap",
-            "tag": "Customer favorite",
-            "title": "The Hair Renew Cap",
-            "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home, no clinic visits.",
-            "link_label": "Shop the cap"
+            "product": "wrinkle-smooth-forehead-patch",
+            "title": "The Wrinkle Smooth Forehead Patch",
+            "label": "Silicone patch · Forehead",
+            "category": "Face",
+            "rating": "4.3",
+            "rating_text": "21 ratings"
+          }
+        },
+        "smile": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-smile-line-patches",
+            "title": "The Wrinkle Smooth Smile Line Patches",
+            "label": "Silicone patches · Smile lines",
+            "category": "Face",
+            "rating": "4.6",
+            "rating_text": "238 ratings"
+          }
+        },
+        "chest": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-chest-pad",
+            "title": "The Wrinkle Smooth Chest Pad",
+            "label": "Silicone pad · Chest",
+            "category": "Body",
+            "rating": "4.6",
+            "rating_text": "45 ratings"
+          }
+        },
+        "hand": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-hand-patches",
+            "title": "The Wrinkle Smooth Hand Patches",
+            "label": "Silicone patches · Hands",
+            "category": "Body",
+            "rating": "4.6",
+            "rating_text": "22 ratings"
           }
         }
       },
       "block_order": [
-        "faceset",
-        "undereye",
-        "cap"
+        "face",
+        "fnc",
+        "eye",
+        "fore",
+        "smile",
+        "chest",
+        "hand"
       ],
       "settings": {
-        "style": "white",
         "eyebrow": "The Daily Glow Co.",
-        "heading": "Our products",
-        "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.</p>",
-        "padding_top": 56
+        "heading": "The full <em>range</em>",
+        "text": "<p>Soft, reusable silicone patches for your forehead, eyes, smile lines, neck, chest and hands. Wear them overnight and peel them off to visibly smoother-looking skin.</p>",
+        "columns_desktop": "4"
       }
     },
     "guarantee": {
@@ -87,7 +138,7 @@
     }
   },
   "order": [
-    "grid",
+    "shop",
     "guarantee"
   ]
 }
