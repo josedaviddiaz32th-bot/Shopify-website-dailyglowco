@@ -26,7 +26,19 @@
         this.setupSticky();
         this.setupSwipe();
         this.setupFold();
+        this.preloadSlides();
         this.update();
+      }
+
+      // Hidden slides are lazy, so they only start downloading when tapped and show
+      // an empty box for a moment. Fetch them once the page itself has loaded.
+      preloadSlides() {
+        var self = this;
+        var go = function () {
+          self.querySelectorAll('.wsp-slide img[loading="lazy"]').forEach(function (i) { i.loading = 'eager'; });
+        };
+        if (document.readyState === 'complete') go();
+        else window.addEventListener('load', go, { once: true });
       }
 
       onClick(e) {

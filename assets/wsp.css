@@ -20,6 +20,8 @@
 .wsp-slide { display: none; margin: 0; position: relative; border-radius: 22px; overflow: hidden; background: var(--dg-mist); }
 .wsp-slide.is-active { display: block; }
 .wsp-slide img, .wsp-slide video { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+/* Before/after photos stack two halves; cropping them to the short mobile slide hides the comparison. */
+.wsp-slide--fit img { object-fit: contain; }
 .wsp-strip { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .wsp-thumbs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; flex: 1 1 auto; min-width: 0; }
 .wsp-thumbs::-webkit-scrollbar { display: none; }
