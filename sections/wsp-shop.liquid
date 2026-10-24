@@ -86,6 +86,7 @@
               <span class="wsp-quick__heading">Quick shop</span>
               <button type="button" class="wsp-quick__close" data-close aria-label="Close">{% render 'dg-icon', name: 'x' %}</button>
             </div>
+            <div class="wsp-quick__scroll">
             <div class="wsp-quick__media">
               {%- for pimg in bp.images limit: 4 -%}
                 {{ pimg | image_url: width: 500 | image_tag: loading: 'lazy', alt: pimg.alt | default: bp.title | escape }}
@@ -106,6 +107,7 @@
                 </fieldset>
               {%- endunless -%}
               <a class="wsp-quick__more" href="{{ bp.url }}">View full details</a>
+            </div>
             </div>
             <div class="wsp-quick__foot">
               <product-form class="product-form" data-section-id="{{ sid }}">
@@ -136,7 +138,7 @@
       <span class="wsp-quick__heading">Filter &amp; sort</span>
       <button type="button" class="wsp-quick__close" data-close aria-label="Close">{% render 'dg-icon', name: 'x' %}</button>
     </div>
-    <div class="wsp-quick__body">
+    <div class="wsp-quick__scroll"><div class="wsp-quick__body">
       {%- if cats.size > 0 -%}
         <fieldset class="wsp-quick__opts">
           <legend>Show</legend>
@@ -152,7 +154,7 @@
         <label class="wsp-quick__opt"><input type="radio" name="wsp-sort-{{ sid }}" value="price-asc"><span>Price, low to high</span></label>
         <label class="wsp-quick__opt"><input type="radio" name="wsp-sort-{{ sid }}" value="price-desc"><span>Price, high to low</span></label>
       </fieldset>
-    </div>
+    </div></div>
     <div class="wsp-quick__foot">
       <button type="button" class="dg-btn dg-btn--primary wsp-atc" data-close>Show <span data-count>{{ shown }}</span> products</button>
     </div>

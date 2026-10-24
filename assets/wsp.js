@@ -152,22 +152,31 @@
           var d = e.target.closest('dialog');
           if (d) setTimeout(function () { d.close(); }, 150);
         });
-        // Click on the dimmed backdrop closes the panel.
+        // Click on the dimmed backdrop closes the panel; the page behind stays locked while one is open.
         this.querySelectorAll('dialog').forEach(function (d) {
           d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+          d.addEventListener('close', function () { document.documentElement.classList.remove('wsp-locked'); });
         });
       }
 
       onClick(e) {
         var q = e.target.closest('[data-open-quick]');
-        if (q) { var d = document.getElementById(q.dataset.openQuick); if (d) d.showModal(); return; }
-        if (e.target.closest('[data-open-filter]')) { if (this.filter) this.filter.showModal(); return; }
+        if (q) { this.open(document.getElementById(q.dataset.openQuick)); return; }
+        if (e.target.closest('[data-open-filter]')) { this.open(this.filter); return; }
         var c = e.target.closest('[data-close]');
         if (c) { c.closest('dialog').close(); return; }
         var m = e.target.closest('[data-cols]');
         if (m) { this.style.setProperty('--wsp-cols-m', m.dataset.cols); this.press(m, '[data-cols]'); return; }
         var dk = e.target.closest('[data-cols-d]');
         if (dk) { this.style.setProperty('--wsp-cols-d', dk.dataset.colsD); this.press(dk, '[data-cols-d]'); }
+      }
+
+      open(d) {
+        if (!d) return;
+        document.documentElement.classList.add('wsp-locked');
+        d.showModal();
+        var sc = d.querySelector('.wsp-quick__scroll');
+        if (sc) sc.scrollTop = 0;
       }
 
       press(btn, sel) {

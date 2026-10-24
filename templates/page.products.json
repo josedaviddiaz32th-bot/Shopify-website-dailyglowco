@@ -8,7 +8,7 @@
           "settings": {
             "product": "wrinkle-smooth-face-set",
             "title": "Face Set (5 pieces)",
-            "label": "Set · Forehead, eyes & smile lines",
+            "label": "Face set · 5 pieces",
             "category": "Sets",
             "rating": "4.6",
             "rating_text": "34 ratings",
@@ -20,7 +20,7 @@
           "settings": {
             "product": "wrinkle-smooth-face-neck-chest-set",
             "title": "Face, Neck & Chest Set (11 pieces)",
-            "label": "Set · Face, neck & chest",
+            "label": "Full set · 11 pieces",
             "category": "Sets",
             "rating": "4.4",
             "rating_text": "68 ratings"
@@ -31,7 +31,7 @@
           "settings": {
             "product": "wrinkle-smooth-under-eye-patches",
             "title": "Under-Eye Patches",
-            "label": "Silicone patches · Eyes",
+            "label": "Under-eyes",
             "category": "Face",
             "rating": "4.7",
             "rating_text": "671 ratings"
@@ -42,7 +42,7 @@
           "settings": {
             "product": "wrinkle-smooth-forehead-patch",
             "title": "Forehead Patch",
-            "label": "Silicone patch · Forehead",
+            "label": "Forehead",
             "category": "Face",
             "rating": "4.3",
             "rating_text": "21 ratings"
@@ -53,7 +53,7 @@
           "settings": {
             "product": "wrinkle-smooth-smile-line-patches",
             "title": "Smile Line Patches",
-            "label": "Silicone patches · Smile lines",
+            "label": "Smile lines",
             "category": "Face",
             "rating": "4.6",
             "rating_text": "238 ratings"
@@ -64,7 +64,7 @@
           "settings": {
             "product": "wrinkle-smooth-chest-pad",
             "title": "Chest Pad",
-            "label": "Silicone pad · Chest",
+            "label": "Chest",
             "category": "Body",
             "rating": "4.6",
             "rating_text": "45 ratings"
@@ -75,7 +75,7 @@
           "settings": {
             "product": "wrinkle-smooth-hand-patches",
             "title": "Hand Patches",
-            "label": "Silicone patches · Hands",
+            "label": "Hands",
             "category": "Body",
             "rating": "4.6",
             "rating_text": "22 ratings"

@@ -248,4 +248,21 @@
     btn.disabled = true;
     items.updateQuantity(parseInt(btn.dataset.line, 10), 2, e, 'dg-upsell', btn.dataset.variant);
   });
+
+  /* ---------- Mobile menu ----------
+     The burger is a <details>. Close it when a link is followed, on Escape, on an
+     outside tap, and when the page comes back from the back/forward cache (the
+     browser restores it exactly as it was left, i.e. open). */
+  function closeBurgers() {
+    document.querySelectorAll('details[data-dg-burger][open]').forEach(function (d) { d.removeAttribute('open'); });
+  }
+  window.addEventListener('pageshow', closeBurgers);
+  window.addEventListener('pagehide', closeBurgers);
+  document.addEventListener('click', function (e) {
+    var open = document.querySelector('details[data-dg-burger][open]');
+    if (!open) return;
+    if (e.target.closest('details[data-dg-burger] .dgh-drawer a')) { closeBurgers(); return; }
+    if (!e.target.closest('details[data-dg-burger]')) closeBurgers();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBurgers(); });
 })();
