@@ -106,12 +106,20 @@
             "product_image_file": "wrinkle-smooth-face-set-hero",
             "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
           }
+        },
+        "imgba": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "wrinkle-smooth-face-set-before-after",
+            "alt": "Customer before and after using the Face Set. Results vary."
+          }
         }
       },
       "block_order": [
         "img0",
-        "img1",
+        "imgba",
         "imghero",
+        "img1",
         "img2",
         "img3",
         "img4",
