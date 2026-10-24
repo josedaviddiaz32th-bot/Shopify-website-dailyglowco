@@ -99,11 +99,19 @@
             "product_image_file": "f37fc42126aec00c90524487d6019bf8",
             "alt": "Two sets: 10 reusable patches"
           }
+        },
+        "imghero": {
+          "type": "image",
+          "settings": {
+            "product_image_file": "wrinkle-smooth-face-set-hero",
+            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
+          }
         }
       },
       "block_order": [
         "img0",
         "img1",
+        "imghero",
         "img2",
         "img3",
         "img4",
