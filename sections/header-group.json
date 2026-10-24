@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "name": "t:sections.header.name",
   "type": "header",
@@ -14,11 +5,11 @@
     "header": {
       "type": "dg-header",
       "settings": {
-        "announcement": "Free tracked shipping | 30-day money-back guarantee",
+        "announcement": "Free shipping on orders $40+ | 30-day money-back guarantee",
         "holiday_tag": "New",
-        "holiday_text": "The Wrinkle Smooth Patches are here",
+        "holiday_text": "Free shipping on orders $40+",
         "holiday_link_label": "Shop now",
-        "holiday_link": "shopify://products/wrinkle-smooth-under-eye-patches",
+        "holiday_link": "shopify://products/wrinkle-smooth-face-set",
         "logo_height": 38,
         "santa_hat": true,
         "menu": "main-menu",

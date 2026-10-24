@@ -1,24 +1,25 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "grid": {
       "type": "wsp-products-grid",
       "blocks": {
-        "patches": {
+        "faceset": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-face-set",
+            "tag": "Most popular",
+            "title": "The Wrinkle Smooth Face Set (5 pieces)",
+            "text": "Forehead, under-eyes and smile lines in one reusable set. Ships free.",
+            "link_label": "Shop the set"
+          }
+        },
+        "undereye": {
           "type": "product",
           "settings": {
             "product": "wrinkle-smooth-under-eye-patches",
             "tag": "New",
-            "title": "The Wrinkle Smooth Patches",
-            "text": "Reusable silicone patches for your forehead and under-eyes. Hold your skin smooth and seal in moisture overnight — peel them off to visibly smoother-looking skin.",
+            "title": "The Wrinkle Smooth Under-Eye Patches",
+            "text": "A reusable pair of soft crescents for the delicate skin under your eyes.",
             "link_label": "Shop the patches"
           }
         },
@@ -34,7 +35,8 @@
         }
       },
       "block_order": [
-        "patches",
+        "faceset",
+        "undereye",
         "cap"
       ],
       "settings": {
@@ -59,7 +61,7 @@
           "type": "badge",
           "settings": {
             "icon": "truck",
-            "text": "Tracked shipping"
+            "text": "Free shipping on orders $40+"
           }
         },
         "gb3": {
