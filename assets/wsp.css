@@ -209,9 +209,9 @@
 .wsp-quick__close { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 999px; background: var(--dg-mist); cursor: pointer; color: var(--dg-ink); }
 .wsp-quick__close .dg-icon { width: 18px; height: 18px; }
 .wsp-quick__scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
-.wsp-quick__media { display: flex; gap: 8px; overflow-x: auto; padding: 16px 20px 0; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+.wsp-quick__media { display: flex; align-items: flex-start; gap: 8px; overflow-x: auto; padding: 16px 20px 0; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
 .wsp-quick__media::-webkit-scrollbar { display: none; }
-.wsp-quick__media img { flex: 0 0 40%; width: 40%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; background: var(--dg-mist); scroll-snap-align: start; }
+.wsp-quick__media img { flex: 0 0 40%; width: 40%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; background: var(--dg-mist); scroll-snap-align: start; }
 .wsp-quick__body { padding: 16px 20px 18px; }
 .wsp-quick__title { margin: 0 0 6px; font-size: 20px; font-weight: 700; line-height: 1.25; }
 .wsp-quick__price { margin: 0 0 16px; font-size: 18px; font-weight: 700; }
