@@ -11,5 +11,5 @@
 ## Re-sync risks
 - `.design-sync/tokens.css` is a hand copy of the `:root` block in `assets/dg-theme.css` - re-copy it if theme colors change.
 - If the theme fonts change in `config/settings_data.json`, update the Google Fonts `@import` in `build-brand.sh` and the font vars in tokens.css.
-- `conventions.md` names `dg-*` (and, once approved, `wsp-*`) classes; re-check them against the built `_ds_bundle.css` after CSS edits.
+- `conventions.md` names `dg-*` and `wsp-*` classes; re-check them against the built `_ds_bundle.css` after CSS edits.
 - `wsp.css` carries Shopify-only behavior that is harmless but odd in designs: the mobile slide height reads `--wsp-slide-h` (set by `wsp.js`, absent in Claude Design, so the svh fallback applies) and `.wsp-title` has a 32px bottom margin on phones for the fold. `.wsp-slide` is `display:none` unless it also has `is-active`.
