@@ -236,22 +236,11 @@
             "text": "A reusable pair of soft crescents for the delicate skin under your eyes.",
             "link_label": "Shop the patches"
           }
-        },
-        "cap": {
-          "type": "product",
-          "settings": {
-            "product": "glow-cap",
-            "tag": "Customer favorite",
-            "title": "The Hair Renew Cap",
-            "text": "Cordless red-light therapy cap for healthier-looking hair — 30 minutes a day, at home.",
-            "link_label": "Shop the cap"
-          }
         }
       },
       "block_order": [
         "faceset",
-        "undereye",
-        "cap"
+        "undereye"
       ],
       "settings": {
         "style": "white",
