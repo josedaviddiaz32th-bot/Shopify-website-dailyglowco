@@ -29,12 +29,12 @@
         "eye": {
           "type": "product",
           "settings": {
-            "product": "wrinkle-smooth-under-eye-patches",
-            "title": "Under-Eye Patches",
-            "label": "Under-eyes",
+            "product": "wrinkle-smooth-eye-patches",
+            "title": "Eye Patches",
+            "label": "Eyes & crow's feet",
             "category": "Face",
-            "rating": "4.7",
-            "rating_text": "671 ratings"
+            "rating": "",
+            "rating_text": ""
           }
         },
         "fore": {
