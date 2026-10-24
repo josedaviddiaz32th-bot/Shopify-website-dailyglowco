@@ -57,6 +57,24 @@
       },
       {
         "type": "header",
+        "content": "Shipping"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping from ($)",
+        "default": 40,
+        "info": "Must match the free-shipping rate in Settings > Shipping and delivery. Drives the cart progress bar and shipping line."
+      },
+      {
+        "type": "text",
+        "id": "standard_shipping_label",
+        "label": "Shipping price below that",
+        "default": "$4.99",
+        "info": "Shown in the cart when the order is under the free-shipping amount. Must match your shipping rate."
+      },
+      {
+        "type": "header",
         "content": "Cart drawer"
       },
       {

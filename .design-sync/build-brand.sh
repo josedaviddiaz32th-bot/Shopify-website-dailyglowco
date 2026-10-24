@@ -7,7 +7,16 @@ OUT=ds-bundle
 rm -rf "$OUT" && mkdir -p "$OUT/tokens"
 
 cp .design-sync/tokens.css "$OUT/tokens/dg-tokens.css"
-cp assets/daily-glow.css "$OUT/_ds_bundle.css"
+# Component CSS: the shared dg-* sections, the star rules (they live in the
+# Shopify-specific dg-theme.css, which isn't synced), then the wsp-* landing page.
+{
+  cat assets/daily-glow.css
+  printf '\n/* ---------- Stars (from assets/dg-theme.css) ---------- */\n'
+  grep -E '^\.dg-stars' assets/dg-theme.css
+  printf '\n/* ---------- Landing page (assets/wsp.css) ---------- */\n'
+  cat assets/wsp.css
+} > "$OUT/_ds_bundle.css"
+grep -q '^\.dg-stars svg' "$OUT/_ds_bundle.css" || { echo "star rules missing from dg-theme.css" >&2; exit 1; }
 cp .design-sync/conventions.md "$OUT/README.md"
 
 cat > "$OUT/styles.css" <<'EOF'

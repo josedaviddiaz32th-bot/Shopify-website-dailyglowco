@@ -22,6 +22,7 @@
 
 {%- liquid
   assign dg_pct = settings.bundle_discount_percent | default: 0
+  assign dg_free_ship = settings.free_shipping_threshold | default: 40 | times: 100
   assign dg_save = 0
   for item in cart.items
     assign dg_base = item.variant.compare_at_price | default: 0
@@ -94,7 +95,7 @@
       >
         {%- if cart != empty -%}
           {%- comment -%} Rewards bar. The caps multi-buy nudge only shows when a cap
-              is actually in the cart; other products get the plain shipping line. {%- endcomment -%}
+              is actually in the cart; below the free-shipping amount the bar tracks progress to it. {%- endcomment -%}
           {%- liquid
             assign dg_cap_count = 0
             for item in cart.items
@@ -102,16 +103,21 @@
                 assign dg_cap_count = dg_cap_count | plus: item.quantity
               endif
             endfor
+            assign dg_ship_left = dg_free_ship | minus: cart.total_price
+            assign dg_ship_pct = cart.total_price | times: 100 | divided_by: dg_free_ship
           -%}
           <div class="dgc-rewards">
-            {%- if dg_pct > 0 and dg_cap_count == 1 -%}
-              <p class="dgc-rewards__msg">Add <strong>1 more cap</strong> to save <strong>{{ dg_pct }}%</strong> on both</p>
-              <div class="dgc-rewards__track"><span style="width: 50%"></span></div>
+            {%- if dg_ship_left > 0 -%}
+              <p class="dgc-rewards__msg">You're <strong>{{ dg_ship_left | money }}</strong> away from <strong>free shipping</strong></p>
+              <div class="dgc-rewards__track"><span style="width: {{ dg_ship_pct }}%"></span></div>
+            {%- elsif dg_pct > 0 and dg_cap_count == 1 -%}
+              <p class="dgc-rewards__msg">You've unlocked <strong>free shipping</strong>. Add <strong>1 more cap</strong> to save <strong>{{ dg_pct }}%</strong> on both</p>
+              <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- elsif dg_pct > 0 and dg_cap_count > 1 -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>{{ dg_pct }}% off your caps</strong> and <strong>free tracked shipping</strong></p>
+              <p class="dgc-rewards__msg">You've unlocked <strong>{{ dg_pct }}% off your caps</strong> and <strong>free shipping</strong></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- else -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>free tracked shipping</strong></p>
+              <p class="dgc-rewards__msg">You've unlocked <strong>free shipping</strong></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- endif -%}
           </div>
@@ -243,7 +249,7 @@
               {%- endif -%}
 
               <ul class="dgc-trust" role="list">
-                <li>{% render 'dg-icon', name: 'truck' %}<span>Free tracked shipping<br><small>About 6–11 days</small></span></li>
+                <li>{% render 'dg-icon', name: 'truck' %}<span>Free shipping<br><small>On orders {{ dg_free_ship | money_without_trailing_zeros }}+</small></span></li>
                 <li>{% render 'dg-icon', name: 'shield' %}<span>30-day money-back<br><small>From delivery</small></span></li>
                 <li>{% render 'dg-icon', name: 'lock' %}<span>Secure checkout<br><small>Encrypted payment</small></span></li>
               </ul>
@@ -269,9 +275,13 @@
           {%- if dg_save > 0 -%}
             <div class="dgc-foot__row dgc-foot__row--save"><span>You save</span><span>{{ dg_save | money }}</span></div>
           {%- endif -%}
-          <div class="dgc-foot__row"><span>Shipping</span><span class="dgc-foot__free">Free</span></div>
+          {%- if cart.total_price >= dg_free_ship -%}
+            <div class="dgc-foot__row"><span>Shipping</span><span class="dgc-foot__free">Free</span></div>
+          {%- else -%}
+            <div class="dgc-foot__row"><span>Shipping</span><span>{{ settings.standard_shipping_label | default: 'Calculated at checkout' | escape }}</span></div>
+          {%- endif -%}
           <div class="totals dgc-foot__row dgc-foot__row--total" role="status">
-            <span class="totals__total">Total</span>
+            <span class="totals__total">{% if cart.total_price >= dg_free_ship %}Total{% else %}Subtotal{% endif %}</span>
             <span class="totals__total-value">{{ cart.total_price | money_with_currency }}</span>
           </div>
         </div>
