@@ -226,7 +226,7 @@
 
               {%- comment -%} Add a second cap {%- endcomment -%}
               {%- assign dg_line = cart.items | first -%}
-              {%- if dg_pct > 0 and cart.items.size == 1 and cart.item_count == 1 -%}
+              {%- if dg_pct > 0 and cart.items.size == 1 and cart.item_count == 1 and dg_line.product.handle == 'glow-cap' -%}
                 {%- assign dg_keep = 100 | minus: dg_pct -%}
                 {%- assign dg_duo = dg_line.final_price | times: 2 | times: dg_keep | divided_by: 100 -%}
                 <div class="dgc-offer">
