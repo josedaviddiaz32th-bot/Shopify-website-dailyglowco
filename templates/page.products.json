@@ -80,6 +80,17 @@
             "rating": "4.6",
             "rating_text": "22 ratings"
           }
+        },
+        "lip": {
+          "type": "product",
+          "settings": {
+            "product": "wrinkle-smooth-lip-line-patches",
+            "title": "Lip Line Patches",
+            "label": "Lip lines",
+            "category": "Face",
+            "rating": "",
+            "rating_text": ""
+          }
         }
       },
       "block_order": [
@@ -88,6 +99,7 @@
         "eye",
         "fore",
         "smile",
+        "lip",
         "chest",
         "hand"
       ],
