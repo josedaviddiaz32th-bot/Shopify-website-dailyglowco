@@ -23,6 +23,21 @@
           r.addEventListener('change', this.update.bind(this));
         }.bind(this));
 
+        // Coming back from checkout restores the page as it was left, with Buy now
+        // still loading and the label hidden. Put the button and the steps back.
+        window.addEventListener('pageshow', function () {
+          this.querySelectorAll('[data-wsp-buynow]').forEach(function (b) {
+            b.classList.remove('loading');
+            b.removeAttribute('aria-disabled');
+          });
+          var steps = this.querySelectorAll('.wsp-steps li');
+          if (steps.length > 1) {
+            steps[0].classList.remove('is-done');
+            steps[0].classList.add('is-on');
+            steps[1].classList.remove('is-on');
+          }
+        }.bind(this));
+
         this.setupSticky();
         this.setupSwipe();
         this.setupFold();
