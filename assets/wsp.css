@@ -59,6 +59,21 @@
 .wsp-offer__now { display: block; font-size: 17px; font-weight: 700; color: var(--dg-ink); }
 .wsp-offer__was { display: block; font-size: 13px; color: var(--dg-ink-muted); text-decoration: line-through; }
 .wsp-offer__flag { position: absolute; top: -10px; left: 14px; padding: 3px 10px; border-radius: 999px; background: var(--dg-grad); color: var(--dg-teal); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+/* Quantity packs: three cards side by side, banner across the top of the flagged one. */
+.wsp-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: stretch; padding-top: 14px; }
+.wsp-pack { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; padding: 16px 6px 12px; border: 1.5px solid var(--dg-line-c); border-radius: 16px; background: #fff; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease; }
+.wsp-pack input { position: absolute; opacity: 0; pointer-events: none; }
+.wsp-pack:has(input:checked) { border-color: var(--dg-orange); box-shadow: 0 0 0 3px rgba(240,138,44,.15); }
+.wsp-pack:has(input:focus-visible) { outline: 2px solid var(--dg-teal); outline-offset: 3px; }
+.wsp-pack--flagged { background: var(--dg-mist); padding-top: 24px; }
+.wsp-pack__flag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 999px; background: var(--dg-teal); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.wsp-pack__img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; background: var(--dg-mist); margin-bottom: 6px; }
+.wsp-pack__title { font-size: 15px; font-weight: 700; color: var(--dg-ink); line-height: 1.2; }
+.wsp-pack__save { font-size: 12.5px; font-weight: 700; color: var(--dg-orange-deep); }
+.wsp-pack__now { margin-top: 4px; font-size: 18px; font-weight: 700; color: var(--dg-ink); }
+.wsp-pack__was { font-size: 13px; color: var(--dg-ink-muted); text-decoration: line-through; }
+.wsp-pack__each { font-size: 12px; color: var(--dg-ink-muted); }
+.wsp-pack__note { margin-top: 4px; font-size: 11.5px; font-weight: 600; color: var(--dg-teal); }
 .wsp-offer__save { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: rgba(240,138,44,.12); color: var(--dg-orange-deep); font-size: 12px; font-weight: 700; }
 
 .wsp-buy .dgp-shoppay { margin-top: 10px; }
@@ -137,7 +152,7 @@
 .wsp-ph span { font-size: 14px; font-weight: 600; max-width: 260px; line-height: 1.5; }
 
 @media (prefers-reduced-motion: reduce) {
-  .wsp-product-card, .wsp-offer { transition: none; }
+  .wsp-product-card, .wsp-offer, .wsp-pack { transition: none; }
 }
 @media screen and (max-width: 749px) {
   .wsp-offer { grid-template-columns: auto 1fr auto; }

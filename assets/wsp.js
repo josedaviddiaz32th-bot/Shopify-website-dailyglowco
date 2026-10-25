@@ -67,6 +67,9 @@
           i.value = r.value;
           i.disabled = !available;
         });
+        this.querySelectorAll('.wsp-form [name="quantity"]').forEach(function (q) {
+          q.value = r.dataset.qty || 1;
+        });
         var label = this.querySelector('[data-atc-label]');
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + fmt) : label.dataset.soldout;
         var atc = this.querySelector('.wsp-atc');

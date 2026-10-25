@@ -51,6 +51,28 @@
   endif
   assign current = p.variants | where: 'id', featured_id | first
   assign product_form_id = 'wsp-product-form-' | append: sid
+
+  # Quantity packs (e.g. "2 + 1 Free"): cards add the current variant at a quantity;
+  # the matching price comes from an automatic quantity discount at checkout.
+  assign packs = section.blocks | where: 'type', 'pack'
+  assign pack_qty = 1
+  assign pack_total = current.price
+  assign pack_first = true
+  for block in packs
+    if block.settings.featured or pack_first
+      assign pack_qty = block.settings.quantity | default: 1 | at_least: 1
+      if block.settings.price > 0
+        assign pack_total = block.settings.price | times: 100 | round
+      else
+        assign pack_total = current.price | times: pack_qty
+      endif
+      if block.settings.featured
+        break
+      endif
+    endif
+    assign pack_first = false
+  endfor
+  assign free_ship_cents = settings.free_shipping_threshold | default: 40 | times: 100
   assign media_blocks = section.blocks | where: 'type', 'image'
   assign video_blocks = section.blocks | where: 'type', 'video'
 -%}
@@ -172,6 +194,51 @@
         {%- comment -%} Offer selector: one card per variant, blocks decorate. {%- endcomment -%}
         <fieldset class="wsp-offers">
           <legend>{{ section.settings.offer_label | escape }}</legend>
+          {%- if packs.size > 0 -%}
+            <div class="wsp-packs">
+              {%- assign pack_checked = false -%}
+              {%- for block in packs -%}
+                {%- liquid
+                  assign qty = block.settings.quantity | default: 1 | at_least: 1
+                  assign full = current.price | times: qty
+                  if block.settings.price > 0
+                    assign total = block.settings.price | times: 100 | round
+                  else
+                    assign total = full
+                  endif
+                  assign each = total | times: 1.0 | divided_by: qty | round
+                  assign save_pct = 0
+                  if total < full
+                    assign save_pct = full | minus: total | times: 100.0 | divided_by: full | round
+                  endif
+                  assign is_on = false
+                  if pack_checked == false and qty == pack_qty and total == pack_total
+                    assign is_on = true
+                    assign pack_checked = true
+                  endif
+                  assign ptitle = block.settings.title | default: qty
+                  assign pimg = current.image | default: p.featured_image
+                -%}
+                <label class="wsp-pack{% if block.settings.badge != blank %} wsp-pack--flagged{% endif %}" {{ block.shopify_attributes }}>
+                  <input type="radio" name="wsp-offer-{{ sid }}" value="{{ current.id }}"
+                    data-price="{{ total }}" data-qty="{{ qty }}" data-available="{{ current.available }}" data-title="{{ ptitle | escape }}"
+                    {% if is_on %}checked{% endif %} {% unless current.available %}disabled{% endunless %}>
+                  {%- if block.settings.badge != blank -%}<span class="wsp-pack__flag">{{ block.settings.badge | escape }}</span>{%- endif -%}
+                  {%- if pimg -%}{{ pimg | image_url: width: 160 | image_tag: class: 'wsp-pack__img', loading: 'lazy', alt: '' }}{%- endif -%}
+                  <span class="wsp-pack__title">{{ ptitle | escape }}</span>
+                  {%- if save_pct > 0 -%}<span class="wsp-pack__save">Save {{ save_pct }}%</span>{%- endif -%}
+                  <span class="wsp-pack__now">{{ total | money }}</span>
+                  {%- if total < full -%}<span class="wsp-pack__was">{{ full | money }}</span>{%- endif -%}
+                  {%- if qty > 1 -%}<span class="wsp-pack__each">{{ each | money }} each</span>{%- endif -%}
+                  {%- if block.settings.note != blank -%}
+                    <span class="wsp-pack__note">{{ block.settings.note | escape }}</span>
+                  {%- elsif total >= free_ship_cents -%}
+                    <span class="wsp-pack__note">Free shipping</span>
+                  {%- endif -%}
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
           {%- for v in p.variants -%}
             {%- liquid
               assign deco = nil
@@ -212,6 +279,7 @@
               </span>
             </label>
           {%- endfor -%}
+          {%- endif -%}
         </fieldset>
 
         <div class="wsp-buy" data-buy>
@@ -221,10 +289,10 @@
             </div>
             {%- form 'product', p, id: product_form_id, class: 'form wsp-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
               <input type="hidden" name="id" value="{{ current.id }}" class="product-variant-id"{% unless current.available %} disabled{% endunless %}>
-              <input type="hidden" name="quantity" value="1">
+              <input type="hidden" name="quantity" value="{{ pack_qty }}">
               <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc"{% unless current.available %} disabled{% endunless %}>
                 <span data-atc-label data-add="{{ 'products.product.add_to_cart' | t | escape }}" data-soldout="{{ 'products.product.sold_out' | t | escape }}">
-                  {%- if current.available %}{{ 'products.product.add_to_cart' | t }} · {{ current.price | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
+                  {%- if current.available %}{{ 'products.product.add_to_cart' | t }} · {{ pack_total | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
                 </span>
                 {%- render 'loading-spinner' -%}
               </button>
@@ -244,7 +312,7 @@
       <div class="wsp-sticky__inner">
         <div class="wsp-sticky__meta">
           <span class="wsp-sticky__name" data-sticky-name>{{ current.title | escape }}</span>
-          <span class="wsp-sticky__price" data-sticky-price>{{ current.price | money }}</span>
+          <span class="wsp-sticky__price" data-sticky-price>{{ pack_total | money }}</span>
         </div>
         <button type="button" class="dg-btn dg-btn--primary" data-sticky-atc>{{ 'products.product.add_to_cart' | t }}</button>
       </div>
@@ -306,6 +374,15 @@
       { "type": "text", "id": "badge", "label": "Badge", "info": "e.g. 'Most popular'" },
       { "type": "text", "id": "save_label", "label": "Save label", "info": "e.g. 'Save $15'" },
       { "type": "number", "id": "compare", "label": "Compare-at price (dollars)", "info": "Shown struck through when above the variant price. Use the real sum of the separate prices." },
+      { "type": "checkbox", "id": "featured", "label": "Pre-selected", "default": false }
+    ] },
+    { "type": "pack", "name": "Quantity pack", "settings": [
+      { "type": "paragraph", "content": "Adding any pack replaces the variant cards with pack cards. Each pack adds the product's first available variant at this quantity. Create a matching automatic quantity discount in Shopify so checkout charges the pack price." },
+      { "type": "number", "id": "quantity", "label": "Quantity", "default": 1 },
+      { "type": "text", "id": "title", "label": "Title", "info": "e.g. '2 + 1 Free'" },
+      { "type": "number", "id": "price", "label": "Pack price (dollars)", "info": "What the customer pays for the whole pack. Savings and price each are worked out from the product's own price × quantity. Leave empty for no discount." },
+      { "type": "text", "id": "badge", "label": "Banner", "info": "e.g. 'Recommended'" },
+      { "type": "text", "id": "note", "label": "Note under the price", "info": "Leave empty to show 'Free shipping' automatically when the pack qualifies." },
       { "type": "checkbox", "id": "featured", "label": "Pre-selected", "default": false }
     ] }
   ],
