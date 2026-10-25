@@ -326,9 +326,15 @@
       var msg = document.querySelector('cart-drawer [data-dgc-code-msg]');
       if (msg && msgIfMissing) {
         var hit = (res.discount_codes || []).filter(function (d) { return d.code.toUpperCase() === msgIfMissing.toUpperCase(); })[0];
-        msg.textContent = hit && hit.applicable ? '' : 'That code isn\'t valid for this cart.';
+        var valid = !!(hit && hit.applicable);
+        msg.textContent = valid ? '' : 'That code isn\'t valid for this cart.';
         var box = msg.closest('details');
         if (box) box.open = true;
+        if (!valid) {
+          // Don't leave a rejected code on the cart; checkout would show it as an error.
+          var keep = (res.discount_codes || []).filter(function (dc) { return dc.applicable; }).map(function (dc) { return dc.code; });
+          cartPost('cart/update.js', { discount: keep.join(',') });
+        }
       }
     });
   }
