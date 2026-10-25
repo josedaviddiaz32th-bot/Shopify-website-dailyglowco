@@ -336,7 +336,7 @@
           "type": "question",
           "settings": {
             "question": "Is there a subscription?",
-            "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring — for the patches or the cap.</p>"
+            "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring.</p>"
           }
         },
         "q5": {
