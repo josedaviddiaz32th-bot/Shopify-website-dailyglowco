@@ -281,6 +281,29 @@
     }).then(function (r) { return r.json(); });
   }
 
+  // Offer cards are narrower than the track (the next one peeks in) and spaced by a gap,
+  // so step by card position rather than by the track's width.
+  function offerIndex(track) {
+    var cards = track.children;
+    if (cards.length < 2) return 0;
+    var pitch = cards[1].offsetLeft - cards[0].offsetLeft;
+    return Math.round(track.scrollLeft / pitch);
+  }
+
+  function syncOfferArrows(track) {
+    var box = track.closest('[data-dgc-offers]');
+    if (!box) return;
+    var prev = box.querySelector('[data-dgc-step="-1"]');
+    var next = box.querySelector('[data-dgc-step="1"]');
+    var max = track.scrollWidth - track.clientWidth - 2;
+    if (prev) prev.disabled = track.scrollLeft <= 2;
+    if (next) next.disabled = track.scrollLeft >= max;
+  }
+
+  document.addEventListener('scroll', function (e) {
+    if (e.target && e.target.matches && e.target.matches('[data-dgc-track]')) syncOfferArrows(e.target);
+  }, true);
+
   function currentCodes() {
     return Array.prototype.map.call(document.querySelectorAll('cart-drawer [data-dgc-code-remove]'), function (b) {
       return b.dataset.dgcCodeRemove;
@@ -294,6 +317,8 @@
       if (msg && msgIfMissing) {
         var hit = (res.discount_codes || []).filter(function (d) { return d.code.toUpperCase() === msgIfMissing.toUpperCase(); })[0];
         msg.textContent = hit && hit.applicable ? '' : 'That code isn\'t valid for this cart.';
+        var box = msg.closest('details');
+        if (box) box.open = true;
       }
     });
   }
@@ -310,18 +335,22 @@
   document.addEventListener('click', function (e) {
     var add = e.target.closest('[data-dgc-add]');
     if (add) {
+      var label = add.textContent;
       add.disabled = true;
-      add.textContent = 'Adding…';
+      add.textContent = '…';
       cartPost('cart/add.js', { items: [{ id: parseInt(add.dataset.dgcAdd, 10), quantity: 1 }] }).then(function (res) {
-        if (res.status) { add.disabled = false; add.textContent = 'Add to cart'; return; }
+        if (res.status) { add.disabled = false; add.textContent = label; return; }
         renderCartSections(res.sections);
-      }).catch(function () { add.disabled = false; add.textContent = 'Add to cart'; });
+      }).catch(function () { add.disabled = false; add.textContent = label; });
       return;
     }
     var step = e.target.closest('[data-dgc-step]');
     if (step) {
       var track = step.closest('[data-dgc-offers]').querySelector('[data-dgc-track]');
-      track.scrollBy({ left: parseInt(step.dataset.dgcStep, 10) * track.clientWidth, behavior: 'smooth' });
+      var cards = track.children;
+      if (!cards.length) return;
+      var idx = Math.max(0, Math.min(cards.length - 1, offerIndex(track) + parseInt(step.dataset.dgcStep, 10)));
+      track.scrollTo({ left: cards[idx].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
       return;
     }
     if (e.target.closest('[data-dgc-code-apply]')) {

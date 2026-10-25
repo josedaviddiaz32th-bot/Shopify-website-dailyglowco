@@ -2,7 +2,8 @@
   The Daily Glow Co. cart drawer.
   Layout: header (My cart • N) · free-shipping tracker · line items (image, name, deal tag,
   stepper | was / now / save, remove) · add-a-second-cap offer · "Special offers" row ·
-  footer (discount code, discounts, shipping, subtotal, one checkout button, payment icons).
+  footer (collapsible discount code, one checkout button with the total, payment icons).
+  Shipping and discount totals are left to checkout to keep the footer short.
 
   Keeps the Dawn hooks cart.js / cart-drawer.js rely on:
   cart-drawer-items, #CartDrawer-Item-N, #Drawer-quantity-N, cart-remove-button[data-index],
@@ -24,20 +25,6 @@
 {%- liquid
   assign dg_pct = settings.bundle_discount_percent | default: 0
   assign dg_free_ship = settings.free_shipping_threshold | default: 40 | times: 100
-  assign dg_save = 0
-  for item in cart.items
-    assign dg_base = item.variant.compare_at_price | default: 0
-    if item.original_price > dg_base
-      assign dg_base = item.original_price
-    endif
-    assign dg_diff = dg_base | times: item.quantity | minus: item.final_line_price
-    if dg_diff > 0
-      assign dg_save = dg_save | plus: dg_diff
-    endif
-  endfor
-  for discount in cart.cart_level_discount_applications
-    assign dg_save = dg_save | plus: discount.total_allocated_amount
-  endfor
   assign dg_in_cart = cart.items | map: 'product_id' | join: ','
   assign dg_in_cart = ',' | append: dg_in_cart | append: ','
 -%}
@@ -252,7 +239,7 @@
                   -%}
                   <li class="dgc-offers__card">
                     <a href="{{ op.url }}" class="dgc-offers__media" tabindex="-1" aria-hidden="true">
-                      {%- if o_img -%}<img src="{{ o_img | image_url: width: 200 }}" alt="" loading="lazy" width="100" height="100">{%- endif -%}
+                      {%- if o_img -%}<img src="{{ o_img | image_url: width: 160 }}" alt="" loading="eager" width="80" height="80">{%- endif -%}
                     </a>
                     <div class="dgc-offers__body">
                       <a href="{{ op.url }}" class="dgc-offers__name">{{ op.title | escape }}</a>
@@ -263,19 +250,21 @@
                           <span class="dgc-offers__save">Save {{ o_save }}%</span>
                         {%- endif -%}
                       </p>
-                      <button type="button" class="dgc-offers__add" data-dgc-add="{{ ov.id }}">Add to cart</button>
                     </div>
+                    <button type="button" class="dgc-offers__add" data-dgc-add="{{ ov.id }}">Add</button>
                   </li>
                 {%- endfor -%}
               {%- endcapture -%}
               {%- if dg_offer_cards contains 'dgc-offers__card' -%}
                 <div class="dgc-offers" data-dgc-offers>
-                  <h3 class="dgc-offers__title">{{ settings.dg_cart_offers_title | default: 'Special offers for your order' | escape }}</h3>
-                  <div class="dgc-offers__wrap">
-                    <button type="button" class="dgc-offers__arrow" data-dgc-step="-1" aria-label="Previous offer">{% render 'dg-icon', name: 'chevron-left' %}</button>
-                    <ul class="dgc-offers__track" role="list" data-dgc-track>{{ dg_offer_cards }}</ul>
-                    <button type="button" class="dgc-offers__arrow" data-dgc-step="1" aria-label="Next offer">{% render 'dg-icon', name: 'chevron-right' %}</button>
+                  <div class="dgc-offers__head">
+                    <h3 class="dgc-offers__title">{{ settings.dg_cart_offers_title | default: 'Special offers for your order' | escape }}</h3>
+                    <div class="dgc-offers__nav">
+                      <button type="button" class="dgc-offers__arrow" data-dgc-step="-1" aria-label="Previous offer" disabled>{% render 'dg-icon', name: 'chevron-left' %}</button>
+                      <button type="button" class="dgc-offers__arrow" data-dgc-step="1" aria-label="Next offer">{% render 'dg-icon', name: 'chevron-right' %}</button>
+                    </div>
                   </div>
+                  <ul class="dgc-offers__track" role="list" data-dgc-track>{{ dg_offer_cards }}</ul>
                 </div>
               {%- endif -%}
             {%- endif -%}
@@ -291,12 +280,13 @@
       <div class="drawer__footer dgc-foot">
         <div class="cart-drawer__footer">
           {%- if settings.dg_cart_discount_field -%}
-            <div class="dgc-code" data-dgc-code>
+            {%- assign dg_codes = cart.discount_applications | where: 'type', 'discount_code' -%}
+            <details class="dgc-code" data-dgc-code{% if dg_codes.size > 0 %} open{% endif %}>
+              <summary class="dgc-code__toggle">{% render 'dg-icon', name: 'tag' %}<span>Have a discount code?</span></summary>
               <div class="dgc-code__row">
                 <input type="text" class="dgc-code__input" placeholder="Discount code" aria-label="Discount code" autocomplete="off" autocapitalize="characters" data-dgc-code-input>
                 <button type="button" class="dgc-code__apply" data-dgc-code-apply>Apply</button>
               </div>
-              {%- assign dg_codes = cart.discount_applications | where: 'type', 'discount_code' -%}
               {%- if dg_codes.size > 0 -%}
                 <ul class="dgc-code__list" role="list">
                   {%- for dc in dg_codes -%}
@@ -308,20 +298,9 @@
                 </ul>
               {%- endif -%}
               <p class="dgc-code__msg" data-dgc-code-msg role="status"></p>
-            </div>
+            </details>
           {%- endif -%}
-          {%- if dg_save > 0 -%}
-            <div class="dgc-foot__row"><span>Discounts</span><span class="dgc-foot__save">−{{ dg_save | money }}</span></div>
-          {%- endif -%}
-          {%- if cart.total_price >= dg_free_ship -%}
-            <div class="dgc-foot__row"><span>Shipping</span><span class="dgc-foot__free">Free</span></div>
-          {%- else -%}
-            <div class="dgc-foot__row"><span>Shipping</span><span>{{ settings.standard_shipping_label | default: 'Calculated at checkout' | escape }}</span></div>
-          {%- endif -%}
-          <div class="totals dgc-foot__row dgc-foot__row--total" role="status">
-            <span class="totals__total">Subtotal</span>
-            <span class="totals__total-value">{{ cart.total_price | money }}</span>
-          </div>
+          <p class="visually-hidden totals" role="status">Subtotal {{ cart.total_price | money }}</p>
         </div>
 
         <div class="cart__ctas dgc-foot__ctas">
