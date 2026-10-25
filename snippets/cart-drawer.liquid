@@ -116,7 +116,7 @@
                     # Pack deals (product metafield custom.packs, kept in step with the automatic
                     # discounts): price per patch, and a nudge to the next pack size.
                     assign dg_packs = item.product.metafields.custom.packs.value
-                    assign dg_each = item.final_line_price | divided_by: item.quantity
+                    assign dg_each = item.final_line_price | times: 1.0 | divided_by: item.quantity | round
                     assign dg_next = nil
                     for dg_t in dg_packs
                       if dg_t.qty > item.quantity and dg_next == nil
