@@ -70,6 +70,14 @@
         this.querySelectorAll('.wsp-form [name="quantity"]').forEach(function (q) {
           q.value = r.dataset.qty || 1;
         });
+        var line = this.querySelector('[data-stock-line]');
+        if (line) {
+          var stock = parseInt(r.dataset.stock, 10);
+          var max = parseInt(line.dataset.lowMax, 10) || 0;
+          line.hidden = !(max > 0 && stock > 0 && stock <= max);
+          var n = line.querySelector('[data-stock-n]');
+          if (n && stock > 0) n.textContent = stock;
+        }
         var label = this.querySelector('[data-atc-label]');
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + fmt) : label.dataset.soldout;
         var atc = this.querySelector('.wsp-atc');

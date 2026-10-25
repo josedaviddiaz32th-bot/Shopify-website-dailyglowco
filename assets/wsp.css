@@ -263,3 +263,8 @@
 
 /* Keep the page behind an open Quick Shop / filter panel from moving. */
 html.wsp-locked, html.wsp-locked body { overflow: hidden; }
+
+/* "Only N left": real Shopify stock, shown only at or below the section's threshold */
+.wsp-stock { display: flex; align-items: center; gap: 8px; margin: -4px 0 12px; font-size: 14px; color: #b42318; }
+.wsp-stock[hidden] { display: none; }
+.wsp-stock__dot { width: 9px; height: 9px; border-radius: 50%; background: #d92d20; box-shadow: 0 0 0 3px rgba(217,45,32,.15); flex: none; }

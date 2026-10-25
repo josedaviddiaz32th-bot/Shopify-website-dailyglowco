@@ -222,6 +222,7 @@
                 <label class="wsp-pack{% if block.settings.badge != blank %} wsp-pack--flagged{% endif %}" {{ block.shopify_attributes }}>
                   <input type="radio" name="wsp-offer-{{ sid }}" value="{{ current.id }}"
                     data-price="{{ total }}" data-qty="{{ qty }}" data-available="{{ current.available }}" data-title="{{ ptitle | escape }}"
+                    data-stock="{% if current.inventory_management == 'shopify' and current.inventory_policy == 'deny' %}{{ current.inventory_quantity }}{% else %}-1{% endif %}"
                     {% if is_on %}checked{% endif %} {% unless current.available %}disabled{% endunless %}>
                   {%- if block.settings.badge != blank -%}<span class="wsp-pack__flag">{{ block.settings.badge | escape }}</span>{%- endif -%}
                   {%- if pimg -%}{{ pimg | image_url: width: 160 | image_tag: class: 'wsp-pack__img', loading: 'lazy', alt: '' }}{%- endif -%}
@@ -259,6 +260,7 @@
             <label class="wsp-offer" {% if deco %}{{ deco.shopify_attributes }}{% endif %}>
               <input type="radio" name="wsp-offer-{{ sid }}" value="{{ v.id }}"
                 data-price="{{ v.price }}" data-available="{{ v.available }}" data-title="{{ card_title | escape }}"
+                data-stock="{% if v.inventory_management == 'shopify' and v.inventory_policy == 'deny' %}{{ v.inventory_quantity }}{% else %}-1{% endif %}"
                 {% if v.id == featured_id %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
               {%- if deco and deco.settings.badge != blank -%}<span class="wsp-offer__flag">{{ deco.settings.badge | escape }}</span>{%- endif -%}
               <span class="wsp-offer__dot" aria-hidden="true"></span>
@@ -281,6 +283,23 @@
           {%- endfor -%}
           {%- endif -%}
         </fieldset>
+
+        {%- comment -%} Real Shopify stock only: shown when the selected option is genuinely down to the threshold. {%- endcomment -%}
+        {%- liquid
+          assign low_max = section.settings.low_stock
+          assign cur_stock = -1
+          if current.inventory_management == 'shopify' and current.inventory_policy == 'deny'
+            assign cur_stock = current.inventory_quantity
+          endif
+          assign show_low = false
+          if low_max > 0 and cur_stock > 0 and cur_stock <= low_max
+            assign show_low = true
+          endif
+        -%}
+        <p class="wsp-stock" data-stock-line data-low-max="{{ low_max }}"{% unless show_low %} hidden{% endunless %}>
+          <span class="wsp-stock__dot" aria-hidden="true"></span>
+          <span>Only <strong data-stock-n>{{ cur_stock }}</strong> left in stock</span>
+        </p>
 
         <div class="wsp-buy" data-buy>
           <product-form class="product-form" data-section-id="{{ sid }}">
@@ -344,6 +363,7 @@
     { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
     { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
+    { "type": "range", "id": "low_stock", "label": "Show 'Only N left' at or below", "min": 0, "max": 20, "step": 1, "default": 5, "info": "Uses the product's real Shopify stock count, so keep stock in AutoDS accurate. 0 turns it off." },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 20 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
