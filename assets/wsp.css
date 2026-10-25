@@ -61,6 +61,7 @@
 .wsp-offer__flag { position: absolute; top: -10px; left: 14px; padding: 3px 10px; border-radius: 999px; background: var(--dg-grad); color: var(--dg-teal); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 /* Quantity packs: three cards side by side, banner across the top of the flagged one. */
 .wsp-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: stretch; padding-top: 14px; }
+.wsp-packs:has(> .wsp-pack:nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .wsp-pack { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; padding: 16px 6px 12px; border: 1.5px solid var(--dg-line-c); border-radius: 16px; background: #fff; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease; }
 .wsp-pack input { position: absolute; opacity: 0; pointer-events: none; }
 .wsp-pack:has(input:checked) { border-color: var(--dg-orange); box-shadow: 0 0 0 3px rgba(240,138,44,.15); }
