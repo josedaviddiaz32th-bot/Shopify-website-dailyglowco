@@ -75,6 +75,11 @@
               if (errBox && errText) { errText.textContent = res.body.description || res.body.message || 'Something went wrong. Please try again.'; errBox.hidden = false; }
               return;
             }
+            var steps = document.querySelectorAll('.wsp-steps li');
+            if (steps.length > 1) {
+              steps[0].classList.replace('is-on', 'is-done');
+              steps[1].classList.add('is-on');
+            }
             window.location.href = root + 'checkout';
           })
           .catch(function () { btn.classList.remove('loading'); btn.removeAttribute('aria-disabled'); });
@@ -98,6 +103,14 @@
         this.querySelectorAll('.wsp-form [name="quantity"]').forEach(function (q) {
           q.value = r.dataset.qty || 1;
         });
+        var tot = this.querySelector('[data-total]');
+        if (tot) {
+          var ship = price >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
+          tot.querySelector('[data-total-all]').textContent = formatMoney(price + ship, this.format);
+          tot.querySelector('[data-total-parts]').textContent = ship > 0
+            ? fmt + ' + ' + formatMoney(ship, this.format) + ' shipping'
+            : 'Free shipping included';
+        }
         var line = this.querySelector('[data-stock-line]');
         if (line) {
           var stock = parseInt(r.dataset.stock, 10);

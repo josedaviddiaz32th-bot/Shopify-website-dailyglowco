@@ -306,6 +306,26 @@
         </p>
 
         <div class="wsp-buy" data-buy>
+          {%- liquid
+            assign ship_cents = settings.standard_shipping_label | remove: '$' | times: 100 | round
+            assign total_ship = 0
+            if pack_total < free_ship_cents
+              assign total_ship = ship_cents
+            endif
+            assign total_all = pack_total | plus: total_ship
+          -%}
+          <ol class="wsp-steps" aria-label="Checkout progress">
+            <li class="is-on"><span class="wsp-steps__dot"></span><span>Choose your pack</span></li>
+            <li><span class="wsp-steps__dot"></span><span>Checkout</span></li>
+            <li><span class="wsp-steps__dot"></span><span>Done</span></li>
+          </ol>
+          <p class="wsp-total" data-total data-ship="{{ ship_cents }}" data-free="{{ free_ship_cents }}">
+            <span class="wsp-total__label">Total</span>
+            <strong data-total-all>{{ total_all | money }}</strong>
+            <span class="wsp-total__parts" data-total-parts>
+              {%- if total_ship > 0 -%}{{ pack_total | money }} + {{ total_ship | money }} shipping{%- else -%}Free shipping included{%- endif -%}
+            </span>
+          </p>
           <product-form class="product-form" data-section-id="{{ sid }}">
             <div class="product-form__error-message-wrapper" role="alert" hidden>
               <span class="product-form__error-message"></span>
