@@ -173,7 +173,9 @@
         "days": "30",
         "eyebrow": "Zero-risk mornings",
         "heading": "We stand behind every patch",
-        "text": "<p>Try it for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+        "text": "<p>Try it for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "button_label": "Choose your pack",
+        "button_link": "/products/wrinkle-smooth-chest-pad#offer"
       }
     },
     "faq": {
