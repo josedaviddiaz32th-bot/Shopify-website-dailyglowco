@@ -249,6 +249,103 @@
     items.updateQuantity(parseInt(btn.dataset.line, 10), 2, e, 'dg-upsell', btn.dataset.variant);
   });
 
+  /* ---------- Cart drawer: special offers, offer arrows, discount codes ---------- */
+  var cartRoot = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+  var cartSections = 'cart-drawer,cart-icon-bubble';
+
+  function renderCartSections(sections) {
+    var drawer = document.querySelector('cart-drawer');
+    if (!drawer || !sections) return;
+    if (sections['cart-drawer']) {
+      var doc = new DOMParser().parseFromString(sections['cart-drawer'], 'text/html');
+      var src = doc.querySelector('.drawer__inner');
+      var dst = drawer.querySelector('.drawer__inner');
+      if (src && dst) dst.innerHTML = src.innerHTML;
+      var fresh = doc.querySelector('cart-drawer');
+      drawer.classList.toggle('is-empty', !!(fresh && fresh.classList.contains('is-empty')));
+    }
+    if (sections['cart-icon-bubble']) {
+      var bubble = document.getElementById('cart-icon-bubble');
+      var bsrc = new DOMParser().parseFromString(sections['cart-icon-bubble'], 'text/html').querySelector('.shopify-section');
+      if (bubble && bsrc) bubble.innerHTML = bsrc.innerHTML;
+    }
+  }
+
+  function cartPost(path, payload) {
+    payload.sections = cartSections;
+    payload.sections_url = window.location.pathname;
+    return fetch(cartRoot + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); });
+  }
+
+  function currentCodes() {
+    return Array.prototype.map.call(document.querySelectorAll('cart-drawer [data-dgc-code-remove]'), function (b) {
+      return b.dataset.dgcCodeRemove;
+    });
+  }
+
+  function setCodes(codes, msgIfMissing) {
+    return cartPost('cart/update.js', { discount: codes.join(',') }).then(function (res) {
+      renderCartSections(res.sections);
+      var msg = document.querySelector('cart-drawer [data-dgc-code-msg]');
+      if (msg && msgIfMissing) {
+        var hit = (res.discount_codes || []).filter(function (d) { return d.code.toUpperCase() === msgIfMissing.toUpperCase(); })[0];
+        msg.textContent = hit && hit.applicable ? '' : 'That code isn\'t valid for this cart.';
+      }
+    });
+  }
+
+  function applyCode(input) {
+    var code = (input.value || '').trim();
+    if (!code) return;
+    var codes = currentCodes().filter(function (c) { return c.toUpperCase() !== code.toUpperCase(); });
+    codes.push(code);
+    input.disabled = true;
+    setCodes(codes, code).catch(function () { input.disabled = false; });
+  }
+
+  document.addEventListener('click', function (e) {
+    var add = e.target.closest('[data-dgc-add]');
+    if (add) {
+      add.disabled = true;
+      add.textContent = 'Adding…';
+      cartPost('cart/add.js', { items: [{ id: parseInt(add.dataset.dgcAdd, 10), quantity: 1 }] }).then(function (res) {
+        if (res.status) { add.disabled = false; add.textContent = 'Add to cart'; return; }
+        renderCartSections(res.sections);
+      }).catch(function () { add.disabled = false; add.textContent = 'Add to cart'; });
+      return;
+    }
+    var step = e.target.closest('[data-dgc-step]');
+    if (step) {
+      var track = step.closest('[data-dgc-offers]').querySelector('[data-dgc-track]');
+      track.scrollBy({ left: parseInt(step.dataset.dgcStep, 10) * track.clientWidth, behavior: 'smooth' });
+      return;
+    }
+    if (e.target.closest('[data-dgc-code-apply]')) {
+      applyCode(document.querySelector('cart-drawer [data-dgc-code-input]'));
+      return;
+    }
+    var rm = e.target.closest('[data-dgc-code-remove]');
+    if (rm) {
+      var drop = rm.dataset.dgcCodeRemove;
+      setCodes(currentCodes().filter(function (c) { return c !== drop; }));
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.matches && e.target.matches('cart-drawer [data-dgc-code-input]')) {
+      e.preventDefault();
+      applyCode(e.target);
+    }
+  });
+  document.addEventListener('input', function (e) {
+    if (e.target.matches && e.target.matches('cart-drawer [data-dgc-code-input]')) {
+      e.target.closest('[data-dgc-code]').classList.toggle('has-text', e.target.value.trim() !== '');
+    }
+  });
+
   /* ---------- Mobile menu ----------
      The burger is a <details>. Close it when a link is followed, on Escape, on an
      outside tap, and when the page comes back from the back/forward cache (the

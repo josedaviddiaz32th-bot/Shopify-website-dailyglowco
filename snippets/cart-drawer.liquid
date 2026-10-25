@@ -1,12 +1,13 @@
 {% comment %}
-  The Daily Glow Co. cart drawer (rebuilt).
-  Layout: header · rewards bar · item cards · add-a-second-cap offer · trust row · compact footer
-  (savings, total, one checkout button, payment icons). Express buttons stay on the product page
-  and on Shopify checkout, so the footer never pushes the items out of view.
+  The Daily Glow Co. cart drawer.
+  Layout: header (My cart • N) · free-shipping tracker · line items (image, name, deal tag,
+  stepper | was / now / save, remove) · add-a-second-cap offer · "Special offers" row ·
+  footer (discount code, discounts, shipping, subtotal, one checkout button, payment icons).
 
   Keeps the Dawn hooks cart.js / cart-drawer.js rely on:
   cart-drawer-items, #CartDrawer-Item-N, #Drawer-quantity-N, cart-remove-button[data-index],
   #CartDrawer-LineItemError-N, .loading__spinner, #CartDrawer-CartItems, .cart-drawer__footer.
+  Offer "Add to cart", the offer arrows and the discount field are handled in dg-theme.js.
 {% endcomment %}
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
@@ -37,10 +38,8 @@
   for discount in cart.cart_level_discount_applications
     assign dg_save = dg_save | plus: discount.total_allocated_amount
   endfor
-  assign dg_items_label = 'items'
-  if cart.item_count == 1
-    assign dg_items_label = 'item'
-  endif
+  assign dg_in_cart = cart.items | map: 'product_id' | join: ','
+  assign dg_in_cart = ',' | append: dg_in_cart | append: ','
 -%}
 
 <cart-drawer class="drawer dgc{% if cart == empty %} is-empty{% endif %}">
@@ -64,20 +63,15 @@
             {% render 'dg-icon', name: 'x' %}
           </button>
           <div class="dgc-empty__body">
-            <span class="dgc-empty__icon">{% render 'dg-icon', name: 'cap' %}</span>
             <h2 class="dgc-empty__title">Your cart is empty</h2>
-            <p class="dgc-empty__text">Simple tools for your daily glow.</p>
-            <a href="/pages/products" class="dgc-btn">
-              Start shopping
-            </a>
+            <p class="dgc-empty__text">Soft, reusable patches for smoother-looking mornings.</p>
+            <a href="/pages/products" class="dgc-btn">Start shopping</a>
           </div>
         </div>
       {%- endif -%}
 
       <div class="drawer__header dgc-head">
-        <h2 class="drawer__heading dgc-head__title">
-          Your cart <span class="dgc-head__count">{{ cart.item_count }} {{ dg_items_label }}</span>
-        </h2>
+        <h2 class="drawer__heading dgc-head__title">My cart <span aria-hidden="true">•</span> {{ cart.item_count }}</h2>
         <button
           class="drawer__close dgc__close"
           type="button"
@@ -94,8 +88,6 @@
         view-event-trigger="manual"
       >
         {%- if cart != empty -%}
-          {%- comment -%} Rewards bar. The caps multi-buy nudge only shows when a cap
-              is actually in the cart; below the free-shipping amount the bar tracks progress to it. {%- endcomment -%}
           {%- liquid
             assign dg_cap_count = 0
             for item in cart.items
@@ -108,16 +100,13 @@
           -%}
           <div class="dgc-rewards">
             {%- if dg_ship_left > 0 -%}
-              <p class="dgc-rewards__msg">You're <strong>{{ dg_ship_left | money }}</strong> away from <strong>free shipping</strong></p>
+              <p class="dgc-rewards__msg">{% render 'dg-icon', name: 'truck' %}<span>You're <strong>{{ dg_ship_left | money }}</strong> away from <strong>free shipping</strong></span></p>
               <div class="dgc-rewards__track"><span style="width: {{ dg_ship_pct }}%"></span></div>
             {%- elsif dg_pct > 0 and dg_cap_count == 1 -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>free shipping</strong>. Add <strong>1 more cap</strong> to save <strong>{{ dg_pct }}%</strong> on both</p>
-              <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
-            {%- elsif dg_pct > 0 and dg_cap_count > 1 -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>{{ dg_pct }}% off your caps</strong> and <strong>free shipping</strong></p>
+              <p class="dgc-rewards__msg">{% render 'dg-icon', name: 'truck' %}<span>You've unlocked <strong>free shipping</strong>. Add <strong>1 more cap</strong> to save <strong>{{ dg_pct }}%</strong> on both</span></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- else -%}
-              <p class="dgc-rewards__msg">You've unlocked <strong>free shipping</strong></p>
+              <p class="dgc-rewards__msg">{% render 'dg-icon', name: 'truck' %}<span>You've unlocked <strong>free shipping</strong></span></p>
               <div class="dgc-rewards__track"><span style="width: 100%"></span></div>
             {%- endif -%}
           </div>
@@ -145,22 +134,15 @@
                     </a>
 
                     <div class="dgc-item__body">
-                      <div class="dgc-item__top">
-                        <a href="{{ item.url }}" class="cart-item__name dgc-item__name">{{ item.product.title | escape }}</a>
-                        <cart-remove-button id="CartDrawer-Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
-                          <button type="button" class="dgc-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}">
-                            {% render 'dg-icon', name: 'x' %}
-                          </button>
-                        </cart-remove-button>
-                      </div>
+                      <a href="{{ item.url }}" class="cart-item__name dgc-item__name">{{ item.product.title | escape }}</a>
 
-                      {%- unless item.product.has_only_default_variant -%}
+                      {%- if item.product.variants.size > 1 -%}
                         <p class="dgc-item__variant">
                           {%- for option in item.options_with_values -%}
                             {{ option.value }}{% unless forloop.last %} · {% endunless %}
                           {%- endfor -%}
                         </p>
-                      {%- endunless -%}
+                      {%- endif -%}
 
                       {%- for property in item.properties -%}
                         {%- assign p_first = property.first | slice: 0 -%}
@@ -170,61 +152,63 @@
                       {%- endfor -%}
 
                       {%- for discount in item.line_level_discount_allocations -%}
-                        <p class="dgc-item__disc">{{ discount.discount_application.title }}</p>
+                        <span class="dgc-tag">{% render 'dg-icon', name: 'tag' %}<span>{{ discount.discount_application.title | escape }}</span></span>
                       {%- endfor -%}
 
-                      <div class="dgc-item__bottom">
-                        <quantity-input class="quantity cart-quantity dgc-qty">
-                          <button class="quantity__button" name="minus" type="button">
-                            <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
-                            <span aria-hidden="true">&minus;</span>
-                          </button>
-                          <input
-                            class="quantity__input"
-                            type="number"
-                            data-quantity-variant-id="{{ item.variant.id }}"
-                            data-quantity-line-key="{{ item.key }}"
-                            name="updates[]"
-                            value="{{ item.quantity }}"
-                            {% # theme-check-disable %}
-                            data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-                            min="0"
-                            data-min="{{ item.variant.quantity_rule.min }}"
-                            {% if item.variant.quantity_rule.max != null %}max="{{ item.variant.quantity_rule.max }}"{% endif %}
-                            step="{{ item.variant.quantity_rule.increment }}"
-                            {% # theme-check-enable %}
-                            aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-                            id="Drawer-quantity-{{ item.index | plus: 1 }}"
-                            data-index="{{ item.index | plus: 1 }}"
-                          >
-                          <button class="quantity__button" name="plus" type="button">
-                            <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
-                            <span aria-hidden="true">+</span>
-                          </button>
-                        </quantity-input>
-
-                        <div class="dgc-item__price cart-item__totals">
-                          {%- render 'loading-spinner' -%}
-                          {%- if dg_line_save > 0 -%}
-                            <s>{{ dg_line_cmp | money }}</s>
-                          {%- endif -%}
-                          <strong>{{ item.final_line_price | money }}</strong>
-                        </div>
-                      </div>
-
-                      {%- if dg_line_save > 0 -%}
-                        <span class="dgc-item__save">You save {{ dg_line_save | money }}</span>
-                      {%- endif -%}
+                      <quantity-input class="quantity cart-quantity dgc-qty">
+                        <button class="quantity__button" name="minus" type="button">
+                          <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                          <span aria-hidden="true">&minus;</span>
+                        </button>
+                        <input
+                          class="quantity__input"
+                          type="number"
+                          data-quantity-variant-id="{{ item.variant.id }}"
+                          data-quantity-line-key="{{ item.key }}"
+                          name="updates[]"
+                          value="{{ item.quantity }}"
+                          {% # theme-check-disable %}
+                          data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                          min="0"
+                          data-min="{{ item.variant.quantity_rule.min }}"
+                          {% if item.variant.quantity_rule.max != null %}max="{{ item.variant.quantity_rule.max }}"{% endif %}
+                          step="{{ item.variant.quantity_rule.increment }}"
+                          {% # theme-check-enable %}
+                          aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                          id="Drawer-quantity-{{ item.index | plus: 1 }}"
+                          data-index="{{ item.index | plus: 1 }}"
+                        >
+                        <button class="quantity__button" name="plus" type="button">
+                          <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                          <span aria-hidden="true">+</span>
+                        </button>
+                      </quantity-input>
 
                       <div id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="cart-item__error dgc-item__error" role="alert">
                         <small class="cart-item__error-text"></small>
                       </div>
                     </div>
+
+                    <div class="dgc-item__side">
+                      <div class="dgc-item__price cart-item__totals">
+                        {%- render 'loading-spinner' -%}
+                        {%- if dg_line_save > 0 -%}<s>{{ dg_line_cmp | money }}</s>{%- endif -%}
+                        <strong>{{ item.final_line_price | money }}</strong>
+                      </div>
+                      {%- if dg_line_save > 0 -%}
+                        <span class="dgc-item__save">{% render 'dg-icon', name: 'tag' %}<span>Save {{ dg_line_save | money_without_trailing_zeros }}</span></span>
+                      {%- endif -%}
+                      <cart-remove-button id="CartDrawer-Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                        <button type="button" class="dgc-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}">
+                          {% render 'dg-icon', name: 'trash' %}
+                        </button>
+                      </cart-remove-button>
+                    </div>
                   </li>
                 {%- endfor -%}
               </ul>
 
-              {%- comment -%} Add a second cap {%- endcomment -%}
+              {%- comment -%} Add a second cap (only when a single cap is the whole cart) {%- endcomment -%}
               {%- assign dg_line = cart.items | first -%}
               {%- if dg_pct > 0 and cart.items.size == 1 and cart.item_count == 1 and dg_line.product.handle == 'glow-cap' -%}
                 {%- assign dg_keep = 100 | minus: dg_pct -%}
@@ -248,11 +232,52 @@
                 </div>
               {%- endif -%}
 
-              <ul class="dgc-trust" role="list">
-                <li>{% render 'dg-icon', name: 'truck' %}<span>Free shipping<br><small>On orders {{ dg_free_ship | money_without_trailing_zeros }}+</small></span></li>
-                <li>{% render 'dg-icon', name: 'shield' %}<span>30-day money-back<br><small>From delivery</small></span></li>
-                <li>{% render 'dg-icon', name: 'lock' %}<span>Secure checkout<br><small>Encrypted payment</small></span></li>
-              </ul>
+              {%- comment -%} Special offers: other products from the theme setting, skipping what's in the cart. {%- endcomment -%}
+              {%- capture dg_offer_cards -%}
+                {%- for op in settings.dg_cart_offers -%}
+                  {%- liquid
+                    assign op_key = ',' | append: op.id | append: ','
+                    if dg_in_cart contains op_key
+                      continue
+                    endif
+                    assign ov = op.selected_or_first_available_variant
+                    unless ov.available
+                      continue
+                    endunless
+                    assign o_img = ov.image | default: op.featured_image
+                    assign o_save = 0
+                    if ov.compare_at_price > ov.price
+                      assign o_save = ov.compare_at_price | minus: ov.price | times: 100.0 | divided_by: ov.compare_at_price | round
+                    endif
+                  -%}
+                  <li class="dgc-offers__card">
+                    <a href="{{ op.url }}" class="dgc-offers__media" tabindex="-1" aria-hidden="true">
+                      {%- if o_img -%}<img src="{{ o_img | image_url: width: 200 }}" alt="" loading="lazy" width="100" height="100">{%- endif -%}
+                    </a>
+                    <div class="dgc-offers__body">
+                      <a href="{{ op.url }}" class="dgc-offers__name">{{ op.title | escape }}</a>
+                      <p class="dgc-offers__price">
+                        <strong>{{ ov.price | money }}</strong>
+                        {%- if o_save > 0 -%}
+                          <s>{{ ov.compare_at_price | money }}</s>
+                          <span class="dgc-offers__save">Save {{ o_save }}%</span>
+                        {%- endif -%}
+                      </p>
+                      <button type="button" class="dgc-offers__add" data-dgc-add="{{ ov.id }}">Add to cart</button>
+                    </div>
+                  </li>
+                {%- endfor -%}
+              {%- endcapture -%}
+              {%- if dg_offer_cards contains 'dgc-offers__card' -%}
+                <div class="dgc-offers" data-dgc-offers>
+                  <h3 class="dgc-offers__title">{{ settings.dg_cart_offers_title | default: 'Special offers for your order' | escape }}</h3>
+                  <div class="dgc-offers__wrap">
+                    <button type="button" class="dgc-offers__arrow" data-dgc-step="-1" aria-label="Previous offer">{% render 'dg-icon', name: 'chevron-left' %}</button>
+                    <ul class="dgc-offers__track" role="list" data-dgc-track>{{ dg_offer_cards }}</ul>
+                    <button type="button" class="dgc-offers__arrow" data-dgc-step="1" aria-label="Next offer">{% render 'dg-icon', name: 'chevron-right' %}</button>
+                  </div>
+                </div>
+              {%- endif -%}
             {%- endif -%}
             <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
             <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
@@ -265,15 +290,27 @@
 
       <div class="drawer__footer dgc-foot">
         <div class="cart-drawer__footer">
-          {%- if cart.cart_level_discount_applications.size > 0 -%}
-            <ul class="dgc-foot__disc" role="list">
-              {%- for discount in cart.cart_level_discount_applications -%}
-                <li><span>{{ discount.title | escape }}</span><span>−{{ discount.total_allocated_amount | money }}</span></li>
-              {%- endfor -%}
-            </ul>
+          {%- if settings.dg_cart_discount_field -%}
+            <div class="dgc-code" data-dgc-code>
+              <div class="dgc-code__row">
+                <input type="text" class="dgc-code__input" placeholder="Discount code" aria-label="Discount code" autocomplete="off" autocapitalize="characters" data-dgc-code-input>
+                <button type="button" class="dgc-code__apply" data-dgc-code-apply>Apply</button>
+              </div>
+              {%- if cart.discount_codes.size > 0 -%}
+                <ul class="dgc-code__list" role="list">
+                  {%- for dc in cart.discount_codes -%}
+                    <li class="{% unless dc.applicable %}is-off{% endunless %}">
+                      {% render 'dg-icon', name: 'tag' %}<span>{{ dc.code | escape }}{% unless dc.applicable %} · doesn't apply to this cart{% endunless %}</span>
+                      <button type="button" data-dgc-code-remove="{{ dc.code | escape }}" aria-label="Remove {{ dc.code | escape }}">{% render 'dg-icon', name: 'x' %}</button>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              <p class="dgc-code__msg" data-dgc-code-msg role="status"></p>
+            </div>
           {%- endif -%}
           {%- if dg_save > 0 -%}
-            <div class="dgc-foot__row dgc-foot__row--save"><span>You save</span><span>{{ dg_save | money }}</span></div>
+            <div class="dgc-foot__row"><span>Discounts</span><span class="dgc-foot__save">−{{ dg_save | money }}</span></div>
           {%- endif -%}
           {%- if cart.total_price >= dg_free_ship -%}
             <div class="dgc-foot__row"><span>Shipping</span><span class="dgc-foot__free">Free</span></div>
@@ -281,8 +318,8 @@
             <div class="dgc-foot__row"><span>Shipping</span><span>{{ settings.standard_shipping_label | default: 'Calculated at checkout' | escape }}</span></div>
           {%- endif -%}
           <div class="totals dgc-foot__row dgc-foot__row--total" role="status">
-            <span class="totals__total">{% if cart.total_price >= dg_free_ship %}Total{% else %}Subtotal{% endif %}</span>
-            <span class="totals__total-value">{{ cart.total_price | money_with_currency }}</span>
+            <span class="totals__total">Subtotal</span>
+            <span class="totals__total-value">{{ cart.total_price | money }}</span>
           </div>
         </div>
 
@@ -296,7 +333,7 @@
             {% if cart == empty %}disabled{% endif %}
           >
             {% render 'dg-icon', name: 'lock' %}
-            <span>Secure checkout</span>
+            <span>Checkout · {{ cart.total_price | money }}</span>
           </button>
           <ul class="dgc-pay" role="list" aria-label="Payment methods">
             {%- for type in shop.enabled_payment_types -%}

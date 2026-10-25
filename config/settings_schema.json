@@ -88,6 +88,25 @@
         "id": "dg_cart_smallprint",
         "label": "Small print under checkout",
         "default": "30-day money-back guarantee · Secure checkout"
+      },
+      {
+        "type": "text",
+        "id": "dg_cart_offers_title",
+        "label": "Offers heading",
+        "default": "Special offers for your order"
+      },
+      {
+        "type": "product_list",
+        "id": "dg_cart_offers",
+        "label": "Products offered in the cart",
+        "limit": 10,
+        "info": "Shown as a swipeable row under the cart items. Products already in the cart are skipped."
+      },
+      {
+        "type": "checkbox",
+        "id": "dg_cart_discount_field",
+        "label": "Show a discount code field",
+        "default": true
       }
     ]
   },
