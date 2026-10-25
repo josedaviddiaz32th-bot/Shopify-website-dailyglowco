@@ -104,9 +104,11 @@
           q.value = r.dataset.qty || 1;
         });
         var tot = this.querySelector('[data-total]');
+        var allFmt = fmt;
         if (tot) {
           var ship = price >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
-          tot.querySelector('[data-total-all]').textContent = formatMoney(price + ship, this.format);
+          allFmt = formatMoney(price + ship, this.format);
+          tot.querySelector('[data-total-all]').textContent = allFmt;
           tot.querySelector('[data-total-parts]').textContent = ship > 0
             ? fmt + ' + ' + formatMoney(ship, this.format) + ' shipping'
             : 'Free shipping included';
@@ -120,7 +122,7 @@
           if (n && stock > 0) n.textContent = stock;
         }
         var label = this.querySelector('[data-atc-label]');
-        if (label) label.textContent = available ? (label.dataset.add + ' · ' + fmt) : label.dataset.soldout;
+        if (label) label.textContent = available ? (label.dataset.add + ' · ' + allFmt) : label.dataset.soldout;
         this.querySelectorAll('.wsp-atc, [data-wsp-buynow]').forEach(function (b) { b.disabled = !available; });
         var sp = this.querySelector('[data-sticky-price]');
         if (sp) sp.textContent = fmt;

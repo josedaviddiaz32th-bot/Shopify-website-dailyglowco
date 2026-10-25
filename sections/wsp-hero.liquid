@@ -336,7 +336,7 @@
               {%- comment -%} Two steps: Buy now adds the selected pack and goes straight to checkout. {%- endcomment -%}
               <button type="button" class="dg-btn dg-btn--primary wsp-buynow" data-wsp-buynow{% unless current.available %} disabled{% endunless %}>
                 <span data-atc-label data-add="Buy now" data-soldout="{{ 'products.product.sold_out' | t | escape }}">
-                  {%- if current.available %}Buy now · {{ pack_total | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
+                  {%- if current.available %}Buy now · {{ total_all | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
                 </span>
                 {%- render 'loading-spinner' -%}
               </button>
