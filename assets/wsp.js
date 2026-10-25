@@ -46,10 +46,38 @@
         if (t) { this.showSlide(parseInt(t.dataset.thumb, 10)); return; }
         var step = e.target.closest('[data-gallery-step]');
         if (step) { this.stepSlide(parseInt(step.dataset.galleryStep, 10)); return; }
-        if (e.target.closest('[data-sticky-atc]')) {
-          var btn = this.querySelector('.wsp-atc');
-          if (btn && !btn.disabled) btn.click();
+        if (e.target.closest('[data-sticky-atc]') || e.target.closest('[data-wsp-buynow]')) {
+          this.buyNow();
         }
+      }
+
+      // Add the selected option/pack to the cart and go straight to checkout.
+      buyNow() {
+        var btn = this.querySelector('[data-wsp-buynow]');
+        var form = this.querySelector('.wsp-form');
+        if (!btn || btn.disabled || !form || btn.classList.contains('loading')) return;
+        var id = parseInt(form.querySelector('[name="id"]').value, 10);
+        var qty = parseInt(form.querySelector('[name="quantity"]').value, 10) || 1;
+        var errBox = this.querySelector('.product-form__error-message-wrapper');
+        var errText = this.querySelector('.product-form__error-message');
+        var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+        btn.classList.add('loading');
+        btn.setAttribute('aria-disabled', 'true');
+        fetch(root + 'cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ items: [{ id: id, quantity: qty }] })
+        }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+          .then(function (res) {
+            if (!res.ok || res.body.status) {
+              btn.classList.remove('loading');
+              btn.removeAttribute('aria-disabled');
+              if (errBox && errText) { errText.textContent = res.body.description || res.body.message || 'Something went wrong. Please try again.'; errBox.hidden = false; }
+              return;
+            }
+            window.location.href = root + 'checkout';
+          })
+          .catch(function () { btn.classList.remove('loading'); btn.removeAttribute('aria-disabled'); });
       }
 
       selected() {
@@ -80,8 +108,7 @@
         }
         var label = this.querySelector('[data-atc-label]');
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + fmt) : label.dataset.soldout;
-        var atc = this.querySelector('.wsp-atc');
-        if (atc) atc.disabled = !available;
+        this.querySelectorAll('.wsp-atc, [data-wsp-buynow]').forEach(function (b) { b.disabled = !available; });
         var sp = this.querySelector('[data-sticky-price]');
         if (sp) sp.textContent = fmt;
         var sn = this.querySelector('[data-sticky-name]');

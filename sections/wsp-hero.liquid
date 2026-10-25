@@ -313,13 +313,18 @@
             {%- form 'product', p, id: product_form_id, class: 'form wsp-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
               <input type="hidden" name="id" value="{{ current.id }}" class="product-variant-id"{% unless current.available %} disabled{% endunless %}>
               <input type="hidden" name="quantity" value="{{ pack_qty }}">
-              <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc"{% unless current.available %} disabled{% endunless %}>
-                <span data-atc-label data-add="{{ 'products.product.add_to_cart' | t | escape }}" data-soldout="{{ 'products.product.sold_out' | t | escape }}">
-                  {%- if current.available %}{{ 'products.product.add_to_cart' | t }} · {{ pack_total | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
+              {%- comment -%} Two steps: Buy now adds the selected pack and goes straight to checkout. {%- endcomment -%}
+              <button type="button" class="dg-btn dg-btn--primary wsp-buynow" data-wsp-buynow{% unless current.available %} disabled{% endunless %}>
+                <span data-atc-label data-add="Buy now" data-soldout="{{ 'products.product.sold_out' | t | escape }}">
+                  {%- if current.available %}Buy now · {{ pack_total | money }}{% else %}{{ 'products.product.sold_out' | t }}{% endif -%}
                 </span>
                 {%- render 'loading-spinner' -%}
               </button>
-              <div class="dgp-shoppay">{{ form | payment_button }}</div>
+              <button type="submit" name="add" class="dg-btn wsp-atc wsp-atc--secondary"{% unless current.available %} disabled{% endunless %}>
+                <span>{{ 'products.product.add_to_cart' | t }}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+              {%- if section.settings.show_express -%}<div class="dgp-shoppay">{{ form | payment_button }}</div>{%- endif -%}
             {%- endform -%}
           </product-form>
           {%- if section.settings.guarantee_line != blank -%}
@@ -337,7 +342,7 @@
           <span class="wsp-sticky__name" data-sticky-name>{{ current.title | escape }}</span>
           <span class="wsp-sticky__price" data-sticky-price>{{ pack_total | money }}</span>
         </div>
-        <button type="button" class="dg-btn dg-btn--primary" data-sticky-atc>{{ 'products.product.add_to_cart' | t }}</button>
+        <button type="button" class="dg-btn dg-btn--primary" data-sticky-atc>Buy now</button>
       </div>
     </div>
   {%- endif -%}
@@ -371,6 +376,7 @@
     { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
     { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
+    { "type": "checkbox", "id": "show_express", "label": "Show Shop Pay / express button under Buy now", "default": false, "info": "Checkout already offers Shop Pay, Apple Pay and PayPal at the top, so this is off to keep the page to one clear button." },
     { "type": "range", "id": "low_stock", "label": "Show 'Only N left' at or below", "min": 0, "max": 20, "step": 1, "default": 5, "info": "Uses the product's real Shopify stock count, so keep stock in AutoDS accurate. 0 turns it off." },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 20 },
