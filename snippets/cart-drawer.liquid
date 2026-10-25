@@ -139,7 +139,8 @@
                       {%- endfor -%}
 
                       {%- for discount in item.line_level_discount_allocations -%}
-                        <span class="dgc-tag">{% render 'dg-icon', name: 'tag' %}<span>{{ discount.discount_application.title | escape }}</span></span>
+                        {%- assign dg_deal = discount.discount_application.title | split: ': ' | last -%}
+                        <span class="dgc-tag">{% render 'dg-icon', name: 'tag' %}<span>{{ dg_deal | escape }}</span></span>
                       {%- endfor -%}
 
                       <quantity-input class="quantity cart-quantity dgc-qty">
