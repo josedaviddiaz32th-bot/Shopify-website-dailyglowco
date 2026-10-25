@@ -296,12 +296,13 @@
                 <input type="text" class="dgc-code__input" placeholder="Discount code" aria-label="Discount code" autocomplete="off" autocapitalize="characters" data-dgc-code-input>
                 <button type="button" class="dgc-code__apply" data-dgc-code-apply>Apply</button>
               </div>
-              {%- if cart.discount_codes.size > 0 -%}
+              {%- assign dg_codes = cart.discount_applications | where: 'type', 'discount_code' -%}
+              {%- if dg_codes.size > 0 -%}
                 <ul class="dgc-code__list" role="list">
-                  {%- for dc in cart.discount_codes -%}
-                    <li class="{% unless dc.applicable %}is-off{% endunless %}">
-                      {% render 'dg-icon', name: 'tag' %}<span>{{ dc.code | escape }}{% unless dc.applicable %} · doesn't apply to this cart{% endunless %}</span>
-                      <button type="button" data-dgc-code-remove="{{ dc.code | escape }}" aria-label="Remove {{ dc.code | escape }}">{% render 'dg-icon', name: 'x' %}</button>
+                  {%- for dc in dg_codes -%}
+                    <li>
+                      {% render 'dg-icon', name: 'tag' %}<span>{{ dc.title | upcase | escape }}</span>
+                      <button type="button" data-dgc-code-remove="{{ dc.title | escape }}" aria-label="Remove {{ dc.title | escape }}">{% render 'dg-icon', name: 'x' %}</button>
                     </li>
                   {%- endfor -%}
                 </ul>
