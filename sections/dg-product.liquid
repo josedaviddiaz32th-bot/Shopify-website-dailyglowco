@@ -109,7 +109,7 @@
     {%- if layout == 'pdp' and section.settings.show_breadcrumb -%}
       <nav class="dgp-crumbs" aria-label="Breadcrumb">
         <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span>
-        <a href="{{ routes.all_products_collection_url }}">Shop</a><span aria-hidden="true">/</span>
+        <a href="{{ '/pages/products' }}">Shop</a><span aria-hidden="true">/</span>
         <span aria-current="page">{{ p.title | escape }}</span>
       </nav>
     {%- endif -%}

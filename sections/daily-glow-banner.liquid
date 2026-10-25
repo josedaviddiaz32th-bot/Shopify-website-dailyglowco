@@ -11,7 +11,7 @@
   elsif hero_product != blank
     assign primary_url = hero_product.url
   else
-    assign primary_url = routes.all_products_collection_url
+    assign primary_url = '/pages/products'
   endif
   assign hero_image = section.settings.image
   if hero_image == blank and hero_product != blank and section.settings.use_product_image
@@ -144,7 +144,7 @@
           </a>
         {%- endif -%}
         {%- if section.settings.button_2_label != blank -%}
-          <a class="dg-btn dg-btn--ghost" href="{{ section.settings.button_2_link | default: routes.all_products_collection_url }}">
+          <a class="dg-btn dg-btn--ghost" href="{{ section.settings.button_2_link | default: '/pages/products' }}">
             {{ section.settings.button_2_label | escape }}
           </a>
         {%- endif -%}

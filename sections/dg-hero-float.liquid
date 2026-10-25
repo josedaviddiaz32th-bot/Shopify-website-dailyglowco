@@ -12,7 +12,7 @@
   elsif p != blank
     assign cta_url = p.url
   else
-    assign cta_url = routes.all_products_collection_url
+    assign cta_url = '/pages/products'
   endif
   assign img_alt = section.settings.card_title | strip_html | escape
 -%}

@@ -20,7 +20,7 @@
     </div>
     {%- if section.settings.button_label != blank -%}
       <div class="dg__cta">
-        <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a>
+        <a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '/pages/products' }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a>
       </div>
     {%- endif -%}
     {%- if section.settings.link_label != blank -%}

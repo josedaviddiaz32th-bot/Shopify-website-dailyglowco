@@ -12,7 +12,7 @@
       <span class="dgh-announce__tag">{{ section.settings.holiday_tag | escape }}</span>
       <span>{{ section.settings.holiday_text | escape }}</span>
       {%- if section.settings.holiday_link_label != blank -%}
-        <a href="{{ section.settings.holiday_link | default: routes.all_products_collection_url }}">{{ section.settings.holiday_link_label | escape }}</a>
+        <a href="{{ section.settings.holiday_link | default: '/pages/products' }}">{{ section.settings.holiday_link_label | escape }}</a>
       {%- endif -%}
     </div>
   {%- elsif section.settings.announcement != blank -%}
