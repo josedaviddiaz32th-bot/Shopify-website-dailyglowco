@@ -350,7 +350,13 @@
       var cards = track.children;
       if (!cards.length) return;
       var idx = Math.max(0, Math.min(cards.length - 1, offerIndex(track) + parseInt(step.dataset.dgcStep, 10)));
-      track.scrollTo({ left: cards[idx].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+      var target = Math.min(cards[idx].offsetLeft - cards[0].offsetLeft, track.scrollWidth - track.clientWidth);
+      track.scrollTo({ left: target, behavior: 'smooth' });
+      // A smooth scroll can be dropped while the drawer is still animating open; land it anyway.
+      setTimeout(function () {
+        if (Math.abs(track.scrollLeft - target) > 4) track.scrollLeft = target;
+        syncOfferArrows(track);
+      }, 450);
       return;
     }
     if (e.target.closest('[data-dgc-code-apply]')) {
