@@ -249,6 +249,16 @@
     items.updateQuantity(parseInt(btn.dataset.line, 10), 2, e, 'dg-upsell', btn.dataset.variant);
   });
 
+  /* ---------- Cart drawer: "Add 1 more" pack hints jump the line to the next pack size ---------- */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-dgc-bump]');
+    if (!btn) return;
+    var items = document.querySelector('cart-drawer-items');
+    if (!items || typeof items.updateQuantity !== 'function') return;
+    btn.disabled = true;
+    items.updateQuantity(parseInt(btn.dataset.line, 10), parseInt(btn.dataset.qty, 10), e, 'dgc-bump', btn.dataset.variant);
+  });
+
   /* ---------- Cart drawer: special offers, offer arrows, discount codes ---------- */
   var cartRoot = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
   var cartSections = 'cart-drawer,cart-icon-bubble';

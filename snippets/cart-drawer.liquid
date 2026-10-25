@@ -112,6 +112,22 @@
                     endif
                     assign dg_line_cmp = dg_base | times: item.quantity
                     assign dg_line_save = dg_line_cmp | minus: item.final_line_price
+
+                    # Pack deals (product metafield custom.packs, kept in step with the automatic
+                    # discounts): price per patch, and a nudge to the next pack size.
+                    assign dg_packs = item.product.metafields.custom.packs.value
+                    assign dg_each = item.final_line_price | divided_by: item.quantity
+                    assign dg_next = nil
+                    for dg_t in dg_packs
+                      if dg_t.qty > item.quantity and dg_next == nil
+                        assign dg_next = dg_t
+                      endif
+                    endfor
+                    if dg_next
+                      assign dg_need = dg_next.qty | minus: item.quantity
+                      assign dg_next_total = dg_next.price | times: 100
+                      assign dg_extra = dg_next_total | minus: item.final_line_price
+                    endif
                   -%}
                   <li id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item dgc-item">
                     <a href="{{ item.url }}" class="dgc-item__media" tabindex="-1" aria-hidden="true">
@@ -182,6 +198,7 @@
                         {%- render 'loading-spinner' -%}
                         {%- if dg_line_save > 0 -%}<s>{{ dg_line_cmp | money }}</s>{%- endif -%}
                         <strong>{{ item.final_line_price | money }}</strong>
+                        {%- if dg_packs != blank and item.quantity > 1 -%}<span class="dgc-item__each">{{ dg_each | money }} each</span>{%- endif -%}
                       </div>
                       {%- if dg_line_save > 0 -%}
                         <span class="dgc-item__save">{% render 'dg-icon', name: 'tag' %}<span>Save {{ dg_line_save | money_without_trailing_zeros }}</span></span>
@@ -192,6 +209,20 @@
                         </button>
                       </cart-remove-button>
                     </div>
+
+                    {%- if dg_next -%}
+                      <button type="button" class="dgc-hint" data-dgc-bump data-line="{{ item.index | plus: 1 }}" data-qty="{{ dg_next.qty }}" data-variant="{{ item.variant.id }}">
+                        {% render 'dg-icon', name: 'tag' %}
+                        <span class="dgc-hint__text">
+                          {%- if dg_extra <= 0 -%}
+                            Add {{ dg_need }} more, it's free
+                          {%- else -%}
+                            Add {{ dg_need }} more: {{ dg_next.qty }} for {{ dg_next_total | money_without_trailing_zeros }}
+                          {%- endif -%}
+                        </span>
+                        <span class="dgc-hint__cta">Add</span>
+                      </button>
+                    {%- endif -%}
                   </li>
                 {%- endfor -%}
               </ul>
