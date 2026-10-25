@@ -127,6 +127,10 @@
                       assign dg_need = dg_next.qty | minus: item.quantity
                       assign dg_next_total = dg_next.price | times: 100
                       assign dg_extra = dg_next_total | minus: item.final_line_price
+                      # Hint only one step away (or from a single item) so pack rows don't fill the cart.
+                      if dg_need > 1 and item.quantity > 1
+                        assign dg_next = nil
+                      endif
                     endif
                   -%}
                   <li id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item dgc-item">
