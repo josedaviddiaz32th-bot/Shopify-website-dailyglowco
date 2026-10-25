@@ -106,7 +106,10 @@
         "offer_label": "Choose your sets",
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
         "sticky_bar": true,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "title_source": "product",
+        "rating": "4.4",
+        "rating_text": "68 ratings"
       }
     },
     "upsell": {

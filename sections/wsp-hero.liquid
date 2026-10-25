@@ -93,7 +93,11 @@
             <span><strong>{{ section.settings.rating | escape }}</strong>/5 · {{ section.settings.rating_text | escape }}</span>
           </p>
         {%- endif -%}
-        <h1 class="wsp-title">{{ section.settings.headline }}</h1>
+        {%- if section.settings.title_source == 'product' -%}
+          <h1 class="wsp-title">{{ p.title | escape }}</h1>
+        {%- else -%}
+          <h1 class="wsp-title">{{ section.settings.headline }}</h1>
+        {%- endif -%}
         {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
       </div>
 
@@ -356,6 +360,10 @@
   "settings": [
     { "type": "product", "id": "product", "label": "Product", "info": "On product pages, leave empty to use the current product." },
     { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Reusable overnight silicone patches" },
+    { "type": "select", "id": "title_source", "label": "Page title", "default": "headline", "options": [
+      { "value": "headline", "label": "Headline below" },
+      { "value": "product", "label": "Product name" }
+    ], "info": "Use the product name on single-product pages so shoppers can see what they're buying." },
     { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Smooth Your Wrinkles <em>While You Sleep</em>" },
     { "type": "text", "id": "rating", "label": "Rating", "info": "Real average from the source only. Leave empty to hide." },
     { "type": "text", "id": "rating_text", "label": "Rating text", "info": "e.g. '671 ratings · 5,000+ sold'. Say where they're from if they aren't this store's own reviews." },

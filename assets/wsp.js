@@ -214,6 +214,8 @@
           var btn = d.querySelector('form [type="submit"]');
           var ok = t.dataset.available === 'true';
           input.value = t.value;
+          var qty = d.querySelector('form [name="quantity"]');
+          if (qty) qty.value = t.dataset.qty || 1;
           input.disabled = !ok;
           btn.disabled = !ok;
           var price = d.querySelector('[data-quick-price]');

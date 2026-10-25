@@ -32,9 +32,15 @@
     <div class="dgf__bottom">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright | escape }}</span>
       <div class="dgf__legal">
-        {%- for link in section.settings.legal_menu.links -%}
-          <a href="{{ link.url }}">{{ link.title | escape }}</a>
-        {%- endfor -%}
+        {%- if section.settings.legal_menu.links.size > 0 -%}
+          {%- for link in section.settings.legal_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for policy in shop.policies -%}
+            <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+          {%- endfor -%}
+        {%- endif -%}
         {%- if settings.social_instagram_link != blank %}<a href="{{ settings.social_instagram_link }}" rel="noopener" target="_blank">Instagram</a>{% endif -%}
         {%- if settings.social_tiktok_link != blank %}<a href="{{ settings.social_tiktok_link }}" rel="noopener" target="_blank">TikTok</a>{% endif -%}
       </div>

@@ -95,8 +95,34 @@
             </div>
             <div class="wsp-quick__body">
               <h3 class="wsp-quick__title">{{ bp.title | escape }}</h3>
-              <p class="wsp-quick__price" data-quick-price>{{ cur.price | money }}</p>
-              {%- unless bp.has_only_default_variant -%}
+              {%- liquid
+                # Pack deals (product metafield custom.packs): offer them here too, starting on the first pack.
+                assign qpacks = bp.metafields.custom.packs.value
+                assign q_qty = 1
+                assign q_total = cur.price
+                if qpacks != blank and bp.variants.size == 1
+                  assign q_first = qpacks | first
+                  assign q_qty = q_first.qty
+                  assign q_total = q_first.price | times: 100
+                endif
+              -%}
+              <p class="wsp-quick__price" data-quick-price>{{ q_total | money }}</p>
+              {%- if qpacks != blank and bp.variants.size == 1 -%}
+                <fieldset class="wsp-quick__opts">
+                  <legend>Pack:</legend>
+                  <label class="wsp-quick__opt">
+                    <input type="radio" name="wsp-quick-opt-{{ block.id }}" value="{{ cur.id }}" data-price="{{ cur.price }}" data-qty="1" data-available="{{ cur.available }}"{% unless cur.available %} disabled{% endunless %}>
+                    <span>1 for {{ cur.price | money_without_trailing_zeros }}</span>
+                  </label>
+                  {%- for qt in qpacks -%}
+                    {%- assign qt_total = qt.price | times: 100 -%}
+                    <label class="wsp-quick__opt">
+                      <input type="radio" name="wsp-quick-opt-{{ block.id }}" value="{{ cur.id }}" data-price="{{ qt_total }}" data-qty="{{ qt.qty }}" data-available="{{ cur.available }}"{% if forloop.first %} checked{% endif %}{% unless cur.available %} disabled{% endunless %}>
+                      <span>{{ qt.qty }} for {{ qt_total | money_without_trailing_zeros }}{% unless qt.label contains ' for $' %} · {{ qt.label }}{% endunless %}</span>
+                    </label>
+                  {%- endfor -%}
+                </fieldset>
+              {%- elsif bp.has_only_default_variant == false -%}
                 <fieldset class="wsp-quick__opts">
                   <legend>{{ bp.options.first | escape }}:</legend>
                   {%- for v in bp.variants -%}
@@ -106,7 +132,7 @@
                     </label>
                   {%- endfor -%}
                 </fieldset>
-              {%- endunless -%}
+              {%- endif -%}
               <a class="wsp-quick__more" href="{{ bp.url }}">View full details</a>
             </div>
             </div>
@@ -118,7 +144,7 @@
                 {%- assign qf_id = 'wsp-quick-form-' | append: block.id -%}
                 {%- form 'product', bp, id: qf_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                   <input type="hidden" name="id" value="{{ cur.id }}" class="product-variant-id"{% unless cur.available %} disabled{% endunless %}>
-                  <input type="hidden" name="quantity" value="1">
+                  <input type="hidden" name="quantity" value="{{ q_qty }}">
                   <button type="submit" name="add" class="dg-btn dg-btn--primary wsp-atc"{% unless cur.available %} disabled{% endunless %}>
                     <span>{% if cur.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
                     {%- render 'loading-spinner' -%}

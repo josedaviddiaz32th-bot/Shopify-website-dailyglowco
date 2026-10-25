@@ -3,18 +3,82 @@
     "hero": {
       "type": "wsp-hero",
       "blocks": {
-        "photo1": { "type": "image", "settings": { "product_image": 1 } },
-        "photo2": { "type": "image", "settings": { "product_image": 2 } },
-        "photo3": { "type": "image", "settings": { "product_image": 3 } },
-        "slot4": { "type": "image", "settings": { "alt": "Photo 4: empty slot, pick an image" } },
-        "slot5": { "type": "image", "settings": { "alt": "Photo 5: empty slot, pick an image" } },
-        "slot6": { "type": "image", "settings": { "alt": "Photo 6: empty slot, pick an image" } },
-        "slot7": { "type": "image", "settings": { "alt": "Photo 7: empty slot, pick an image" } },
-        "proof1": { "type": "proof", "settings": { "icon": "leaf", "text": "No needles, no tape, no refills" } },
-        "proof2": { "type": "proof", "settings": { "icon": "repeat", "text": "Reusable: just clean and reuse" } },
-        "proof3": { "type": "proof", "settings": { "icon": "truck", "text": "Free shipping on orders $40+" } }
+        "photo1": {
+          "type": "image",
+          "settings": {
+            "product_image": 1
+          }
+        },
+        "photo2": {
+          "type": "image",
+          "settings": {
+            "product_image": 2
+          }
+        },
+        "photo3": {
+          "type": "image",
+          "settings": {
+            "product_image": 3
+          }
+        },
+        "slot4": {
+          "type": "image",
+          "settings": {
+            "alt": "Photo 4: empty slot, pick an image"
+          }
+        },
+        "slot5": {
+          "type": "image",
+          "settings": {
+            "alt": "Photo 5: empty slot, pick an image"
+          }
+        },
+        "slot6": {
+          "type": "image",
+          "settings": {
+            "alt": "Photo 6: empty slot, pick an image"
+          }
+        },
+        "slot7": {
+          "type": "image",
+          "settings": {
+            "alt": "Photo 7: empty slot, pick an image"
+          }
+        },
+        "proof1": {
+          "type": "proof",
+          "settings": {
+            "icon": "leaf",
+            "text": "No needles, no tape, no refills"
+          }
+        },
+        "proof2": {
+          "type": "proof",
+          "settings": {
+            "icon": "repeat",
+            "text": "Reusable: just clean and reuse"
+          }
+        },
+        "proof3": {
+          "type": "proof",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
+          }
+        }
       },
-      "block_order": ["photo1", "photo2", "photo3", "slot4", "slot5", "slot6", "slot7", "proof1", "proof2", "proof3"],
+      "block_order": [
+        "photo1",
+        "photo2",
+        "photo3",
+        "slot4",
+        "slot5",
+        "slot6",
+        "slot7",
+        "proof1",
+        "proof2",
+        "proof3"
+      ],
       "settings": {
         "eyebrow": "Reusable overnight silicone patches",
         "headline": "Smooth your lines <em>while you sleep</em>",
@@ -22,7 +86,8 @@
         "offer_label": "Choose your option",
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
         "sticky_bar": true,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "title_source": "product"
       }
     },
     "upsell": {
@@ -39,7 +104,9 @@
           }
         }
       },
-      "block_order": ["set"],
+      "block_order": [
+        "set"
+      ],
       "settings": {
         "style": "mist",
         "eyebrow": "Want to cover more lines?",
@@ -51,11 +118,33 @@
     "guarantee": {
       "type": "dg-guarantee",
       "blocks": {
-        "gb1": { "type": "badge", "settings": { "icon": "shield", "text": "30-day money-back guarantee" } },
-        "gb2": { "type": "badge", "settings": { "icon": "truck", "text": "Free shipping on orders $40+" } },
-        "gb3": { "type": "badge", "settings": { "icon": "mail", "text": "Real support: support@thedailyglowco.com" } }
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
       },
-      "block_order": ["gb1", "gb2", "gb3"],
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
       "settings": {
         "style": "teal",
         "days": "30",
@@ -67,12 +156,41 @@
     "faq": {
       "type": "dg-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "How do I use it?", "answer": "<p>Apply to clean, fully dry skin (no serum or oil underneath), smoothing from the center outward. Wear overnight, 6–8 hours, then peel off gently. Just clean and reuse after each application.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "How many times can I reuse it?", "answer": "<p>Many nights with proper care: clean it after each use and store it on its backing film.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "How much is shipping?", "answer": "<p>Free on orders of $40 or more. Orders under $40 ship for a flat $4.99.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "How do returns work?", "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I use it?",
+            "answer": "<p>Apply to clean, fully dry skin (no serum or oil underneath), smoothing from the center outward. Wear overnight, 6–8 hours, then peel off gently. Just clean and reuse after each application.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How many times can I reuse it?",
+            "answer": "<p>Many nights with proper care: clean it after each use and store it on its backing film.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How much is shipping?",
+            "answer": "<p>Free on orders of $40 or more. Orders under $40 ship for a flat $4.99.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How do returns work?",
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
       "settings": {
         "style": "light",
         "eyebrow": "Questions, answered",
@@ -80,7 +198,16 @@
         "open_first": true
       }
     },
-    "disclosures": { "type": "disclosures", "settings": {} }
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {}
+    }
   },
-  "order": ["hero", "upsell", "guarantee", "faq", "disclosures"]
+  "order": [
+    "hero",
+    "upsell",
+    "guarantee",
+    "faq",
+    "disclosures"
+  ]
 }
