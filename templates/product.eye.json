@@ -30,7 +30,7 @@
         "photo3": {
           "type": "image",
           "settings": {
-            "product_image": 3
+            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-hero.webp"
           }
         },
         "slot4": {
