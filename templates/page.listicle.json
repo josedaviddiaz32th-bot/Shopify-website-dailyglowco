@@ -20,7 +20,7 @@
           "type": "reason",
           "settings": {
             "title": "They work while you sleep",
-            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-before-after-photo.webp",
+            "image": "shopify://shop_images/listicle-forehead-patch-before-after-photo.jpg",
             "alt": "Forehead lines before and after wearing the patch overnight",
             "text": "Soft silicone holds your skin smooth all night, so lines look <strong>ironed out by morning</strong>."
           }
@@ -29,7 +29,7 @@
           "type": "reason",
           "settings": {
             "title": "Nothing goes into your skin",
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-under-eye.webp",
+            "image": "shopify://shop_images/listicle-eye-patches-before-after-photo-under-eye.jpg",
             "alt": "Under-eyes before and after wearing the patches",
             "text": "No needles, no actives, nothing absorbed. Just a clear patch you peel off when you wake up."
           }
@@ -57,7 +57,7 @@
           "settings": {
             "title": "You can try it risk-free",
             "text": "Take 30 days to decide. If you don't love your mornings, <strong>get your money back</strong>. Results vary.",
-            "image": "shopify://shop_images/wrinkle-smooth-smile-line-patches-before-after-photo.webp",
+            "image": "shopify://shop_images/listicle-smile-line-patches-before-after-photo.jpg",
             "alt": "Smile lines before and after wearing the patches"
           }
         }
