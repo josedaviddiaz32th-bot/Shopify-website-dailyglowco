@@ -11,6 +11,18 @@
   "current": {
     "holiday_mode": true,
     "holiday_show_compare": true,
+    "dg_cart_offers_title": "Special offers for your order",
+    "dg_cart_offers": [
+      "wrinkle-smooth-face-set",
+      "wrinkle-smooth-eye-patches",
+      "wrinkle-smooth-forehead-patch",
+      "wrinkle-smooth-smile-line-patches",
+      "wrinkle-smooth-lip-line-patches",
+      "wrinkle-smooth-hand-patches",
+      "wrinkle-smooth-chest-pad",
+      "wrinkle-smooth-face-neck-chest-set"
+    ],
+    "dg_cart_discount_field": true,
     "logo_width": 160,
     "type_header_font": "poppins_n6",
     "heading_scale": 110,
@@ -146,12 +158,12 @@
     "blocks": {
       "9752555012629308362": {
         "type": "shopify://apps/parkour-facebook-pixel/blocks/threasury_pixel/f23b2ffe-4c53-446e-ad3a-7976ffbee5c2",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     },
@@ -211,18 +223,6 @@
           "shadow": "#17393d"
         }
       }
-    },
-    "dg_cart_offers": [
-      "wrinkle-smooth-face-set",
-      "wrinkle-smooth-eye-patches",
-      "wrinkle-smooth-forehead-patch",
-      "wrinkle-smooth-smile-line-patches",
-      "wrinkle-smooth-lip-line-patches",
-      "wrinkle-smooth-hand-patches",
-      "wrinkle-smooth-chest-pad",
-      "wrinkle-smooth-face-neck-chest-set"
-    ],
-    "dg_cart_offers_title": "Special offers for your order",
-    "dg_cart_discount_field": true
+    }
   }
 }
