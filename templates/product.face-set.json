@@ -7,7 +7,7 @@
           "type": "proof",
           "settings": {
             "icon": "check",
-            "text": "Forehead, under-eyes & smile lines"
+            "text": "3 areas in one set: forehead, under-eyes & smile lines"
           }
         },
         "proof2": {
@@ -36,7 +36,7 @@
           "settings": {
             "match": "2 Sets",
             "title": "2 Sets (10 pieces)",
-            "subtitle": "$30 a set, with a spare ready or one to share",
+            "subtitle": "2 forehead + 8 under-eye & smile line patches · $30 a set",
             "badge": "Most popular",
             "save_label": "Save $30",
             "compare": 90,
@@ -48,7 +48,7 @@
           "settings": {
             "match": "1 Set",
             "title": "1 Set (5 pieces)",
-            "subtitle": "Everything you need to start tonight"
+            "subtitle": "1 forehead patch + 4 for under-eyes & smile lines"
           }
         },
         "img0": {
