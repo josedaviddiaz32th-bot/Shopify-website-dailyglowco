@@ -18,13 +18,13 @@
         "photo_guide": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-guide-under-eye.webp"
+            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-under-eye.webp"
           }
         },
         "photo_guide2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-guide-crows-feet.webp"
+            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-crows-feet.webp"
           }
         },
         "photo3": {

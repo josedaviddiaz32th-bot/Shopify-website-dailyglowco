@@ -18,13 +18,13 @@
         "photo_guide": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-guide-1.webp"
+            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-photo-1.webp"
           }
         },
         "photo_guide2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-guide-2.webp"
+            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-photo-2.webp"
           }
         },
         "photo3": {
