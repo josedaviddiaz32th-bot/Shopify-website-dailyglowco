@@ -360,7 +360,7 @@
       <div class="wsp-sticky__inner">
         <div class="wsp-sticky__meta">
           <span class="wsp-sticky__name" data-sticky-name>{{ current.title | escape }}</span>
-          <span class="wsp-sticky__price" data-sticky-price>{{ pack_total | money }}</span>
+          <span class="wsp-sticky__price" data-sticky-price>{{ total_all | money }}{% if total_ship > 0 %} with shipping{% else %} · free shipping{% endif %}</span>
         </div>
         <button type="button" class="dg-btn dg-btn--primary" data-sticky-atc>Buy now</button>
       </div>

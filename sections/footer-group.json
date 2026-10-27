@@ -9,14 +9,14 @@
           "type": "links",
           "settings": {
             "heading": "Shop",
-            "menu": "main-menu"
+            "menu": "footer-shop"
           }
         },
         "col_help": {
           "type": "links",
           "settings": {
             "heading": "Help",
-            "menu": "footer",
+            "menu": "footer-help",
             "show_email": true
           }
         }

@@ -405,6 +405,18 @@
     document.querySelectorAll('details[data-dg-burger][open]').forEach(function (d) { d.removeAttribute('open'); });
   }
   window.addEventListener('pageshow', closeBurgers);
+
+  /* Coming back with the browser's Back button (e.g. from checkout) shows the page as it
+     was first loaded, so the cart count and drawer can be stale. Re-render them from the
+     live cart. */
+  window.addEventListener('pageshow', function (e) {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if (!e.persisted && !(nav && nav.type === 'back_forward')) return;
+    fetch(cartRoot + '?sections=' + cartSections, { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(renderCartSections)
+      .catch(function () {});
+  });
   window.addEventListener('pagehide', closeBurgers);
   document.addEventListener('click', function (e) {
     var open = document.querySelector('details[data-dg-burger][open]');

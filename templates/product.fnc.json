@@ -115,24 +115,24 @@
     "upsell": {
       "type": "wsp-products-grid",
       "blocks": {
-        "set": {
+        "hands": {
           "type": "product",
           "settings": {
-            "product": "wrinkle-smooth-face-set",
-            "tag": "Most popular",
-            "title": "The Wrinkle Smooth Face Set (5 pieces)",
-            "text": "Forehead, under-eyes and smile lines in one set, and it ships free.",
-            "link_label": "See the set"
+            "product": "wrinkle-smooth-hand-patches",
+            "tag": "Complete the set",
+            "title": "The Wrinkle Smooth Hand Patches",
+            "text": "Soft silicone patches for the backs of your hands, for smoother-looking skin by morning.",
+            "link_label": "See the patches"
           }
         }
       },
       "block_order": [
-        "set"
+        "hands"
       ],
       "settings": {
         "style": "mist",
-        "eyebrow": "Want to cover more lines?",
-        "heading": "Get the full face set",
+        "eyebrow": "Face, neck and chest covered?",
+        "heading": "Don't forget your hands",
         "padding_top": 56,
         "padding_bottom": 56
       }

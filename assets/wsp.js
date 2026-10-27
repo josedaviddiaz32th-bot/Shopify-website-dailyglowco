@@ -120,8 +120,9 @@
         });
         var tot = this.querySelector('[data-total]');
         var allFmt = fmt;
+        var ship = null;
         if (tot) {
-          var ship = price >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
+          ship = price >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
           allFmt = formatMoney(price + ship, this.format);
           tot.querySelector('[data-total-all]').textContent = allFmt;
           tot.querySelector('[data-total-parts]').textContent = ship > 0
@@ -140,7 +141,7 @@
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + allFmt) : label.dataset.soldout;
         this.querySelectorAll('.wsp-atc, [data-wsp-buynow]').forEach(function (b) { b.disabled = !available; });
         var sp = this.querySelector('[data-sticky-price]');
-        if (sp) sp.textContent = fmt;
+        if (sp) sp.textContent = ship === null ? fmt : allFmt + (ship > 0 ? ' with shipping' : ' · free shipping');
         var sn = this.querySelector('[data-sticky-name]');
         if (sn && r.dataset.title) sn.textContent = r.dataset.title;
       }
