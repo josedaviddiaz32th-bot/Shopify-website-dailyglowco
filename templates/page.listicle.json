@@ -4,55 +4,59 @@
       "type": "wsp-listicle",
       "settings": {
         "label": "Advertisement",
-        "heading": "5 reasons the Wrinkle Smooth Face Set is the easiest way to wake up to <em>smoother-looking skin</em>, with no needles and no appointments",
-        "intro": "<p>Creams that didn't touch them. Needles that weren't an option. Tape that left red marks by morning.</p><p>If your forehead lines, under-eye lines and smile lines have outlasted all of it, here's why a 30-second night routine is different.</p>",
-        "cta_label": "Choose your set",
-        "cta_link": "#offer",
-        "padding_top": 32,
-        "padding_bottom": 24
+        "heading": "5 reasons to try silicone patches <em>before needles</em>",
+        "intro": "No creams, no clinic visits. Just 30 seconds before bed.",
+        "end_heading": "Your smoother-looking mornings <em>start tonight</em>",
+        "cta_label": "Start tonight",
+        "cta_link": "/products/wrinkle-smooth-face-set",
+        "end_note": "From $45 · Free shipping · 30-day money-back guarantee",
+        "sticky": true,
+        "sticky_label": "See the patches",
+        "padding_top": 28,
+        "padding_bottom": 96
       },
       "blocks": {
         "r1": {
           "type": "reason",
           "settings": {
-            "title": "It works while you sleep",
+            "title": "They work while you sleep",
             "image": "shopify://shop_images/wrinkle-smooth-face-set-in-use.webp",
-            "alt": "The Face Set worn on the forehead, under the eyes and along the smile lines",
-            "text": "<p>Each patch is soft, clear silicone. Smoothed onto clean, dry skin, it holds the skin flat and seals in your skin's own moisture for 6–8 hours.</p><p>Peel it off in the morning and your lines look <strong>visibly smoother, like they've been ironed out</strong>. No actives, nothing absorbed.</p>"
+            "alt": "Silicone patches worn on the forehead, under the eyes and along the smile lines",
+            "text": "Soft silicone holds your skin smooth all night, so lines look <strong>ironed out by morning</strong>."
           }
         },
         "r2": {
           "type": "reason",
           "settings": {
-            "title": "Three areas in one set, not one",
-            "image": "shopify://shop_images/wrinkle-smooth-face-set-hero.png",
-            "alt": "The 5 pieces of the Face Set: 1 forehead patch and 4 crescents",
-            "text": "<p><strong>1 forehead patch</strong> with a center piece for the frown lines between your brows, plus <strong>4 crescents</strong> you can wear under your eyes, at the outer corners for crow's feet, or along your smile lines.</p><p>A single-area silicone patch often costs around $30 on its own. The whole Face Set starts at $45.</p>"
+            "title": "Nothing goes into your skin",
+            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-in-use.webp",
+            "alt": "A clear forehead patch",
+            "text": "No needles, no actives, nothing absorbed. Just a clear patch you peel off when you wake up."
           }
         },
         "r3": {
           "type": "reason",
           "settings": {
-            "title": "No needles, no appointments, no downtime",
-            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-in-use.webp",
-            "alt": "A forehead patch worn overnight",
-            "text": "<p>Injectables cost about $435–$586 a visit and need repeating every 3–4 months. Patches don't inject anything, and there's nothing to recover from.</p><p>You keep your own expression. You just <strong>look rested, and still look like you.</strong></p>"
+            "title": "A fraction of a clinic visit",
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-hero.png",
+            "alt": "A set of 5 clear silicone patches",
+            "text": "Injectables run <strong>$435–$586 a visit</strong>. A full set of patches starts at $45."
           }
         },
         "r4": {
           "type": "reason",
           "settings": {
-            "title": "30 seconds on, then just clean and reuse",
+            "title": "It takes 30 seconds",
             "image": "shopify://shop_images/wrinkle-smooth-eye-patches-in-use.jpg",
-            "alt": "Crescent patches worn under the eyes",
-            "text": "<p>Smooth each patch on from the center outward. That's the whole routine.</p><p>In the morning, peel it off slowly, <strong>just clean and reuse</strong>, and put it back on its backing. No tape, no refills to buy.</p>"
+            "alt": "Patches worn under the eyes",
+            "text": "Smooth it on before bed. <strong>Just clean and reuse</strong>. No refills to buy."
           }
         },
         "r5": {
           "type": "reason",
           "settings": {
-            "title": "Try it for 30 days, risk-free",
-            "text": "<p>Wear it for 30 days from delivery. If you don't love your mornings, email us and <strong>get your money back</strong>.</p><p>Every set ships free, with tracking. Results vary.</p>"
+            "title": "You can try it risk-free",
+            "text": "Take 30 days to decide. If you don't love your mornings, <strong>get your money back</strong>. Results vary."
           }
         }
       },
@@ -63,149 +67,9 @@
         "r4",
         "r5"
       ]
-    },
-    "hero": {
-      "type": "wsp-hero",
-      "blocks": {
-        "proof1": {
-          "type": "proof",
-          "settings": {
-            "icon": "check",
-            "text": "3 areas in one set: forehead, under-eyes & smile lines"
-          }
-        },
-        "proof2": {
-          "type": "proof",
-          "settings": {
-            "icon": "leaf",
-            "text": "No needles, no tape, no refills"
-          }
-        },
-        "proof3": {
-          "type": "proof",
-          "settings": {
-            "icon": "repeat",
-            "text": "Reusable: just clean and reuse"
-          }
-        },
-        "proof4": {
-          "type": "proof",
-          "settings": {
-            "icon": "truck",
-            "text": "Ships free: every set clears $40"
-          }
-        },
-        "offer-2": {
-          "type": "offer",
-          "settings": {
-            "match": "2 Sets",
-            "title": "2 Sets (10 pieces)",
-            "subtitle": "2 forehead + 8 under-eye & smile line patches · $30 a set",
-            "badge": "Most popular",
-            "save_label": "Save $30",
-            "compare": 90,
-            "featured": true
-          }
-        },
-        "offer-1": {
-          "type": "offer",
-          "settings": {
-            "match": "1 Set",
-            "title": "1 Set (5 pieces)",
-            "subtitle": "1 forehead patch + 4 for under-eyes & smile lines"
-          }
-        },
-        "img0": {
-          "type": "image",
-          "settings": {
-            "product_image_file": "wrinkle-smooth-face-set-in-use",
-            "alt": "The Wrinkle Smooth Face Set worn on the forehead, under the eyes and along the smile lines"
-          }
-        },
-        "img1": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 4: empty slot, pick an image"
-          }
-        },
-        "img2": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 5: empty slot, pick an image"
-          }
-        },
-        "img3": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 6: empty slot, pick an image"
-          }
-        },
-        "img4": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 7: empty slot, pick an image"
-          }
-        },
-        "img5": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 8: empty slot, pick an image"
-          }
-        },
-        "img6": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 9: empty slot, pick an image"
-          }
-        },
-        "imghero": {
-          "type": "image",
-          "settings": {
-            "product_image_file": "wrinkle-smooth-face-set-hero",
-            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
-          }
-        },
-        "imgba": {
-          "type": "image",
-          "settings": {
-            "product_image_file": "wrinkle-smooth-face-set-before-after",
-            "alt": "Customer before and after using the Face Set. Results vary."
-          }
-        }
-      },
-      "block_order": [
-        "img0",
-        "imgba",
-        "imghero",
-        "img1",
-        "img2",
-        "img3",
-        "img4",
-        "img5",
-        "img6",
-        "proof1",
-        "proof2",
-        "proof3",
-        "proof4",
-        "offer-2",
-        "offer-1"
-      ],
-      "settings": {
-        "eyebrow": "The 5-piece face set",
-        "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
-        "rating": "4.6",
-        "rating_text": "34 ratings · 300+ sold",
-        "subheadline": "Five soft silicone patches for your forehead, under your eyes and your smile lines. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.",
-        "offer_label": "Choose your set",
-        "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
-        "sticky_bar": true,
-        "product": "wrinkle-smooth-face-set",
-        "padding_top": 20
-      }
     }
   },
   "order": [
-    "listicle",
-    "hero"
+    "listicle"
   ]
 }

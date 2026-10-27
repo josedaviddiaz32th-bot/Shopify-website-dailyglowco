@@ -1,33 +1,43 @@
 {%- comment -%}
-  Listicle landing page ("N reasons why…") for ad traffic: a labelled advertisement
-  with an intro and numbered reasons, each with an optional image. Pair it with a
-  wsp-hero section below it so the reader can buy on the same page.
+  Listicle landing page ("N reasons…") for cold ad traffic: a labelled advertisement,
+  a short headline, numbered reasons (short header + one line, optional image) and an
+  end card whose button goes to the product page. A small sticky button stays on screen
+  for readers who are ready before the end.
 {%- endcomment -%}
 {{ 'daily-glow.css' | asset_url | stylesheet_tag }}
 {{ 'wsp.css' | asset_url | stylesheet_tag }}
 
+{%- assign cta_link = section.settings.cta_link | default: routes.root_url -%}
 <section class="dg dg--white wsp-lst" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
   <div class="dg__wrap wsp-lst__wrap">
     {%- if section.settings.label != blank %}<p class="wsp-lst__label">{{ section.settings.label | escape }}</p>{% endif -%}
     {%- if section.settings.heading != blank %}<h1 class="wsp-lst__title">{{ section.settings.heading }}</h1>{% endif -%}
-    {%- if section.settings.intro != blank %}<div class="wsp-lst__intro">{{ section.settings.intro }}</div>{% endif -%}
+    {%- if section.settings.intro != blank %}<p class="wsp-lst__intro">{{ section.settings.intro | escape }}</p>{% endif -%}
 
     <ol class="wsp-lst__list">
       {%- for block in section.blocks -%}
         <li class="wsp-lst__item" {{ block.shopify_attributes }}>
-          <h2 class="wsp-lst__h"><span class="wsp-lst__n">{{ forloop.index }}.</span> {{ block.settings.title }}</h2>
+          <h2 class="wsp-lst__h"><span class="wsp-lst__n">{{ forloop.index }}</span>{{ block.settings.title | escape }}</h2>
           {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'wsp-lst__img', loading: 'lazy', widths: '400, 600, 900, 1200', sizes: '(min-width: 750px) 680px, 92vw', alt: block.settings.alt | default: block.settings.image.alt | escape }}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'wsp-lst__img', loading: 'lazy', widths: '400, 600, 900, 1200', sizes: '(min-width: 750px) 640px, 92vw', alt: block.settings.alt | default: block.settings.image.alt | escape }}
           {%- endif -%}
-          {%- if block.settings.text != blank %}<div class="wsp-lst__text">{{ block.settings.text }}</div>{% endif -%}
+          {%- if block.settings.text != blank %}<p class="wsp-lst__text">{{ block.settings.text }}</p>{% endif -%}
         </li>
       {%- endfor -%}
     </ol>
 
     {%- if section.settings.cta_label != blank -%}
-      <a class="dg-btn dg-btn--primary wsp-lst__cta" href="{{ section.settings.cta_link | default: '#offer' }}">{{ section.settings.cta_label | escape }} →</a>
+      <div class="wsp-lst__end">
+        {%- if section.settings.end_heading != blank %}<h2 class="wsp-lst__end-h">{{ section.settings.end_heading }}</h2>{% endif -%}
+        <a class="dg-btn dg-btn--primary wsp-lst__cta" href="{{ cta_link }}">{{ section.settings.cta_label | escape }} →</a>
+        {%- if section.settings.end_note != blank %}<p class="wsp-lst__note">{{ section.settings.end_note | escape }}</p>{% endif -%}
+      </div>
     {%- endif -%}
   </div>
+
+  {%- if section.settings.sticky and section.settings.sticky_label != blank -%}
+    <div class="wsp-lst__sticky"><a class="dg-btn dg-btn--primary" href="{{ cta_link }}">{{ section.settings.sticky_label | escape }} →</a></div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -37,19 +47,23 @@
   "class": "section-wsp-listicle",
   "settings": [
     { "type": "text", "id": "label", "label": "Label above the headline", "default": "Advertisement", "info": "Keep a label like 'Advertisement' so the page isn't mistaken for news (FTC)." },
-    { "type": "inline_richtext", "id": "heading", "label": "Headline" },
-    { "type": "richtext", "id": "intro", "label": "Intro" },
-    { "type": "text", "id": "cta_label", "label": "Button under the list", "default": "See the set" },
-    { "type": "text", "id": "cta_link", "label": "Button link", "default": "#offer", "info": "#offer jumps to the buy box on this page." },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 32 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+    { "type": "inline_richtext", "id": "heading", "label": "Headline", "info": "Keep it under about 10 words." },
+    { "type": "text", "id": "intro", "label": "One line under the headline" },
+    { "type": "inline_richtext", "id": "end_heading", "label": "End card heading" },
+    { "type": "text", "id": "cta_label", "label": "End button" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Usually the product page." },
+    { "type": "text", "id": "end_note", "label": "Line under the button", "info": "Only real offers, e.g. free shipping or the guarantee." },
+    { "type": "checkbox", "id": "sticky", "label": "Show a sticky button at the bottom of the screen", "default": true },
+    { "type": "text", "id": "sticky_label", "label": "Sticky button label" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 28 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
   ],
   "blocks": [
     { "type": "reason", "name": "Reason", "settings": [
-      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "title", "label": "Header", "info": "A few words." },
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "alt", "label": "Image description" },
-      { "type": "richtext", "id": "text", "label": "Text" }
+      { "type": "inline_richtext", "id": "text", "label": "One line" }
     ] }
   ],
   "presets": [{ "name": "WSP listicle" }]
