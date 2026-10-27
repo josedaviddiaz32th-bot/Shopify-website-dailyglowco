@@ -20,8 +20,8 @@
           "type": "reason",
           "settings": {
             "title": "They work while you sleep",
-            "image": "shopify://shop_images/wrinkle-smooth-face-set-in-use.webp",
-            "alt": "Silicone patches worn on the forehead, under the eyes and along the smile lines",
+            "image": "shopify://shop_images/listicle-forehead-before-after.png",
+            "alt": "Forehead before and after wearing the patch overnight",
             "text": "Soft silicone holds your skin smooth all night, so lines look <strong>ironed out by morning</strong>."
           }
         },
@@ -29,8 +29,8 @@
           "type": "reason",
           "settings": {
             "title": "Nothing goes into your skin",
-            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-in-use.webp",
-            "alt": "A clear forehead patch",
+            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-under-eye.webp",
+            "alt": "Under-eyes before and after wearing the patches",
             "text": "No needles, no actives, nothing absorbed. Just a clear patch you peel off when you wake up."
           }
         },
@@ -38,8 +38,8 @@
           "type": "reason",
           "settings": {
             "title": "A fraction of a clinic visit",
-            "image": "shopify://shop_images/wrinkle-smooth-face-set-hero.png",
-            "alt": "A set of 5 clear silicone patches",
+            "image": "shopify://shop_images/listicle-one-set-three-areas.png",
+            "alt": "One set covers the forehead, under-eyes and smile lines, from $45",
             "text": "Injectables run <strong>$435–$586 a visit</strong>. A full set of patches starts at $45."
           }
         },
@@ -47,8 +47,8 @@
           "type": "reason",
           "settings": {
             "title": "It takes 30 seconds",
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-in-use.jpg",
-            "alt": "Patches worn under the eyes",
+            "image": "shopify://shop_images/listicle-routine-card.png",
+            "alt": "The 3-area overnight routine, on in 30 seconds",
             "text": "Smooth it on before bed. <strong>Just clean and reuse</strong>. No refills to buy."
           }
         },
@@ -56,7 +56,9 @@
           "type": "reason",
           "settings": {
             "title": "You can try it risk-free",
-            "text": "Take 30 days to decide. If you don't love your mornings, <strong>get your money back</strong>. Results vary."
+            "text": "Take 30 days to decide. If you don't love your mornings, <strong>get your money back</strong>. Results vary.",
+            "image": "shopify://shop_images/listicle-30-day-promise.png",
+            "alt": "Smoother-looking mornings or your money back"
           }
         }
       },
