@@ -15,6 +15,12 @@
             "product_image": 2
           }
         },
+        "photo_guide": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-before-after-guide.webp"
+          }
+        },
         "photo3": {
           "type": "image",
           "settings": {
@@ -96,6 +102,7 @@
       "block_order": [
         "photo1",
         "photo2",
+        "photo_guide",
         "photo3",
         "slot4",
         "slot5",

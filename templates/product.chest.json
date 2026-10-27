@@ -15,6 +15,18 @@
             "product_image": 2
           }
         },
+        "photo_guide": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-guide-1.webp"
+          }
+        },
+        "photo_guide2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-before-after-guide-2.webp"
+          }
+        },
         "photo3": {
           "type": "image",
           "settings": {
@@ -89,6 +101,8 @@
       "block_order": [
         "photo1",
         "photo2",
+        "photo_guide",
+        "photo_guide2",
         "photo3",
         "slot4",
         "slot5",
