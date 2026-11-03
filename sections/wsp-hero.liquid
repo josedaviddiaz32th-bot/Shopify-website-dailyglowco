@@ -269,7 +269,7 @@
               {%- if deco and deco.settings.badge != blank -%}<span class="wsp-offer__flag">{{ deco.settings.badge | escape }}</span>{%- endif -%}
               <span class="wsp-offer__dot" aria-hidden="true"></span>
               {%- assign vimg = v.image | default: p.featured_image -%}
-              {%- if vimg -%}{{ vimg | image_url: width: 120 | image_tag: class: 'wsp-offer__img', loading: 'lazy', alt: '' }}{%- endif -%}
+              {%- if vimg -%}{{ vimg | image_url: width: 160 | image_tag: class: 'wsp-offer__img', loading: 'lazy', alt: '' }}{%- endif -%}
               <span class="wsp-offer__body">
                 <span class="wsp-offer__title">{{ card_title | escape }}
                   {%- if deco and deco.settings.save_label != blank %} <span class="wsp-offer__save">{{ deco.settings.save_label | escape }}</span>{% endif -%}

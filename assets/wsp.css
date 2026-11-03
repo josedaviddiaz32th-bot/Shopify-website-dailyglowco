@@ -161,8 +161,8 @@
   .wsp-product-card, .wsp-offer, .wsp-pack { transition: none; }
 }
 @media screen and (max-width: 749px) {
-  .wsp-offer { grid-template-columns: auto 1fr auto; }
-  .wsp-offer__img { display: none; }
+  .wsp-offer { gap: 10px; padding: 14px 12px; }
+  .wsp-offer__img { width: 64px; height: 64px; }
   /* Tighter fold: shorter gallery so rating + full name sit in the first screen */
   .wsp-grid { gap: 12px; }
   /* First screen = banner, header, carousel, stars, name. The slide fills whatever
