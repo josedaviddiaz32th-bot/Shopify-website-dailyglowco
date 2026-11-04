@@ -27,30 +27,6 @@
             "image": "shopify://shop_images/wrinkle-smooth-hand-patches-hero-text.jpg"
           }
         },
-        "slot4": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 4: empty slot, pick an image"
-          }
-        },
-        "slot5": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 5: empty slot, pick an image"
-          }
-        },
-        "slot6": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 6: empty slot, pick an image"
-          }
-        },
-        "slot7": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 7: empty slot, pick an image"
-          }
-        },
         "proof1": {
           "type": "proof",
           "settings": {
@@ -89,22 +65,58 @@
             "badge": "Best value",
             "featured": true
           }
+        },
+        "c_hold": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-overnight-hold.jpg",
+            "alt": "Soft silicone holds skin flat overnight and seals in moisture"
+          }
+        },
+        "tab1": {
+          "type": "tab",
+          "settings": {
+            "title": "Why it works",
+            "text": "<p>While you sleep, your face presses and folds and your skin loses moisture, so lines set in deeper. Each patch does two things all night: it <strong>holds the skin smooth</strong> so it can't crease, and it <strong>seals in your skin's own moisture</strong>. Peel it off in the morning and your lines look ironed out.</p><p>No needles, no actives, nothing absorbed. Just soft silicone doing its job for 6–8 hours.</p>"
+          }
+        },
+        "tab2": {
+          "type": "tab",
+          "settings": {
+            "title": "How to use",
+            "text": "<ul><li><strong>Prep:</strong> start with clean, fully dry skin. No serum, lotion or oil underneath.</li><li><strong>Apply:</strong> press each patch on from the center out so it lies flat. Don't stretch the skin around the eyes.</li><li><strong>Sleep:</strong> wear them overnight, 6–8 hours. Side sleeper? Press the edges once more before lights out.</li><li><strong>Morning:</strong> peel off gently, then just clean and reuse. Store each patch on its backing film.</li></ul>"
+          }
+        },
+        "tab3": {
+          "type": "tab",
+          "settings": {
+            "title": "What's in the box",
+            "text": "<ul><li><strong>1 hand patch</strong>, shaped to cover the back of your hand (about 10 × 11 cm)</li><li>Soft, clear silicone</li></ul><p>Choosing the 2 + 1 pack? You get 3 patches.</p>"
+          }
+        },
+        "tab4": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & returns",
+            "text": "<p><strong>Free shipping</strong> on orders of $40 or more; smaller orders ship for a flat $4.99. Every order is tracked.</p><p><strong>30-day money-back guarantee:</strong> if you don't love your mornings, email support@thedailyglowco.com within 30 days of delivery for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
         }
       },
       "block_order": [
         "photo3",
         "photo_guide",
+        "c_hold",
         "photo2",
         "photo1",
-        "slot4",
-        "slot5",
-        "slot6",
-        "slot7",
         "proof1",
         "proof2",
         "proof3",
         "pack1",
-        "pack3"
+        "pack3",
+        "tab1",
+        "tab2",
+        "tab3",
+        "tab4"
       ],
       "settings": {
         "eyebrow": "Reusable overnight silicone patches",
@@ -116,7 +128,13 @@
         "padding_bottom": 40,
         "title_source": "product",
         "rating": "4.6",
-        "rating_text": "22 ratings"
+        "rating_text": "22 ratings",
+        "full_slides": true,
+        "show_placeholders": false,
+        "sale_badge": "Black Friday sale",
+        "sale_text": "Our biggest offer of the year: <strong>buy 2, get 1 free</strong>. Ends Dec 1.",
+        "sale_end": "2026-12-01",
+        "stock_text": "Limited stock: only 22 left"
       }
     },
     "upsell": {
@@ -177,11 +195,11 @@
       "settings": {
         "style": "teal",
         "days": "30",
-        "eyebrow": "Zero-risk mornings",
-        "heading": "We stand behind every patch",
-        "text": "<p>Try it for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
-        "button_label": "Choose your pack",
-        "button_link": "/products/wrinkle-smooth-hand-patches#offer"
+        "eyebrow": "Feel the difference",
+        "heading": "30-Day Risk-Free Trial",
+        "text": "<p>If you don't see smoother-looking mornings within 30 days, send it back for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "button_label": "Claim my offer",
+        "button_link": "#offer"
       }
     },
     "faq": {
@@ -190,52 +208,270 @@
         "q1": {
           "type": "question",
           "settings": {
-            "question": "How do I use it?",
-            "answer": "<p>Apply to clean, fully dry skin (no serum or oil underneath), smoothing from the center outward. Wear overnight, 6–8 hours, then peel off gently. Just clean and reuse after each application.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "How many times can I reuse it?",
-            "answer": "<p>Many nights with proper care: clean it after each use and store it on its backing film.</p>"
+            "question": "Will the patches stay on all night?",
+            "answer": "<p>Applied to clean, fully dry skin (no serum or oil underneath), the patches are made to stay in place overnight. Smooth each one from the center outward so it sits flat, and press the edges once more if you sleep on your side.</p>"
           }
         },
         "q3": {
           "type": "question",
           "settings": {
-            "question": "How much is shipping?",
-            "answer": "<p>Free on orders of $40 or more. Orders under $40 ship for a flat $4.99.</p>"
+            "question": "How many times can I reuse them?",
+            "answer": "<p>Many nights with proper care. Clean each patch after use and store it on its backing film. How long they last depends on your skin prep and care routine.</p>"
           }
         },
-        "q4": {
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Will they irritate my skin or cause breakouts?",
+            "answer": "<p>The patches are soft silicone with no actives; nothing is absorbed into your skin. Keep them clean between uses. If your skin is sensitive, try one for an hour first.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Does it work on deep lines?",
+            "answer": "<p>You'll see smoother-looking softening. Fine lines respond most; deep-set lines soften less. We'd rather tell you that now than surprise you later.</p>"
+          }
+        },
+        "q11": {
           "type": "question",
           "settings": {
             "question": "How do returns work?",
-            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy.</p>"
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
+        },
+        "qw": {
+          "type": "question",
+          "settings": {
+            "question": "How long should I wear them?",
+            "answer": "<p>Overnight, 6–8 hours is the sweet spot. Put them on right before bed and peel them off when you wake up.</p>"
+          }
+        },
+        "qr": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I see results?",
+            "answer": "<p>Most people see smoother-looking skin the very first morning. The look is strongest in the first hours after you peel them off, and mornings keep starting smoother when you use them regularly.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "How much is shipping?",
+            "answer": "<p>Free on orders of $40 or more. Orders under $40 ship for a flat $4.99. Every order is tracked.</p>"
           }
         }
       },
       "block_order": [
         "q1",
-        "q2",
+        "qw",
+        "qr",
+        "q5",
         "q3",
-        "q4"
+        "q8",
+        "q9",
+        "q11"
       ],
       "settings": {
         "style": "light",
-        "eyebrow": "Questions, answered",
-        "heading": "Good to know",
-        "open_first": true
+        "anchor": "faq",
+        "eyebrow": "FAQ",
+        "heading": "Questions, <em>answered</em>",
+        "open_first": true,
+        "button_label": "Claim my offer",
+        "button_link": "#offer"
       }
     },
     "disclosures": {
       "type": "disclosures",
       "settings": {}
+    },
+    "sale": {
+      "type": "dg-ticker",
+      "settings": {
+        "style": "sale",
+        "speed": 28,
+        "end_date": "2026-12-01"
+      },
+      "blocks": {
+        "s1": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "text": "Black Friday sale"
+          }
+        },
+        "s2": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "text": "Buy 2, get 1 free"
+          }
+        },
+        "s3": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "text": "Ends Dec 1"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    "results": {
+      "type": "wsp-results",
+      "settings": {
+        "style": "light",
+        "heading": "Smoother mornings <em>from the very first night</em>",
+        "note": "Before and after one night. Results vary.",
+        "padding_top": 56,
+        "padding_bottom": 48,
+        "show_stars": false
+      },
+      "blocks": {
+        "r1": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-hands.jpg",
+            "alt": "Back of the hands before and after",
+            "title": "Back of the hands",
+            "rating": 5,
+            "text": "Your hands look smoother and more even when you peel the patch off."
+          }
+        },
+        "r2": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-hands-2.jpg",
+            "alt": "Fine lines before and after",
+            "title": "Fine lines",
+            "rating": 5,
+            "text": "The fine lines across the back of your hand look softer, in the one place skincare usually forgets."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2"
+      ]
+    },
+    "stats": {
+      "type": "wsp-stats",
+      "settings": {
+        "style": "mist",
+        "heading": "The secret to <em>smoother-looking mornings</em>",
+        "image": "shopify://shop_images/wrinkle-smooth-results-hands.jpg",
+        "note": "Based on a survey of 200 users conducted by our manufacturer."
+      },
+      "blocks": {
+        "st1": {
+          "type": "stat",
+          "settings": {
+            "value": 95,
+            "text": "saw <strong>smoother-looking skin</strong> the very first morning"
+          }
+        },
+        "st2": {
+          "type": "stat",
+          "settings": {
+            "value": 92,
+            "text": "said their hands <strong>looked smoother</strong> within 7 nights"
+          }
+        },
+        "st3": {
+          "type": "stat",
+          "settings": {
+            "value": 97,
+            "text": "would <strong>recommend the patches</strong> to a friend"
+          }
+        }
+      },
+      "block_order": [
+        "st1",
+        "st2",
+        "st3"
+      ]
+    },
+    "vs": {
+      "type": "wsp-vs",
+      "settings": {
+        "style": "light",
+        "heading": "Daily Glow <em>vs others</em>",
+        "col_us": "Daily Glow",
+        "col_them": "Others",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "v1": {
+          "type": "row",
+          "settings": {
+            "label": "Holds your lines smooth all night",
+            "us": true,
+            "them": false
+          }
+        },
+        "v2": {
+          "type": "row",
+          "settings": {
+            "label": "Seals in moisture while you sleep",
+            "us": true,
+            "them": false
+          }
+        },
+        "v3": {
+          "type": "row",
+          "settings": {
+            "label": "Shaped for the back of your hands",
+            "us": true,
+            "them": false
+          }
+        },
+        "v4": {
+          "type": "row",
+          "settings": {
+            "label": "Reusable: just clean and reuse",
+            "us": true,
+            "them": false
+          }
+        },
+        "v5": {
+          "type": "row",
+          "settings": {
+            "label": "No needles, no glue, no actives",
+            "us": true,
+            "them": false
+          }
+        },
+        "v6": {
+          "type": "row",
+          "settings": {
+            "label": "30-day money-back guarantee",
+            "us": true,
+            "them": false
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6"
+      ]
     }
   },
   "order": [
     "hero",
+    "sale",
+    "results",
+    "stats",
+    "vs",
     "upsell",
     "guarantee",
     "faq",

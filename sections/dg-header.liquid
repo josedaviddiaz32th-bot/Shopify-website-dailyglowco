@@ -23,7 +23,18 @@
 -%}
 <header class="dgh-site{% if section.settings.sticky %} dgh-site--sticky{% endif %}" data-dg-header>
   {%- if sale_bar -%}
-    {%- assign sale_parts = section.settings.sale_bar_text | split: '|' -%}
+    {%- liquid
+      assign sale_text = section.settings.sale_bar_text
+      assign sale_lines = section.settings.sale_bar_overrides | newline_to_br | split: '<br />'
+      for line in sale_lines
+        assign kv = line | split: '='
+        assign k = kv[0] | strip
+        if k != blank and k == template.suffix and kv[1] != blank
+          assign sale_text = kv[1] | strip
+        endif
+      endfor
+      assign sale_parts = sale_text | split: '|'
+    -%}
     <a class="dgh-sale" href="{{ section.settings.sale_bar_link | default: '#offer' }}"{% if section.settings.sale_bar_end != blank %} data-sale-end="{{ section.settings.sale_bar_end | escape }}"{% endif %}>
       <span class="dgh-sale__track">
         {%- for i in (1..2) -%}
@@ -128,6 +139,7 @@
     { "type": "text", "id": "sale_bar_text", "label": "Sale bar text", "info": "Replaces the announcement while set. Separate parts with |, e.g. Black Friday sale | 2nd set just $15" },
     { "type": "url", "id": "sale_bar_link", "label": "Sale bar link", "info": "Empty = jumps to the offer on product pages." },
     { "type": "text", "id": "sale_bar_end", "label": "Sale bar last day (YYYY-MM-DD)" },
+    { "type": "textarea", "id": "sale_bar_overrides", "label": "Different text per template", "info": "One per line: template suffix = text, e.g. eye = Black Friday sale | Up to 40% off" },
     { "type": "text", "id": "sale_bar_templates", "label": "Only on these product templates", "info": "Template suffixes, comma separated, e.g. face-set. Empty = every page." },
     { "type": "text", "id": "announcement", "label": "Announcement", "info": "Separate messages with |", "default": "Free tracked shipping | 30-day money-back guarantee | Buy 2, save 15%" },
     { "type": "text", "id": "holiday_tag", "label": "Holiday label", "default": "Holiday gifting" },

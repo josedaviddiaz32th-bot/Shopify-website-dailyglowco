@@ -16,7 +16,8 @@
         "sticky": true,
         "sale_bar_text": "Black Friday sale | Up to 67% off",
         "sale_bar_end": "2026-12-01",
-        "sale_bar_templates": "face-set"
+        "sale_bar_templates": "face-set, eye, forehead, lip, smile, hands, chest, fnc",
+        "sale_bar_overrides": "eye = Black Friday sale | Up to 40% off\nforehead = Black Friday sale | Up to 40% off\nlip = Black Friday sale | Up to 40% off\nsmile = Black Friday sale | Up to 40% off\nhands = Black Friday sale | Up to 33% off\nchest = Black Friday sale | Up to 33% off\nfnc = Black Friday sale | Up to 29% off"
       }
     }
   },
