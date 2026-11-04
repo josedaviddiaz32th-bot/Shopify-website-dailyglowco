@@ -55,15 +55,15 @@
       codes.push(code);
       return fetch('/cart/update.js', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ discount: codes.join(',') }) });
     }).catch(function () {});
-    // Confirmation right under the product description, so it's on screen as soon as the card closes.
+    // Confirmation right under the product name, so it's on screen as soon as the card closes.
     window.dgScratchNote = function () {
       document.querySelectorAll('.wsp-head').forEach(function (head) {
         if (head.querySelector('.dg-claimed')) return;
         var p = document.createElement('p');
         p.className = 'dg-claimed';
         p.innerHTML = '<span aria-hidden="true">\u2713</span> Your 10% welcome discount is applied';
-        var sub = head.querySelector('.wsp-sub');
-        if (sub) sub.insertAdjacentElement('afterend', p); else head.appendChild(p);
+        var title = head.querySelector('.wsp-title');
+        if (title) title.insertAdjacentElement('afterend', p); else head.appendChild(p);
       });
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.dgScratchNote); else window.dgScratchNote();
@@ -80,7 +80,7 @@
   })();
 </script>
 <style>
-  .dg-claimed { display: flex; align-items: center; gap: 8px; width: fit-content; margin: 12px 0 4px; padding: 7px 14px; border-radius: 999px; background: #E8F5EE; font-size: 14px; font-weight: 600; color: #1F6B47; }
+  .dg-claimed { display: flex; align-items: center; gap: 8px; width: fit-content; margin: -18px 0 16px; padding: 7px 14px; border-radius: 999px; background: #E8F5EE; font-size: 14px; font-weight: 600; color: #1F6B47; }
 </style>
 {%- if sp_show -%}
 <div class="dgs" id="DgScratch" role="dialog" aria-modal="true" aria-labelledby="DgScratchTitle" hidden data-delay="{{ sp_delay }}">
