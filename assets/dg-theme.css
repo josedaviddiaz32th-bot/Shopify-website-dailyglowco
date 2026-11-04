@@ -515,3 +515,9 @@ cart-drawer .dgc-applied .dg-icon { width: 20px; height: 20px; flex: none; }
 cart-drawer .dgc-applied strong { font-weight: 700; }
 cart-drawer .dgc-express { margin-top: 2px; }
 cart-drawer .dgc-express shopify-accelerated-checkout-cart { --shopify-accelerated-checkout-button-block-size: 44px; --shopify-accelerated-checkout-button-border-radius: 999px; --shopify-accelerated-checkout-row-gap: 8px; --shopify-accelerated-checkout-inline-alignment: center; }
+
+/* Cart drawer open: the page behind must not scroll. iPhone Safari ignores overflow on <body> alone, so lock <html>;
+   scrolling the item list stops at its ends instead of carrying over; swipes on the fixed parts do nothing. */
+html:has(body.overflow-hidden) { overflow: hidden; }
+cart-drawer .dgc-scroll { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+cart-drawer .cart-drawer__overlay, cart-drawer .drawer__header, cart-drawer .drawer__footer { touch-action: none; overscroll-behavior: contain; }
