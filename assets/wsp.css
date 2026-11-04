@@ -343,7 +343,7 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 .wsp-res__track::-webkit-scrollbar { display: none; }
 .wsp-res__card { flex: 0 0 min(72vw, 300px); scroll-snap-align: start; background: var(--dg-card); border: 1px solid var(--dg-line); border-radius: 20px; padding: 12px 12px 16px; display: flex; flex-direction: column; gap: 10px; }
 .dg--light .wsp-res__card, .wsp-res.dg--light .wsp-res__card { background: #fff; box-shadow: 0 8px 24px -16px rgba(23,57,61,.35); }
-.wsp-res__img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
+.wsp-res__img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 7; object-fit: cover; border-radius: 14px; }
 .wsp-res__stars { display: flex; gap: 2px; color: #F5A623; }
 .wsp-res__stars svg { width: 17px; height: 17px; display: block; }
 .wsp-res__stars .off { color: rgba(23,57,61,.18); }
