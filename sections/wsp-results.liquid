@@ -1,0 +1,74 @@
+{%- comment -%}
+  Results card carousel: swipeable cards with a before/after photo, stars, the
+  customer's words and their name | age. Advances on its own every few seconds
+  until the shopper touches it.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+{%- capture star -%}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>{%- endcapture -%}
+<section class="dg dg--{{ section.settings.style }} wsp-res" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+    </div>
+    <div class="wsp-res__track" data-res-track>
+      {%- for block in section.blocks -%}
+        <article class="wsp-res__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 700 | image_tag: class: 'wsp-res__img', loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 750px) 300px, 72vw', alt: block.settings.alt | default: block.settings.image.alt | escape }}
+          {%- else -%}
+            <div class="wsp-res__img wsp-ph"><span>{{ block.settings.alt | default: 'Before / after photo' | escape }}</span></div>
+          {%- endif -%}
+          <div class="wsp-res__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+            {%- for i in (1..5) %}<span{% if i > block.settings.rating %} class="off"{% endif %}>{{ star }}</span>{% endfor -%}
+          </div>
+          <p class="wsp-res__text">{{ block.settings.text | escape }}</p>
+          <p class="wsp-res__who">{{ block.settings.name | escape }}{% if block.settings.age != blank %} <span>|</span> {{ block.settings.age | escape }}{% endif %}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank %}<p class="wsp-res__note">{{ section.settings.note | escape }}</p>{% endif -%}
+  </div>
+  <script>
+    (function () {
+      var t = document.currentScript.parentElement.querySelector('[data-res-track]');
+      if (!t || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var stop = false;
+      ['touchstart', 'pointerdown', 'wheel'].forEach(function (e) { t.addEventListener(e, function () { stop = true; }, { passive: true }); });
+      setInterval(function () {
+        if (stop || !t.children.length) return;
+        var w = t.children[0].getBoundingClientRect().width + 14;
+        var end = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
+        t.scrollTo({ left: end ? 0 : t.scrollLeft + w, behavior: 'smooth' });
+      }, 3800);
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "WSP results cards",
+  "tag": "div",
+  "class": "section-wsp-results",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "light", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "eyebrow", "label": "Small label" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Smoother mornings <em>from the first night</em>" },
+    { "type": "text", "id": "note", "label": "Line under the cards", "info": "e.g. 'Real customers. Results vary.'" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "result", "name": "Result card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Before / after photo" },
+      { "type": "text", "id": "alt", "label": "Photo description" },
+      { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+      { "type": "textarea", "id": "text", "label": "Customer's words" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Customer" },
+      { "type": "text", "id": "age", "label": "Age" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP results cards" }]
+}
+{% endschema %}

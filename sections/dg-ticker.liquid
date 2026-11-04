@@ -1,5 +1,7 @@
 {{ 'daily-glow.css' | asset_url | stylesheet_tag }}
-<div class="dg dg-ticker dg--{{ section.settings.style }}" style="--dg-speed: {{ section.settings.speed }}s;" role="region" aria-label="Highlights">
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
+{%- unless section.settings.end_date != blank and today > section.settings.end_date -%}
+<div class="dg dg-ticker dg--{{ section.settings.style }}{% if section.settings.style == 'sale' %} dg-ticker--sale{% endif %}" style="--dg-speed: {{ section.settings.speed }}s;" role="region" aria-label="Highlights"{% if section.settings.end_date != blank %} data-sale-end="{{ section.settings.end_date | escape }}"{% endif %}>
   <div class="dg-ticker__track">
     {%- for i in (1..2) -%}
       <div class="dg-ticker__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
@@ -13,7 +15,11 @@
     {%- endfor -%}
   </div>
 </div>
+{%- endunless -%}
+{%- if section.settings.end_date != blank -%}
+<script>(function(){var e=document.currentScript.previousElementSibling;if(e&&e.dataset.saleEnd&&Date.now()>new Date(e.dataset.saleEnd+'T23:59:59').getTime())e.hidden=true;})();</script>
+{%- endif -%}
 
 {% schema %}
-{"name":"Daily Glow ticker","tag":"div","class":"section-dg-ticker","settings":[{"type":"select","id":"style","label":"Color style","default":"teal","options":[{"value":"light","label":"White"},{"value":"mist","label":"Mist"},{"value":"teal","label":"Deep teal"}]},{"type":"range","id":"speed","label":"Scroll speed (seconds per loop)","min":10,"max":80,"step":2,"default":36}],"blocks":[{"type":"item","name":"Item","settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"light","label":"Light"},{"value":"hands","label":"Hands"},{"value":"leaf","label":"Leaf"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"home","label":"Home"},{"value":"spark","label":"Spark"},{"value":"truck","label":"Truck"},{"value":"cap","label":"Cap"},{"value":"power","label":"Power"},{"value":"repeat","label":"Repeat"},{"value":"heart","label":"Heart"},{"value":"lock","label":"Lock"},{"value":"mail","label":"Mail"},{"value":"check","label":"Check"}],"default":"check"},{"type":"text","id":"text","label":"Text","default":"Drug-free & non-invasive"}]}],"presets":[{"name":"Daily Glow ticker","blocks":[{"type":"item","settings":{"icon":"leaf","text":"No pills. No creams."}},{"type":"item","settings":{"icon":"hands","text":"Hands-free sessions"}},{"type":"item","settings":{"icon":"shield","text":"30-day money-back guarantee"}},{"type":"item","settings":{"icon":"truck","text":"Tracked shipping"}}]}]}
+{"name":"Daily Glow ticker","tag":"div","class":"section-dg-ticker","settings":[{"type":"select","id":"style","label":"Color style","default":"teal","options":[{"value":"light","label":"White"},{"value":"mist","label":"Mist"},{"value":"teal","label":"Deep teal"},{"value":"sale","label":"Sale (teal to orange)"}]},{"type":"text","id":"end_date","label":"Hide after (YYYY-MM-DD)","info":"Optional. For sale banners: the ticker hides itself after this day."},{"type":"range","id":"speed","label":"Scroll speed (seconds per loop)","min":10,"max":80,"step":2,"default":36}],"blocks":[{"type":"item","name":"Item","settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"light","label":"Light"},{"value":"hands","label":"Hands"},{"value":"leaf","label":"Leaf"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"home","label":"Home"},{"value":"spark","label":"Spark"},{"value":"truck","label":"Truck"},{"value":"cap","label":"Cap"},{"value":"power","label":"Power"},{"value":"repeat","label":"Repeat"},{"value":"heart","label":"Heart"},{"value":"lock","label":"Lock"},{"value":"mail","label":"Mail"},{"value":"check","label":"Check"}],"default":"check"},{"type":"text","id":"text","label":"Text","default":"Drug-free & non-invasive"}]}],"presets":[{"name":"Daily Glow ticker","blocks":[{"type":"item","settings":{"icon":"leaf","text":"No pills. No creams."}},{"type":"item","settings":{"icon":"hands","text":"Hands-free sessions"}},{"type":"item","settings":{"icon":"shield","text":"30-day money-back guarantee"}},{"type":"item","settings":{"icon":"truck","text":"Tracked shipping"}}]}]}
 {% endschema %}

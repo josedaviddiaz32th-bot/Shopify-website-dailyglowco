@@ -1,0 +1,63 @@
+{%- comment -%}
+  Us vs others: a two-column check / cross table.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+{%- capture yes -%}<span class="wsp-vs__mark is-yes" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{%- endcapture -%}
+{%- capture no -%}<span class="wsp-vs__mark is-no" aria-label="No"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg></span>{%- endcapture -%}
+<section class="dg dg--{{ section.settings.style }} wsp-vs" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+    </div>
+    <table class="wsp-vs__table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="sr-only">Feature</span></th>
+          <th scope="col" class="wsp-vs__us">{{ section.settings.col_us | escape }}</th>
+          <th scope="col">{{ section.settings.col_them | escape }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row">{{ block.settings.label | escape }}</th>
+            <td class="wsp-vs__us">{% if block.settings.us %}{{ yes }}{% else %}{{ no }}{% endif %}</td>
+            <td>{% if block.settings.them %}{{ yes }}{% else %}{{ no }}{% endif %}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    {%- if section.settings.button_label != blank -%}
+      <div class="dg__cta"><a class="dg-btn dg-btn--primary" href="{{ section.settings.button_link | default: '#offer' }}">{{ section.settings.button_label | escape }}{% render 'dg-icon', name: 'arrow' %}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WSP us vs others",
+  "tag": "div",
+  "class": "section-wsp-vs",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "light", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "eyebrow", "label": "Small label" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Daily Glow <em>vs others</em>" },
+    { "type": "text", "id": "col_us", "label": "Our column", "default": "Daily Glow" },
+    { "type": "text", "id": "col_them", "label": "Other column", "default": "Others" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [
+      { "type": "text", "id": "label", "label": "Feature", "default": "Feature" },
+      { "type": "checkbox", "id": "us", "label": "We have it", "default": true },
+      { "type": "checkbox", "id": "them", "label": "Others have it", "default": false }
+    ] }
+  ],
+  "presets": [{ "name": "WSP us vs others" }]
+}
+{% endschema %}

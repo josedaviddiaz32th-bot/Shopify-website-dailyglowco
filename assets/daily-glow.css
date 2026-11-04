@@ -139,3 +139,10 @@
   .dg-badges { justify-content: center; }
   .dg-guarantee__cta .dg-btn, .dg__cta .dg-btn { width: 100%; }
 }
+
+/* Sale ticker: moving Black Friday strip */
+.dg-ticker--sale { background: linear-gradient(110deg, #0F2A2D 0%, #17393D 45%, #8A4A1C 78%, #F08A2C 100%); color: #fff; border: 0; }
+.dg-ticker--sale .dg-ticker__group { gap: 26px; padding: 11px 13px; }
+.dg-ticker--sale .dg-ticker__item { font-size: 13px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; text-shadow: 0 0 8px rgba(255,255,255,.25); }
+.dg-ticker--sale .dg-ticker__item .dg-icon { color: var(--dg-gold); width: 16px; height: 16px; }
+.dg-ticker[hidden] { display: none; }

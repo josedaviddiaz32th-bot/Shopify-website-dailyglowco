@@ -305,3 +305,15 @@
     });
   }
 })();
+
+// Sale banners: hide anything marked data-sale-end="YYYY-MM-DD" once that day is over
+// (the page can be cached past midnight, so Liquid alone isn't enough).
+(function () {
+  var hide = function () {
+    document.querySelectorAll('[data-sale-end]').forEach(function (el) {
+      var d = el.getAttribute('data-sale-end');
+      if (d && Date.now() > new Date(d + 'T23:59:59').getTime()) el.hidden = true;
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hide); else hide();
+})();

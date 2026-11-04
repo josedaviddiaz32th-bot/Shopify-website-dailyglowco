@@ -77,7 +77,7 @@
   assign video_blocks = section.blocks | where: 'type', 'video'
 -%}
 
-<wsp-hero class="dg wsp-hero" id="offer" data-section="{{ sid }}" data-money-format="{{ shop.money_format | escape }}">
+<wsp-hero class="dg wsp-hero{% if section.settings.full_slides %} wsp-hero--full{% endif %}" id="offer" data-section="{{ sid }}" data-money-format="{{ shop.money_format | escape }}">
   <div class="dg__wrap" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
     <div class="wsp-grid">
 
@@ -141,7 +141,7 @@
             endif
           -%}
           {%- comment -%} Empty slots are kept as placeholders for the theme editor; shoppers never see them. {%- endcomment -%}
-          {%- if vm == blank and gimg == blank and block.settings.asset == blank and request.design_mode == false -%}{%- assign n = n | minus: 1 -%}{%- continue -%}{%- endif -%}
+          {%- if vm == blank and gimg == blank and block.settings.asset == blank and request.design_mode == false and section.settings.show_placeholders == false -%}{%- assign n = n | minus: 1 -%}{%- continue -%}{%- endif -%}
           {%- if block.settings.alt == blank and gimg.alt != blank -%}{%- assign alt = gimg.alt | escape -%}{%- endif -%}
           {%- capture img -%}
             {%- if vm != blank -%}
@@ -193,6 +193,23 @@
               <li {{ block.shopify_attributes }}>{% render 'dg-icon', name: block.settings.icon %}<span>{{ block.settings.text | escape }}</span></li>
             {%- endfor -%}
           </ul>
+        {%- endif -%}
+
+        {%- liquid
+          assign sale_on = false
+          if section.settings.sale_badge != blank or section.settings.sale_text != blank
+            assign sale_on = true
+            assign today = 'now' | date: '%Y-%m-%d'
+            if section.settings.sale_end != blank and today > section.settings.sale_end
+              assign sale_on = false
+            endif
+          endif
+        -%}
+        {%- if sale_on -%}
+          <div class="wsp-sale" data-sale-end="{{ section.settings.sale_end | escape }}">
+            {%- if section.settings.sale_badge != blank %}<span class="wsp-sale__badge">{{ section.settings.sale_badge | escape }}</span>{% endif -%}
+            {%- if section.settings.sale_text != blank %}<p class="wsp-sale__text">{{ section.settings.sale_text }}</p>{% endif -%}
+          </div>
         {%- endif -%}
 
         {%- comment -%} Offer selector: one card per variant, blocks decorate. {%- endcomment -%}
@@ -300,10 +317,14 @@
             assign show_low = true
           endif
         -%}
+        {%- if section.settings.stock_text != blank -%}
+          <p class="wsp-stock wsp-stock--fixed"><span class="wsp-stock__dot" aria-hidden="true"></span><span>{{ section.settings.stock_text | escape }}</span></p>
+        {%- else -%}
         <p class="wsp-stock" data-stock-line data-low-max="{{ low_max }}"{% unless show_low %} hidden{% endunless %}>
           <span class="wsp-stock__dot" aria-hidden="true"></span>
           <span>Only <strong data-stock-n>{{ cur_stock }}</strong> left in stock</span>
         </p>
+        {%- endif -%}
 
         <div class="wsp-buy" data-buy>
           {%- liquid
@@ -351,6 +372,17 @@
             <p class="wsp-guarantee-line">{% render 'dg-icon', name: 'shield' %}<span>{{ section.settings.guarantee_line | escape }}</span></p>
           {%- endif -%}
         </div>
+        {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
+        {%- if tabs.size > 0 -%}
+          <div class="wsp-tabs">
+            {%- for block in tabs -%}
+              <details class="wsp-tab" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.title | escape }}</summary>
+                <div class="wsp-tab__body">{{ block.settings.text }}</div>
+              </details>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -397,6 +429,13 @@
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
     { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
     { "type": "checkbox", "id": "show_express", "label": "Show Shop Pay / express button under Buy now", "default": false, "info": "Checkout already offers Shop Pay, Apple Pay and PayPal at the top, so this is off to keep the page to one clear button." },
+    { "type": "checkbox", "id": "full_slides", "label": "Show whole carousel images on phones", "default": false, "info": "Square slides keep their full width and height, so text on the image is never cut off." },
+    { "type": "checkbox", "id": "show_placeholders", "label": "Show empty carousel slots to shoppers", "default": false, "info": "Turn on while waiting for images: empty slots show their description as a placeholder." },
+    { "type": "header", "content": "Sale" },
+    { "type": "text", "id": "sale_badge", "label": "Sale badge", "info": "e.g. BLACK FRIDAY SALE. Leave badge and text empty to hide." },
+    { "type": "inline_richtext", "id": "sale_text", "label": "Sale message", "info": "Shown above the packs." },
+    { "type": "text", "id": "sale_end", "label": "Sale last day (YYYY-MM-DD)", "info": "The sale message hides itself after this day." },
+    { "type": "text", "id": "stock_text", "label": "Stock line", "info": "e.g. 'Limited stock: only 43 left'. Shown with a red dot above the buttons. Leave empty to use the real Shopify stock count below." },
     { "type": "range", "id": "low_stock", "label": "Show 'Only N left' at or below", "min": 0, "max": 20, "step": 1, "default": 5, "info": "Uses the product's real Shopify stock count, so keep stock in AutoDS accurate. 0 turns it off." },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 20 },
@@ -413,6 +452,10 @@
     { "type": "video", "name": "Gallery video", "settings": [
       { "type": "number", "id": "index", "label": "Product video number", "default": 1, "info": "1 = the first video in the product's media." },
       { "type": "text", "id": "alt", "label": "Video description" }
+    ] },
+    { "type": "tab", "name": "Info tab", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "How to use" },
+      { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tab text</p>" }
     ] },
     { "type": "proof", "name": "Proof bullet", "limit": 4, "settings": [
       { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [

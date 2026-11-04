@@ -1,0 +1,79 @@
+{%- comment -%}
+  Stats with rings: a photo, then up to 4 percentages whose rings fill and count up
+  when they scroll into view, and a source line underneath.
+{%- endcomment -%}
+{{ 'daily-glow.css' | asset_url | stylesheet_tag }}
+{{ 'wsp.css' | asset_url | stylesheet_tag }}
+<section class="dg dg--{{ section.settings.style }} wsp-stats" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
+  <div class="dg__wrap">
+    <div class="dg__head">
+      {%- if section.settings.eyebrow != blank %}<p class="dg__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif -%}
+      {%- if section.settings.heading != blank %}<h2 class="dg__title">{{ section.settings.heading }}</h2>{% endif -%}
+    </div>
+    <div class="wsp-stats__grid">
+      <div class="wsp-stats__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 700, 1000', sizes: '(min-width: 750px) 500px, 92vw', alt: section.settings.image.alt | escape }}
+        {%- else -%}
+          <div class="wsp-ph"><span>Model photo</span></div>
+        {%- endif -%}
+      </div>
+      <ul class="wsp-stats__list" data-stats>
+        {%- for block in section.blocks -%}
+          {%- assign v = block.settings.value | at_least: 0 | at_most: 100 -%}
+          <li class="wsp-stat" {{ block.shopify_attributes }}>
+            <div class="wsp-stat__ring" style="--v: {{ v }};">
+              <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" class="bg"/><circle cx="40" cy="40" r="34" class="fg" pathLength="100"/></svg>
+              <strong data-to="{{ v }}">{{ v }}%</strong>
+            </div>
+            <p>{{ block.settings.text }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- if section.settings.note != blank %}<p class="wsp-stats__note">{{ section.settings.note | escape }}</p>{% endif -%}
+  </div>
+  <script>
+    (function () {
+      var list = document.currentScript.parentElement.querySelector('[data-stats]');
+      if (!list || !('IntersectionObserver' in window)) return;
+      list.classList.add('is-armed');
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          io.disconnect();
+          list.classList.add('is-in');
+          list.querySelectorAll('[data-to]').forEach(function (n) {
+            var to = parseInt(n.dataset.to, 10) || 0, t0 = performance.now();
+            (function step(t) { var k = Math.min(1, (t - t0) / 1400); n.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + '%'; if (k < 1) requestAnimationFrame(step); })(t0);
+          });
+        });
+      }, { threshold: 0.35 });
+      io.observe(list);
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "WSP stats rings",
+  "tag": "div",
+  "class": "section-wsp-stats",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Color style", "default": "mist", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
+    { "type": "text", "id": "eyebrow", "label": "Small label" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "note", "label": "Source line", "info": "Where the numbers come from, e.g. 'Based on a survey of 120 customers'." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "limit": 4, "settings": [
+      { "type": "range", "id": "value", "label": "Percent", "min": 0, "max": 100, "step": 1, "default": 90 },
+      { "type": "inline_richtext", "id": "text", "label": "What it means" }
+    ] }
+  ],
+  "presets": [{ "name": "WSP stats rings" }]
+}
+{% endschema %}
