@@ -365,8 +365,8 @@
             <span>Checkout · {{ cart.total_price | money }}</span>
           </button>
           {%- if additional_checkout_buttons -%}
-            {%- comment -%} Express checkout (Apple Pay, Shop Pay, Google Pay, PayPal): buy straight from the drawer. {%- endcomment -%}
-            <div class="dgc-express additional-checkout-buttons">
+            {%- comment -%} Express checkout (Apple Pay, Shop Pay, Google Pay, PayPal): buy straight from the drawer. --horizontal keeps them in one row; Shopify otherwise stacks 4 wallets on screens under 430px. {%- endcomment -%}
+            <div class="dgc-express additional-checkout-buttons additional-checkout-buttons--horizontal">
               {{ content_for_additional_checkout_buttons }}
             </div>
           {%- else -%}
