@@ -5,9 +5,32 @@
 {%- liquid
   assign holiday = settings.holiday_mode
   assign menu = section.settings.menu
+  # Sale bar: replaces the announcement while the sale runs, on the listed template suffixes (empty = every page).
+  assign sale_bar = false
+  if section.settings.sale_bar_text != blank
+    assign sale_bar = true
+    assign today = 'now' | date: '%Y-%m-%d'
+    if section.settings.sale_bar_end != blank and today > section.settings.sale_bar_end
+      assign sale_bar = false
+    endif
+    if section.settings.sale_bar_templates != blank
+      assign sale_tpls = section.settings.sale_bar_templates | remove: ' ' | split: ','
+      unless sale_tpls contains template.suffix
+        assign sale_bar = false
+      endunless
+    endif
+  endif
 -%}
 <header class="dgh-site{% if section.settings.sticky %} dgh-site--sticky{% endif %}" data-dg-header>
-  {%- if holiday -%}
+  {%- if sale_bar -%}
+    {%- assign sale_parts = section.settings.sale_bar_text | split: '|' -%}
+    <a class="dgh-sale" href="{{ section.settings.sale_bar_link | default: '#offer' }}"{% if section.settings.sale_bar_end != blank %} data-sale-end="{{ section.settings.sale_bar_end | escape }}"{% endif %}>
+      {%- for part in sale_parts -%}
+        {%- unless forloop.first %}<span class="dgh-sale__sep" aria-hidden="true">-</span>{% endunless -%}
+        <span>{{ part | strip | escape }}</span>
+      {%- endfor -%}
+    </a>
+  {%- elsif holiday -%}
     <div class="dgh-announce">
       <span class="dgh-announce__tag">{{ section.settings.holiday_tag | escape }}</span>
       <span>{{ section.settings.holiday_text | escape }}</span>
@@ -94,6 +117,11 @@
   "class": "section-dg-header",
   "settings": [
     { "type": "header", "content": "Announcement" },
+    { "type": "header", "content": "Sale bar" },
+    { "type": "text", "id": "sale_bar_text", "label": "Sale bar text", "info": "Replaces the announcement while set. Separate parts with |, e.g. Black Friday sale | 2nd set just $15" },
+    { "type": "url", "id": "sale_bar_link", "label": "Sale bar link", "info": "Empty = jumps to the offer on product pages." },
+    { "type": "text", "id": "sale_bar_end", "label": "Sale bar last day (YYYY-MM-DD)" },
+    { "type": "text", "id": "sale_bar_templates", "label": "Only on these product templates", "info": "Template suffixes, comma separated, e.g. face-set. Empty = every page." },
     { "type": "text", "id": "announcement", "label": "Announcement", "info": "Separate messages with |", "default": "Free tracked shipping | 30-day money-back guarantee | Buy 2, save 15%" },
     { "type": "text", "id": "holiday_tag", "label": "Holiday label", "default": "Holiday gifting" },
     { "type": "text", "id": "holiday_text", "label": "Holiday announcement", "default": "Buy 2 caps, save 15% · Order by Dec 12 for holiday delivery" },

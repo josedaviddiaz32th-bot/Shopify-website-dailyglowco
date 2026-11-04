@@ -13,7 +13,10 @@
         "logo_height": 38,
         "santa_hat": true,
         "menu": "main-menu",
-        "sticky": true
+        "sticky": true,
+        "sale_bar_text": "Black Friday sale | 2nd set just $15",
+        "sale_bar_end": "2026-12-01",
+        "sale_bar_templates": "face-set"
       }
     }
   },
