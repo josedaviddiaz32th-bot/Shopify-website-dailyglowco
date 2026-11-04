@@ -160,7 +160,9 @@
           tot.querySelector('[data-total-all]').textContent = allFmt;
           var was = tot.querySelector('[data-total-was]');
           if (was) { was.hidden = !off; was.textContent = off ? formatMoney(price + ship, this.format) : ''; }
-          tot.querySelector('[data-total-parts]').textContent = (off ? '10% welcome discount · ' : '') + (ship > 0
+          var parts = tot.querySelector('[data-total-parts]');
+          parts.classList.toggle('wsp-total__parts--welcome', !!off);
+          parts.textContent = (off ? '\u2713 10% welcome discount · ' : '') + (ship > 0
             ? formatMoney(net, this.format) + ' + ' + formatMoney(ship, this.format) + ' shipping'
             : (off ? 'free shipping' : 'Free shipping included'));
         }

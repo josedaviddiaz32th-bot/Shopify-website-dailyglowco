@@ -27,8 +27,8 @@
         "proof4": {
           "type": "proof",
           "settings": {
-            "icon": "truck",
-            "text": "Ships free: every set clears $40"
+            "icon": "spark",
+            "text": "Visibly smoother skin from the first night"
           }
         },
         "offer-2": {
@@ -36,7 +36,7 @@
           "settings": {
             "match": "2 Sets",
             "title": "2 Sets (10 pieces)",
-            "subtitle": "2 forehead + 8 under-eye & smile line patches · $30 a set",
+            "subtitle": "2 forehead + 8 eye & smile‑line patches · only $30 a set",
             "badge": "Most popular",
             "save_label": "Save $30",
             "compare": 90,
@@ -48,7 +48,7 @@
           "settings": {
             "match": "1 Set",
             "title": "1 Set (5 pieces)",
-            "subtitle": "1 forehead patch + 4 for under-eyes & smile lines"
+            "subtitle": "1 forehead patch + 4 eye & smile‑line patches"
           }
         },
         "img0": {
@@ -161,7 +161,7 @@
         "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
         "rating": "4.6",
         "rating_text": "34 ratings · 300+ sold",
-        "subheadline": "Five soft silicone patches for your forehead, under your eyes and your smile lines. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.",
+        "subheadline": "Five soft silicone patches for your <strong>forehead</strong>, <strong>under your eyes</strong> and your <strong>smile lines</strong>. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.",
         "offer_label": "Choose your set",
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
         "sticky_bar": true,

@@ -98,7 +98,7 @@
         {%- else -%}
           <h1 class="wsp-title">{{ section.settings.headline }}</h1>
         {%- endif -%}
-        {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline | escape }}</p>{% endif -%}
+        {%- if section.settings.subheadline != blank %}<p class="wsp-sub">{{ section.settings.subheadline }}</p>{% endif -%}
       </div>
 
       {%- comment -%} Gallery. Cadence: hero shot → texture/fit → objection → proof. {%- endcomment -%}
@@ -428,7 +428,7 @@
     { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Smooth Your Wrinkles <em>While You Sleep</em>" },
     { "type": "text", "id": "rating", "label": "Rating", "info": "Real average from the source only. Leave empty to hide." },
     { "type": "text", "id": "rating_text", "label": "Rating text", "info": "e.g. '671 ratings · 5,000+ sold'. Say where they're from if they aren't this store's own reviews." },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin." },
+    { "type": "inline_richtext", "id": "subheadline", "label": "Subheadline", "info": "Bold words stand out (e.g. the areas the set covers).", "default": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin." },
     { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
     { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
@@ -464,7 +464,7 @@
     { "type": "proof", "name": "Proof bullet", "limit": 4, "settings": [
       { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
         { "value": "check", "label": "Check" }, { "value": "repeat", "label": "Repeat" }, { "value": "leaf", "label": "Leaf" },
-        { "value": "shield", "label": "Shield" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "truck", "label": "Truck" }
+        { "value": "shield", "label": "Shield" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "truck", "label": "Truck" }, { "value": "spark", "label": "Spark" }
       ] },
       { "type": "text", "id": "text", "label": "Text", "default": "No needles, no tape, no refills" }
     ] },

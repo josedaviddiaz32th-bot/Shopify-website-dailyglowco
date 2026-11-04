@@ -88,6 +88,7 @@
 .wsp-atc--secondary:hover { background: var(--dg-mist); }
 .wsp-total__was { margin-right: 6px; font-size: 16px; font-weight: 600; color: var(--dg-ink-muted, rgba(23,57,61,.6)); }
 .wsp-total__was[hidden] { display: none; }
+.wsp-total .wsp-total__parts--welcome { display: inline-flex; align-items: center; margin-top: 6px; padding: 6px 12px; border-radius: 999px; background: #E8F5EE; border: 1px solid rgba(31,107,71,.18); color: #1F6B47; font-weight: 700; font-size: 13.5px; }
 .wsp-guarantee-line { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--dg-ink-muted); }
 .wsp-guarantee-line .dg-icon { width: 18px; height: 18px; color: var(--dg-orange); flex: none; margin-top: 1px; }
 
@@ -398,3 +399,6 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 /* Text in brand orange: a deeper shade so small text stays readable (WCAG AA contrast) */
 .dg .dg__eyebrow, .wsp-offer__save, .wsp-product-card__tag, .wsp-product-card__link { color: #A8500F; }
 .dg.dg--teal .dg__eyebrow { color: var(--dg-gold); }
+
+/* Bold words in the subheadline (e.g. the areas the set covers) */
+.wsp-sub strong { color: var(--dg-ink, #17393D); font-weight: 700; }

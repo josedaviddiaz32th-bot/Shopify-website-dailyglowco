@@ -255,6 +255,19 @@
                 </div>
               {%- endif -%}
 
+              {%- comment -%} Discount codes on the cart (e.g. the scratch-card SCRATCH10): shown right under the items so it's seen at once. {%- endcomment -%}
+              {%- for dg_app in cart.cart_level_discount_applications -%}
+                {%- if dg_app.type == 'discount_code' and dg_app.total_allocated_amount > 0 -%}
+                  {%- liquid
+                    assign dg_app_label = 'Code ' | append: dg_app.title
+                    if dg_app.title == 'SCRATCH10'
+                      assign dg_app_label = '10% welcome discount'
+                    endif
+                  -%}
+                  <p class="dgc-applied">{% render 'dg-icon', name: 'check' %}<span><strong>{{ dg_app_label | escape }} applied</strong> · you save {{ dg_app.total_allocated_amount | money }}</span></p>
+                {%- endif -%}
+              {%- endfor -%}
+
               {%- comment -%} Special offers: other products from the theme setting, skipping what's in the cart. {%- endcomment -%}
               {%- capture dg_offer_cards -%}
                 {%- for op in settings.dg_cart_offers -%}
@@ -351,11 +364,18 @@
             {% render 'dg-icon', name: 'lock' %}
             <span>Checkout · {{ cart.total_price | money }}</span>
           </button>
+          {%- if additional_checkout_buttons -%}
+            {%- comment -%} Express checkout (Apple Pay, Shop Pay, Google Pay, PayPal): buy straight from the drawer. {%- endcomment -%}
+            <div class="dgc-express additional-checkout-buttons additional-checkout-buttons--vertical">
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+          {%- else -%}
           <ul class="dgc-pay" role="list" aria-label="Payment methods">
             {%- for type in shop.enabled_payment_types -%}
               <li>{{ type | payment_type_svg_tag: class: 'dgc-pay__icon' }}</li>
             {%- endfor -%}
           </ul>
+          {%- endif -%}
         </div>
       </div>
     </div>

@@ -508,3 +508,10 @@ cart-drawer .dgc-empty__text { margin: 0 0 6px; color: var(--dg-ink-muted); font
 @media (prefers-reduced-motion: reduce) { .dgh-sale__track { animation: none; } }
 .dgh-sale[hidden] { display: none; }
 @media screen and (max-width: 749px) { .dgh-site .dgh-sale { font-size: 12.5px; padding: 8px 0; letter-spacing: .04em; } }
+
+/* Cart drawer: applied discount code banner (under the items) and express checkout buttons */
+cart-drawer .dgc-applied { display: flex; align-items: center; gap: 10px; margin: 4px 0 16px; padding: 12px 14px; border-radius: 14px; background: #E8F5EE; border: 1px solid rgba(31,107,71,.18); color: #1F6B47; font-size: 14px; line-height: 1.4; }
+cart-drawer .dgc-applied .dg-icon { width: 20px; height: 20px; flex: none; }
+cart-drawer .dgc-applied strong { font-weight: 700; }
+cart-drawer .dgc-express { margin-top: 2px; }
+cart-drawer .dgc-express shopify-accelerated-checkout-cart { --shopify-accelerated-checkout-button-block-size: 46px; --shopify-accelerated-checkout-button-border-radius: 999px; --shopify-accelerated-checkout-row-gap: 8px; }
