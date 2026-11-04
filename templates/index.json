@@ -97,8 +97,8 @@
         "imghero": {
           "type": "image",
           "settings": {
-            "product_image_file": "wrinkle-smooth-face-set-hero",
-            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches"
+            "alt": "The Wrinkle Smooth Face Set: 1 forehead patch and 4 crescent patches",
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-hero-text.jpg"
           }
         },
         "imgba": {

@@ -24,7 +24,7 @@
         "photo3": {
           "type": "image",
           "settings": {
-            "product_image": 3
+            "image": "shopify://shop_images/wrinkle-smooth-lip-line-patches-hero-text.jpg"
           }
         },
         "slot4": {

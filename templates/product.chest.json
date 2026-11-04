@@ -30,7 +30,7 @@
         "photo3": {
           "type": "image",
           "settings": {
-            "product_image": 3
+            "image": "shopify://shop_images/wrinkle-smooth-chest-pad-hero-text.jpg"
           }
         },
         "slot4": {
