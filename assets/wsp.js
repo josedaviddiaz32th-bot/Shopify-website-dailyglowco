@@ -31,7 +31,7 @@
             b.classList.remove('loading');
             b.removeAttribute('aria-disabled');
           });
-          var sb = this.querySelector('[data-sticky-atc]');
+          var sb = (this.stickyBar || this).querySelector('[data-sticky-atc]');
           if (sb) sb.textContent = 'Buy now';
           this.update();
           var steps = this.querySelectorAll('.wsp-steps li');
@@ -94,7 +94,7 @@
         var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
         var self = this;
         var label = btn.querySelector('[data-atc-label]');
-        var sticky = this.querySelector('[data-sticky-atc]');
+        var sticky = (this.stickyBar || this).querySelector('[data-sticky-atc]');
         var steps = document.querySelectorAll('.wsp-steps li');
         var reset = function () {
           btn.classList.remove('loading');
@@ -177,9 +177,10 @@
         var label = this.querySelector('[data-atc-label]');
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + allFmt) : label.dataset.soldout;
         this.querySelectorAll('.wsp-atc, [data-wsp-buynow]').forEach(function (b) { b.disabled = !available; });
-        var sp = this.querySelector('[data-sticky-price]');
+        var sb = this.stickyBar || this;
+        var sp = sb.querySelector('[data-sticky-price]');
         if (sp) sp.textContent = ship === null ? fmt : allFmt + (ship > 0 ? ' with shipping' : ' · free shipping');
-        var sn = this.querySelector('[data-sticky-name]');
+        var sn = sb.querySelector('[data-sticky-name]');
         if (sn && r.dataset.title) sn.textContent = r.dataset.title;
       }
 
@@ -244,20 +245,16 @@
         var bar = this.querySelector('[data-sticky]');
         var buy = this.querySelector('[data-buy]');
         if (!bar || !buy || !('IntersectionObserver' in window)) return;
-        // Keep the bar on the real bottom edge of the visible screen (iPhone Safari's shrinking toolbar can strand it higher up).
-        var vv = window.visualViewport;
-        if (vv) {
-          var pin = function () {
-            if (bar.hidden) return;
-            bar.style.transform = '';
-            var gap = vv.offsetTop + vv.height - bar.getBoundingClientRect().bottom;
-            if (Math.abs(gap) > 2) bar.style.transform = 'translateY(' + Math.round(gap) + 'px)';
-          };
-          vv.addEventListener('resize', pin);
-          vv.addEventListener('scroll', pin);
-          window.addEventListener('scroll', pin, { passive: true });
-          new MutationObserver(pin).observe(bar, { attributes: true, attributeFilter: ['hidden'] });
-        }
+        // The bar sticks to the bottom of the page instead of floating over it: iPhone Safari leaves
+        // "fixed" bars where the old screen bottom was while its toolbar shrinks, but keeps sticky ones
+        // on the real bottom edge. It moves to the end of <main> so it can stick for the whole page;
+        // its button and price are wired here because it is no longer inside this element.
+        var main = document.getElementById('MainContent');
+        if (main && bar.parentNode !== main) main.appendChild(bar);
+        this.stickyBar = bar;
+        var self = this;
+        var atc = bar.querySelector('[data-sticky-atc]');
+        if (atc) atc.addEventListener('click', function () { self.buyNow(); });
         new IntersectionObserver(function (entries) {
           bar.hidden = entries[0].isIntersecting || entries[0].boundingClientRect.top > 0;
         }, { threshold: 0 }).observe(buy);
