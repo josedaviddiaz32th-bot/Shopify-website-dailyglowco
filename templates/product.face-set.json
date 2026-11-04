@@ -58,42 +58,6 @@
             "alt": "How to use: the Face Set worn on the forehead, under the eyes and along the smile lines"
           }
         },
-        "img1": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 3 (your image): close-up of the clear patch on skin, with the line 'Holds your lines flat while you sleep'"
-          }
-        },
-        "img2": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 4 (your image): 3 before/afters side by side: forehead, under-eyes, smile lines"
-          }
-        },
-        "img3": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 5 (your image): what it's made of: soft clear silicone, no actives, nothing absorbed"
-          }
-        },
-        "img4": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 6 (your image): Daily Glow vs others, check / cross list"
-          }
-        },
-        "img5": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 8 (your image): the numbers, e.g. 5 patches, 1 minute, 6-8 hours"
-          }
-        },
-        "img6": {
-          "type": "image",
-          "settings": {
-            "alt": "Slide 9 (your image): 30-day money-back guarantee with the model"
-          }
-        },
         "imghero": {
           "type": "image",
           "settings": {
@@ -135,18 +99,52 @@
             "title": "Shipping & returns",
             "text": "<p><strong>Free shipping</strong> on orders of $40 or more, and every Face Set option qualifies. Every order is tracked.</p><p><strong>30-day money-back guarantee:</strong> if you don't love your mornings, email support@thedailyglowco.com within 30 days of delivery for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
           }
+        },
+        "c_hold": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-overnight-hold.jpg",
+            "alt": "Soft silicone holds skin flat overnight and seals in moisture"
+          }
+        },
+        "c_three": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-three-results.jpg",
+            "alt": "Before and after: forehead, crow's feet and smile lines"
+          }
+        },
+        "c_days": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-day1-day7.jpg",
+            "alt": "Wake up to visibly smoother skin: day 1 and day 7"
+          }
+        },
+        "c_apply": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-one-use.jpg",
+            "alt": "Applying the clear under-eye patches"
+          }
+        },
+        "c_guar": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-guarantee.jpg",
+            "alt": "30-day money-back guarantee"
+          }
         }
       },
       "block_order": [
         "imghero",
         "imgba",
-        "img1",
-        "img2",
-        "img3",
-        "img4",
+        "c_hold",
+        "c_three",
+        "c_days",
+        "c_apply",
         "img0",
-        "img5",
-        "img6",
+        "c_guar",
         "proof1",
         "proof2",
         "proof3",
@@ -168,7 +166,7 @@
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
         "sticky_bar": true,
         "full_slides": true,
-        "show_placeholders": true,
+        "show_placeholders": false,
         "sale_badge": "Black Friday sale",
         "sale_text": "Our biggest offer of the year: <strong>your 2nd set for just $15</strong>. Ends Dec 1.",
         "sale_end": "2026-12-01",
