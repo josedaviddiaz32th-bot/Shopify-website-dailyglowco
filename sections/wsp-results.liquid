@@ -16,7 +16,7 @@
       {%- for block in section.blocks -%}
         <article class="wsp-res__card" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 700 | image_tag: class: 'wsp-res__img', loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 750px) 300px, 72vw', alt: block.settings.alt | default: block.settings.image.alt | escape }}
+            {{ block.settings.image | image_url: width: 700 | image_tag: class: 'wsp-res__img', loading: 'lazy', widths: '300, 400, 550, 700', sizes: '(min-width: 750px) 280px, calc(72vw - 26px)', alt: block.settings.alt | default: block.settings.image.alt | escape }}
           {%- else -%}
             <div class="wsp-res__img wsp-ph"><span>{{ block.settings.alt | default: 'Before / after photo' | escape }}</span></div>
           {%- endif -%}

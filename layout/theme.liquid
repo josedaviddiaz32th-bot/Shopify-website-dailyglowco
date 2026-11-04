@@ -296,10 +296,11 @@
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-      {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-      {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-      {{ 'component-price.css' | asset_url | stylesheet_tag }}
-      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+      {%- comment -%} Only used inside the (hidden) cart drawer, so they load without blocking the first paint. {%- endcomment -%}
+      <link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-totals.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
     {%- unless settings.type_body_font.system? -%}

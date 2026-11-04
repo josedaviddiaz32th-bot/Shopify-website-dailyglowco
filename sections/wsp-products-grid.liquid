@@ -18,9 +18,9 @@
         {%- if bp == blank -%}{%- continue -%}{%- endif -%}
         <a class="wsp-product-card" href="{{ bp.url }}" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 45vw, 92vw', alt: bp.title | escape }}
+            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 550, 700, 900', sizes: '(min-width: 750px) 45vw, calc(100vw - 40px)', alt: bp.title | escape }}
           {%- elsif bp.featured_image -%}
-            {{ bp.featured_image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 45vw, 92vw', alt: bp.title | escape }}
+            {{ bp.featured_image | image_url: width: 900 | image_tag: class: 'wsp-product-card__img', loading: 'lazy', widths: '400, 550, 700, 900', sizes: '(min-width: 750px) 45vw, calc(100vw - 40px)', alt: bp.title | escape }}
           {%- else -%}
             <div class="wsp-product-card__img wsp-ph"><span>{{ bp.title | escape }}</span></div>
           {%- endif -%}

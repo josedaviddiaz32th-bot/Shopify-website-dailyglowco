@@ -149,7 +149,7 @@
             {%- if vm != blank -%}
               {{ vm | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1200x' }}
             {%- elsif gimg != blank -%}
-              {{ gimg | image_url: width: 1400 | image_tag: loading: eager, fetchpriority: fp, widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, 92vw', alt: alt }}
+              {{ gimg | image_url: width: 1400 | image_tag: loading: eager, fetchpriority: fp, widths: '300, 450, 600, 750, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, calc(100vw - 32px)', alt: alt }}
             {%- elsif block.settings.asset != blank -%}
               <img src="{{ block.settings.asset | asset_url }}" alt="{{ alt }}" loading="{{ eager }}" width="1200" height="1200">
             {%- else -%}
@@ -157,7 +157,7 @@
             {%- endif -%}
           {%- endcapture -%}
           <figure class="wsp-slide{% if n == 1 %} is-active{% endif %}{% if gimg.src contains 'before-after' %} wsp-slide--fit{% endif %}" data-slide="{{ n }}" {{ block.shopify_attributes }}>{{ img }}</figure>
-          {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{%- if vm != blank -%}{{ vm.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt }}{%- elsif gimg != blank -%}{{ gimg | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt }}{%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="" loading="lazy" width="120" height="120">{%- else -%}<span class="wsp-ph" style="aspect-ratio:auto;height:100%"><span style="font-size:10px">{{ n }}</span></span>{%- endif -%}</button>{%- endcapture -%}
+          {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if n == 1 %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{%- if vm != blank -%}{{ vm.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: alt }}{%- elsif gimg != blank -%}{{ gimg | image_url: width: 120 | image_tag: loading: 'lazy', alt: alt }}{%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="" loading="lazy" width="120" height="120">{%- else -%}<span class="wsp-ph" style="aspect-ratio:auto;height:100%"><span style="font-size:10px">{{ n }}</span></span>{%- endif -%}</button>{%- endcapture -%}
         {%- endfor -%}
         {%- if n == 0 and p.images.size > 0 -%}
           {%- comment -%} No media blocks: show the product's own photos. {%- endcomment -%}
@@ -165,8 +165,8 @@
             {%- assign n = n | plus: 1 -%}
             {%- assign alt = pimg.alt | default: p.title | escape -%}
             {%- if forloop.first %}{% assign eager = 'eager' %}{% assign fp = 'high' %}{% else %}{% assign eager = 'lazy' %}{% assign fp = 'auto' %}{% endif -%}
-            <figure class="wsp-slide{% if forloop.first %} is-active{% endif %}{% if pimg.src contains 'before-after' %} wsp-slide--fit{% endif %}" data-slide="{{ n }}">{{ pimg | image_url: width: 1400 | image_tag: loading: eager, fetchpriority: fp, widths: '300, 600, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, 92vw', alt: alt }}</figure>
-            {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{{ pimg | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt }}</button>{%- endcapture -%}
+            <figure class="wsp-slide{% if forloop.first %} is-active{% endif %}{% if pimg.src contains 'before-after' %} wsp-slide--fit{% endif %}" data-slide="{{ n }}">{{ pimg | image_url: width: 1400 | image_tag: loading: eager, fetchpriority: fp, widths: '300, 450, 600, 750, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, calc(100vw - 32px)', alt: alt }}</figure>
+            {%- capture thumbs -%}{{ thumbs }}<button type="button" class="wsp-thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ n }}" aria-label="{{ alt }}">{{ pimg | image_url: width: 120 | image_tag: loading: 'lazy', alt: alt }}</button>{%- endcapture -%}
           {%- endfor -%}
         {%- endif -%}
         {%- if n == 0 -%}

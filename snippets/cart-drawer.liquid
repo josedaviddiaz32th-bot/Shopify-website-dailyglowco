@@ -11,7 +11,7 @@
   Offer "Add to cart", the offer arrows and the discount field are handled in dg-theme.js.
 {% endcomment %}
 
-{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
