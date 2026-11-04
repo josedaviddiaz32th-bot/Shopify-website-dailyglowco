@@ -357,7 +357,11 @@
       cartPost('cart/add.js', { items: [{ id: parseInt(add.dataset.dgcAdd, 10), quantity: 1 }] }).then(function (res) {
         if (res.status) { add.disabled = false; add.textContent = label; return; }
         renderCartSections(res.sections);
-      }).catch(function () { add.disabled = false; add.textContent = label; });
+      }).catch(function () {
+        add.disabled = false; add.textContent = label;
+        // The add may have reached the cart even though the reply was lost (flaky connection): resync the drawer.
+        fetch(cartRoot + '?sections=' + cartSections).then(function (r) { return r.json(); }).then(renderCartSections).catch(function () {});
+      });
       return;
     }
     var step = e.target.closest('[data-dgc-step]');
