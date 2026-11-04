@@ -20,11 +20,16 @@
           {%- else -%}
             <div class="wsp-res__img wsp-ph"><span>{{ block.settings.alt | default: 'Before / after photo' | escape }}</span></div>
           {%- endif -%}
-          <div class="wsp-res__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
-            {%- for i in (1..5) %}<span{% if i > block.settings.rating %} class="off"{% endif %}>{{ star }}</span>{% endfor -%}
-          </div>
+          {%- if section.settings.show_stars -%}
+            <div class="wsp-res__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+              {%- for i in (1..5) %}<span{% if i > block.settings.rating %} class="off"{% endif %}>{{ star }}</span>{% endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.title != blank %}<h3 class="wsp-res__title">{{ block.settings.title | escape }}</h3>{% endif -%}
           <p class="wsp-res__text">{{ block.settings.text | escape }}</p>
-          <p class="wsp-res__who">{{ block.settings.name | escape }}{% if block.settings.age != blank %} <span>|</span> {{ block.settings.age | escape }}{% endif %}</p>
+          {%- if block.settings.name != blank -%}
+            <p class="wsp-res__who">{{ block.settings.name | escape }}{% if block.settings.age != blank %} <span>|</span> {{ block.settings.age | escape }}{% endif %}</p>
+          {%- endif -%}
         </article>
       {%- endfor -%}
     </div>
@@ -55,6 +60,7 @@
     { "type": "select", "id": "style", "label": "Color style", "default": "light", "options": [{ "value": "light", "label": "White" }, { "value": "mist", "label": "Mist" }, { "value": "teal", "label": "Deep teal" }] },
     { "type": "text", "id": "eyebrow", "label": "Small label" },
     { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Smoother mornings <em>from the first night</em>" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": false, "info": "Only for real customer reviews." },
     { "type": "text", "id": "note", "label": "Line under the cards", "info": "e.g. 'Real customers. Results vary.'" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
@@ -63,9 +69,10 @@
     { "type": "result", "name": "Result card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Before / after photo" },
       { "type": "text", "id": "alt", "label": "Photo description" },
+      { "type": "text", "id": "title", "label": "Title", "info": "e.g. Forehead lines" },
       { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
       { "type": "textarea", "id": "text", "label": "Customer's words" },
-      { "type": "text", "id": "name", "label": "Name", "default": "Customer" },
+      { "type": "text", "id": "name", "label": "Customer name", "info": "Only for real customer reviews. Leave empty for brand cards." },
       { "type": "text", "id": "age", "label": "Age" }
     ] }
   ],

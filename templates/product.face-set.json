@@ -159,8 +159,8 @@
       "settings": {
         "eyebrow": "The 5-piece face set",
         "headline": "Smooth Your Wrinkles <em>While You Sleep</em>",
-        "rating": "4.6",
-        "rating_text": "34 ratings · 300+ sold",
+        "rating": "",
+        "rating_text": "",
         "subheadline": "Five soft silicone patches for your forehead, under your eyes and your smile lines. Wear them overnight and peel them off to visibly smoother-looking skin, with no needles, no tape and no refills.",
         "offer_label": "Choose your set",
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
@@ -338,64 +338,70 @@
       "settings": {
         "style": "light",
         "heading": "Smoother mornings <em>from the very first night</em>",
-        "note": "Real customers. Results vary.",
+        "note": "Before and after one night. Results vary.",
         "padding_top": 56,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "show_stars": false
       },
       "blocks": {
         "r1": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/listicle-forehead-patch-before-after-photo.jpg",
+            "image": "shopify://shop_images/wrinkle-smooth-results-forehead.jpg",
             "alt": "Forehead lines before and after",
+            "title": "Forehead lines",
             "rating": 5,
-            "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
-            "name": "Customer name",
-            "age": "Age"
+            "text": "Peel it off in the morning and your forehead looks noticeably smoother. The kind of result you check the mirror twice for."
           }
         },
         "r2": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/listicle-eye-patches-before-after-photo-under-eye.jpg",
-            "alt": "Under-eye lines before and after",
+            "image": "shopify://shop_images/wrinkle-smooth-results-frown-lines.jpg",
+            "alt": "Frown lines before and after",
+            "title": "Frown lines",
             "rating": 5,
-            "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
-            "name": "Customer name",
-            "age": "Age"
+            "text": "That line between your brows looks softer by morning. One easy step before bed."
           }
         },
         "r3": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/listicle-smile-line-patches-before-after-photo.jpg",
-            "alt": "Smile lines before and after",
+            "image": "shopify://shop_images/wrinkle-smooth-results-under-eyes.jpg",
+            "alt": "Under-eyes before and after",
+            "title": "Under-eyes",
             "rating": 5,
-            "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
-            "name": "Customer name",
-            "age": "Age"
+            "text": "Under-eyes look smoother and fresher, and concealer goes on better instead of settling into lines."
           }
         },
         "r4": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/listicle-eye-patches-before-after-photo-crows-feet.jpg",
+            "image": "shopify://shop_images/wrinkle-smooth-results-crows-feet.jpg",
             "alt": "Crow's feet before and after",
+            "title": "Crow's feet",
             "rating": 5,
-            "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
-            "name": "Customer name",
-            "age": "Age"
+            "text": "The fine lines at the corners of your eyes look softer, so you look rested when you start your day."
           }
         },
         "r5": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/listicle-lip-line-patches-before-after-photo.jpg",
-            "alt": "Lip lines before and after",
+            "image": "shopify://shop_images/wrinkle-smooth-results-smile-lines.jpg",
+            "alt": "Smile lines before and after",
+            "title": "Smile lines",
             "rating": 5,
-            "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
-            "name": "Customer name",
-            "age": "Age"
+            "text": "The creases around your smile look smoother, right where you wanted a little extra attention."
+          }
+        },
+        "r6": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-lip-lines.jpg",
+            "alt": "Lip lines before and after",
+            "title": "Lip lines",
+            "rating": 5,
+            "text": "The little lines above your upper lip look softer, and lipstick goes on smoother."
           }
         }
       },
@@ -404,7 +410,8 @@
         "r2",
         "r3",
         "r4",
-        "r5"
+        "r5",
+        "r6"
       ]
     },
     "stats": {
@@ -512,77 +519,6 @@
         "v5",
         "v6"
       ]
-    },
-    "reviews": {
-      "type": "dg-reviews",
-      "settings": {
-        "style": "mist",
-        "anchor": "reviews",
-        "eyebrow": "Reviews",
-        "heading": "Customer <em>reviews</em>",
-        "show_summary": true,
-        "average": "4.6",
-        "summary_text": "Based on 34 reviews",
-        "disclosure": "<p>[Placeholder] Real customer reviews are coming. These cards will be replaced.</p>",
-        "badge_text": "Verified buyer",
-        "initial_count": 6,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
-      "blocks": {
-        "rv1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[Placeholder] A real customer review goes here.",
-            "name": "Customer A.",
-            "verified": true
-          }
-        },
-        "rv2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[Placeholder] A real customer review goes here.",
-            "name": "Customer B.",
-            "verified": true
-          }
-        },
-        "rv3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[Placeholder] A real customer review goes here.",
-            "name": "Customer C.",
-            "verified": true
-          }
-        },
-        "rv4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[Placeholder] A real customer review goes here.",
-            "name": "Customer D.",
-            "verified": true
-          }
-        },
-        "rv5": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[Placeholder] A real customer review goes here.",
-            "name": "Customer E.",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "rv1",
-        "rv2",
-        "rv3",
-        "rv4",
-        "rv5"
-      ]
     }
   },
   "order": [
@@ -592,7 +528,6 @@
     "stats",
     "vs",
     "guarantee",
-    "reviews",
     "faq",
     "disclosures"
   ]
