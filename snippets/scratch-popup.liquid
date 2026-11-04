@@ -39,22 +39,35 @@
   (function () {
     var claimed = false;
     try { claimed = !!(JSON.parse(localStorage.getItem('dg_scratch') || 'null') || {}).claimed; } catch (e) {}
+    window.dgScratchClaimed = function () {
+      try { return !!(JSON.parse(localStorage.getItem('dg_scratch') || 'null') || {}).claimed; } catch (e) { return false; }
+    };
     var on = false;
     window.dgScratchEnable = function () {
     if (on) return;
     on = true;
-    // Show a reassurance line by the buy and checkout buttons.
+    var code = window.dgScratch.code;
+    // Attach the code to the cart itself (works even while the cart is empty), so the cart drawer,
+    // cart page and checkout all show the 10%. Keeps any other codes already on the cart.
+    fetch('/cart.js', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (cart) {
+      var codes = (cart.discount_codes || []).map(function (d) { return d.code; });
+      if (codes.some(function (c) { return c.toUpperCase() === code; })) return;
+      codes.push(code);
+      return fetch('/cart/update.js', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ discount: codes.join(',') }) });
+    }).catch(function () {});
+    // Confirmation right under the product description, so it's on screen as soon as the card closes.
     window.dgScratchNote = function () {
-      document.querySelectorAll('[data-buy], #CartDrawer-Checkout').forEach(function (el) {
-        var host = el.matches('[data-buy]') ? el : el.parentElement;
-        if (!host || host.querySelector('.dg-claimed')) return;
+      document.querySelectorAll('.wsp-head').forEach(function (head) {
+        if (head.querySelector('.dg-claimed')) return;
         var p = document.createElement('p');
         p.className = 'dg-claimed';
-        p.textContent = '\u2713 10% welcome discount applied at checkout';
-        host.appendChild(p);
+        p.innerHTML = '<span aria-hidden="true">\u2713</span> Your 10% welcome discount is applied';
+        var sub = head.querySelector('.wsp-sub');
+        if (sub) sub.insertAdjacentElement('afterend', p); else head.appendChild(p);
       });
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.dgScratchNote); else window.dgScratchNote();
+    document.dispatchEvent(new CustomEvent('dg:scratch-claimed'));
     // Cart checkout buttons (drawer and cart page) go through the same URL as Buy now.
     document.addEventListener('click', function (e) {
       var b = e.target.closest('#CartDrawer-Checkout, button[name="checkout"]');
@@ -67,7 +80,7 @@
   })();
 </script>
 <style>
-  .dg-claimed { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 0; font-size: 13.5px; font-weight: 600; color: #2E7D5B; }
+  .dg-claimed { display: flex; align-items: center; gap: 8px; width: fit-content; margin: 12px 0 4px; padding: 7px 14px; border-radius: 999px; background: #E8F5EE; font-size: 14px; font-weight: 600; color: #1F6B47; }
 </style>
 {%- if sp_show -%}
 <div class="dgs" id="DgScratch" role="dialog" aria-modal="true" aria-labelledby="DgScratchTitle" hidden data-delay="{{ sp_delay }}">
@@ -97,7 +110,7 @@
     <div class="dgs__step" data-dgs-step="done" hidden>
       <p class="dgs__eyebrow">You're in</p>
       <h2 class="dgs__title">10% off is applied</h2>
-      <p class="dgs__done-text">No code to copy. Your discount is already on your order and will show at checkout, with your email filled in.</p>
+      <p class="dgs__done-text">No code to copy. You'll see the 10% in your total right away, and checkout opens with your email filled in.</p>
       <button type="button" class="dgs__btn" data-dgs-close>Keep shopping</button>
     </div>
   </div>

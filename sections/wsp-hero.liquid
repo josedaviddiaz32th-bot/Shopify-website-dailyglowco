@@ -344,6 +344,7 @@
           </ol>
           <p class="wsp-total" data-total data-ship="{{ ship_cents }}" data-free="{{ free_ship_cents }}">
             <span class="wsp-total__label">Total</span>
+            <s class="wsp-total__was" data-total-was hidden></s>
             <strong data-total-all>{{ total_all | money }}</strong>
             <span class="wsp-total__parts" data-total-parts>
               {%- if total_ship > 0 -%}{{ pack_total | money }} + {{ total_ship | money }} shipping{%- else -%}Free shipping included{%- endif -%}

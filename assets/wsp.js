@@ -19,6 +19,7 @@
         this.format = this.dataset.moneyFormat || '${{amount}}';
 
         this.addEventListener('click', this.onClick.bind(this));
+        document.addEventListener('dg:scratch-claimed', this.update.bind(this));
         this.querySelectorAll('.wsp-offers input').forEach(function (r) {
           r.addEventListener('change', this.update.bind(this));
         }.bind(this));
@@ -149,13 +150,19 @@
         var tot = this.querySelector('[data-total]');
         var allFmt = fmt;
         var ship = null;
+        // Scratch-card welcome discount claimed: show the 10% off the order right here, not only at checkout.
+        var welcome = window.dgScratchClaimed && window.dgScratchClaimed();
+        var off = welcome ? Math.round(price * 0.1) : 0;
+        var net = price - off;
         if (tot) {
-          ship = price >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
-          allFmt = formatMoney(price + ship, this.format);
+          ship = net >= (parseInt(tot.dataset.free, 10) || 0) ? 0 : (parseInt(tot.dataset.ship, 10) || 0);
+          allFmt = formatMoney(net + ship, this.format);
           tot.querySelector('[data-total-all]').textContent = allFmt;
-          tot.querySelector('[data-total-parts]').textContent = ship > 0
-            ? fmt + ' + ' + formatMoney(ship, this.format) + ' shipping'
-            : 'Free shipping included';
+          var was = tot.querySelector('[data-total-was]');
+          if (was) { was.hidden = !off; was.textContent = off ? formatMoney(price + ship, this.format) : ''; }
+          tot.querySelector('[data-total-parts]').textContent = (off ? '10% welcome discount · ' : '') + (ship > 0
+            ? formatMoney(net, this.format) + ' + ' + formatMoney(ship, this.format) + ' shipping'
+            : (off ? 'free shipping' : 'Free shipping included'));
         }
         var line = this.querySelector('[data-stock-line]');
         if (line) {
