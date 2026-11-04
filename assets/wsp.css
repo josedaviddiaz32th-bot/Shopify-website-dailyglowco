@@ -405,3 +405,7 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 
 /* Offer card: the per-set price on its own line under the contents */
 .wsp-offer__unit { display: block; margin-top: 2px; font-weight: 600; color: var(--dg-ink, #17393D); }
+
+/* Bonus line (free guide): same quiet style as the guarantee line, a little tighter to it */
+.wsp-bonus-line { margin-top: 6px; }
+.wsp-bonus-line strong { color: var(--dg-ink, #17393D); font-weight: 600; }

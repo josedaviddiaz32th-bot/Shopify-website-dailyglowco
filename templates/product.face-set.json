@@ -90,7 +90,7 @@
           "type": "tab",
           "settings": {
             "title": "What's in the box",
-            "text": "<ul><li><strong>1 forehead patch</strong>, about 14.3 × 6 cm, with a center piece for the frown lines between your brows</li><li><strong>4 crescent patches</strong>, about 7.8 × 2.2 cm, for under-eyes, crow's feet or smile lines</li><li><strong>Backing film</strong> to store each patch between uses</li></ul><p>Choosing 2 Sets? You get two of everything.</p>"
+            "text": "<ul><li><strong>1 forehead patch</strong>, about 14.3 × 6 cm, with a center piece for the frown lines between your brows</li><li><strong>4 crescent patches</strong>, about 7.8 × 2.2 cm, for under-eyes, crow's feet or smile lines</li><li><strong>Backing film</strong> to store each patch between uses</li></ul><p>Choosing 2 Sets? You get two of everything.</p><p><strong>Bonus:</strong> our 8-page <em>Healthy Skin After 30</em> guide (PDF), emailed to you after you order.</p>"
           }
         },
         "tab4": {
@@ -170,7 +170,8 @@
         "sale_badge": "Black Friday sale",
         "sale_text": "Our biggest offer of the year: <strong>your 2nd set for just $15</strong>. Ends Dec 1.",
         "sale_end": "2026-12-01",
-        "stock_text": "Limited stock: only 37 left"
+        "stock_text": "Limited stock: only 37 left",
+        "bonus_line": "Free with every set: our <strong>Healthy Skin After 30</strong> guide, emailed after you order."
       }
     },
     "guarantee": {

@@ -378,6 +378,9 @@
           {%- if section.settings.guarantee_line != blank -%}
             <p class="wsp-guarantee-line">{% render 'dg-icon', name: 'shield' %}<span>{{ section.settings.guarantee_line | escape }}</span></p>
           {%- endif -%}
+          {%- if section.settings.bonus_line != blank -%}
+            <p class="wsp-guarantee-line wsp-bonus-line">{% render 'dg-icon', name: 'gift' %}<span>{{ section.settings.bonus_line }}</span></p>
+          {%- endif -%}
         </div>
         {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
         {%- if tabs.size > 0 -%}
@@ -434,6 +437,7 @@
     { "type": "text", "id": "rating_text", "label": "Rating text", "info": "e.g. '671 ratings · 5,000+ sold'. Say where they're from if they aren't this store's own reviews." },
     { "type": "inline_richtext", "id": "subheadline", "label": "Subheadline", "info": "Bold words stand out (e.g. the areas the set covers).", "default": "Soft, reusable silicone patches that hold your skin smooth and seal in moisture overnight — no needles, no tape, no refills. Peel them off in the morning to visibly smoother-looking skin." },
     { "type": "text", "id": "offer_label", "label": "Offer selector label", "default": "Choose your patches" },
+    { "type": "inline_richtext", "id": "bonus_line", "label": "Bonus line (under the guarantee)", "info": "e.g. the free guide emailed after ordering. Leave empty to hide." },
     { "type": "text", "id": "guarantee_line", "label": "Line under the button", "default": "Try them for 30 days. If you don't love your mornings, get your money back." },
     { "type": "checkbox", "id": "sticky_bar", "label": "Sticky buy bar on mobile", "default": true },
     { "type": "checkbox", "id": "show_express", "label": "Show Shop Pay / express button under Buy now", "default": false, "info": "Checkout already offers Shop Pay, Apple Pay and PayPal at the top, so this is off to keep the page to one clear button." },
