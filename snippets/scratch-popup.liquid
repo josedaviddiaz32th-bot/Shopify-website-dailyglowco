@@ -5,7 +5,7 @@
     - attaches the discount code to this browser session, so checkout applies it automatically,
     - remembers the email so checkout opens with it already filled in (see dgGoCheckout below).
   The code itself (SCRATCH10: 10% off the order, once per customer, stacks with pack deals) lives in
-  Shopify admin > Discounts. Change the code there and here together.
+  Shopify admin > Discounts. Change the code there and here together (it is also used in wsp.js totals).
 {%- endcomment -%}
 {%- liquid
   assign sp_code = 'SCRATCH10'
