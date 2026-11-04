@@ -25,10 +25,17 @@
   {%- if sale_bar -%}
     {%- assign sale_parts = section.settings.sale_bar_text | split: '|' -%}
     <a class="dgh-sale" href="{{ section.settings.sale_bar_link | default: '#offer' }}"{% if section.settings.sale_bar_end != blank %} data-sale-end="{{ section.settings.sale_bar_end | escape }}"{% endif %}>
-      {%- for part in sale_parts -%}
-        {%- unless forloop.first %}<span class="dgh-sale__sep" aria-hidden="true">-</span>{% endunless -%}
-        <span>{{ part | strip | escape }}</span>
-      {%- endfor -%}
+      <span class="dgh-sale__track">
+        {%- for i in (1..2) -%}
+          <span class="dgh-sale__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
+            {%- for r in (1..4) -%}
+              {%- for part in sale_parts -%}
+                <span>{{ part | strip | escape }}</span><span class="dgh-sale__sep" aria-hidden="true">-</span>
+              {%- endfor -%}
+            {%- endfor -%}
+          </span>
+        {%- endfor -%}
+      </span>
     </a>
   {%- elsif holiday -%}
     <div class="dgh-announce">

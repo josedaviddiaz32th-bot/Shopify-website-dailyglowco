@@ -496,11 +496,15 @@ cart-drawer .dgc-empty__text { margin: 0 0 6px; color: var(--dg-ink-muted); font
 
 /* Sale bar (replaces the announcement while a sale runs) */
 .dgh-site .dgh-sale {
-  display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 12px;
+  display: block; overflow: hidden; padding: 9px 0;
   background: linear-gradient(110deg, #0F2A2D 0%, #17393D 45%, #8A4A1C 78%, #F08A2C 100%);
   color: #fff; text-decoration: none; font-size: 14px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
   text-shadow: 0 0 8px rgba(255,255,255,.3); white-space: nowrap;
 }
+.dgh-sale__track { display: flex; width: max-content; animation: dgh-sale-scroll 26s linear infinite; }
+.dgh-sale__group { display: flex; align-items: center; gap: 14px; padding-right: 14px; }
 .dgh-sale__sep { color: var(--dg-gold, #FFC24A); }
+@keyframes dgh-sale-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .dgh-sale__track { animation: none; } }
 .dgh-sale[hidden] { display: none; }
-@media screen and (max-width: 749px) { .dgh-site .dgh-sale { font-size: 12.5px; padding: 8px 10px; letter-spacing: .04em; } }
+@media screen and (max-width: 749px) { .dgh-site .dgh-sale { font-size: 12.5px; padding: 8px 0; letter-spacing: .04em; } }
