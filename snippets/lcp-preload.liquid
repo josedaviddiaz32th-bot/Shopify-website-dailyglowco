@@ -32,6 +32,11 @@
     assign lcp_img = images[lcp_file]
   endif
 -%}
+{%- if lcp_file != blank -%}
+  {%- comment -%} The carousel's stylesheets are linked from the sections in <body>; fetch them early (styles still apply in their usual order). {%- endcomment -%}
+  <link rel="preload" as="style" href="{{ 'daily-glow.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'wsp.css' | asset_url }}">
+{%- endif -%}
 {%- if lcp_img != blank and lcp_img.width -%}
   <link rel="preload" as="image" fetchpriority="high" imagesizes="(min-width: 990px) 620px, calc(100vw - 32px)" imagesrcset="{%- assign lcp_widths = '300,450,600,750,900,1200,1400' | split: ',' -%}{%- for w in lcp_widths -%}{%- assign px = w | plus: 0 -%}{{ lcp_img | image_url: width: px }} {{ px }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}">
 {%- endif -%}
