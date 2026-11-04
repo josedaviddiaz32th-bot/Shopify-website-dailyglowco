@@ -391,6 +391,6 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 .wsp-vs__mark.is-no svg { stroke: rgba(23,57,61,.45); }
 .wsp-vs .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
-/* Text in brand orange: a deeper shade so small text stays readable (WCAG AA) */
+/* Text in brand orange: a deeper shade so small text stays readable (WCAG AA contrast) */
 .dg .dg__eyebrow, .wsp-offer__save, .wsp-product-card__tag, .wsp-product-card__link { color: #A8500F; }
 .dg.dg--teal .dg__eyebrow { color: var(--dg-gold); }
