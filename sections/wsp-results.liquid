@@ -14,8 +14,15 @@
     </div>
     <div class="wsp-res__track" data-res-track>
       {%- for block in section.blocks -%}
-        <article class="wsp-res__card" {{ block.shopify_attributes }}>
-          {%- if block.settings.image != blank -%}
+        {%- liquid
+          assign text_only = false
+          if block.settings.image == blank and block.settings.name != blank
+            assign text_only = true
+          endif
+        -%}
+        <article class="wsp-res__card{% if text_only %} wsp-res__card--text{% endif %}" {{ block.shopify_attributes }}>
+          {%- if text_only -%}
+          {%- elsif block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 700 | image_tag: class: 'wsp-res__img', loading: 'lazy', widths: '300, 400, 550, 700', sizes: '(min-width: 750px) 280px, calc(72vw - 26px)', alt: block.settings.alt | default: block.settings.image.alt | escape }}
           {%- else -%}
             <div class="wsp-res__img wsp-ph"><span>{{ block.settings.alt | default: 'Before / after photo' | escape }}</span></div>
@@ -67,7 +74,7 @@
   ],
   "blocks": [
     { "type": "result", "name": "Result card", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Before / after photo" },
+      { "type": "image_picker", "id": "image", "label": "Before / after photo", "info": "Leave empty on a named review to show it as a text card." },
       { "type": "text", "id": "alt", "label": "Photo description" },
       { "type": "text", "id": "title", "label": "Title", "info": "e.g. Forehead lines" },
       { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },

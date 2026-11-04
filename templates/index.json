@@ -517,12 +517,95 @@
         "button_label": "Claim my offer",
         "button_link": "#offer"
       }
+    },
+    "reviews": {
+      "type": "wsp-results",
+      "blocks": {
+        "rv1": {
+          "type": "result",
+          "settings": {
+            "title": "Forehead lines",
+            "rating": 5,
+            "text": "Okay, I’m impressed. Took the patch off this morning and my forehead looked noticeably smoother. Already looking forward to using it again tonight.",
+            "name": "Jennifer C.",
+            "age": "47"
+          }
+        },
+        "rv2": {
+          "type": "result",
+          "settings": {
+            "title": "Crow’s feet",
+            "rating": 5,
+            "text": "Really pleased with how the little lines around my eyes looked afterward. My skin looked smooth and rested. These are staying in my routine.",
+            "name": "Michelle P.",
+            "age": "52"
+          }
+        },
+        "rv3": {
+          "type": "result",
+          "settings": {
+            "title": "Under-eye lines",
+            "rating": 5,
+            "text": "Loved these after the first try. The skin under my eyes felt hydrated and looked smoother. Wish I’d ordered them sooner.",
+            "name": "Rachel N.",
+            "age": "45"
+          }
+        },
+        "rv4": {
+          "type": "result",
+          "settings": {
+            "title": "Lip lines",
+            "rating": 5,
+            "text": "Really happy with how the skin above my upper lip looked afterward. Those little lines were softer, and my lipstick looked lovely.",
+            "name": "Angela B.",
+            "age": "49"
+          }
+        },
+        "rv5": {
+          "type": "result",
+          "settings": {
+            "title": "Smile lines",
+            "rating": 5,
+            "text": "The fine creases around my smile lines looked so much smoother. Exactly the area I wanted to give a little extra attention.",
+            "name": "Lisa H.",
+            "age": "55"
+          }
+        },
+        "rv6": {
+          "type": "result",
+          "settings": {
+            "title": "Hand lines",
+            "rating": 5,
+            "text": "I spend plenty of time on my face and usually forget about my hands. I loved how much smoother the skin looked afterward. Such an easy little addition to my evening routine.",
+            "name": "Denise C.",
+            "age": "59"
+          }
+        }
+      },
+      "block_order": [
+        "rv1",
+        "rv2",
+        "rv3",
+        "rv4",
+        "rv5",
+        "rv6"
+      ],
+      "settings": {
+        "style": "mist",
+        "eyebrow": "Customer reviews",
+        "heading": "What women are saying <em>after their first nights</em>",
+        "show_stars": true,
+        "note": "Reviews from our customers. Results vary.",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "hero",
     "sale",
     "results",
+    "reviews",
     "stats",
     "vs",
     "guarantee",
