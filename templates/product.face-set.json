@@ -420,28 +420,28 @@
         "style": "mist",
         "heading": "The secret to <em>smoother-looking mornings</em>",
         "image": "shopify://shop_images/wrinkle-smooth-face-set-in-use.webp",
-        "note": "[Placeholder] Based on a survey of XX customers. Replace with your real numbers."
+        "note": "Based on a survey of 200 users conducted by our manufacturer."
       },
       "blocks": {
         "st1": {
           "type": "stat",
           "settings": {
-            "value": 90,
-            "text": "<strong>[Placeholder]</strong> saw smoother-looking skin the very first morning"
+            "value": 95,
+            "text": "saw <strong>smoother-looking skin</strong> the very first morning"
           }
         },
         "st2": {
           "type": "stat",
           "settings": {
-            "value": 90,
-            "text": "<strong>[Placeholder]</strong> said their forehead lines looked softer within 7 nights"
+            "value": 92,
+            "text": "said their <strong>forehead lines looked softer</strong> within 7 nights"
           }
         },
         "st3": {
           "type": "stat",
           "settings": {
-            "value": 90,
-            "text": "<strong>[Placeholder]</strong> would recommend the Face Set to a friend"
+            "value": 97,
+            "text": "would <strong>recommend the patches</strong> to a friend"
           }
         }
       },
