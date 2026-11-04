@@ -348,7 +348,7 @@
         "r1": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-forehead-patch-before-after-photo.webp",
+            "image": "shopify://shop_images/listicle-forehead-patch-before-after-photo.jpg",
             "alt": "Forehead lines before and after",
             "rating": 5,
             "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
@@ -359,7 +359,7 @@
         "r2": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-under-eye.webp",
+            "image": "shopify://shop_images/listicle-eye-patches-before-after-photo-under-eye.jpg",
             "alt": "Under-eye lines before and after",
             "rating": 5,
             "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
@@ -370,7 +370,7 @@
         "r3": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-smile-line-patches-before-after-photo.webp",
+            "image": "shopify://shop_images/listicle-smile-line-patches-before-after-photo.jpg",
             "alt": "Smile lines before and after",
             "rating": 5,
             "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
@@ -381,7 +381,7 @@
         "r4": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-eye-patches-before-after-photo-crows-feet.webp",
+            "image": "shopify://shop_images/listicle-eye-patches-before-after-photo-crows-feet.jpg",
             "alt": "Crow's feet before and after",
             "rating": 5,
             "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
@@ -392,7 +392,7 @@
         "r5": {
           "type": "result",
           "settings": {
-            "image": "shopify://shop_images/wrinkle-smooth-lip-line-patches-before-after-photo.webp",
+            "image": "shopify://shop_images/listicle-lip-line-patches-before-after-photo.jpg",
             "alt": "Lip lines before and after",
             "rating": 5,
             "text": "[Placeholder] A real customer review goes here: what they noticed the first morning and how their lines look now.",
