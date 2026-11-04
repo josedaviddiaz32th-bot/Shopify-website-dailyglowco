@@ -123,7 +123,7 @@
               return;
             }
             // With the scratch-card discount claimed, checkout opens with the code applied and the email filled in.
-            window.location.href = window.dgCheckoutUrl ? window.dgCheckoutUrl(root) : root + 'checkout';
+            if (window.dgGoCheckout) window.dgGoCheckout(root); else window.location.href = root + 'checkout';
           })
           .catch(reset);
       }

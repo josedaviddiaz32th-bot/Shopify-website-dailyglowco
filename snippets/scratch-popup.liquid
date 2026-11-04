@@ -19,16 +19,22 @@
   /* Shared by the popup, Buy now and the cart checkout buttons: once the shopper has claimed the code,
      send them to checkout with the code applied and their email filled in. */
   window.dgScratch = { code: {{ sp_code | json }} };
-  window.dgCheckoutUrl = function (root) {
-    var base = (root || '/') + 'checkout';
-    try {
-      var s = JSON.parse(localStorage.getItem('dg_scratch') || 'null');
-      if (s && s.claimed) {
-        return base + '?discount=' + encodeURIComponent(s.code || window.dgScratch.code) +
-          (s.email ? '&checkout%5Bemail%5D=' + encodeURIComponent(s.email) : '');
-      }
-    } catch (e) {}
-    return base;
+  /* Shopify's /checkout redirect drops a pre-filled email, but a cart link (/cart/ID:QTY,ID:QTY?...)
+     keeps both the email and the discount, so the cart's items are turned into one. */
+  window.dgGoCheckout = function (root) {
+    root = root || '/';
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem('dg_scratch') || 'null'); } catch (e) {}
+    if (!s || !s.claimed) { window.location.href = root + 'checkout'; return; }
+    var q = 'discount=' + encodeURIComponent(s.code || window.dgScratch.code) +
+      (s.email ? '&checkout%5Bemail%5D=' + encodeURIComponent(s.email) : '');
+    fetch(root + 'cart.js', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        var lines = (cart.items || []).map(function (i) { return i.variant_id + ':' + i.quantity; });
+        window.location.href = lines.length ? root + 'cart/' + lines.join(',') + '?' + q : root + 'checkout?' + q;
+      })
+      .catch(function () { window.location.href = root + 'checkout?' + q; });
   };
   (function () {
     var claimed = false;
@@ -54,7 +60,7 @@
       var b = e.target.closest('#CartDrawer-Checkout, button[name="checkout"]');
       if (!b) return;
       e.preventDefault();
-      window.location.href = window.dgCheckoutUrl('/');
+      window.dgGoCheckout('/');
     }, true);
     };
     if (claimed) window.dgScratchEnable();
