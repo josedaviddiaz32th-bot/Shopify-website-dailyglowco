@@ -317,3 +317,14 @@
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hide); else hide();
 })();
+
+// Menu links to #how-it-works / #home-how land on the info tabs and open "How to use".
+(function () {
+  var open = function () {
+    if (location.hash !== '#how-it-works' && location.hash !== '#home-how') return;
+    var tab = document.querySelector('[data-how-tab]');
+    if (tab) { tab.open = true; tab.scrollIntoView({ block: 'start' }); }
+  };
+  window.addEventListener('hashchange', open);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', open); else open();
+})();

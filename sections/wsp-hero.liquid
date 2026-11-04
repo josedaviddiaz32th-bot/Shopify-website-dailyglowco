@@ -374,9 +374,10 @@
         </div>
         {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
         {%- if tabs.size > 0 -%}
-          <div class="wsp-tabs">
+          <div class="wsp-tabs" id="how-it-works">
+            <span id="home-how" aria-hidden="true"></span>
             {%- for block in tabs -%}
-              <details class="wsp-tab" {{ block.shopify_attributes }}>
+              <details class="wsp-tab"{% if block.settings.title contains 'How to' %} data-how-tab{% endif %} {{ block.shopify_attributes }}>
                 <summary>{{ block.settings.title | escape }}</summary>
                 <div class="wsp-tab__body">{{ block.settings.text }}</div>
               </details>
