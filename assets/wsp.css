@@ -392,5 +392,5 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 .wsp-vs .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 /* Text in brand orange: a deeper shade so small text stays readable (WCAG AA) */
-.dg__eyebrow, .wsp-offer__save, .wsp-product-card__tag, .wsp-product-card__link { color: #A8500F; }
-.dg--teal .dg__eyebrow { color: var(--dg-gold); }
+.dg .dg__eyebrow, .wsp-offer__save, .wsp-product-card__tag, .wsp-product-card__link { color: #A8500F; }
+.dg.dg--teal .dg__eyebrow { color: var(--dg-gold); }
