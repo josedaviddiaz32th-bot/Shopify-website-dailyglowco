@@ -95,6 +95,8 @@
 /* Sticky bar */
 .wsp-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: #fff; border-top: 1px solid var(--dg-line-c); box-shadow: 0 -10px 30px rgba(23,57,61,.12); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); }
 .wsp-sticky[hidden] { display: none; }
+/* iPhone Safari can leave a fixed bar where the old screen bottom was while its toolbar shrinks; the strip keeps page content from showing under the bar, and wsp.js re-pins it. */
+.wsp-sticky::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 160px; background: #fff; }
 .wsp-sticky__inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
 .wsp-sticky__meta { min-width: 0; flex: 1 1 auto; }
 .wsp-sticky__name { display: block; font-size: 14px; font-weight: 600; color: var(--dg-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

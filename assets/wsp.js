@@ -244,6 +244,20 @@
         var bar = this.querySelector('[data-sticky]');
         var buy = this.querySelector('[data-buy]');
         if (!bar || !buy || !('IntersectionObserver' in window)) return;
+        // Keep the bar on the real bottom edge of the visible screen (iPhone Safari's shrinking toolbar can strand it higher up).
+        var vv = window.visualViewport;
+        if (vv) {
+          var pin = function () {
+            if (bar.hidden) return;
+            bar.style.transform = '';
+            var gap = vv.offsetTop + vv.height - bar.getBoundingClientRect().bottom;
+            if (Math.abs(gap) > 2) bar.style.transform = 'translateY(' + Math.round(gap) + 'px)';
+          };
+          vv.addEventListener('resize', pin);
+          vv.addEventListener('scroll', pin);
+          window.addEventListener('scroll', pin, { passive: true });
+          new MutationObserver(pin).observe(bar, { attributes: true, attributeFilter: ['hidden'] });
+        }
         new IntersectionObserver(function (entries) {
           bar.hidden = entries[0].isIntersecting || entries[0].boundingClientRect.top > 0;
         }, { threshold: 0 }).observe(buy);

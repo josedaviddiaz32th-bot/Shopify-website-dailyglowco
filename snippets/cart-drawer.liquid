@@ -366,7 +366,7 @@
           </button>
           {%- if additional_checkout_buttons -%}
             {%- comment -%} Express checkout (Apple Pay, Shop Pay, Google Pay, PayPal): buy straight from the drawer. {%- endcomment -%}
-            <div class="dgc-express additional-checkout-buttons additional-checkout-buttons--vertical">
+            <div class="dgc-express additional-checkout-buttons">
               {{ content_for_additional_checkout_buttons }}
             </div>
           {%- else -%}

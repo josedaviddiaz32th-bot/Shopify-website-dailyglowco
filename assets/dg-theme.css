@@ -514,4 +514,4 @@ cart-drawer .dgc-applied { display: flex; align-items: center; gap: 10px; margin
 cart-drawer .dgc-applied .dg-icon { width: 20px; height: 20px; flex: none; }
 cart-drawer .dgc-applied strong { font-weight: 700; }
 cart-drawer .dgc-express { margin-top: 2px; }
-cart-drawer .dgc-express shopify-accelerated-checkout-cart { --shopify-accelerated-checkout-button-block-size: 46px; --shopify-accelerated-checkout-button-border-radius: 999px; --shopify-accelerated-checkout-row-gap: 8px; }
+cart-drawer .dgc-express shopify-accelerated-checkout-cart { --shopify-accelerated-checkout-button-block-size: 44px; --shopify-accelerated-checkout-button-border-radius: 999px; --shopify-accelerated-checkout-row-gap: 8px; --shopify-accelerated-checkout-inline-alignment: center; }
