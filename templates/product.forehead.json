@@ -100,10 +100,10 @@
         }
       },
       "block_order": [
+        "photo3",
         "photo_guide",
         "photo2",
         "photo1",
-        "photo3",
         "slot4",
         "slot5",
         "slot6",

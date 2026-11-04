@@ -116,10 +116,10 @@
         }
       },
       "block_order": [
+        "imghero",
         "imgguide",
         "imgba",
         "img0",
-        "imghero",
         "img1",
         "img2",
         "img3",
