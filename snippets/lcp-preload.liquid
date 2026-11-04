@@ -1,0 +1,37 @@
+{%- comment -%}
+  Preloads the first carousel image of the home page and the wrinkle product pages from the top
+  of <head>, so phones request it before the theme and Shopify scripts (it is the page's largest
+  paint). The widths and sizes must match the first slide in wsp-hero.liquid, or the browser
+  downloads the image twice. If you change a page's first carousel image in the theme editor,
+  update its file name here too.
+{%- endcomment -%}
+{%- liquid
+  assign lcp_file = blank
+  case template.suffix
+    when 'face-set'
+      assign lcp_file = 'wrinkle-smooth-face-set-hero-text.jpg'
+    when 'eye'
+      assign lcp_file = 'wrinkle-smooth-eye-patches-hero-text.jpg'
+    when 'forehead'
+      assign lcp_file = 'wrinkle-smooth-forehead-patch-hero-text.jpg'
+    when 'lip'
+      assign lcp_file = 'wrinkle-smooth-lip-line-patches-hero-text.jpg'
+    when 'smile'
+      assign lcp_file = 'wrinkle-smooth-smile-line-patches-hero-text.jpg'
+    when 'hands'
+      assign lcp_file = 'wrinkle-smooth-hand-patches-hero-text.jpg'
+    when 'chest'
+      assign lcp_file = 'wrinkle-smooth-chest-pad-hero-text.jpg'
+    when 'fnc'
+      assign lcp_file = 'wrinkle-smooth-face-neck-chest-set-hero-text.jpg'
+  endcase
+  if template.name == 'index'
+    assign lcp_file = 'wrinkle-smooth-face-set-hero-text.jpg'
+  endif
+  if lcp_file != blank
+    assign lcp_img = images[lcp_file]
+  endif
+-%}
+{%- if lcp_img != blank and lcp_img.width -%}
+  <link rel="preload" as="image" fetchpriority="high" imagesizes="(min-width: 990px) 620px, calc(100vw - 32px)" imagesrcset="{%- assign lcp_widths = '300,450,600,750,900,1200,1400' | split: ',' -%}{%- for w in lcp_widths -%}{%- assign px = w | plus: 0 -%}{{ lcp_img | image_url: width: px }} {{ px }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}">
+{%- endif -%}
