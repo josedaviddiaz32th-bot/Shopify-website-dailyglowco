@@ -116,9 +116,9 @@
         }
       },
       "block_order": [
-        "img0",
-        "imgba",
         "imgguide",
+        "imgba",
+        "img0",
         "imghero",
         "img1",
         "img2",
