@@ -1,0 +1,217 @@
+{%- comment -%}
+  Scratch-card welcome popup. A few seconds after the page loads, shoppers scratch a card to reveal
+  10% off and leave their email to claim it. Claiming:
+    - subscribes the email (Shopify customer form, tagged newsletter + scratch-card),
+    - attaches the discount code to this browser session, so checkout applies it automatically,
+    - remembers the email so checkout opens with it already filled in (see dgCheckoutUrl below).
+  The code itself (SCRATCH10: 10% off the order, once per customer, stacks with pack deals) lives in
+  Shopify admin > Discounts. Change the code there and here together.
+{%- endcomment -%}
+{%- liquid
+  assign sp_code = 'SCRATCH10'
+  assign sp_delay = 3000
+  assign sp_show = true
+  if template.name == 'cart' or template.name == 'customers/account' or request.design_mode
+    assign sp_show = false
+  endif
+-%}
+<script>
+  /* Shared by the popup, Buy now and the cart checkout buttons: once the shopper has claimed the code,
+     send them to checkout with the code applied and their email filled in. */
+  window.dgScratch = { code: {{ sp_code | json }} };
+  window.dgCheckoutUrl = function (root) {
+    var base = (root || '/') + 'checkout';
+    try {
+      var s = JSON.parse(localStorage.getItem('dg_scratch') || 'null');
+      if (s && s.claimed) {
+        return base + '?discount=' + encodeURIComponent(s.code || window.dgScratch.code) +
+          (s.email ? '&checkout%5Bemail%5D=' + encodeURIComponent(s.email) : '');
+      }
+    } catch (e) {}
+    return base;
+  };
+  (function () {
+    var claimed = false;
+    try { claimed = !!(JSON.parse(localStorage.getItem('dg_scratch') || 'null') || {}).claimed; } catch (e) {}
+    var on = false;
+    window.dgScratchEnable = function () {
+    if (on) return;
+    on = true;
+    // Show a reassurance line by the buy and checkout buttons.
+    window.dgScratchNote = function () {
+      document.querySelectorAll('[data-buy], #CartDrawer-Checkout').forEach(function (el) {
+        var host = el.matches('[data-buy]') ? el : el.parentElement;
+        if (!host || host.querySelector('.dg-claimed')) return;
+        var p = document.createElement('p');
+        p.className = 'dg-claimed';
+        p.textContent = '\u2713 10% welcome discount applied at checkout';
+        host.appendChild(p);
+      });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.dgScratchNote); else window.dgScratchNote();
+    // Cart checkout buttons (drawer and cart page) go through the same URL as Buy now.
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('#CartDrawer-Checkout, button[name="checkout"]');
+      if (!b) return;
+      e.preventDefault();
+      window.location.href = window.dgCheckoutUrl('/');
+    }, true);
+    };
+    if (claimed) window.dgScratchEnable();
+  })();
+</script>
+<style>
+  .dg-claimed { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 0; font-size: 13.5px; font-weight: 600; color: #2E7D5B; }
+</style>
+{%- if sp_show -%}
+<div class="dgs" id="DgScratch" role="dialog" aria-modal="true" aria-labelledby="DgScratchTitle" hidden data-delay="{{ sp_delay }}">
+  <div class="dgs__card">
+    <button type="button" class="dgs__close" data-dgs-close aria-label="Close">&times;</button>
+    <div class="dgs__step" data-dgs-step="claim">
+      <p class="dgs__eyebrow">Welcome gift</p>
+      <h2 class="dgs__title" id="DgScratchTitle">Scratch to reveal your welcome gift</h2>
+      <div class="dgs__scratch">
+        <div class="dgs__prize" aria-live="polite">
+          <span class="dgs__won">You won</span>
+          <strong>10% OFF</strong>
+          <span class="dgs__on">your whole order</span>
+        </div>
+        <canvas class="dgs__foil" width="560" height="220" aria-label="Scratch area: drag your finger across it to reveal your gift"></canvas>
+      </div>
+      {%- form 'customer', id: 'DgScratchForm', class: 'dgs__form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter, scratch-card">
+        <label class="visually-hidden" for="DgScratchEmail">Email address</label>
+        <input id="DgScratchEmail" type="email" name="contact[email]" required autocomplete="email" inputmode="email" placeholder="Email address">
+        <p class="dgs__error" data-dgs-error hidden>Please enter a valid email.</p>
+        <button type="submit" class="dgs__btn" data-dgs-submit>Claim my 10%</button>
+        <p class="dgs__fine">By claiming you agree to get emails from The Daily Glow Co. Unsubscribe anytime. One use per customer.</p>
+      {%- endform -%}
+      <button type="button" class="dgs__no" data-dgs-close>No thanks</button>
+    </div>
+    <div class="dgs__step" data-dgs-step="done" hidden>
+      <p class="dgs__eyebrow">You're in</p>
+      <h2 class="dgs__title">10% off is applied</h2>
+      <p class="dgs__done-text">No code to copy. Your discount is already on your order and will show at checkout, with your email filled in.</p>
+      <button type="button" class="dgs__btn" data-dgs-close>Keep shopping</button>
+    </div>
+  </div>
+</div>
+<style>
+  .dgs { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgba(15, 42, 45, .55); }
+  .dgs[hidden] { display: none; }
+  .dgs__card { position: relative; width: 100%; max-width: 380px; background: #fff; border-radius: 22px; padding: 26px 22px 18px; text-align: center; color: #17393D; font-family: var(--font-body-family, Poppins, sans-serif); box-shadow: 0 24px 60px -20px rgba(0,0,0,.45); animation: dgs-in .28s ease-out; }
+  @keyframes dgs-in { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .dgs__close { position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; border: 0; background: none; font-size: 26px; line-height: 1; color: #17393D; cursor: pointer; }
+  .dgs__eyebrow { display: inline-block; margin: 0 0 8px; padding: 3px 10px; border-radius: 999px; background: #FFF6EC; color: #A8500F; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .dgs__title { margin: 0 0 14px; font-size: 21px; line-height: 1.25; font-weight: 700; color: #17393D; }
+  .dgs__scratch { position: relative; height: 140px; margin: 0 0 14px; border-radius: 14px; overflow: hidden; background: linear-gradient(120deg, #FFC24A, #F08A2C); }
+  .dgs__prize { position: absolute; inset: 0; display: grid; place-content: center; gap: 2px; color: #17393D; }
+  .dgs__won { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .dgs__prize strong { font-size: 44px; line-height: 1; font-weight: 800; letter-spacing: -.01em; }
+  .dgs__on { font-size: 13px; font-weight: 600; }
+  .dgs__foil { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; transition: opacity .45s ease; }
+  .dgs__foil.is-gone { opacity: 0; pointer-events: none; }
+  .dgs__form { display: grid; gap: 10px; }
+  .dgs__form input[type=email] { width: 100%; min-height: 48px; padding: 0 14px; border: 1.5px solid rgba(23,57,61,.25); border-radius: 12px; font: inherit; font-size: 16px; color: #17393D; background: #fff; }
+  .dgs__form input[type=email]:focus { outline: 2px solid #F08A2C; outline-offset: 1px; }
+  .dgs__error { margin: -4px 0 0; font-size: 13px; color: #b42318; text-align: left; }
+  .dgs__btn { min-height: 52px; width: 100%; border: 0; border-radius: 999px; background: linear-gradient(90deg, #F08A2C, #FFC24A); color: #17393D; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .dgs__btn[disabled] { opacity: .7; cursor: progress; }
+  .dgs__fine { margin: 0; font-size: 11.5px; line-height: 1.45; color: rgba(23,57,61,.72); }
+  .dgs__no { margin-top: 6px; padding: 8px; border: 0; background: none; font: inherit; font-size: 13px; color: rgba(23,57,61,.72); text-decoration: underline; cursor: pointer; }
+  .dgs__done-text { margin: 0 0 16px; font-size: 15px; line-height: 1.55; color: rgba(23,57,61,.85); }
+  @media (prefers-reduced-motion: reduce) { .dgs__card { animation: none; } .dgs__foil { transition: none; } }
+</style>
+<script>
+  (function () {
+    var KEY = 'dg_scratch';
+    var root = document.getElementById('DgScratch');
+    if (!root) return;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+    var save = function () { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+    var code = window.dgScratch.code;
+
+    // Already claimed: nothing to show. Dismissed: stay quiet for 3 days.
+    if (state.claimed) return;
+    if (state.dismissed && Date.now() - state.dismissed < 3 * 864e5) return;
+
+    var open = function () {
+      root.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      setupFoil();
+    };
+    var close = function () {
+      root.hidden = true;
+      document.documentElement.style.overflow = '';
+      if (!state.claimed) { state.dismissed = Date.now(); save(); }
+    };
+    root.addEventListener('click', function (e) {
+      if (e.target === root || e.target.closest('[data-dgs-close]')) close();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !root.hidden) close(); });
+
+    // Foil the shopper scratches off; fades away once about 40% is cleared.
+    var setupFoil = function () {
+      var c = root.querySelector('.dgs__foil');
+      if (!c || c.dataset.ready) return;
+      c.dataset.ready = '1';
+      var ctx = c.getContext('2d');
+      var g = ctx.createLinearGradient(0, 0, c.width, c.height);
+      g.addColorStop(0, '#C9CED0'); g.addColorStop(.5, '#EEF1F2'); g.addColorStop(1, '#B9BFC2');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, c.width, c.height);
+      ctx.fillStyle = 'rgba(23,57,61,.55)';
+      ctx.font = '700 26px Poppins, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('SCRATCH HERE', c.width / 2, c.height / 2);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = 46; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      var down = false, last = null, moves = 0;
+      var pt = function (e) { var r = c.getBoundingClientRect(); return { x: (e.clientX - r.left) * c.width / r.width, y: (e.clientY - r.top) * c.height / r.height }; };
+      var cleared = function () {
+        var d = ctx.getImageData(0, 0, c.width, c.height).data, clear = 0, n = 0;
+        for (var i = 3; i < d.length; i += 64) { n++; if (d[i] === 0) clear++; }
+        return clear / n;
+      };
+      var reveal = function () { c.classList.add('is-gone'); var em = document.getElementById('DgScratchEmail'); if (em && window.innerWidth > 749) em.focus(); };
+      c.addEventListener('pointerdown', function (e) { down = true; last = pt(e); c.setPointerCapture(e.pointerId); });
+      c.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var p = pt(e);
+        ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        last = p;
+        if (++moves % 8 === 0 && cleared() > .4) reveal();
+      });
+      ['pointerup', 'pointercancel'].forEach(function (t) { c.addEventListener(t, function () { down = false; if (cleared() > .4) reveal(); }); });
+    };
+
+    // Claim: subscribe the email, attach the code to this session, remember the email for checkout.
+    var form = document.getElementById('DgScratchForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.querySelector('[name="contact[email]"]').value.trim();
+      var err = form.querySelector('[data-dgs-error]');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; return; }
+      err.hidden = true;
+      var btn = form.querySelector('[data-dgs-submit]');
+      btn.disabled = true; btn.textContent = 'Applying your 10%…';
+      state = { claimed: true, email: email, code: code, t: Date.now() };
+      save();
+      var apply = fetch('/discount/' + encodeURIComponent(code), { credentials: 'same-origin' }).catch(function () {});
+      var subscribe = fetch(form.action, { method: 'POST', body: new FormData(form), credentials: 'same-origin' })
+        .then(function (r) { return r.url && r.url.indexOf('/challenge') > -1 ? 'challenge' : 'ok'; })
+        .catch(function () { return 'ok'; });
+      Promise.all([apply, subscribe]).then(function (res) {
+        // Shopify sometimes asks for a quick human check on sign-ups; send the shopper through it (the discount is already applied).
+        if (res[1] === 'challenge') { form.submit(); return; }
+        root.querySelector('[data-dgs-step="claim"]').hidden = true;
+        root.querySelector('[data-dgs-step="done"]').hidden = false;
+        window.dgScratchEnable();
+      });
+    });
+
+    var delay = parseInt(root.dataset.delay, 10) || 3000;
+    var start = function () { setTimeout(open, delay); };
+    if (document.readyState === 'complete') start(); else window.addEventListener('load', start, { once: true });
+  })();
+</script>
+{%- endif -%}

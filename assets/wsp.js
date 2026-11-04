@@ -122,7 +122,8 @@
               if (errBox && errText) { errText.textContent = res.body.description || res.body.message || 'Something went wrong. Please try again.'; errBox.hidden = false; }
               return;
             }
-            window.location.href = root + 'checkout';
+            // With the scratch-card discount claimed, checkout opens with the code applied and the email filled in.
+            window.location.href = window.dgCheckoutUrl ? window.dgCheckoutUrl(root) : root + 'checkout';
           })
           .catch(reset);
       }
