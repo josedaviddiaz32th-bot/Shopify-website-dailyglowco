@@ -59,6 +59,13 @@
           self.querySelectorAll('.wsp-slide img[loading="lazy"]').forEach(function (i) { i.loading = 'eager'; });
         };
         ['pointerdown', 'touchstart', 'mouseenter', 'focusin'].forEach(function (e) { media.addEventListener(e, go, { once: true, passive: true }); });
+        // Slide 2 is fetched right after the page loads, so the first tap never shows an empty box.
+        var second = function () {
+          var img = self.querySelector('.wsp-slide:nth-child(2) img[loading="lazy"]');
+          if (img) img.loading = 'eager';
+        };
+        if (document.readyState === 'complete') second();
+        else window.addEventListener('load', second, { once: true });
       }
 
       onClick(e) {
