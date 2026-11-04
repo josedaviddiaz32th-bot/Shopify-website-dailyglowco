@@ -55,43 +55,7 @@
           "type": "image",
           "settings": {
             "product_image_file": "wrinkle-smooth-face-set-in-use",
-            "alt": "The Wrinkle Smooth Face Set worn on the forehead, under the eyes and along the smile lines"
-          }
-        },
-        "img1": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 4: empty slot, pick an image"
-          }
-        },
-        "img2": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 5: empty slot, pick an image"
-          }
-        },
-        "img3": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 6: empty slot, pick an image"
-          }
-        },
-        "img4": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 7: empty slot, pick an image"
-          }
-        },
-        "img5": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 8: empty slot, pick an image"
-          }
-        },
-        "img6": {
-          "type": "image",
-          "settings": {
-            "alt": "Photo 9: empty slot, pick an image"
+            "alt": "How to use: the Face Set worn on the forehead, under the eyes and along the smile lines"
           }
         },
         "imghero": {
@@ -107,24 +71,90 @@
             "product_image_file": "wrinkle-smooth-face-set-before-after",
             "alt": "Customer before and after using the Face Set. Results vary."
           }
+        },
+        "tab1": {
+          "type": "tab",
+          "settings": {
+            "title": "Why it works",
+            "text": "<p>While you sleep, your face presses and folds and your skin loses moisture, so lines set in deeper. Each patch does two things all night: it <strong>holds the skin smooth</strong> so it can't crease, and it <strong>seals in your skin's own moisture</strong>. Peel it off in the morning and your lines look ironed out.</p><p>No needles, no actives, nothing absorbed. Just soft silicone doing its job for 6–8 hours.</p>"
+          }
+        },
+        "tab2": {
+          "type": "tab",
+          "settings": {
+            "title": "How to use",
+            "text": "<ul><li><strong>Prep:</strong> start with clean, fully dry skin. No serum, lotion or oil underneath.</li><li><strong>Apply:</strong> press each patch on from the center out so it lies flat. Don't stretch the skin around the eyes.</li><li><strong>Sleep:</strong> wear them overnight, 6–8 hours. Side sleeper? Press the edges once more before lights out.</li><li><strong>Morning:</strong> peel off gently, then just clean and reuse. Store each patch on its backing film.</li></ul>"
+          }
+        },
+        "tab3": {
+          "type": "tab",
+          "settings": {
+            "title": "What's in the box",
+            "text": "<ul><li><strong>1 forehead patch</strong>, about 14.3 × 6 cm, with a center piece for the frown lines between your brows</li><li><strong>4 crescent patches</strong>, about 7.8 × 2.2 cm, for under-eyes, crow's feet or smile lines</li><li><strong>Backing film</strong> to store each patch between uses</li></ul><p>Choosing 2 Sets? You get two of everything.</p>"
+          }
+        },
+        "tab4": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & returns",
+            "text": "<p><strong>Free shipping</strong> on orders of $40 or more, and every Face Set option qualifies. Every order is tracked.</p><p><strong>30-day money-back guarantee:</strong> if you don't love your mornings, email support@thedailyglowco.com within 30 days of delivery for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
+        },
+        "c_hold": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-overnight-hold.jpg",
+            "alt": "Soft silicone holds skin flat overnight and seals in moisture"
+          }
+        },
+        "c_three": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-three-results.jpg",
+            "alt": "Before and after: forehead, crow's feet and smile lines"
+          }
+        },
+        "c_days": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-day1-day7.jpg",
+            "alt": "Wake up to visibly smoother skin: day 1 and day 7"
+          }
+        },
+        "c_apply": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-one-use.jpg",
+            "alt": "Applying the clear under-eye patches"
+          }
+        },
+        "c_guar": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-face-set-carousel-guarantee.jpg",
+            "alt": "30-day money-back guarantee"
+          }
         }
       },
       "block_order": [
         "imghero",
         "imgba",
+        "c_hold",
+        "c_three",
+        "c_days",
+        "c_apply",
         "img0",
-        "img1",
-        "img2",
-        "img3",
-        "img4",
-        "img5",
-        "img6",
+        "c_guar",
         "proof1",
         "proof2",
         "proof3",
         "proof4",
         "offer-2",
-        "offer-1"
+        "offer-1",
+        "tab1",
+        "tab2",
+        "tab3",
+        "tab4"
       ],
       "settings": {
         "eyebrow": "The 5-piece face set",
@@ -135,85 +165,42 @@
         "offer_label": "Choose your set",
         "guarantee_line": "Try it for 30 days. If you don't love your mornings, get your money back.",
         "sticky_bar": true,
-        "product": "wrinkle-smooth-face-set",
-        "padding_top": 20
+        "full_slides": true,
+        "show_placeholders": false,
+        "sale_badge": "Black Friday sale",
+        "sale_text": "Our biggest offer of the year: <strong>your 2nd set for just $15</strong>. Ends Dec 1.",
+        "sale_end": "2026-12-01",
+        "stock_text": "Limited stock: only 37 left",
+        "product": "wrinkle-smooth-face-set"
       }
     },
-    "ticker": {
+    "sale": {
       "type": "dg-ticker",
-      "blocks": {
-        "t1": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "text": "Free shipping on orders $40+"
-          }
-        },
-        "t2": {
-          "type": "item",
-          "settings": {
-            "icon": "repeat",
-            "text": "Reusable night after night"
-          }
-        },
-        "t3": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "text": "No actives, nothing absorbed"
-          }
-        },
-        "t4": {
-          "type": "item",
-          "settings": {
-            "icon": "shield",
-            "text": "30-day money-back guarantee"
-          }
-        },
-        "t5": {
-          "type": "item",
-          "settings": {
-            "icon": "clock",
-            "text": "Five patches, one minute before bed"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5"
-      ],
       "settings": {
-        "style": "light"
-      }
-    },
-    "how": {
-      "type": "dg-steps",
+        "style": "sale",
+        "speed": 28,
+        "end_date": "2026-12-01"
+      },
       "blocks": {
         "s1": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "badge": "Step 1",
-            "title": "Apply before bed",
-            "text": "<p>Smooth the patch onto clean, dry skin — from the center outward. It takes about 30 seconds.</p>"
+            "icon": "spark",
+            "text": "Black Friday sale"
           }
         },
         "s2": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "badge": "Step 2",
-            "title": "Sleep",
-            "text": "<p>The soft silicone holds your skin smooth through the night and seals in your skin's own moisture. No actives — nothing absorbed.</p>"
+            "icon": "spark",
+            "text": "2nd set just $15"
           }
         },
         "s3": {
-          "type": "step",
+          "type": "item",
           "settings": {
-            "badge": "Step 3",
-            "title": "Peel and glow",
-            "text": "<p>Peel it off in the morning to visibly smoother-looking skin. Then just clean and reuse — night after night.</p>"
+            "icon": "spark",
+            "text": "Ends Dec 1"
           }
         }
       },
@@ -221,15 +208,313 @@
         "s1",
         "s2",
         "s3"
+      ]
+    },
+    "results": {
+      "type": "wsp-results",
+      "settings": {
+        "style": "light",
+        "heading": "Smoother mornings <em>from the very first night</em>",
+        "note": "Before and after one night. Results vary.",
+        "padding_top": 56,
+        "padding_bottom": 48,
+        "show_stars": false
+      },
+      "blocks": {
+        "r1": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-forehead.jpg",
+            "alt": "Forehead lines before and after",
+            "title": "Forehead lines",
+            "rating": 5,
+            "text": "Peel it off in the morning and your forehead looks noticeably smoother. The kind of result you check the mirror twice for."
+          }
+        },
+        "r2": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-frown-lines.jpg",
+            "alt": "Frown lines before and after",
+            "title": "Frown lines",
+            "rating": 5,
+            "text": "That line between your brows looks softer by morning. One easy step before bed."
+          }
+        },
+        "r3": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-under-eyes.jpg",
+            "alt": "Under-eyes before and after",
+            "title": "Under-eyes",
+            "rating": 5,
+            "text": "Under-eyes look smoother and fresher, and concealer goes on better instead of settling into lines."
+          }
+        },
+        "r4": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-crows-feet.jpg",
+            "alt": "Crow's feet before and after",
+            "title": "Crow's feet",
+            "rating": 5,
+            "text": "The fine lines at the corners of your eyes look softer, so you look rested when you start your day."
+          }
+        },
+        "r5": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-smile-lines.jpg",
+            "alt": "Smile lines before and after",
+            "title": "Smile lines",
+            "rating": 5,
+            "text": "The creases around your smile look smoother, right where you wanted a little extra attention."
+          }
+        },
+        "r6": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/wrinkle-smooth-results-lip-lines.jpg",
+            "alt": "Lip lines before and after",
+            "title": "Lip lines",
+            "rating": 5,
+            "text": "The little lines above your upper lip look softer, and lipstick goes on smoother."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ]
+    },
+    "stats": {
+      "type": "wsp-stats",
+      "settings": {
+        "style": "mist",
+        "heading": "The secret to <em>smoother-looking mornings</em>",
+        "image": "shopify://shop_images/wrinkle-smooth-face-set-in-use.webp",
+        "note": "Based on a survey of 200 users conducted by our manufacturer."
+      },
+      "blocks": {
+        "st1": {
+          "type": "stat",
+          "settings": {
+            "value": 95,
+            "text": "saw <strong>smoother-looking skin</strong> the very first morning"
+          }
+        },
+        "st2": {
+          "type": "stat",
+          "settings": {
+            "value": 92,
+            "text": "said their <strong>forehead lines looked softer</strong> within 7 nights"
+          }
+        },
+        "st3": {
+          "type": "stat",
+          "settings": {
+            "value": 97,
+            "text": "would <strong>recommend the patches</strong> to a friend"
+          }
+        }
+      },
+      "block_order": [
+        "st1",
+        "st2",
+        "st3"
+      ]
+    },
+    "vs": {
+      "type": "wsp-vs",
+      "settings": {
+        "style": "light",
+        "heading": "Daily Glow <em>vs others</em>",
+        "col_us": "Daily Glow",
+        "col_them": "Others",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "v1": {
+          "type": "row",
+          "settings": {
+            "label": "Holds your lines smooth all night",
+            "us": true,
+            "them": false
+          }
+        },
+        "v2": {
+          "type": "row",
+          "settings": {
+            "label": "Seals in moisture while you sleep",
+            "us": true,
+            "them": false
+          }
+        },
+        "v3": {
+          "type": "row",
+          "settings": {
+            "label": "Forehead, eyes & smile lines in one set",
+            "us": true,
+            "them": false
+          }
+        },
+        "v4": {
+          "type": "row",
+          "settings": {
+            "label": "Reusable: just clean and reuse",
+            "us": true,
+            "them": false
+          }
+        },
+        "v5": {
+          "type": "row",
+          "settings": {
+            "label": "No needles, no glue, no actives",
+            "us": true,
+            "them": false
+          }
+        },
+        "v6": {
+          "type": "row",
+          "settings": {
+            "label": "30-day money-back guarantee",
+            "us": true,
+            "them": false
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6"
+      ]
+    },
+    "guarantee": {
+      "type": "dg-guarantee",
+      "blocks": {
+        "gb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "gb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping on orders $40+"
+          }
+        },
+        "gb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "mail",
+            "text": "Real support: support@thedailyglowco.com"
+          }
+        }
+      },
+      "block_order": [
+        "gb1",
+        "gb2",
+        "gb3"
+      ],
+      "settings": {
+        "style": "teal",
+        "days": "30",
+        "eyebrow": "Feel the difference",
+        "heading": "30-Day Risk-Free Trial",
+        "text": "<p>If you don't see smoother-looking mornings within 30 days, send it back for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "button_label": "Claim my offer",
+        "button_link": "#offer"
+      }
+    },
+    "faq": {
+      "type": "dg-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will the patches stay on all night?",
+            "answer": "<p>Applied to clean, fully dry skin (no serum or oil underneath), the patches are made to stay in place overnight. Smooth each one from the center outward so it sits flat, and press the edges once more if you sleep on your side.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Where do the four crescents go?",
+            "answer": "<p>Wherever you notice lines most: under your eyes, at the outer corners for crow's feet, or along your smile lines. Mix and match from night to night.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How many times can I reuse them?",
+            "answer": "<p>Many nights with proper care. Clean each patch after use and store it on its backing film. How long they last depends on your skin prep and care routine.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Will they irritate my skin or cause breakouts?",
+            "answer": "<p>The patches are soft silicone with no actives; nothing is absorbed into your skin. Keep them clean between uses. If your skin is sensitive, try one for an hour first.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Does it work on deep lines?",
+            "answer": "<p>You'll see smoother-looking softening. Fine lines respond most; deep-set lines soften less. We'd rather tell you that now than surprise you later.</p>"
+          }
+        },
+        "q11": {
+          "type": "question",
+          "settings": {
+            "question": "How do returns work?",
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+          }
+        },
+        "qw": {
+          "type": "question",
+          "settings": {
+            "question": "How long should I wear them?",
+            "answer": "<p>Overnight, 6–8 hours is the sweet spot. Put them on right before bed and peel them off when you wake up.</p>"
+          }
+        },
+        "qr": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I see results?",
+            "answer": "<p>Most people see smoother-looking skin the very first morning. The look is strongest in the first hours after you peel them off, and mornings keep starting smoother when you use them regularly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "qw",
+        "qr",
+        "q2",
+        "q5",
+        "q3",
+        "q8",
+        "q11"
       ],
       "settings": {
         "style": "light",
-        "anchor": "home-how",
-        "eyebrow": "How it works",
-        "heading": "Hold + hydrate, <em>while you sleep</em>",
-        "text": "<p>While you sleep, your skin folds and loses moisture. The patch holds the skin surface smooth and seals in moisture — so lines look softer and \"ironed out\" by morning.</p>",
-        "button_label": "See the full story",
-        "button_link": "/products/wrinkle-smooth-face-set"
+        "anchor": "faq",
+        "eyebrow": "FAQ",
+        "heading": "Questions, <em>answered</em>",
+        "open_first": true,
+        "button_label": "Claim my offer",
+        "button_link": "#offer"
       }
     },
     "products": {
@@ -267,131 +552,16 @@
         "heading": "Everything we make",
         "text": "<p>Simple tools for your daily glow — no needles, no clinics, no subscriptions.</p>"
       }
-    },
-    "guarantee": {
-      "type": "dg-guarantee",
-      "blocks": {
-        "gb1": {
-          "type": "badge",
-          "settings": {
-            "icon": "shield",
-            "text": "30-day money-back guarantee"
-          }
-        },
-        "gb2": {
-          "type": "badge",
-          "settings": {
-            "icon": "truck",
-            "text": "Free shipping on orders $40+"
-          }
-        },
-        "gb3": {
-          "type": "badge",
-          "settings": {
-            "icon": "mail",
-            "text": "Real support: support@thedailyglowco.com"
-          }
-        }
-      },
-      "block_order": [
-        "gb1",
-        "gb2",
-        "gb3"
-      ],
-      "settings": {
-        "style": "teal",
-        "days": "30",
-        "eyebrow": "Zero-risk",
-        "heading": "Every product, guaranteed",
-        "text": "<p>Try anything we make for 30 days from delivery. If you don't love it, write to us and get your money back.</p>",
-        "button_label": "Shop the patches",
-        "button_link": "/#offer"
-      }
-    },
-    "faq": {
-      "type": "dg-faq",
-      "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "Will the patches stay on all night?",
-            "answer": "<p>Applied to clean, fully dry skin — no serum or oil underneath — the patch is made to stay in place overnight. Smooth it from the center outward so it sits flat.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "How many times can I reuse them?",
-            "answer": "<p>Many nights with proper care: clean the patch after each use and store it on its backing.</p>"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "Are they safe under my eyes?",
-            "answer": "<p>The eye patches are shaped for the delicate under-eye area. Apply without stretching the skin, and stop if you feel irritation.</p>"
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "question": "Is there a subscription?",
-            "answer": "<p>No. You buy once and reuse. No refills, no memberships, nothing recurring.</p>"
-          }
-        },
-        "q5": {
-          "type": "question",
-          "settings": {
-            "question": "How do returns work?",
-            "answer": "<p>You have 30 days from delivery on everything we sell. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "How much is shipping?",
-            "answer": "<p>Free on orders of $40 or more, and every Face Set qualifies. Orders under $40 ship for a flat $4.99.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q6",
-        "q5"
-      ],
-      "settings": {
-        "style": "mist",
-        "anchor": "faq",
-        "eyebrow": "Questions, answered",
-        "heading": "Before you ask",
-        "open_first": true,
-        "button_label": "Shop the patches",
-        "button_link": "/#offer"
-      }
-    },
-    "cta": {
-      "type": "wsp-cta",
-      "settings": {
-        "style": "teal",
-        "eyebrow": "Tonight's the night",
-        "heading": "Wake up to <em>visibly smoother skin</em>",
-        "text": "<p>Thirty seconds before bed. Smoother-looking skin in the mirror tomorrow. And thirty days to decide if your mornings are better.</p>",
-        "button_label": "Choose your set",
-        "button_link": "#offer",
-        "guarantee_line": "Free shipping on orders $40+ · 30-day money-back guarantee · Reusable"
-      }
     }
   },
   "order": [
     "hero",
-    "ticker",
-    "how",
+    "sale",
+    "results",
+    "stats",
+    "vs",
     "products",
     "guarantee",
-    "faq",
-    "cta"
+    "faq"
   ]
 }

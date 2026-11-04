@@ -13,9 +13,10 @@
     if section.settings.sale_bar_end != blank and today > section.settings.sale_bar_end
       assign sale_bar = false
     endif
+    assign tpl_key = template.suffix | default: template.name
     if section.settings.sale_bar_templates != blank
       assign sale_tpls = section.settings.sale_bar_templates | remove: ' ' | split: ','
-      unless sale_tpls contains template.suffix
+      unless sale_tpls contains tpl_key
         assign sale_bar = false
       endunless
     endif
@@ -29,7 +30,7 @@
       for line in sale_lines
         assign kv = line | split: '='
         assign k = kv[0] | strip
-        if k != blank and k == template.suffix and kv[1] != blank
+        if k != blank and k == tpl_key and kv[1] != blank
           assign sale_text = kv[1] | strip
         endif
       endfor
