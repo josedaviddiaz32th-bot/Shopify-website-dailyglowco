@@ -30,6 +30,9 @@
             b.classList.remove('loading');
             b.removeAttribute('aria-disabled');
           });
+          var sb = this.querySelector('[data-sticky-atc]');
+          if (sb) sb.textContent = 'Buy now';
+          this.update();
           var steps = this.querySelectorAll('.wsp-steps li');
           if (steps.length > 1) {
             steps[0].classList.remove('is-done');
@@ -88,8 +91,26 @@
         var errBox = this.querySelector('.product-form__error-message-wrapper');
         var errText = this.querySelector('.product-form__error-message');
         var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+        var self = this;
+        var label = btn.querySelector('[data-atc-label]');
+        var sticky = this.querySelector('[data-sticky-atc]');
+        var steps = document.querySelectorAll('.wsp-steps li');
+        var reset = function () {
+          btn.classList.remove('loading');
+          btn.removeAttribute('aria-disabled');
+          if (sticky) sticky.textContent = 'Buy now';
+          if (steps.length > 1) { steps[0].classList.remove('is-done'); steps[0].classList.add('is-on'); steps[1].classList.remove('is-on'); }
+          self.update();
+        };
+        // Instant feedback: the label says where we're going and the steps move to Checkout.
         btn.classList.add('loading');
         btn.setAttribute('aria-disabled', 'true');
+        if (label) label.textContent = 'Going to checkout…';
+        if (sticky) sticky.textContent = 'Going to checkout…';
+        if (steps.length > 1) {
+          steps[0].classList.replace('is-on', 'is-done');
+          steps[1].classList.add('is-on');
+        }
         fetch(root + 'cart/add.js', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -97,19 +118,13 @@
         }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
           .then(function (res) {
             if (!res.ok || res.body.status) {
-              btn.classList.remove('loading');
-              btn.removeAttribute('aria-disabled');
+              reset();
               if (errBox && errText) { errText.textContent = res.body.description || res.body.message || 'Something went wrong. Please try again.'; errBox.hidden = false; }
               return;
             }
-            var steps = document.querySelectorAll('.wsp-steps li');
-            if (steps.length > 1) {
-              steps[0].classList.replace('is-on', 'is-done');
-              steps[1].classList.add('is-on');
-            }
             window.location.href = root + 'checkout';
           })
-          .catch(function () { btn.classList.remove('loading'); btn.removeAttribute('aria-disabled'); });
+          .catch(reset);
       }
 
       selected() {
