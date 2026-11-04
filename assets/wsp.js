@@ -45,15 +45,20 @@
         this.update();
       }
 
-      // Hidden slides are lazy, so they only start downloading when tapped and show
-      // an empty box for a moment. Fetch them once the page itself has loaded.
+      // Hidden slides are lazy so they don't compete with the first image on slow
+      // phones. Fetch them as soon as the shopper touches the gallery, so the next
+      // slide is ready by the time the tap or swipe finishes.
       preloadSlides() {
         var self = this;
+        var media = this.querySelector('.wsp-media');
+        if (!media) return;
+        var done = false;
         var go = function () {
+          if (done) return;
+          done = true;
           self.querySelectorAll('.wsp-slide img[loading="lazy"]').forEach(function (i) { i.loading = 'eager'; });
         };
-        if (document.readyState === 'complete') go();
-        else window.addEventListener('load', go, { once: true });
+        ['pointerdown', 'touchstart', 'mouseenter', 'focusin'].forEach(function (e) { media.addEventListener(e, go, { once: true, passive: true }); });
       }
 
       onClick(e) {

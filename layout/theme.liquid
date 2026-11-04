@@ -22,8 +22,14 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {%- liquid
+      assign meta_desc = page_description
+      if meta_desc == blank and template.name == 'index'
+        assign meta_desc = 'Reusable silicone patches that smooth the look of forehead, under-eye and smile lines while you sleep. No needles, no refills. Free shipping on orders $40+ and a 30-day money-back guarantee.'
+      endif
+    -%}
+    {% if meta_desc != blank %}
+      <meta name="description" content="{{ meta_desc | escape }}">
     {% endif %}
 
     {% render 'meta-tags' %}

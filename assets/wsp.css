@@ -320,8 +320,9 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 .wsp-sale__text { margin: 0; font-size: 14px; line-height: 1.45; color: var(--dg-ink, #17393D); }
 .wsp-sale__text strong { color: #C2410C; }
 .wsp-stock--fixed { margin: 2px 0 14px; }
-.wsp-stock--fixed .wsp-stock__dot { animation: wsp-pulse 1.6s ease-out infinite; }
-@keyframes wsp-pulse { 0% { box-shadow: 0 0 0 0 rgba(217,45,32,.45); } 70% { box-shadow: 0 0 0 8px rgba(217,45,32,0); } 100% { box-shadow: 0 0 0 0 rgba(217,45,32,0); } }
+.wsp-stock--fixed .wsp-stock__dot { position: relative; box-shadow: none; }
+.wsp-stock--fixed .wsp-stock__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(217,45,32,.45); animation: wsp-pulse 1.6s ease-out infinite; }
+@keyframes wsp-pulse { 0% { transform: scale(1); opacity: 1; } 70%, 100% { transform: scale(2.8); opacity: 0; } }
 .wsp-tabs { margin-top: 18px; border-top: 1px solid var(--dg-line); scroll-margin-top: 110px; }
 #home-how { display: block; scroll-margin-top: 110px; }
 .wsp-tab { border-bottom: 1px solid var(--dg-line); }
@@ -336,7 +337,7 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 @media screen and (max-width: 749px) {
   .wsp-hero--full .wsp-slide img, .wsp-hero--full .wsp-slide video, .wsp-hero--full .wsp-slide .wsp-ph { height: auto; aspect-ratio: 1 / 1; }
 }
-@media (prefers-reduced-motion: reduce) { .wsp-stock--fixed .wsp-stock__dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .wsp-stock--fixed .wsp-stock__dot::after { animation: none; } }
 
 /* ---------- Results cards (wsp-results) ---------- */
 .wsp-res .dg__head { margin-bottom: 28px; }
@@ -389,3 +390,7 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 .wsp-vs__mark.is-no { background: rgba(23,57,61,.08); }
 .wsp-vs__mark.is-no svg { stroke: rgba(23,57,61,.45); }
 .wsp-vs .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Text in brand orange: a deeper shade so small text stays readable (WCAG AA) */
+.dg__eyebrow, .wsp-offer__save, .wsp-product-card__tag, .wsp-product-card__link { color: #A8500F; }
+.dg--teal .dg__eyebrow { color: var(--dg-gold); }

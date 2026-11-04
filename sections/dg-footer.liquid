@@ -3,7 +3,7 @@
   <div class="dgf__wrap">
     <div class="dgf__grid">
       <div class="dgf__intro">
-        <img src="{{ 'dg-logo-horizontal-white.svg' | asset_url }}" alt="{{ shop.name | escape }}" height="56" style="height: 56px; width: auto;" loading="lazy">
+        <img src="{{ 'dg-logo-horizontal-white.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="212" height="56" style="height: 56px; width: auto;" loading="lazy">
         {%- if section.settings.signup_heading != blank %}<p class="dgf__pitch">{{ section.settings.signup_heading | escape }}</p>{% endif -%}
         {%- form 'customer', id: 'DgFooterNewsletter', class: 'dgf__form' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">

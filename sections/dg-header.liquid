@@ -87,7 +87,7 @@
         {%- if section.settings.logo != blank -%}
           {{ section.settings.logo | image_url: width: 600 | image_tag: height: section.settings.logo_height, widths: '200, 400, 600', alt: shop.name, loading: 'eager' }}
         {%- else -%}
-          <img src="{{ 'dg-logo-header.svg' | asset_url }}" alt="{{ shop.name | escape }}" height="{{ section.settings.logo_height }}" style="height: {{ section.settings.logo_height }}px; width: auto;">
+          <img src="{{ 'dg-logo-header.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_height | times: 492 | divided_by: 108 }}" height="{{ section.settings.logo_height }}" style="height: {{ section.settings.logo_height }}px; width: auto;">
         {%- endif -%}
         {%- if holiday and section.settings.santa_hat -%}
           <svg class="dgh-hat" viewBox="0 0 40 34" aria-hidden="true">

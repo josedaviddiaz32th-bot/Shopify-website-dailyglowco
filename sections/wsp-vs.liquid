@@ -3,8 +3,8 @@
 {%- endcomment -%}
 {{ 'daily-glow.css' | asset_url | stylesheet_tag }}
 {{ 'wsp.css' | asset_url | stylesheet_tag }}
-{%- capture yes -%}<span class="wsp-vs__mark is-yes" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{%- endcapture -%}
-{%- capture no -%}<span class="wsp-vs__mark is-no" aria-label="No"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg></span>{%- endcapture -%}
+{%- capture yes -%}<span class="wsp-vs__mark is-yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{%- endcapture -%}
+{%- capture no -%}<span class="wsp-vs__mark is-no" role="img" aria-label="No"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg></span>{%- endcapture -%}
 <section class="dg dg--{{ section.settings.style }} wsp-vs" style="--dg-pt: {{ section.settings.padding_top }}px; --dg-pb: {{ section.settings.padding_bottom }}px;">
   <div class="dg__wrap">
     <div class="dg__head">
