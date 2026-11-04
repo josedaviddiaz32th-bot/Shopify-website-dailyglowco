@@ -404,3 +404,6 @@ html.wsp-locked, html.wsp-locked body { overflow: hidden; }
 
 /* Bold words in the subheadline (e.g. the areas the set covers) */
 .wsp-sub strong { color: var(--dg-ink, #17393D); font-weight: 700; }
+
+/* Offer card: the per-set price on its own line under the contents */
+.wsp-offer__unit { display: block; margin-top: 2px; font-weight: 600; color: var(--dg-ink, #17393D); }

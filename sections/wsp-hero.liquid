@@ -293,7 +293,11 @@
                 <span class="wsp-offer__title">{{ card_title | escape }}
                   {%- if deco and deco.settings.save_label != blank %} <span class="wsp-offer__save">{{ deco.settings.save_label | escape }}</span>{% endif -%}
                 </span>
-                {%- if deco and deco.settings.subtitle != blank -%}<span class="wsp-offer__sub">{{ deco.settings.subtitle | escape }}</span>{%- endif -%}
+                {%- if deco and deco.settings.subtitle != blank -%}
+                  {%- comment -%} Text after " · " (e.g. "only $30 a set") gets its own line so it never wraps mid-phrase. {%- endcomment -%}
+                  {%- assign sub_parts = deco.settings.subtitle | split: ' · ' -%}
+                  <span class="wsp-offer__sub">{{ sub_parts.first | escape }}{%- if sub_parts.size > 1 -%}<span class="wsp-offer__unit">{{ sub_parts | slice: 1, 9 | join: ' · ' | escape }}</span>{%- endif -%}</span>
+                {%- endif -%}
               </span>
               <span class="wsp-offer__price">
                 <span class="wsp-offer__now">{{ v.price | money }}</span>
