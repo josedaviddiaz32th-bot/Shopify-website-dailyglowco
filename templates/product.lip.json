@@ -113,7 +113,7 @@
           "type": "tab",
           "settings": {
             "title": "Shipping & returns",
-            "text": "<p><strong>Free shipping</strong> on orders of $40 or more; smaller orders ship for a flat $4.99. Every order is tracked.</p><p><strong>30-day money-back guarantee:</strong> if you don't love your mornings, email support@thedailyglowco.com within 30 days of delivery for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+            "text": "<p><strong>Free shipping</strong> on orders of $40 or more; smaller orders ship for a flat $4.99. Every order is tracked.</p><p><strong>30-day money-back guarantee:</strong> if you don't love your mornings, email support@thedailyglowco.com within 30 days of delivery for a full refund.</p>"
           }
         }
       },
@@ -212,7 +212,7 @@
         "days": "30",
         "eyebrow": "Feel the difference",
         "heading": "30-Day Risk-Free Trial",
-        "text": "<p>If you don't see smoother-looking mornings within 30 days, send it back for a full refund. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "text": "<p>If you don't see smoother-looking mornings within 30 days, send it back for a full refund.</p>",
         "button_label": "Claim my offer",
         "button_link": "#offer"
       }
@@ -252,7 +252,7 @@
           "type": "question",
           "settings": {
             "question": "How do returns work?",
-            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out, with your money back if you're not happy.</p>"
           }
         },
         "qw": {

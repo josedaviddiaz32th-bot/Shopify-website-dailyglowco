@@ -452,7 +452,7 @@
         "days": "30",
         "eyebrow": "Zero-risk mornings",
         "heading": "We stand behind every patch",
-        "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>",
+        "text": "<p>Try the patches for 30 days from delivery. If you don't love what you see in the mirror, write to us and get your money back.</p>",
         "button_label": "Choose your patches",
         "button_link": "/products/wrinkle-smooth-patches#offer"
       }
@@ -534,7 +534,7 @@
           "type": "question",
           "settings": {
             "question": "How do returns work?",
-            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy. Damaged or wrong item? Send a photo within 7 days and we'll replace it.</p>"
+            "answer": "<p>You have 30 days from delivery. Email support@thedailyglowco.com and we'll sort it out — money back if you're not happy.</p>"
           }
         }
       },
