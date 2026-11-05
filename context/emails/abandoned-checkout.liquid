@@ -1,3 +1,6 @@
+{% assign dg_items = line_items %}
+{% if dg_items == blank %}{% assign dg_items = subtotal_line_items %}{% endif %}
+{% if dg_items == blank %}{% assign dg_items = checkout.line_items %}{% endif %}
   <div style="display:none; max-height:0; overflow:hidden;">We saved your checkout, so you can pick up right where you left off.</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1;">
     <tr>
@@ -45,7 +48,7 @@
             <td style="padding:28px 26px 0;">
               <h2 style="margin:0 0 6px; font-size:18px; font-weight:700;">Saved for you</h2>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                {% for line in line_items %}
+                {% for line in dg_items %}
                   <tr>
                     <td width="72" valign="top" style="padding:14px 0; border-bottom:1px solid #E3EAE7;">
                       {% if line.image %}
@@ -60,10 +63,10 @@
                       <br><span style="font-size:13px; color:#5B7275;">Qty {{ line.quantity }}</span>
                     </td>
                     <td valign="top" align="right" style="padding:14px 0; border-bottom:1px solid #E3EAE7; font-size:15px; white-space:nowrap;">
-                      {% if line.original_line_price > line.final_line_price %}
+                      {% if line.final_line_price and line.original_line_price %}{% if line.original_line_price > line.final_line_price %}
                         <span style="font-size:13px; color:#5B7275; text-decoration:line-through;">{{ line.original_line_price | money }}</span><br>
-                      {% endif %}
-                      <strong>{{ line.final_line_price | money }}</strong>
+                      {% endif %}{% endif %}
+                      <strong>{{ line.final_line_price | default: line.line_price | money }}</strong>
                     </td>
                   </tr>
                 {% endfor %}
@@ -71,9 +74,9 @@
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px; font-size:15px;">
                 <tr>
                   <td style="padding:5px 0; font-weight:700;">Subtotal</td>
-                  <td align="right" style="padding:5px 0; font-weight:700;">{{ subtotal_price | money }}</td>
+                  <td align="right" style="padding:5px 0; font-weight:700;">{{ subtotal_price | default: checkout.subtotal_price | money }}</td>
                 </tr>
-                {% if subtotal_price >= 4000 %}
+                {% assign dg_sub = subtotal_price | default: checkout.subtotal_price | default: 0 %}{% if dg_sub >= 4000 %}
                   <tr>
                     <td colspan="2" align="right" style="padding:2px 0 0; font-size:13px; font-weight:600; color:#F08A2C;">Free shipping is included</td>
                   </tr>
