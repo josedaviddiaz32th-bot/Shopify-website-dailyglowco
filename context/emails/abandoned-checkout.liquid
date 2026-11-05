@@ -1,0 +1,213 @@
+{% comment %}
+  The Daily Glow Co. — Abandoned checkout recovery email (Shopify customer notification).
+  Paste in Shopify admin: Settings > Notifications > Customer notifications > Abandoned checkout > Edit code.
+  Subject line: Your smoother mornings are still waiting
+  Alternates to test: "{{ billing_address.first_name | default: 'Hey' }}, you left your patches behind" · "Your pillow's still working the night shift"
+  Copy built from the Avatar Sheet (pillow creases, "rested, not angry", burned by patches that fall off),
+  Core Beliefs 1-2 and 6 (the pillow makes the lines, the patch holds skin flat overnight, the guarantee)
+  and the Offer Brief objection list (stays on? gentle under the eyes? what if it doesn't work?).
+  The Black Friday strip hides itself after Dec 1, 2026.
+{% endcomment %}
+{%- capture email_title -%}Your smoother mornings are still waiting{%- endcapture -%}
+{%- assign teal = '#17393D' -%}
+{%- assign orange = '#F08A2C' -%}
+{%- assign gold = '#FFC24A' -%}
+{%- assign mist = '#EEF3F1' -%}
+{%- assign ink_muted = '#5B7275' -%}
+{%- assign dg_name = billing_address.first_name | default: customer.first_name -%}
+{%- assign dg_lines = subtotal_line_items -%}
+{%- if dg_lines == nil or dg_lines == empty -%}{%- assign dg_lines = line_items -%}{%- endif -%}
+{%- assign dg_today = 'now' | date: '%Y%m%d' | plus: 0 -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ email_title }}</title>
+  <style>
+    body { margin: 0; padding: 0; background: {{ mist }}; }
+    a { color: {{ teal }}; }
+    @media (max-width: 600px) {
+      .dg-wrap { width: 100% !important; }
+      .dg-pad { padding-left: 20px !important; padding-right: 20px !important; }
+      .dg-h1 { font-size: 26px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background:{{ mist }};">
+  <div style="display:none; max-height:0; overflow:hidden;">We saved your checkout, so you can pick up right where you left off.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:{{ mist }};">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" class="dg-wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden; font-family:Poppins, Helvetica, Arial, sans-serif; color:{{ teal }};">
+
+          {%- if dg_today <= 20261201 -%}
+          <!-- Black Friday strip (hides itself after Dec 1) -->
+          <tr>
+            <td align="center" style="background:{{ teal }}; padding:10px 20px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#FFFFFF;">
+              Black Friday sale <span style="color:{{ gold }};">&middot;</span> up to 67% off <span style="color:{{ gold }};">&middot;</span> ends Dec 1
+            </td>
+          </tr>
+          {%- endif -%}
+
+          <!-- Header -->
+          <tr>
+            <td class="dg-pad" align="center" style="padding:28px 40px 8px;">
+              <a href="{{ shop.url }}" style="text-decoration:none; color:{{ teal }};">
+                {%- if shop.email_logo_url -%}
+                  <img src="{{ shop.email_logo_url }}" alt="{{ shop.name }}" width="{{ shop.email_logo_width | default: 160 }}" style="display:block; border:0; max-width:100%; height:auto;">
+                {%- else -%}
+                  <span style="font-size:20px; font-weight:700;">{{ shop.name }}</span>
+                {%- endif -%}
+              </a>
+            </td>
+          </tr>
+
+          <!-- Hero -->
+          <tr>
+            <td class="dg-pad" align="center" style="padding:20px 40px 8px;">
+              <p style="margin:0 0 10px; font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:{{ orange }};">Still thinking it over?</p>
+              <h1 class="dg-h1" style="margin:0 0 12px; font-size:30px; line-height:1.2; font-weight:700; color:{{ teal }};">{% if dg_name != blank %}{{ dg_name }}, your{% else %}Your{% endif %} smoother mornings are still waiting</h1>
+              <p style="margin:0; font-size:16px; line-height:1.6; color:{{ ink_muted }};">You were one step away from waking up to visibly smoother skin. We saved your checkout, so you can pick up right where you left off.</p>
+            </td>
+          </tr>
+
+          <!-- Button -->
+          <tr>
+            <td align="center" style="padding:22px 40px 6px;">
+              <a href="{{ url }}" style="display:inline-block; background:{{ orange }}; color:{{ teal }}; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Finish my checkout</a>
+            </td>
+          </tr>
+
+          <!-- What's waiting -->
+          <tr>
+            <td class="dg-pad" style="padding:28px 40px 0;">
+              <h2 style="margin:0 0 6px; font-size:18px; font-weight:700;">Saved for you</h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                {%- for line in dg_lines -%}
+                  <tr>
+                    <td width="72" valign="top" style="padding:14px 0; border-bottom:1px solid #E3EAE7;">
+                      {%- if line.image -%}
+                        <img src="{{ line | img_url: 'compact_cropped' }}" alt="" width="60" height="60" style="display:block; width:60px; height:60px; border-radius:10px; object-fit:cover; background:{{ mist }};">
+                      {%- endif -%}
+                    </td>
+                    <td valign="top" style="padding:14px 10px; border-bottom:1px solid #E3EAE7; font-size:15px; line-height:1.4;">
+                      <strong>{{ line.product.title | default: line.title }}</strong>
+                      {%- if line.variant.title != blank and line.variant.title != 'Default Title' -%}
+                        <br><span style="font-size:13px; color:{{ ink_muted }};">{{ line.variant.title }}</span>
+                      {%- endif -%}
+                      <br><span style="font-size:13px; color:{{ ink_muted }};">Qty {{ line.quantity }}</span>
+                      {%- for allocation in line.discount_allocations -%}
+                        <br><span style="font-size:13px; color:{{ orange }}; font-weight:600;">{{ allocation.discount_application.title }}</span>
+                      {%- endfor -%}
+                    </td>
+                    <td valign="top" align="right" style="padding:14px 0; border-bottom:1px solid #E3EAE7; font-size:15px; white-space:nowrap;">
+                      {%- if line.original_line_price > line.final_line_price -%}
+                        <span style="font-size:13px; color:{{ ink_muted }}; text-decoration:line-through;">{{ line.original_line_price | money }}</span><br>
+                      {%- endif -%}
+                      <strong>{{ line.final_line_price | money }}</strong>
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px; font-size:15px;">
+                <tr>
+                  <td style="padding:5px 0; font-weight:700;">Subtotal</td>
+                  <td align="right" style="padding:5px 0; font-weight:700;">{{ subtotal_price | money }}</td>
+                </tr>
+                {%- if subtotal_price >= 4000 -%}
+                  <tr>
+                    <td colspan="2" align="right" style="padding:2px 0 0; font-size:13px; font-weight:600; color:{{ orange }};">Free shipping is included</td>
+                  </tr>
+                {%- endif -%}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Why tonight -->
+          <tr>
+            <td class="dg-pad" style="padding:30px 40px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:{{ mist }}; border-radius:14px;">
+                <tr>
+                  <td style="padding:20px 22px;">
+                    <h2 style="margin:0 0 8px; font-size:18px; font-weight:700;">Your pillow works the night shift</h2>
+                    <p style="margin:0 0 10px; font-size:15px; line-height:1.6;">Every night your face spends hours pressed into a pillow, folding the same lines into your forehead, around your eyes and along your smile. That's why the creases that used to fade by lunch start staying all day.</p>
+                    <p style="margin:0; font-size:15px; line-height:1.6;">Our soft silicone patches <strong>hold your skin flat and seal in moisture while you sleep</strong>, so you peel them off to visibly smoother skin. You look rested, not tired, and still like you. No needles, no tape, no refills.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Still deciding -->
+          <tr>
+            <td class="dg-pad" style="padding:28px 40px 0;">
+              <h2 style="margin:0 0 14px; font-size:18px; font-weight:700;">Still deciding? Quick answers</h2>
+              <p style="margin:0 0 4px; font-size:15px; font-weight:700;">Will it stay on all night?</p>
+              <p style="margin:0 0 14px; font-size:15px; line-height:1.6; color:{{ ink_muted }};">Put it on clean, fully dry skin with no serum or oil underneath and it's made to stay put until morning.</p>
+              <p style="margin:0 0 4px; font-size:15px; font-weight:700;">Is it gentle enough for under my eyes?</p>
+              <p style="margin:0 0 14px; font-size:15px; line-height:1.6; color:{{ ink_muted }};">It's soft silicone with no actives, and nothing is absorbed into your skin. Rinse, let it air-dry, and wear it again the next night.</p>
+              <p style="margin:0 0 4px; font-size:15px; font-weight:700;">What if it doesn't work for me?</p>
+              <p style="margin:0; font-size:15px; line-height:1.6; color:{{ ink_muted }};">Then you get your money back. Here's how:</p>
+            </td>
+          </tr>
+
+          <!-- Guarantee -->
+          <tr>
+            <td class="dg-pad" style="padding:22px 40px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid {{ orange }}; border-radius:14px;">
+                <tr>
+                  <td width="74" align="center" valign="middle" style="padding:16px 0 16px 16px;">
+                    <div style="width:58px; height:58px; border-radius:50%; background:{{ gold }}; color:{{ teal }}; text-align:center; font-weight:700;">
+                      <div style="font-size:20px; line-height:20px; padding-top:12px;">30</div>
+                      <div style="font-size:9px; letter-spacing:1px;">DAYS</div>
+                    </div>
+                  </td>
+                  <td valign="middle" style="padding:16px 18px 16px 12px; font-size:14px; line-height:1.55;">
+                    <strong style="font-size:15px;">Try it for 30 days, risk-free.</strong><br>
+                    If you don't love your mornings, email us and get your money back. No hoops, no hard feelings.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Bonus + second button -->
+          <tr>
+            <td class="dg-pad" align="center" style="padding:24px 40px 0;">
+              <p style="margin:0; font-size:14px; line-height:1.6;">&#127873; <strong>Free with every set:</strong> our <em>Healthy Skin After 30</em> guide, emailed after you order.</p>
+              {%- if dg_today <= 20261201 -%}
+                <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:{{ ink_muted }};">Our Black Friday prices end <strong style="color:{{ teal }};">Dec 1</strong>, and stock is limited.</p>
+              {%- endif -%}
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:18px 40px 6px;">
+              <a href="{{ url }}" style="display:inline-block; background:{{ teal }}; color:#FFFFFF; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Return to my checkout</a>
+            </td>
+          </tr>
+
+          <!-- Help -->
+          <tr>
+            <td class="dg-pad" align="center" style="padding:26px 40px 30px;">
+              <p style="margin:0 0 4px; font-size:15px; line-height:1.6;">Questions before you order? Hit reply. A real person reads every email.</p>
+              <p style="margin:0; font-size:15px;"><a href="mailto:support@thedailyglowco.com" style="color:{{ teal }}; font-weight:700;">support@thedailyglowco.com</a></p>
+              <p style="margin:22px 0 0; font-size:16px; line-height:1.5;">Sweet dreams,<br><strong>The Daily Glow Co. team</strong></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background:{{ teal }}; padding:20px 30px; font-size:12px; line-height:1.6; color:#CFE0DC;">
+              <span style="font-weight:700; letter-spacing:3px; color:#FFFFFF;">THE DAILY GLOW CO.</span><br>
+              You're getting this because you started a checkout at our store.<br>
+              <a href="{{ shop.url }}/products/wrinkle-smooth-face-set" style="color:#CFE0DC;">Shop the Face Set</a> &nbsp;·&nbsp; <a href="{{ shop.url }}/pages/products" style="color:#CFE0DC;">All patches</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
