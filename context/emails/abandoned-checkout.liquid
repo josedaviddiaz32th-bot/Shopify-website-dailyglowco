@@ -1,55 +1,22 @@
-{% comment %}
-  The Daily Glow Co. — Abandoned checkout recovery email (Shopify customer notification).
-  Paste in Shopify admin: Settings > Notifications > Customer notifications > Abandoned checkout > Edit code.
-  Subject line: Your smoother mornings are still waiting
-  Alternates to test: "you left your patches behind" (with the first name) · "Your pillow's still working the night shift"
-  Copy built from the Avatar Sheet (pillow creases, "rested, not angry", burned by patches that fall off),
-  Core Beliefs 1-2 and 6 (the pillow makes the lines, the patch holds skin flat overnight, the guarantee)
-  and the Offer Brief objection list (stays on? gentle under the eyes? what if it doesn't work?).
-  The Black Friday strip hides itself after Dec 1, 2026.
-{% endcomment %}
-{% capture email_title %}Your smoother mornings are still waiting{% endcapture %}
-{% assign dg_name = billing_address.first_name %}
-{% if dg_name == blank %}{% assign dg_name = customer.first_name %}{% endif %}
-{% assign dg_today = 'now' | date: '%Y%m%d' | plus: 0 %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ email_title }}</title>
-  <style>
-    body { margin: 0; padding: 0; background: #EEF3F1; }
-    a { color: #17393D; }
-    @media (max-width: 600px) {
-      .dg-wrap { width: 100% !important; }
-      .dg-pad { padding-left: 20px !important; padding-right: 20px !important; }
-      .dg-h1 { font-size: 26px !important; }
-    }
-  </style>
-</head>
-<body style="margin:0; padding:0; background:#EEF3F1;">
   <div style="display:none; max-height:0; overflow:hidden;">We saved your checkout, so you can pick up right where you left off.</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1;">
     <tr>
-      <td align="center" style="padding:24px 12px;">
-        <table role="presentation" class="dg-wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden; font-family:Poppins, Helvetica, Arial, sans-serif; color:#17393D;">
+      <td align="center" style="padding:20px 10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden; font-family:Poppins, Helvetica, Arial, sans-serif; color:#17393D;">
 
-          {% if dg_today <= 20261201 %}
-          <!-- Black Friday strip (hides itself after Dec 1) -->
+          <!-- Black Friday strip: delete this row after Dec 1 -->
           <tr>
             <td align="center" style="background:#17393D; padding:10px 20px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#FFFFFF;">
               Black Friday sale <span style="color:#FFC24A;">&middot;</span> up to 67% off <span style="color:#FFC24A;">&middot;</span> ends Dec 1
             </td>
           </tr>
-          {% endif %}
 
           <!-- Header -->
           <tr>
-            <td class="dg-pad" align="center" style="padding:28px 40px 8px;">
+            <td align="center" style="padding:28px 26px 8px;">
               <a href="{{ shop.url }}" style="text-decoration:none; color:#17393D;">
                 {% if shop.email_logo_url %}
-                  <img src="{{ shop.email_logo_url }}" alt="{{ shop.name }}" width="{{ shop.email_logo_width | default: 160 }}" style="display:block; border:0; max-width:100%; height:auto;">
+                  <img src="{{ shop.email_logo_url }}" alt="{{ shop.name }}" width="160" style="display:block; border:0; max-width:100%; height:auto;">
                 {% else %}
                   <span style="font-size:20px; font-weight:700;">{{ shop.name }}</span>
                 {% endif %}
@@ -59,23 +26,23 @@
 
           <!-- Hero -->
           <tr>
-            <td class="dg-pad" align="center" style="padding:20px 40px 8px;">
+            <td align="center" style="padding:20px 26px 8px;">
               <p style="margin:0 0 10px; font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#F08A2C;">Still thinking it over?</p>
-              <h1 class="dg-h1" style="margin:0 0 12px; font-size:30px; line-height:1.2; font-weight:700; color:#17393D;">{% if dg_name != blank %}{{ dg_name }}, your{% else %}Your{% endif %} smoother mornings are still waiting</h1>
+              <h1 style="margin:0 0 12px; font-size:27px; line-height:1.22; font-weight:700; color:#17393D;">{% if billing_address.first_name != blank %}{{ billing_address.first_name }}, your{% else %}Your{% endif %} smoother mornings are still waiting</h1>
               <p style="margin:0; font-size:16px; line-height:1.6; color:#5B7275;">You were one step away from waking up to visibly smoother skin. We saved your checkout, so you can pick up right where you left off.</p>
             </td>
           </tr>
 
           <!-- Button -->
           <tr>
-            <td align="center" style="padding:22px 40px 6px;">
+            <td align="center" style="padding:22px 26px 6px;">
               <a href="{{ url }}" style="display:inline-block; background:#F08A2C; color:#17393D; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Finish my checkout</a>
             </td>
           </tr>
 
           <!-- What's waiting -->
           <tr>
-            <td class="dg-pad" style="padding:28px 40px 0;">
+            <td style="padding:28px 26px 0;">
               <h2 style="margin:0 0 6px; font-size:18px; font-weight:700;">Saved for you</h2>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 {% for line in line_items %}
@@ -86,14 +53,11 @@
                       {% endif %}
                     </td>
                     <td valign="top" style="padding:14px 10px; border-bottom:1px solid #E3EAE7; font-size:15px; line-height:1.4;">
-                      <strong>{{ line.product.title | default: line.title }}</strong>
+                      <strong>{{ line.title }}</strong>
                       {% if line.variant.title != blank and line.variant.title != 'Default Title' %}
                         <br><span style="font-size:13px; color:#5B7275;">{{ line.variant.title }}</span>
                       {% endif %}
                       <br><span style="font-size:13px; color:#5B7275;">Qty {{ line.quantity }}</span>
-                      {% for allocation in line.discount_allocations %}
-                        <br><span style="font-size:13px; color:#F08A2C; font-weight:600;">{{ allocation.discount_application.title }}</span>
-                      {% endfor %}
                     </td>
                     <td valign="top" align="right" style="padding:14px 0; border-bottom:1px solid #E3EAE7; font-size:15px; white-space:nowrap;">
                       {% if line.original_line_price > line.final_line_price %}
@@ -120,7 +84,7 @@
 
           <!-- Why tonight -->
           <tr>
-            <td class="dg-pad" style="padding:30px 40px 0;">
+            <td style="padding:30px 26px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1; border-radius:14px;">
                 <tr>
                   <td style="padding:20px 22px;">
@@ -135,7 +99,7 @@
 
           <!-- Still deciding -->
           <tr>
-            <td class="dg-pad" style="padding:28px 40px 0;">
+            <td style="padding:28px 26px 0;">
               <h2 style="margin:0 0 14px; font-size:18px; font-weight:700;">Still deciding? Quick answers</h2>
               <p style="margin:0 0 4px; font-size:15px; font-weight:700;">Will it stay on all night?</p>
               <p style="margin:0 0 14px; font-size:15px; line-height:1.6; color:#5B7275;">Put it on clean, fully dry skin with no serum or oil underneath and it's made to stay put until morning.</p>
@@ -148,7 +112,7 @@
 
           <!-- Guarantee -->
           <tr>
-            <td class="dg-pad" style="padding:22px 40px 0;">
+            <td style="padding:22px 26px 0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid #F08A2C; border-radius:14px;">
                 <tr>
                   <td width="74" align="center" valign="middle" style="padding:16px 0 16px 16px;">
@@ -168,22 +132,20 @@
 
           <!-- Bonus + second button -->
           <tr>
-            <td class="dg-pad" align="center" style="padding:24px 40px 0;">
+            <td align="center" style="padding:24px 26px 0;">
               <p style="margin:0; font-size:14px; line-height:1.6;">&#127873; <strong>Free with every set:</strong> our <em>Healthy Skin After 30</em> guide, emailed after you order.</p>
-              {% if dg_today <= 20261201 %}
                 <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#5B7275;">Our Black Friday prices end <strong style="color:#17393D;">Dec 1</strong>, and stock is limited.</p>
-              {% endif %}
             </td>
           </tr>
           <tr>
-            <td align="center" style="padding:18px 40px 6px;">
+            <td align="center" style="padding:18px 26px 6px;">
               <a href="{{ url }}" style="display:inline-block; background:#17393D; color:#FFFFFF; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Return to my checkout</a>
             </td>
           </tr>
 
           <!-- Help -->
           <tr>
-            <td class="dg-pad" align="center" style="padding:26px 40px 30px;">
+            <td align="center" style="padding:26px 26px 30px;">
               <p style="margin:0 0 4px; font-size:15px; line-height:1.6;">Questions before you order? Hit reply. A real person reads every email.</p>
               <p style="margin:0; font-size:15px;"><a href="mailto:support@thedailyglowco.com" style="color:#17393D; font-weight:700;">support@thedailyglowco.com</a></p>
               <p style="margin:22px 0 0; font-size:16px; line-height:1.5;">Sweet dreams,<br><strong>The Daily Glow Co. team</strong></p>
@@ -205,5 +167,3 @@
     </tr>
   </table>
   {{ open_tracking_block }}
-</body>
-</html>
