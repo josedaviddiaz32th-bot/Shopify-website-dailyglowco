@@ -1,0 +1,181 @@
+{% assign dg_cart_url = abandoned_visit.url %}
+{% if dg_cart_url == blank %}{% assign dg_cart_url = shop.url | append: '/cart' %}{% endif %}
+  <div style="display:none; max-height:0; overflow:hidden;">Your patches are still in your cart. Here's how they work, in one quick read.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1;">
+    <tr>
+      <td align="center" style="padding:20px 10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden; font-family:Poppins, Helvetica, Arial, sans-serif; color:#17393D;">
+
+          <!-- Black Friday strip: delete this row after Dec 1 -->
+          <tr>
+            <td align="center" style="background:#17393D; padding:10px 20px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#FFFFFF;">
+              Black Friday sale <span style="color:#FFC24A;">&middot;</span> up to 67% off <span style="color:#FFC24A;">&middot;</span> ends Dec 1
+            </td>
+          </tr>
+
+          <!-- Header -->
+          <tr>
+            <td align="center" style="padding:28px 26px 8px;">
+              <a href="{{ shop.url }}" style="text-decoration:none; color:#17393D;">
+                {% if shop.email_logo_url %}
+                  <img src="{{ shop.email_logo_url }}" alt="{{ shop.name }}" width="160" style="display:block; border:0; max-width:100%; height:auto;">
+                {% else %}
+                  <span style="font-size:20px; font-weight:700;">{{ shop.name }}</span>
+                {% endif %}
+              </a>
+            </td>
+          </tr>
+
+          <!-- Hero -->
+          <tr>
+            <td align="center" style="padding:20px 26px 8px;">
+              <p style="margin:0 0 10px; font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#F08A2C;">You picked a good one</p>
+              <h1 style="margin:0 0 12px; font-size:27px; line-height:1.22; font-weight:700; color:#17393D;">{% if customer.first_name != blank %}{{ customer.first_name }}, your{% else %}Your{% endif %} patches are still in your cart</h1>
+              <p style="margin:0; font-size:16px; line-height:1.6; color:#5B7275;">We kept them for you. If you got pulled away, or you're still wondering whether they'll work for you, here's everything in one quick read.</p>
+            </td>
+          </tr>
+
+          <!-- Button -->
+          <tr>
+            <td align="center" style="padding:22px 26px 6px;">
+              <a href="{{ dg_cart_url }}" style="display:inline-block; background:#F08A2C; color:#17393D; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">See my cart</a>
+            </td>
+          </tr>
+
+          <!-- In your cart -->
+          {% if abandoned_visit.products_added_to_cart != blank %}
+          <tr>
+            <td style="padding:28px 26px 0;">
+              <h2 style="margin:0 0 6px; font-size:18px; font-weight:700;">In your cart</h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                {% for item in abandoned_visit.products_added_to_cart %}
+                  {% assign dg_img = item.image_url %}
+                  {% assign dg_img_start = dg_img | slice: 0, 2 %}
+                  {% if dg_img_start == '//' %}{% assign dg_img = 'https:' | append: dg_img %}{% endif %}
+                  <tr>
+                    <td width="72" valign="top" style="padding:14px 0; border-bottom:1px solid #E3EAE7;">
+                      {% if dg_img != blank %}
+                        <img src="{{ dg_img }}" alt="" width="60" height="60" style="display:block; width:60px; height:60px; border-radius:10px; object-fit:cover; background:#EEF3F1;">
+                      {% endif %}
+                    </td>
+                    <td valign="middle" style="padding:14px 10px; border-bottom:1px solid #E3EAE7; font-size:15px; line-height:1.4;">
+                      <strong>{{ item.title }}</strong>
+                      {% if item.variant_title != blank and item.variant_title != 'Default Title' %}
+                        <br><span style="font-size:13px; color:#5B7275;">{{ item.variant_title }}</span>
+                      {% endif %}
+                    </td>
+                    <td valign="middle" align="right" style="padding:14px 0; border-bottom:1px solid #E3EAE7; font-size:13px; color:#5B7275; white-space:nowrap;">
+                      Qty {{ item.quantity | default: 1 }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+              {% if abandoned_visit.remaining_cart_products_count != blank %}{% if abandoned_visit.remaining_cart_products_count > 0 %}
+                <p style="margin:10px 0 0; font-size:13px; color:#5B7275;">+ {{ abandoned_visit.remaining_cart_products_count }} more in your cart</p>
+              {% endif %}{% endif %}
+              <p style="margin:12px 0 0; font-size:13px; font-weight:600; color:#F08A2C;">Free shipping on orders $40+</p>
+            </td>
+          </tr>
+          {% endif %}
+
+          <!-- How it works -->
+          <tr>
+            <td style="padding:30px 26px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1; border-radius:14px;">
+                <tr>
+                  <td style="padding:20px 22px 6px;">
+                    <h2 style="margin:0 0 6px; font-size:18px; font-weight:700;">Why the lines stay longer after 30</h2>
+                    <p style="margin:0 0 16px; font-size:15px; line-height:1.6;">Every night your face spends hours pressed into a pillow, folding the same lines again and again. Our soft silicone patches <strong>hold your skin flat and seal in moisture while you sleep</strong>, so the creases don't get folded in all night.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 22px 20px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="38" valign="top" style="padding:0 0 12px;"><div style="width:28px; height:28px; border-radius:50%; background:#17393D; color:#FFFFFF; font-size:13px; font-weight:700; line-height:28px; text-align:center;">1</div></td>
+                        <td valign="top" style="padding:3px 0 12px; font-size:15px; line-height:1.5;"><strong>Wash and dry.</strong> Clean skin, no serum or oil underneath.</td>
+                      </tr>
+                      <tr>
+                        <td width="38" valign="top" style="padding:0 0 12px;"><div style="width:28px; height:28px; border-radius:50%; background:#17393D; color:#FFFFFF; font-size:13px; font-weight:700; line-height:28px; text-align:center;">2</div></td>
+                        <td valign="top" style="padding:3px 0 12px; font-size:15px; line-height:1.5;"><strong>Smooth it on.</strong> Press the patch over the area and go to sleep.</td>
+                      </tr>
+                      <tr>
+                        <td width="38" valign="top"><div style="width:28px; height:28px; border-radius:50%; background:#F08A2C; color:#17393D; font-size:13px; font-weight:700; line-height:28px; text-align:center;">3</div></td>
+                        <td valign="top" style="padding:3px 0 0; font-size:15px; line-height:1.5;"><strong>Peel off in the morning.</strong> Rinse, air-dry and wear it again the next night.</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Why people like it -->
+          <tr>
+            <td style="padding:28px 26px 0;">
+              <h2 style="margin:0 0 14px; font-size:18px; font-weight:700;">Made for real life</h2>
+              <p style="margin:0 0 10px; font-size:15px; line-height:1.5;"><span style="color:#F08A2C; font-weight:700;">&#10003;</span>&nbsp; No needles, no injections, no downtime</p>
+              <p style="margin:0 0 10px; font-size:15px; line-height:1.5;"><span style="color:#F08A2C; font-weight:700;">&#10003;</span>&nbsp; Soft silicone with no actives, gentle enough for under the eyes</p>
+              <p style="margin:0 0 10px; font-size:15px; line-height:1.5;"><span style="color:#F08A2C; font-weight:700;">&#10003;</span>&nbsp; Reusable, so one set lasts night after night</p>
+              <p style="margin:0; font-size:15px; line-height:1.5;"><span style="color:#F08A2C; font-weight:700;">&#10003;</span>&nbsp; Works while you sleep, so it fits any routine</p>
+            </td>
+          </tr>
+
+          <!-- Guarantee -->
+          <tr>
+            <td style="padding:26px 26px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid #F08A2C; border-radius:14px;">
+                <tr>
+                  <td width="74" align="center" valign="middle" style="padding:16px 0 16px 16px;">
+                    <div style="width:58px; height:58px; border-radius:50%; background:#FFC24A; color:#17393D; text-align:center; font-weight:700;">
+                      <div style="font-size:20px; line-height:20px; padding-top:12px;">30</div>
+                      <div style="font-size:9px; letter-spacing:1px;">DAYS</div>
+                    </div>
+                  </td>
+                  <td valign="middle" style="padding:16px 18px 16px 12px; font-size:14px; line-height:1.55;">
+                    <strong style="font-size:15px;">Nothing to lose by trying.</strong><br>
+                    Use them for 30 nights. If you don't love your mornings, email us and get your money back.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Offer + second button -->
+          <tr>
+            <td align="center" style="padding:24px 26px 0;">
+              <p style="margin:0; font-size:15px; line-height:1.6;"><strong>Black Friday:</strong> add a 2nd Face Set for just <strong style="color:#F08A2C;">$15</strong>, or buy 3, get 2 free on most single-area patches.</p>
+              <p style="margin:8px 0 0; font-size:14px; line-height:1.6;">&#127873; Plus our <em>Healthy Skin After 30</em> guide, free with every set.</p>
+              <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#5B7275;">Sale prices end <strong style="color:#17393D;">Dec 1</strong>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:18px 26px 6px;">
+              <a href="{{ dg_cart_url }}" style="display:inline-block; background:#17393D; color:#FFFFFF; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Back to my cart</a>
+            </td>
+          </tr>
+
+          <!-- Help -->
+          <tr>
+            <td align="center" style="padding:26px 26px 30px;">
+              <p style="margin:0 0 4px; font-size:15px; line-height:1.6;">Not sure which area to start with? Hit reply and we'll help you pick.</p>
+              <p style="margin:0; font-size:15px;"><a href="mailto:support@thedailyglowco.com" style="color:#17393D; font-weight:700;">support@thedailyglowco.com</a></p>
+              <p style="margin:22px 0 0; font-size:16px; line-height:1.5;">Sweet dreams,<br><strong>The Daily Glow Co. team</strong></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background:#17393D; padding:20px 30px; font-size:12px; line-height:1.6; color:#CFE0DC;">
+              <span style="font-weight:700; letter-spacing:3px; color:#FFFFFF;">THE DAILY GLOW CO.</span><br>
+              You're getting this because you added something to your cart at our store.<br>
+              <a href="{{ shop.url }}/products/wrinkle-smooth-face-set" style="color:#CFE0DC;">Shop the Face Set</a> &nbsp;·&nbsp; <a href="{{ shop.url }}/pages/products" style="color:#CFE0DC;">All patches</a><br>
+              <a href="{{ unsubscribe_link }}" style="color:#CFE0DC;">Unsubscribe</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+  {{ open_tracking_block }}

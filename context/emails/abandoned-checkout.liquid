@@ -1,6 +1,10 @@
-{% assign dg_items = line_items %}
+{% assign dg_items = abandoned_checkout.line_items %}
+{% if dg_items == blank %}{% assign dg_items = line_items %}{% endif %}
 {% if dg_items == blank %}{% assign dg_items = subtotal_line_items %}{% endif %}
-{% if dg_items == blank %}{% assign dg_items = checkout.line_items %}{% endif %}
+{% assign dg_url = abandoned_checkout.url %}
+{% if dg_url == blank %}{% assign dg_url = url %}{% endif %}
+{% assign dg_name = customer.first_name %}
+{% if dg_name == blank %}{% assign dg_name = billing_address.first_name %}{% endif %}
   <div style="display:none; max-height:0; overflow:hidden;">We saved your checkout, so you can pick up right where you left off.</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EEF3F1;">
     <tr>
@@ -31,7 +35,7 @@
           <tr>
             <td align="center" style="padding:20px 26px 8px;">
               <p style="margin:0 0 10px; font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#F08A2C;">Still thinking it over?</p>
-              <h1 style="margin:0 0 12px; font-size:27px; line-height:1.22; font-weight:700; color:#17393D;">{% if billing_address.first_name != blank %}{{ billing_address.first_name }}, your{% else %}Your{% endif %} smoother mornings are still waiting</h1>
+              <h1 style="margin:0 0 12px; font-size:27px; line-height:1.22; font-weight:700; color:#17393D;">{% if dg_name != blank %}{{ dg_name }}, your{% else %}Your{% endif %} smoother mornings are still waiting</h1>
               <p style="margin:0; font-size:16px; line-height:1.6; color:#5B7275;">You were one step away from waking up to visibly smoother skin. We saved your checkout, so you can pick up right where you left off.</p>
             </td>
           </tr>
@@ -39,7 +43,7 @@
           <!-- Button -->
           <tr>
             <td align="center" style="padding:22px 26px 6px;">
-              <a href="{{ url }}" style="display:inline-block; background:#F08A2C; color:#17393D; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Finish my checkout</a>
+              <a href="{{ dg_url }}" style="display:inline-block; background:#F08A2C; color:#17393D; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Finish my checkout</a>
             </td>
           </tr>
 
@@ -51,14 +55,19 @@
                 {% for line in dg_items %}
                   <tr>
                     <td width="72" valign="top" style="padding:14px 0; border-bottom:1px solid #E3EAE7;">
-                      {% if line.image %}
-                        <img src="{{ line | img_url: 'compact_cropped' }}" alt="" width="60" height="60" style="display:block; width:60px; height:60px; border-radius:10px; object-fit:cover; background:#EEF3F1;">
+                      {% assign dg_img = line.image_url %}
+                      {% if dg_img == blank and line.image %}{% assign dg_img = line | img_url: 'compact_cropped' %}{% endif %}
+                      {% assign dg_img_start = dg_img | slice: 0, 2 %}
+                      {% if dg_img_start == '//' %}{% assign dg_img = 'https:' | append: dg_img %}{% endif %}
+                      {% if dg_img != blank %}
+                        <img src="{{ dg_img }}" alt="" width="60" height="60" style="display:block; width:60px; height:60px; border-radius:10px; object-fit:cover; background:#EEF3F1;">
                       {% endif %}
                     </td>
                     <td valign="top" style="padding:14px 10px; border-bottom:1px solid #E3EAE7; font-size:15px; line-height:1.4;">
-                      <strong>{{ line.title }}</strong>
-                      {% if line.variant.title != blank and line.variant.title != 'Default Title' %}
-                        <br><span style="font-size:13px; color:#5B7275;">{{ line.variant.title }}</span>
+                      <strong>{{ line.product_title | default: line.title }}</strong>
+                      {% assign dg_variant = line.variant_title | default: line.variant.title %}
+                      {% if dg_variant != blank and dg_variant != 'Default Title' %}
+                        <br><span style="font-size:13px; color:#5B7275;">{{ dg_variant }}</span>
                       {% endif %}
                       <br><span style="font-size:13px; color:#5B7275;">Qty {{ line.quantity }}</span>
                     </td>
@@ -66,22 +75,31 @@
                       {% if line.final_line_price and line.original_line_price %}{% if line.original_line_price > line.final_line_price %}
                         <span style="font-size:13px; color:#5B7275; text-decoration:line-through;">{{ line.original_line_price | money }}</span><br>
                       {% endif %}{% endif %}
-                      <strong>{{ line.final_line_price | default: line.line_price | money }}</strong>
+                      {% assign dg_price = line.final_line_price | default: line.line_price %}
+                      {% if dg_price != blank %}<strong>{{ dg_price | money }}</strong>{% endif %}
                     </td>
                   </tr>
                 {% endfor %}
               </table>
+              {% if abandoned_checkout.remaining_products_count != blank %}{% if abandoned_checkout.remaining_products_count > 0 %}
+                <p style="margin:10px 0 0; font-size:13px; color:#5B7275;">+ {{ abandoned_checkout.remaining_products_count }} more in your checkout</p>
+              {% endif %}{% endif %}
+              {% assign dg_sub = subtotal_price | default: checkout.subtotal_price %}
+              {% if dg_sub != blank %}
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px; font-size:15px;">
                 <tr>
                   <td style="padding:5px 0; font-weight:700;">Subtotal</td>
-                  <td align="right" style="padding:5px 0; font-weight:700;">{{ subtotal_price | default: checkout.subtotal_price | money }}</td>
+                  <td align="right" style="padding:5px 0; font-weight:700;">{{ dg_sub | money }}</td>
                 </tr>
-                {% assign dg_sub = subtotal_price | default: checkout.subtotal_price | default: 0 %}{% if dg_sub >= 4000 %}
+                {% if dg_sub >= 4000 %}
                   <tr>
                     <td colspan="2" align="right" style="padding:2px 0 0; font-size:13px; font-weight:600; color:#F08A2C;">Free shipping is included</td>
                   </tr>
                 {% endif %}
               </table>
+              {% else %}
+              <p style="margin:12px 0 0; font-size:13px; font-weight:600; color:#F08A2C;">Free shipping on orders $40+</p>
+              {% endif %}
             </td>
           </tr>
 
@@ -142,7 +160,7 @@
           </tr>
           <tr>
             <td align="center" style="padding:18px 26px 6px;">
-              <a href="{{ url }}" style="display:inline-block; background:#17393D; color:#FFFFFF; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Return to my checkout</a>
+              <a href="{{ dg_url }}" style="display:inline-block; background:#17393D; color:#FFFFFF; font-size:16px; font-weight:700; text-decoration:none; padding:15px 34px; border-radius:999px;">Return to my checkout</a>
             </td>
           </tr>
 
