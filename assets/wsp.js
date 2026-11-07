@@ -31,8 +31,6 @@
             b.classList.remove('loading');
             b.removeAttribute('aria-disabled');
           });
-          var sb = (this.stickyBar || this).querySelector('[data-sticky-atc]');
-          if (sb) sb.textContent = 'Buy now';
           this.update();
           var steps = this.querySelectorAll('.wsp-steps li');
           if (steps.length > 1) {
@@ -77,7 +75,7 @@
         if (t) { this.showSlide(parseInt(t.dataset.thumb, 10)); return; }
         var step = e.target.closest('[data-gallery-step]');
         if (step) { this.stepSlide(parseInt(step.dataset.galleryStep, 10)); return; }
-        if (e.target.closest('[data-sticky-atc]') || e.target.closest('[data-wsp-buynow]')) {
+        if (e.target.closest('[data-wsp-buynow]')) {
           this.buyNow();
         }
       }
@@ -94,12 +92,10 @@
         var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
         var self = this;
         var label = btn.querySelector('[data-atc-label]');
-        var sticky = (this.stickyBar || this).querySelector('[data-sticky-atc]');
         var steps = document.querySelectorAll('.wsp-steps li');
         var reset = function () {
           btn.classList.remove('loading');
           btn.removeAttribute('aria-disabled');
-          if (sticky) sticky.textContent = 'Buy now';
           if (steps.length > 1) { steps[0].classList.remove('is-done'); steps[0].classList.add('is-on'); steps[1].classList.remove('is-on'); }
           self.update();
         };
@@ -107,7 +103,6 @@
         btn.classList.add('loading');
         btn.setAttribute('aria-disabled', 'true');
         if (label) label.textContent = 'Going to checkout…';
-        if (sticky) sticky.textContent = 'Going to checkout…';
         if (steps.length > 1) {
           steps[0].classList.replace('is-on', 'is-done');
           steps[1].classList.add('is-on');
@@ -178,6 +173,8 @@
         if (label) label.textContent = available ? (label.dataset.add + ' · ' + allFmt) : label.dataset.soldout;
         this.querySelectorAll('.wsp-atc, [data-wsp-buynow]').forEach(function (b) { b.disabled = !available; });
         var sb = this.stickyBar || this;
+        var sa = sb.querySelector('[data-sticky-atc]');
+        if (sa) sa.disabled = !available;
         var sp = sb.querySelector('[data-sticky-price]');
         if (sp) sp.textContent = ship === null ? fmt : allFmt + (ship > 0 ? ' with shipping' : ' · free shipping');
         var sn = sb.querySelector('[data-sticky-name]');
@@ -254,7 +251,11 @@
         this.stickyBar = bar;
         var self = this;
         var atc = bar.querySelector('[data-sticky-atc]');
-        if (atc) atc.addEventListener('click', function () { self.buyNow(); });
+        // Adds the selected pack through the page's own Add to cart button, so the cart drawer opens as usual.
+        if (atc) atc.addEventListener('click', function () {
+          var add = self.querySelector('.wsp-atc');
+          if (add && !add.disabled && add.getAttribute('aria-disabled') !== 'true') add.click();
+        });
         new IntersectionObserver(function (entries) {
           bar.hidden = entries[0].isIntersecting || entries[0].boundingClientRect.top > 0;
         }, { threshold: 0 }).observe(buy);
